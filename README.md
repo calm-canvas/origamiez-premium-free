@@ -1,41 +1,64 @@
-Origamiez
----
+# Origamiez
 
-If you is planning to start an online blog website, Origamiez is a Blog WordPress theme which is designed for online blog sites.
+Origamiez is a flexible WordPress theme designed for magazine, newspaper, and forum websites. It features a clean, professional layout with extensive customization options including unlimited color schemes, multiple sidebars, rich post formats, and top banner areas. Fully responsive, Origamiez looks great on any device and is easy to customize and use.
 
-This Origamiez WordPress theme was designed and coded by COLOURS THEME
+This WordPress theme was originally designed and coded by COLOURS THEME.
 
-Origamiez comes with a simple and clean layout but professional and nice look. 
-Theme offers lots of features as unlimited color schemes, sidebars, rich formats, top banners. 
-Fully responsive, this Origamiez WordPress Theme has really great look on any device. 
-It's easy to customize and use.
+## Features
 
----
+- Responsive design that works on all devices
+- Multiple layout options (full-width, magazine, three-column)
+- Extensive widget areas for flexible content placement
+- Custom widgets for enhanced functionality
+- Support for post formats (standard, gallery, video, audio)
+- Integration with popular plugins (WooCommerce, bbPress, DW Question & Answer)
+- Translation-ready with multiple languages included
+- SEO-friendly markup
 
-### Requirements
+## Requirements
 
-- docker & docker-compose
-- php 8.2
-- composer
-- node 18.x
+- Docker & Docker Compose
+- PHP 8.2
+- Composer
+- Node.js 18.x
 
----
-
-### Install
+## Installation
 
 ```shell
 docker compose up -d &&
 ./bin/install.sh
 ```
 
----
+## Development Access
 
-### Account
-- http://localhost:8001/wp-admin/
-- username: root
-- password: secret
+- WordPress Admin: http://localhost:8001/wp-admin/
+- Username: root
+- Password: secret
 
----
+## Documentation
 
-### Refs
-- https://sebhastian.com/mysql-drop-all-tables/
+Comprehensive documentation is available in the `docs` folder:
+
+- [Developer Guide](docs/developer-guide.md) - Technical documentation for theme developers
+- [User Guide](docs/user-guide.md) - End-user documentation for website administrators
+
+## Theme Structure
+
+The theme follows WordPress best practices and includes:
+
+- Customizer integration for theme options
+- Template parts for modular development
+- Custom widget classes for consistent styling
+- Plugin integrations for extended functionality
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This theme is licensed under the GNU General Public License v3.0.
+
+## References
+
+- [MySQL Database Management](https://sebhastian.com/mysql-drop-all-tables/)
