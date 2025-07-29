@@ -15,7 +15,6 @@ services:
       WORDPRESS_TABLE_PREFIX: '${WORDPRESS_TABLE_PREFIX:-wp_}'
     volumes:
       - ./docker/snapshot:/tmp/snapshot
-      - ./docker/uploads:/var/www/html/wp-content/uploads
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
       - type: bind
         source: ./docker/config/php.ini
