@@ -1,6 +1,7 @@
 node_modules/
 .idea/
 .vscode/
+.zencoder/
 origamiez/vendor/
 docker/plugins/akismet/
 docker/plugins/hello.php
