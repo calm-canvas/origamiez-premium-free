@@ -3,16 +3,19 @@
 
 if(class_exists('bbPress')){
 
-  register_sidebar(array(
-      'id'            => 'bbpress_right_sidebar',
-      'name'          => esc_attr__('Right (bbPress)', 'origamiez'),
-      'description'   => '',
-      'before_widget' => '<div id="%1$s" class="widget origamiez-bbpress-widget %2$s">',
-      'after_widget'  => '</div></div>',
-      'before_title'  => '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">',
-      'after_title'   => '</span></h2><div class="origamiez-widget-content clearfix">'
-  ));
+  function origamiez_bbpress_register_sidebar() {
+    register_sidebar(array(
+        'id'            => 'bbpress_right_sidebar',
+        'name'          => esc_attr__('Right (bbPress)', 'origamiez'),
+        'description'   => '',
+        'before_widget' => '<div id="%1$s" class="widget origamiez-bbpress-widget %2$s">',
+        'after_widget'  => '</div></div>',
+        'before_title'  => '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">',
+        'after_title'   => '</span></h2><div class="origamiez-widget-content clearfix">'
+    ));
+  }
 
+  add_action('init', 'origamiez_bbpress_register_sidebar', 40);
   add_action('after_setup_theme', 'origamiez_bbpress_theme_setup', 5);
 
   function origamiez_bbpress_theme_setup() {
