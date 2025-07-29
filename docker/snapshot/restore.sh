@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mysql -uroot -proot wordpress < /tmp/snapshot/schema.sql
+mysql -hmysql8 -uroot -psecret origamiez < /tmp/snapshot/schema.sql
