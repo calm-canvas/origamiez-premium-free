@@ -20,11 +20,6 @@ services:
     volumes:
       - ./docker/snapshot:/tmp/snapshot
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
-
-      - type: bind
-        source: ./debug/debug.log
-        target: /var/www/html/wp-content/debug.log
-
       - type: bind
         source: ./docker/config/php.ini
         target: /usr/local/etc/php/php.ini
