@@ -73,7 +73,6 @@ origamiez_clear_login_attempts($user_login)
 // File upload security
 origamiez_restrict_file_uploads($mimes)
 origamiez_check_file_upload($file)
-origamiez_sanitize_file_name($filename)
 
 // Database security
 origamiez_prepare_query($query, $args)

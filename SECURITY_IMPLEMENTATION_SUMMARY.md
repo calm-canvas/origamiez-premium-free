@@ -108,7 +108,6 @@ origamiez_clear_login_attempts()
 // File upload security
 origamiez_restrict_file_uploads()
 origamiez_check_file_upload()
-origamiez_sanitize_file_name()
 
 // Database security
 origamiez_prepare_query()

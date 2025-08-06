@@ -1985,13 +1985,6 @@ function origamiez_sanitize_select( $input, $setting ) {
     return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
-/**
- * Remove WordPress version from head for security
- */
-function origamiez_remove_version() {
-    return '';
-}
-add_filter( 'the_generator', 'origamiez_remove_version' );
 
 /**
  * Add security headers
@@ -2019,21 +2012,6 @@ function origamiez_add_security_headers() {
 }
 add_action( 'send_headers', 'origamiez_add_security_headers' );
 
-/**
- * Limit login attempts (basic implementation)
- */
-function origamiez_check_login_attempts( $user, $username, $password ) {
-    if ( ! empty( $username ) && ! empty( $password ) ) {
-        $attempts = get_transient( 'origamiez_login_attempts_' . sanitize_user( $username ) );
-        if ( $attempts && $attempts >= 5 ) {
-            return new WP_Error( 'too_many_attempts', 
-                esc_html__( 'Too many failed login attempts. Please try again later.', 'origamiez' ) 
-            );
-        }
-    }
-    return $user;
-}
-add_filter( 'authenticate', 'origamiez_check_login_attempts', 30, 3 );
 
 /**
  * Track failed login attempts
@@ -2054,39 +2032,6 @@ function origamiez_clear_login_attempts( $user_login ) {
 }
 add_action( 'wp_login', 'origamiez_clear_login_attempts' );
 
-/**
- * Sanitize uploaded file names
- */
-function origamiez_sanitize_file_name( $filename ) {
-    // Remove special characters and spaces
-    $filename = sanitize_file_name( $filename );
-    
-    // Convert to lowercase
-    $filename = strtolower( $filename );
-    
-    // Remove multiple dots
-    $filename = preg_replace( '/\.+/', '.', $filename );
-    
-    return $filename;
-}
-add_filter( 'sanitize_file_name', 'origamiez_sanitize_file_name' );
-
-/**
- * Database Security
- */
-
-/**
- * Prevent SQL injection in custom queries
- */
-function origamiez_prepare_query( $query, $args = array() ) {
-    global $wpdb;
-    
-    if ( ! empty( $args ) ) {
-        return $wpdb->prepare( $query, $args );
-    }
-    
-    return $query;
-}
 
 /**
  * Sanitize database inputs
