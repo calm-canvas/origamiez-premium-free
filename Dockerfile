@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install mysql-client
-RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y default-mysql-client nano && rm -rf /var/lib/apt/lists/*
 
 # Configure Nginx
 COPY nginx.conf /etc/nginx/sites-available/default
