@@ -1,105 +1,157 @@
+:root {
+  --font-body: "Roboto Serif", serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: "Neuton", serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: "Neuton", serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: "Neuton", serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: "Neuton", serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: "Neuton", serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: "Neuton", serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: "Neuton", serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: "Neuton", serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: "Neuton", serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+}
+
 /*
  * --------------------------------------------------
  * SKELETON
  * --------------------------------------------------
  */
 body {
-  color: #444;
+  color: var(--body-color);
 }
 
 a {
-  color: #222;
+  color: var(--link-color);
 }
 a:hover {
-  color: #E74C3C;
+  color: var(--link-hover-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #222;
+  color: var(--heading-color);
 }
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: #222;
+  color: var(--link-color);
 }
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
-  color: #E74C3C;
+  color: var(--link-hover-color);
 }
 
 #origamiez-header {
-  background: #FFFFFF;
+  background: var(--white);
   border-bottom: none;
   padding-bottom: 20px;
 }
 
 #origamiez-header-bottom {
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid var(--main-menu-bg-color);
 }
 
 #origamiez-header-bar-inner {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 
 #main-nav {
-  background: #FFFFFF;
-  border-top: 1px solid #DDDDDD;
+  background: var(--white);
+  border-top: 1px solid var(--line-2-bg-color);
 }
 #main-nav.stuckMenu.isStuck {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid #DDDDDD;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 #main-nav.stuckMenu.isStuck .main-menu {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 
 #main-menu a {
-  color: #fff;
+  color: var(--main-menu-color);
 }
 #main-menu > li.current-menu-item > a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 #main-menu > li:hover > a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 #main-menu li ul {
-  border-top: 3px solid #E74C3C;
-  border-left: 1px solid #DDDDDD;
-  border-right: 1px solid #DDDDDD;
-  border-bottom: 1px solid #DDDDDD;
-  background: #FFFFFF;
+  border-top: 3px solid var(--primary-color);
+  border-left: 1px solid var(--line-2-bg-color);
+  border-right: 1px solid var(--line-2-bg-color);
+  border-bottom: 1px solid var(--line-2-bg-color);
+  background: var(--white);
 }
 #main-menu li ul li {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 #main-menu li ul li a {
-  color: #444;
+  color: var(--body-color);
 }
 #main-menu li ul li:hover > a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 #origamiez-body-inner {
-  background: #FFFFFF;
+  background: var(--white);
 }
 
 .origamiez-col-right {
-  border-left: 1px solid #DDDDDD;
+  border-left: 1px solid var(--line-2-bg-color);
 }
 
 #origamiez-footer-sidebars {
   border-top: none;
-  background-color: #293535;
+  background-color: var(--footer-sidebars-bg-color);
 }
 
 #origamiez-footer-end {
-  background-color: #1e2a2a;
-  color: #999999;
+  background-color: var(--footer-end-bg-color);
+  color: var(--footer-end-text-color);
 }
 
 #bottom-menu li a {
-  color: #999999;
-  border-left: 1px solid #999999;
+  color: var(--footer-end-text-color);
+  border-left: 1px solid var(--footer-end-text-color);
 }
 #bottom-menu li a:hover {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 #bottom-menu li:first-child a {
   border-left: none;
@@ -111,14 +163,14 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
  * --------------------------------------------------
  */
 #origamiez-headline-ticker .origamiez-headline-caption {
-  background-color: #FFFFFF;
-  color: #E74C3C;
+  background-color: var(--white);
+  color: var(--primary-color);
 }
 #origamiez-headline-ticker .origamiez-headline-caption > span {
-  border-right: 1px solid #DDDDDD;
+  border-right: 1px solid var(--line-2-bg-color);
 }
 #origamiez-headline-ticker #origamiez-ticker a time {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 /*
@@ -132,12 +184,12 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
  * --------------------------------------------------
  */
 #sidebar-center {
-  border-right: 1px solid #DDDDDD;
-  background-color: #FFFFFF;
+  border-right: 1px solid var(--line-2-bg-color);
+  background-color: var(--white);
 }
 #sidebar-center .widget {
   margin-top: -1px;
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 #sidebar-center .widget:first-child {
   margin-top: 0;
@@ -160,27 +212,27 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
  * --------------------------------------------------
  */
 #sidebar-bottom {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 #sidebar-bottom .widget .widget-title-text {
   border-bottom: none;
 }
 
 #origamiez-footer-sidebars h2.widget-title {
-  color: #FFFFFF;
+  color: var(--footer-sidebars-widget-heading-color);
 }
 #origamiez-footer-sidebars .origamiez-widget-content {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 #origamiez-footer-sidebars .origamiez-widget-content a {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 #origamiez-footer-sidebars .widget_calendar caption {
-  border-bottom-color: #555555;
+  border-bottom-color: var(--line-1-bg-color);
 }
 #origamiez-footer-sidebars .widget_tag_cloud .origamiez-widget-content a {
-  color: #FFFFFF;
-  background-color: #555555;
+  color: var(--white);
+  background-color: var(--line-1-bg-color);
 }
 
 /*
@@ -189,11 +241,11 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
  * --------------------------------------------------
  */
 form.search-form .search-text {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 form.search-form .search-submit {
-  background-color: #FFFFFF;
-  color: #DFDFDF;
+  background-color: var(--white);
+  color: var(--black_light);
 }
 
 /*
@@ -202,27 +254,27 @@ form.search-form .search-submit {
  * --------------------------------------------------
  */
 body.without_bg_slides {
-  background: #FFFFFF;
+  background: var(--white);
 }
 body.without_bg_slides #sb-site,
 body.without_bg_slides .sb-site-container {
-  background: #FFFFFF;
+  background: var(--white);
 }
 
 .origamiez-mobile-icon {
-  background-color: #E74C3C;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 .sb-slidebar {
-  background-color: #293535;
+  background-color: var(--footer-sidebars-bg-color);
 }
 
 #mobile-menu a {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 #mobile-menu li {
-  border-top: 1px solid #555555;
+  border-top: 1px solid var(--line-1-bg-color);
 }
 #mobile-menu > li:first-child {
   border-top: none;
@@ -234,17 +286,17 @@ body.without_bg_slides .sb-site-container {
  * --------------------------------------------------
  */
 .sb-slidebar.sb-right {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 .sb-slidebar.sb-right a {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 .sb-slidebar.sb-right .widget-title {
-  border-color: #555555;
-  color: #E74C3C;
+  border-color: var(--line-1-bg-color);
+  color: var(--primary-color);
 }
 .sb-slidebar.sb-right form.search-form .search-text {
-  border-color: #555555;
+  border-color: var(--line-1-bg-color);
 }
 
 /*
@@ -253,12 +305,12 @@ body.without_bg_slides .sb-site-container {
  * --------------------------------------------------
  */
 h2.widget-title {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 
 #origamiez-top-banner .widget-title-text,
 #origamiez-body .widget-title-text {
-  border-bottom: 1px solid #E74C3C;
+  border-bottom: 1px solid var(--primary-color);
 }
 
 /*
@@ -268,11 +320,11 @@ h2.widget-title {
  */
 .widget_archive select,
 .widget_categories select {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 
 .widget_rss ul li:before {
-  color: #FA9B39;
+  color: var(--rss-color);
 }
 
 /*
@@ -281,13 +333,13 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-minimalist .origamiez-widget-content .origamiez-wp-m-post {
-  border-top: 1px dashed #555555;
+  border-top: 1px dashed var(--line-1-bg-color);
 }
 .origamiez-widget-posts-minimalist .origamiez-widget-content .origamiez-wp-m-post.origamiez-wp-m-post-first {
   border-top: none;
 }
 .origamiez-widget-posts-minimalist .origamiez-widget-content .origamiez-wp-m-post h5 a {
-  color: #999999;
+  color: var(--footer-sidebars-text-color);
 }
 
 /*
@@ -296,23 +348,23 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-tweets .origamiez-widget-content .origamiez-wp-m-tweet {
-  border-top: 1px solid #555555;
+  border-top: 1px solid var(--line-1-bg-color);
 }
 .origamiez-widget-tweets .origamiez-widget-content .origamiez-wp-m-tweet:hover .fa-twitter {
-  color: #00A0D1;
+  color: var(--twitter-color);
 }
 .origamiez-widget-tweets .origamiez-widget-content .origamiez-wp-m-tweet.origamiez-wp-m-tweet-first {
   border-top: none;
 }
 .origamiez-widget-tweets .origamiez-widget-content .origamiez-wp-m-tweet p.origamiez-wp-m-tweet-content a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 #origamiez-body .origamiez-widget-tweets .origamiez-widget-content .origamiez-wp-m-tweet {
-  border-top-color: #DDDDDD;
+  border-top-color: var(--line-2-bg-color);
 }
 #origamiez-body .origamiez-widget-tweets .origamiez-widget-content .fa-twitter {
-  color: #00A0D1;
+  color: var(--twitter-color);
 }
 
 /*
@@ -321,34 +373,34 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-newsletter p.newsletter-form input[type=text] {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 .origamiez-widget-newsletter p.newsletter-form button[type=submit] {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 .origamiez-widget-newsletter p.newsletter-form:hover button[type=submit] {
-  border: 1px solid #E74C3C;
-  background-color: #E74C3C;
-  color: #FFFFFF;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 #origamiez-footer .origamiez-widget-newsletter p.newsletter-form input[type=text] {
-  background: #293535;
-  border: 1px solid #555555;
+  background: var(--footer-sidebars-bg-color);
+  border: 1px solid var(--line-1-bg-color);
 }
 #origamiez-footer .origamiez-widget-newsletter p.newsletter-form button[type=submit] {
-  border: 1px solid #555555;
-  background: #555555;
-  color: #F9F9F9;
+  border: 1px solid var(--line-1-bg-color);
+  background: var(--line-1-bg-color);
+  color: var(--secondary-color);
 }
 #origamiez-footer .origamiez-widget-newsletter p.newsletter-form:hover input[type=text] {
-  border: 1px solid #E74C3C;
-  color: #FFFFFF;
+  border: 1px solid var(--primary-color);
+  color: var(--white);
 }
 #origamiez-footer .origamiez-widget-newsletter p.newsletter-form:hover button[type=submit] {
-  border: 1px solid #E74C3C;
-  background: #E74C3C;
-  color: #FFFFFF;
+  border: 1px solid var(--primary-color);
+  background: var(--primary-color);
+  color: var(--white);
 }
 
 /*
@@ -357,7 +409,7 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-small-thumbnail .origamiez-widget-content .origamiez-wp-mt-post {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 .origamiez-widget-posts-small-thumbnail .origamiez-widget-content .origamiez-wp-mt-post.origamiez-wp-mt-post-first {
   border-top: none;
@@ -372,9 +424,9 @@ h2.widget-title {
   border-top: none;
 }
 .origamiez-widget-posts-grid .origamiez-widget-content .row .origamiez-wp-grid-post {
-  border-top: 1px solid #DDDDDD;
-  border-left: 1px solid #DDDDDD;
-  border-right: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
+  border-left: 1px solid var(--line-2-bg-color);
+  border-right: 1px solid var(--line-2-bg-color);
   margin-left: -1px;
 }
 .origamiez-widget-posts-grid .origamiez-widget-content .row .origamiez-wp-grid-post.origamiez-wp-grid-post-first {
@@ -390,11 +442,11 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .widget_tag_cloud .tagcloud a {
-  background-color: #F9F9F9;
+  background-color: var(--secondary-color);
 }
 .widget_tag_cloud .tagcloud a:hover {
-  background-color: #E74C3C;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 /*
@@ -403,7 +455,7 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .widget_calendar caption {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 .widget_calendar tr {
   line-height: 20px;
@@ -416,28 +468,28 @@ h2.widget-title {
  * --------------------------------------------------
  */
 a.social-link {
-  color: #555555;
-  border: 1px solid #555555;
+  color: var(--line-1-bg-color);
+  border: 1px solid var(--line-1-bg-color);
 }
 a.social-link.social-link-facebook {
-  color: #3B5998;
-  border: 1px solid #3B5998;
+  color: var(--facebook-color);
+  border: 1px solid var(--facebook-color);
 }
 a.social-link.social-link-twitter {
-  color: #00A0D1;
-  border: 1px solid #00A0D1;
+  color: var(--twitter-color);
+  border: 1px solid var(--twitter-color);
 }
 a.social-link.social-link-pinterest {
-  color: #910101;
-  border: 1px solid #910101;
+  color: var(--pinterest-color);
+  border: 1px solid var(--pinterest-color);
 }
 a.social-link.social-link-google-plus {
-  color: #C63D2D;
-  border: 1px solid #C63D2D;
+  color: var(--google-plus-color);
+  border: 1px solid var(--google-plus-color);
 }
 a.social-link.social-link-rss {
-  color: #FA9B39;
-  border: 1px solid #FA9B39;
+  color: var(--rss-color);
+  border: 1px solid var(--rss-color);
 }
 
 /*
@@ -451,12 +503,12 @@ a.social-link.social-link-rss {
  * --------------------------------------------------
  */
 .widget-title .owl-custom-pagination {
-  border: 1px solid #DDDDDD;
-  color: #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
+  color: var(--line-2-bg-color);
 }
 .widget-title .owl-custom-pagination:hover {
-  border-color: #E74C3C;
-  color: #E74C3C;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /*
@@ -465,7 +517,7 @@ a.social-link.social-link-rss {
  * --------------------------------------------------
  */
 .metadata-circle-icon .fa {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 /*
@@ -477,12 +529,12 @@ div.comment-metadata .metadata-divider,
 div.comment-metadata time,
 div.comment-metadata .comment-reply-link,
 div.comment-metadata a {
-  color: #444;
+  color: var(--body-color);
 }
 
 p.metadata .metadata-post-format {
-  background: #E74C3C;
-  color: #FFFFFF;
+  background: var(--primary-color);
+  color: var(--white);
 }
 p.metadata i,
 p.metadata .metadata-author a,
@@ -491,19 +543,19 @@ p.metadata .metadata-comment,
 p.metadata .metadata-date,
 p.metadata .metadata-views,
 p.metadata .metadata-divider {
-  color: #777777;
+  color: var(--metadata-color);
 }
 p.metadata .metadata-categories a:hover {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 p.metadata-readmore a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 div.origamiez-article-metadata p.metadata-divider-horizonal {
-  border-bottom: 1px dashed #DDDDDD;
-  color: #E74C3C;
+  border-bottom: 1px dashed var(--line-2-bg-color);
+  color: var(--primary-color);
 }
 
 .origamiez-transition-all, .wpcf7-form .wpcf7-form-control.wpcf7-submit {
@@ -520,13 +572,13 @@ div.origamiez-article-metadata p.metadata-divider-horizonal {
  */
 .breadcrumb {
   background-color: transparent;
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 .breadcrumb a {
   text-decoration: none;
 }
 .breadcrumb a.current-page {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 /*
@@ -538,19 +590,19 @@ body.origamiez-layout-blog #origamiez-blogposts {
   list-style-type: none;
 }
 body.origamiez-layout-blog #origamiez-blogposts > li {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-blog #origamiez-blogposts > li.origamiez-first-post {
   border-top: none;
 }
 body.origamiez-layout-blog #origamiez-blogposts > li article .entry-thumb a .overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--overlay_black);
 }
 body.origamiez-layout-blog #origamiez-blogposts > li article .entry-thumb a .overlay-link {
-  border: 2px solid #FFFFFF;
+  border: 2px solid var(--white);
 }
 body.origamiez-layout-blog #origamiez-blogposts > li article .entry-thumb a .fa {
-  color: #FFFFFF;
+  color: var(--white);
 }
 
 /*
@@ -559,19 +611,19 @@ body.origamiez-layout-blog #origamiez-blogposts > li article .entry-thumb a .fa 
  * --------------------------------------------------
  */
 body.origamiez-layout-blog.origamiez-layout-blog-masonry #origamiez-blogposts {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-blog.origamiez-layout-blog-masonry #origamiez-blogposts .item {
   border-bottom: none;
   border-right: none;
-  border-left: 1px solid #DDDDDD;
-  border-top: 1px solid #DDDDDD;
+  border-left: 1px solid var(--line-2-bg-color);
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-blog.origamiez-layout-blog-masonry #origamiez-blogposts-loadmore {
-  background-color: #E74C3C;
+  background-color: var(--primary-color);
 }
 body.origamiez-layout-blog.origamiez-layout-blog-masonry #origamiez-blogposts-loadmore a {
-  color: #FFFFFF;
+  color: var(--white);
 }
 
 /*
@@ -580,11 +632,11 @@ body.origamiez-layout-blog.origamiez-layout-blog-masonry #origamiez-blogposts-lo
  * --------------------------------------------------
  */
 ul.page-numbers {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 ul.page-numbers li a, ul.page-numbers li span {
   border-radius: 5px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
   text-decoration: none;
   transition: all 0.5s;
   -ms-transition: all 0.5s;
@@ -595,12 +647,12 @@ ul.page-numbers li span.dots {
   border-color: transparent;
 }
 ul.page-numbers li a:hover, ul.page-numbers li span.current {
-  color: #E74C3C;
-  border-color: #E74C3C;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 #origamiez_singular_pagination a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 /*
@@ -609,53 +661,53 @@ ul.page-numbers li a:hover, ul.page-numbers li span.current {
  * --------------------------------------------------
  */
 body.origamiez-layout-single #origamiez-post-wrap div.entry-tag {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-category,
 body.origamiez-layout-single #origamiez-post-tag {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-category span,
 body.origamiez-layout-single #origamiez-post-category a,
 body.origamiez-layout-single #origamiez-post-tag span,
 body.origamiez-layout-single #origamiez-post-tag a {
-  background-color: #F9F9F9;
+  background-color: var(--secondary-color);
 }
 body.origamiez-layout-single #origamiez-post-category span:hover,
 body.origamiez-layout-single #origamiez-post-category a:hover,
 body.origamiez-layout-single #origamiez-post-tag span:hover,
 body.origamiez-layout-single #origamiez-post-tag a:hover {
-  background-color: #E74C3C;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 body.origamiez-layout-single #origamiez-post-category span,
 body.origamiez-layout-single #origamiez-post-tag span {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 body.origamiez-layout-single #origamiez-post-category {
   border-top: none;
 }
 body.origamiez-layout-single #origamiez-post-adjacent {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-adjacent div.origamiez-post-adjacent-prev {
-  border-right: 1px solid #DDDDDD;
+  border-right: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-adjacent div.origamiez-post-adjacent-next {
-  border-left: 1px solid #DDDDDD;
+  border-left: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-author {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-author .origamiez-author-name a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 body.origamiez-layout-single #origamiez-post-author .origamiez-author-socials a {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-layout-single #origamiez-post-related .origamiez-widget-content figure.post figcaption a {
-  color: #FFFFFF;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  background-color: var(--overlay_black);
 }
 
 /*
@@ -667,35 +719,35 @@ body.origamiez-layout-single #origamiez-post-related .origamiez-widget-content f
   border-top: none !important;
 }
 #comments > .widget-title.comments-title {
-  border-top: 1px dashed #DDDDDD;
+  border-top: 1px dashed var(--line-2-bg-color);
 }
 #comments #comment-nav-below {
-  border-top: 1px dashed #DDDDDD;
+  border-top: 1px dashed var(--line-2-bg-color);
 }
 #comments .comment-list > li:first-child {
   border-top: none;
 }
 #comments .pingback,
 #comments .comment {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 #comments .pingback .comment-meta .comment-author .fn a,
 #comments .comment .comment-meta .comment-author .fn a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 #comments #respond {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 #comments #respond .comment-form-info input {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 #comments #respond .comment-form-comment textarea {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 #comments #respond .form-submit input {
-  color: #FFFFFF;
+  color: var(--white);
   border: none;
-  background-color: #E74C3C;
+  background-color: var(--primary-color);
 }
 
 /*
@@ -705,7 +757,7 @@ body.origamiez-layout-single #origamiez-post-related .origamiez-widget-content f
  */
 .separator {
   border-bottom-width: 1px;
-  border-bottom-color: #DDDDDD;
+  border-bottom-color: var(--line-2-bg-color);
 }
 
 .separator-solid {
@@ -732,16 +784,16 @@ body.origamiez-layout-single #origamiez-post-related .origamiez-widget-content f
  * --------------------------------------------------
  */
 .wpcf7-form .wpcf7-form-control-wrap > input[type=text], .wpcf7-form .wpcf7-form-control-wrap > input[type=email], .wpcf7-form .wpcf7-form-control-wrap > input[type=number], .wpcf7-form .wpcf7-form-control-wrap > input[type=phone], .wpcf7-form .wpcf7-form-control-wrap > textarea {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 .wpcf7-form .wpcf7-form-control.wpcf7-submit {
-  background-color: #E74C3C;
-  border: 1px solid #E74C3C;
-  color: #FFFFFF;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white);
 }
 .wpcf7-form .wpcf7-form-control.wpcf7-submit:hover {
-  color: #E74C3C;
-  background-color: #FFFFFF;
+  color: var(--primary-color);
+  background-color: var(--white);
 }
 
 /*
@@ -759,35 +811,35 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 #origamiez-admin-rating {
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--line-2-bg-color);
 }
 #origamiez-admin-rating .origamiez-admin-rating-summary {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 #origamiez-admin-rating .origamiez-rating-total {
-  background-color: #E74C3C;
+  background-color: var(--primary-color);
 }
 #origamiez-admin-rating .origamiez-rating-total span {
-  color: #FFFFFF;
+  color: var(--white);
 }
 #origamiez-admin-rating .origamiez-admin-rating-per-featured .col-left {
   font-size: 16px;
 }
 #origamiez-admin-rating .origamiez-admin-rating-per-featured .col-right .circle {
-  border: 3px solid #E74C3C;
-  background: #FFFFFF;
-  color: #E74C3C;
+  border: 3px solid var(--primary-color);
+  background: var(--white);
+  color: var(--primary-color);
 }
 #origamiez-admin-rating .origamiez-admin-rating-per-featured .col-right .line-front {
-  background-color: #E74C3C;
+  background-color: var(--primary-color);
 }
 #origamiez-admin-rating .origamiez-admin-rating-per-featured .col-right .line-back {
-  background-color: #DDDDDD;
+  background-color: var(--line-2-bg-color);
 }
 
 .origamiez-rating-total-inside-widget {
-  background: #E74C3C;
-  color: #FFFFFF;
+  background: var(--primary-color);
+  color: var(--white);
 }
 
 /*
@@ -796,7 +848,7 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-contact-information .origamiez-contact-block .fa {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 /*
@@ -805,7 +857,7 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-widget-posts-two-cols .article-col-right article {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 .origamiez-widget-posts-two-cols .article-col-right article.origamiez-post-1 {
   border-top: none !important;
@@ -817,13 +869,13 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-widget-posts-with-format-icon .origamiez-widget-content .origamiez-w-m-post {
-  border-top: 1px solid #DDDDDD;
+  border-top: 1px solid var(--line-2-bg-color);
 }
 .origamiez-widget-posts-with-format-icon .origamiez-widget-content .metadata-circle-icon {
-  border: 1px solid #FFFFFF;
+  border: 1px solid var(--white);
 }
 .origamiez-widget-posts-with-format-icon .origamiez-widget-content .metadata-circle-icon .fa {
-  color: #FFFFFF;
+  color: var(--white);
 }
 
 /*
@@ -832,16 +884,16 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-widget-posts-zebra .origamiez-widget-content .origamiez-wp-zebra-post {
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid var(--line-3-bg-color);
 }
 .origamiez-widget-posts-zebra .origamiez-widget-content .origamiez-wp-zebra-post:last-child {
   border-bottom: none;
 }
 .origamiez-widget-posts-zebra .origamiez-widget-content .origamiez-wp-zebra-post.even {
-  background-color: #F9F9F9;
+  background-color: var(--secondary-color);
 }
 .origamiez-widget-posts-zebra .origamiez-widget-content .origamiez-wp-zebra-post.odd {
-  background-color: #FFFFFF;
+  background-color: var(--white);
 }
 .origamiez-widget-posts-zebra .origamiez-widget-content .origamiez-wp-zebra-post .metadata {
   margin-top: 10px;
@@ -853,11 +905,11 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-widget-posts-with-background .origamiez-widget-content .origamiez-wp-post {
-  background-color: #F9F9F9;
+  background-color: var(--secondary-color);
 }
 .origamiez-widget-posts-with-background .origamiez-widget-content .origamiez-wp-post .origamiez-wp-post-index {
-  border: 1px solid #E74C3C;
-  color: #E74C3C;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
 /*
@@ -866,7 +918,7 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 .origamiez-widget-posts-slider .origamiez-widget-content .item .caption {
-  background-color: #FFFFFF;
+  background-color: var(--white);
 }
 .origamiez-widget-posts-slider .origamiez-widget-content .col-right .owl-pagination {
   background-color: rgba(255, 255, 255, 0.5);
@@ -879,18 +931,18 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  */
 @media only screen and (max-width: 1023px) {
   #sidebar-right {
-    border-top: 1px solid #DDDDDD;
+    border-top: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (max-width: 767px) {
   #origamiez-post-adjacent .origamiez-post-adjacent-next {
-    border-top: 1px dashed #DDDDDD;
+    border-top: 1px dashed var(--line-2-bg-color);
   }
   .origamiez-widget-posts-playlist .row-first .origamiez-wp-other-post-even .entry-title {
-    border-top: 1px solid #555555 !important;
+    border-top: 1px solid var(--line-1-bg-color) !important;
   }
   .origamiez-widget-posts-two-cols .article-col-right {
-    border-top: 1px solid #DDDDDD;
+    border-top: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (max-width: 767px) {
@@ -901,27 +953,27 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
 }
 @media only screen and (min-width: 1024px) and (max-width: 1179px) {
   .origamiez-col-right {
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (min-width: 980px) and (max-width: 1023px) {
   .origamiez-col-right {
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (min-width: 900px) and (max-width: 979px) {
   .origamiez-col-right {
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (min-width: 800px) and (max-width: 899px) {
   .origamiez-col-right {
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 799px) {
   .origamiez-col-right {
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid var(--line-2-bg-color);
   }
 }
 @media only screen and (max-width: 599px) {
@@ -935,7 +987,7 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  * --------------------------------------------------
  */
 #sidebar-bottom .widget {
-  border-bottom-color: #DDDDDD;
+  border-bottom-color: var(--line-2-bg-color);
 }
 
 /*
@@ -945,31 +997,31 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  */
 body.origamiez-page-magazine #sidebar-main-center-top,
 body.origamiez-page-magazine #sidebar-main-top {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 body.origamiez-page-magazine #main-center-outer > .origamiez-left,
 body.origamiez-page-magazine #main-center-inner > .origamiez-left {
-  border-right: 1px solid #DDDDDD;
+  border-right: 1px solid var(--line-2-bg-color);
 }
 
 body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.aligncenter, body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.alignleft, body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.alignright {
-  border: 1px solid #DDDDDD;
-  background-color: #E5E5E5;
+  border: 1px solid var(--line-2-bg-color);
+  background-color: var(--line-3-bg-color);
 }
 
 #origamiez-top-bar {
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 
 #top-menu a {
-  color: #222;
+  color: var(--heading-color);
 }
 #top-menu a:hover {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 
 #origamiez-blogposts > li.sticky article {
-  background-color: #F9F9F9;
+  background-color: var(--secondary-color);
 }
 
 /*
@@ -979,7 +1031,7 @@ body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.alignc
  */
 p.origamiez-readmore-block > a,
 #origamiez-footer-copyright > a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 p.origamiez-readmore-block > a:hover,
 #origamiez-footer-copyright > a:hover {
@@ -991,7 +1043,7 @@ p.origamiez-readmore-block > a:hover,
 }
 
 .entry-content a {
-  color: #E74C3C;
+  color: var(--primary-color);
 }
 .entry-content a:hover {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -1002,21 +1054,21 @@ p.origamiez-readmore-block > a:hover,
 }
 .entry-content q,
 .entry-content blockquote {
-  border-left: 3px solid #E74C3C;
+  border-left: 3px solid var(--primary-color);
 }
 
 #bottom-mobile-menu {
   background-color: transparent;
-  border: 3px solid #293535;
+  border: 3px solid var(--footer-sidebars-bg-color);
 }
 
 #top-mobile-menu {
-  border: 3px solid #DDDDDD;
+  border: 3px solid var(--line-2-bg-color);
 }
 
 #bottom-mobile-menu:hover,
 #top-mobile-menu:hover {
-  border-color: #E74C3C;
+  border-color: var(--primary-color);
 }
 
 /*
@@ -1025,17 +1077,17 @@ p.origamiez-readmore-block > a:hover,
  * --------------------------------------------------
  */
 #origamiez_singular_pagination a {
-  border-right: 3px solid #E74C3C;
+  border-right: 3px solid var(--primary-color);
 }
 
 body.page-template-template-page-three-cols #sidebar-middle,
 body.origamiez-taxonomy-three-cols #sidebar-middle,
 body.origamiez-single-post-three-cols #sidebar-middle {
-  border-right: 1px solid #DDDDDD;
+  border-right: 1px solid var(--line-2-bg-color);
 }
 
 body.page-template-template-page-three-cols-slm #sidebar-center,
 body.origamiez-taxonomy-three-cols-slm #sidebar-center,
 body.origamiez-single-post-three-cols-slm #sidebar-center {
-  border-left: 1px solid #DDDDDD;
+  border-left: 1px solid var(--line-2-bg-color);
 }

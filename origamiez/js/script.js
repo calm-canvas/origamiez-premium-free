@@ -302,10 +302,49 @@ var OrigamierUtil = {
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap/scss/bootstrap.scss":
-/*!****************************************************!*\
-  !*** ./node_modules/bootstrap/scss/bootstrap.scss ***!
-  \****************************************************/
+/***/ "./assets/sass/responsive.scss":
+/*!*************************************!*\
+  !*** ./assets/sass/responsive.scss ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./assets/sass/skin/custom.scss":
+/*!**************************************!*\
+  !*** ./assets/sass/skin/custom.scss ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./assets/sass/skin/default.scss":
+/*!***************************************!*\
+  !*** ./assets/sass/skin/default.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./assets/sass/typography/default.scss":
+/*!*********************************************!*\
+  !*** ./assets/sass/typography/default.scss ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -319,6 +358,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************!*\
   !*** ./node_modules/@fortawesome/fontawesome-free/css/all.css ***!
   \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap/scss/bootstrap.scss":
+/*!****************************************************!*\
+  !*** ./node_modules/bootstrap/scss/bootstrap.scss ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -371,58 +423,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************!*\
   !*** ./style.scss ***!
   \********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./assets/sass/responsive.scss":
-/*!*************************************!*\
-  !*** ./assets/sass/responsive.scss ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./assets/sass/typography/default.scss":
-/*!*********************************************!*\
-  !*** ./assets/sass/typography/default.scss ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./assets/sass/skin/default.scss":
-/*!***************************************!*\
-  !*** ./assets/sass/skin/default.scss ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./assets/sass/skin/custom.scss":
-/*!**************************************!*\
-  !*** ./assets/sass/skin/custom.scss ***!
-  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
