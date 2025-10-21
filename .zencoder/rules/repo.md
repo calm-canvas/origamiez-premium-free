@@ -13,14 +13,14 @@ Origamiez is a flexible WordPress theme designed for magazine, newspaper, and fo
 - **assets/**: Source files for CSS (SASS) and JavaScript
 - **bin/**: Installation and startup scripts
 - **docker/**: Docker configuration and database snapshots
-- **docs/**: Documentation for developers and users
+- **.zencoder/**: Configuration for Zencoder
 
 ## Language & Runtime
 **Language**: PHP, JavaScript, SASS
-**PHP Version**: 8.2+
-**Node.js Version**: 18.x
+**PHP Version**: 7.4+ (Tested up to 8.4)
+**WordPress Version**: 5.5+ (Tested up to 6.8.3)
 **Build System**: Laravel Mix (webpack wrapper)
-**Package Managers**: Composer (PHP), npm/yarn (JavaScript)
+**Package Managers**: Composer (PHP), npm (JavaScript)
 
 ## Dependencies
 **PHP Dependencies**:
@@ -62,11 +62,13 @@ npx mix --production
 ```
 
 ## Docker
-**Docker Image**: wordpress:php8.4-apache
+**Docker Image**: wordpress:php8.4-fpm
 **Configuration**: 
 - Custom PHP configuration in docker/config/php.ini
 - Database and media restoration scripts in docker/snapshot/
 - WordPress runs on port 8001 by default (configurable in .env)
+- Uses Nginx as web server with PHP-FPM
+- Includes wp-cli for WordPress management
 
 ## Main Files & Resources
 **Entry Points**:
@@ -78,6 +80,7 @@ npx mix --production
 - webpack.mix.js: Asset compilation configuration
 - composer.json: PHP dependency management
 - package.json: JavaScript dependency management
+- docker-compose.yml: Docker environment setup
 
 ## Testing
 **Access**:
@@ -85,7 +88,7 @@ npx mix --production
 - Username: root
 - Password: secret
 
-## Project Structure
+## Theme Structure
 The theme follows WordPress standards with template files in the root, and specialized directories:
 - **app/**: Core PHP classes with PSR-4 autoloading
 - **inc/**: Theme includes (widgets, customizer, functions)
