@@ -1,3 +1,92 @@
+:root {
+  --font-body: "Roboto Serif", serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: "Neuton", serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: "Neuton", serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: "Neuton", serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: "Neuton", serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: "Neuton", serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: "Neuton", serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: "Neuton", serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: "Neuton", serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: "Neuton", serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+  --body-color: #555555;
+  --heading-color: #1f1f1f;
+  --link-color: #1e9bd2;
+  --link-hover-color: #1e9bd2;
+  --primary-color: #1e9bd2;
+  --secondary-color: #5495d9;
+  --main-menu-color: #ffffff;
+  --main-menu-bg-color: #1f1f1f;
+  --line-1-bg-color: #222222;
+  --line-2-bg-color: #eeeeee;
+  --line-3-bg-color: #dddddd;
+  --footer-sidebars-bg-color: #1f1f1f;
+  --footer-sidebars-text-color: #d5d5d5;
+  --footer-sidebars-widget-heading-color: #ffffff;
+  --footer-end-bg-color: #191919;
+  --footer-end-text-color: #aaaaaa;
+  --white: #ffffff;
+  --black: #000000;
+  --black_light: #333333;
+  --overlay_white: rgba(255, 255, 255, 0.5);
+  --overlay_black: rgba(0, 0, 0, 0.5);
+  --facebook-color: #3b5998;
+  --twitter-color: #55acee;
+  --google-plus-color: #db4437;
+  --pinterest-color: #bd081c;
+  --rss-color: #f26522;
+  --metadata-color: #999999;
+  --youtube-color: #ff0000;
+  --linkedin-color: #0077b5;
+  --tumblr-color: #35465c;
+  --digg-color: #005be2;
+  --reddit-color: #ff4500;
+  --stumbleupon-color: #eb4924;
+  --vk-color: #4c75a3;
+  --print-color: #5a5a5a;
+  --envelope-color: #333333;
+  --color-success: #28a745;
+}
+
 /*
  * --------------------------------------------------
  * SKELETON
@@ -84,7 +173,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 }
 
 #origamiez-footer-sidebars {
-  /*border-top: 1px solid $line-1-bg-color;*/
+  /*border-top: 1px solid var(--line-1-bg-color);*/
   border-top: none;
   background-color: var(--footer-sidebars-bg-color);
 }
