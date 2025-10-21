@@ -130,6 +130,3 @@ Load & register modules.
 */
 require_once( $dir . '/vendor/autoload.php' );
 add_filter( 'use_widgets_block_editor', '__return_false' );
-
-
-//bomb_auto_thumbs(1832, 1836);
