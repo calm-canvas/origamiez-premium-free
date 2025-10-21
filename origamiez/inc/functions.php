@@ -1818,7 +1818,7 @@ function origamiez_get_metadata_prefix($echo = true)
 {
     $prefix = apply_filters('origamiez_get_metadata_prefix', '&horbar;');
     if ($echo) {
-        echo wp_kses_post( htmlspecialchars_decode( $prefix ) );
+        echo $prefix ;
     } else {
         return $prefix;
     }
