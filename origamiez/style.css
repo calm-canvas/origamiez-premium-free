@@ -4,7 +4,7 @@
  * Author: openwpdotorg
  * Author URI: http://openwp.org
  * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
- * Version: 3.0.1761041331
+ * Version: 3.0.1761041565
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -68,43 +68,43 @@
   --font-block-quote: "Neuton", serif;
   --font-block-quote-line-height: 25px;
   --font-block-quote-size: 14px;
-  --body-color: #555555;
-  --heading-color: #1f1f1f;
-  --link-color: #1e9bd2;
-  --link-hover-color: #1e9bd2;
-  --primary-color: #1e9bd2;
-  --secondary-color: #5495d9;
-  --main-menu-color: #ffffff;
-  --main-menu-bg-color: #1f1f1f;
-  --line-1-bg-color: #222222;
-  --line-2-bg-color: #eeeeee;
-  --line-3-bg-color: #dddddd;
-  --footer-sidebars-bg-color: #1f1f1f;
-  --footer-sidebars-text-color: #d5d5d5;
-  --footer-sidebars-widget-heading-color: #ffffff;
-  --footer-end-bg-color: #191919;
-  --footer-end-text-color: #aaaaaa;
-  --white: #ffffff;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
   --black: #000000;
-  --black_light: #333333;
+  --black_light: #DFDFDF;
   --overlay_white: rgba(255, 255, 255, 0.5);
   --overlay_black: rgba(0, 0, 0, 0.5);
-  --facebook-color: #3b5998;
-  --twitter-color: #55acee;
-  --google-plus-color: #db4437;
-  --pinterest-color: #bd081c;
-  --rss-color: #f26522;
-  --metadata-color: #999999;
-  --youtube-color: #ff0000;
-  --linkedin-color: #0077b5;
-  --tumblr-color: #35465c;
-  --digg-color: #005be2;
-  --reddit-color: #ff4500;
-  --stumbleupon-color: #eb4924;
-  --vk-color: #4c75a3;
-  --print-color: #5a5a5a;
-  --envelope-color: #333333;
-  --color-success: #28a745;
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
 }
 
 :root {
@@ -157,43 +157,43 @@
   --font-block-quote: "Neuton", serif;
   --font-block-quote-line-height: 25px;
   --font-block-quote-size: 14px;
-  --body-color: #555555;
-  --heading-color: #1f1f1f;
-  --link-color: #1e9bd2;
-  --link-hover-color: #1e9bd2;
-  --primary-color: #1e9bd2;
-  --secondary-color: #5495d9;
-  --main-menu-color: #ffffff;
-  --main-menu-bg-color: #1f1f1f;
-  --line-1-bg-color: #222222;
-  --line-2-bg-color: #eeeeee;
-  --line-3-bg-color: #dddddd;
-  --footer-sidebars-bg-color: #1f1f1f;
-  --footer-sidebars-text-color: #d5d5d5;
-  --footer-sidebars-widget-heading-color: #ffffff;
-  --footer-end-bg-color: #191919;
-  --footer-end-text-color: #aaaaaa;
-  --white: #ffffff;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
   --black: #000000;
-  --black_light: #333333;
+  --black_light: #DFDFDF;
   --overlay_white: rgba(255, 255, 255, 0.5);
   --overlay_black: rgba(0, 0, 0, 0.5);
-  --facebook-color: #3b5998;
-  --twitter-color: #55acee;
-  --google-plus-color: #db4437;
-  --pinterest-color: #bd081c;
-  --rss-color: #f26522;
-  --metadata-color: #999999;
-  --youtube-color: #ff0000;
-  --linkedin-color: #0077b5;
-  --tumblr-color: #35465c;
-  --digg-color: #005be2;
-  --reddit-color: #ff4500;
-  --stumbleupon-color: #eb4924;
-  --vk-color: #4c75a3;
-  --print-color: #5a5a5a;
-  --envelope-color: #333333;
-  --color-success: #28a745;
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
 }
 
 * {
