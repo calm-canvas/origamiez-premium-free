@@ -15,9 +15,9 @@ docker compose up -d && ./bin/install.sh
 ```
 
 ### Access URLs
-- WordPress Admin: http://localhost:8001/wp-admin/
-- Username: root
-- Password: secret
+- WordPress Admin: http://localhost:8000/wp-admin/
+- Username: admin
+- Password: admin
 
 ### Key Commands
 
@@ -79,6 +79,6 @@ Laravel Mix handles:
 
 1. Make changes to source files in `assets/` directory
 2. Run `npm run watch` for automatic rebuilding during development
-3. Test changes in Docker environment at http://localhost:8001
+3. Test changes in Docker environment at http://localhost:8000
 4. For PHP changes, modify files in `origamiez/` directory directly
 5. Use `composer install` inside Docker container for PHP dependencies
