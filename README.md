@@ -1,136 +1,107 @@
 # Origamiez - WordPress Magazine & Forum Theme
 
-A flexible, modern WordPress theme designed for magazine, newspaper, and forum websites. Built with responsive design, extensive customization options, and robust plugin integration support.
+A flexible WordPress theme for magazines, news sites, and forums. Responsive, highly customizable, with powerful plugin integrations.
 
 ## Features
 
-- **Responsive Design**: Fully responsive layout that works seamlessly across all devices
-- **Multiple Layouts**: Various layout options for magazine, newspaper, and forum displays
-- **Customizable**: Extensive customizer options for colors, typography, and layouts
-- **Widget Areas**: Multiple widget regions for flexible content placement
-- **Plugin Integration**: Built-in support for:
-  - WooCommerce (e-commerce)
-  - bbPress (forums)
-  - DW Question & Answer
-- **Post Formats**: Support for multiple post formats (standard, gallery, video, audio, etc.)
-- **Performance Optimized**: Fast loading with optimized assets and caching
-- **Translation Ready**: Multi-language support with translation files
+- **Responsive**: Compatible with all devices
+- **Multiple Layouts**: Magazine, news, and forum
+- **Customization**: Colors, typography, layout
+- **Flexible Widgets**: Multiple content areas
+- **Plugin Integration**: WooCommerce, bbPress, DW Q&A
+- **Post Formats**: Supports various formats
+- **Performance**: Asset optimization, caching
+- **Multilingual**: Translation-ready
 
-## Tech Stack
+## Technology Stack
 
-- **Language**: PHP 7.4+, JavaScript (ES6), SCSS/CSS
+- **Languages**: PHP 7.4+, JavaScript ES6, SCSS
 - **CMS**: WordPress 5.5+
 - **Frontend**: Bootstrap 5.3, Font Awesome 6.4
-- **Build System**: Laravel Mix (webpack wrapper)
-- **Package Managers**: npm (JavaScript), Composer (PHP)
-- **Containerization**: Docker + PHP-FPM + Nginx + Supervisor
+- **Build Tool**: Laravel Mix (webpack)
+- **Package Managers**: npm, Composer
+- **Containerization**: Docker + Nginx + PHP-FPM
 - **Database**: MySQL 8.0
 
-## Prerequisites
+## Requirements
 
-Before getting started, ensure you have:
+- **Docker** ([install](https://docs.docker.com/get-docker/))
+- **Docker Compose** 2.0+ ([install](https://docs.docker.com/compose/install/))
+- **Node.js** 16+ ([download](https://nodejs.org/))
+- **Git** ([install](https://git-scm.com/))
+- **MySQL Server** (running separately)
 
-- **Docker**: Latest version installed ([Docker Installation Guide](https://docs.docker.com/get-docker/))
-- **Docker Compose**: Version 2.0+ ([Docker Compose Installation](https://docs.docker.com/compose/install/))
-- **Node.js**: Version 16+ for asset building ([Node.js Download](https://nodejs.org/))
-- **Git**: For version control ([Git Installation](https://git-scm.com/))
-- **MySQL Server**: Running independently (not containerized with this project)
+## Installation
 
-## Installation Guide
-
-### 1. Clone the Repository
+### 1. Clone
 
 ```bash
 git clone https://github.com/tranthethang/origamiez.git
 cd origamiez
 ```
 
-### 2. Environment Configuration
-
-Copy the example environment file and adjust settings:
+### 2. Configuration
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your configuration:
+Edit `.env`:
 
 ```env
-WP_PORT=8000                           # WordPress port
-WORDPRESS_DEBUG=1                      # Debug mode
-WORDPRESS_DB_USER=root                 # MySQL username
-WORDPRESS_DB_PASSWORD=password102           # MySQL password
-WORDPRESS_DB_NAME=origamiez            # Database name
-WORDPRESS_DB_HOST=your-mysql-host:3306 # MySQL host (adjust if not using default)
-WORDPRESS_DB_PORT=3306                 # MySQL port
-WORDPRESS_DB_CHARSET=utf8mb4           # Character set
-WORDPRESS_TABLE_PREFIX=wp_             # Table prefix
+WP_PORT=8001
+WORDPRESS_DB_USER=root
+WORDPRESS_DB_PASSWORD=secret
+WORDPRESS_DB_NAME=origamiez
+WORDPRESS_DB_HOST=mysql:3306
 ```
 
-### 3. Install JavaScript Dependencies
+### 3. Docker Setup
 
 ```bash
-npm install
-```
-
-This installs all required packages:
-- Bootstrap 5.3 for styling
-- Font Awesome 6.4 for icons
-- Owl Carousel for sliders
-- jQuery plugins for interactive features
-
-### 4. Start Docker Container
-
-Ensure your MySQL server is running and accessible, then start the WordPress container:
-
-```bash
+# Start the containers
 docker compose up -d
+
+# Check the status
+docker compose ps
 ```
 
-This command:
-- Builds the Docker image (on first run)
-- Starts the WordPress container with Nginx + PHP-FPM
-- Exposes the application on port defined in `.env` (default: 8000)
+### 4. Dependencies
 
-### 5. Initialize WordPress
+```bash
+# npm packages
+npm install
 
-Run the installation script to restore database and PHP dependencies:
+# PHP dependencies
+docker compose exec wordpress composer install
+```
+
+### 5. Initialize
 
 ```bash
 ./bin/install.sh
 ```
 
-This script:
-- Restores WordPress database from snapshot
-- Installs PHP dependencies via Composer
-- Sets up the theme environment
-
-### 6. Compile Assets
-
-Build CSS and JavaScript from source files:
+### 6. Build Assets
 
 ```bash
-# Development build (with sourcemaps)
+# Dev build
 npm run dev
 
-# Watch for changes (auto-rebuild on file changes)
+# Watch
 npm run watch
 
-# Production build (optimized and minified)
+# Production
 npm run production
 ```
 
-### 7. Access WordPress
-
-Open your browser and navigate to:
+### 7. Access
 
 ```
-http://localhost:8000/wp-admin/
+http://localhost:8001/wp-admin/
 ```
 
-**Credentials** (from snapshot):
-- **Username**: `admin`
-- **Password**: `admin`
+**Login**: `root` / `secret`
 
 ## Project Structure
 
@@ -169,10 +140,10 @@ origamiez/
 
 ### Making Changes
 
-1. **Source Files**: Edit SCSS/JavaScript in `assets/` directory
+1. **Source Files**: Edit SCSS/JavaScript in the `assets/` directory
 2. **Watch Mode**: Run `npm run watch` for automatic recompilation
-3. **PHP**: Edit WordPress template files directly in `origamiez/` directory
-4. **View Changes**: Refresh browser at `http://localhost:8000`
+3. **PHP**: Edit WordPress template files directly in the `origamiez/` directory
+4. **View Changes**: Refresh your browser at `http://localhost:8000`
 
 ### File Organization
 
@@ -318,14 +289,14 @@ docker compose exec wordpress mysql -h ${WORDPRESS_DB_HOST} \
 
 ### Asset Changes Not Showing
 
-1. Ensure watch/build completed:
+1. Ensure the watch/build process has completed:
    ```bash
    npm run dev
    ```
 
-2. Clear WordPress cache if using a cache plugin
+2. Clear the WordPress cache if you are using a caching plugin
 
-3. Hard refresh browser (Ctrl+Shift+R or Cmd+Shift+R)
+3. Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R)
 
 ### Permission Errors
 
@@ -338,30 +309,30 @@ docker compose exec wordpress chown -R owp:owp /var/www/html/wp-content/themes/o
 
 ### Database Connection Issues
 
-Verify MySQL credentials in `.env` match your MySQL server:
-- Check `WORDPRESS_DB_HOST` and port are correct
+Verify that the MySQL credentials in `.env` match your MySQL server:
+- Check if `WORDPRESS_DB_HOST` and the port are correct
 - Verify `WORDPRESS_DB_USER` and `WORDPRESS_DB_PASSWORD`
-- Confirm database exists: `WORDPRESS_DB_NAME`
+- Confirm the database exists: `WORDPRESS_DB_NAME`
 
 ## Performance Optimization
 
 The theme includes several optimizations:
 
 - **Lazy Loading**: For images and content
-- **Asset Minification**: CSS and JavaScript are minified in production
-- **Caching Headers**: Static assets cached with far-future headers
-- **Security Headers**: Security headers configured in Nginx
+- **Asset Minification**: CSS and JavaScript are minified for production
+- **Caching Headers**: Static assets are cached with far-future headers
+- **Security Headers**: Security headers are configured in Nginx
 - **Database Queries**: Optimized WordPress queries
 
 ## Security
 
-Security features implemented:
+The following security features are implemented:
 
-- **Non-root User**: Theme runs as non-root user (owp)
+- **Non-root User**: The theme runs as a non-root user (owp)
 - **Security Headers**: X-Frame-Options, X-Content-Type-Options, X-XSS-Protection
-- **Disabled Functions**: PHP dangerous functions disabled by default
-- **File Permissions**: Restrictive permissions on sensitive directories
-- **Environment Variables**: Database credentials not hardcoded
+- **Disabled Functions**: Dangerous PHP functions are disabled by default
+- **File Permissions**: Restrictive permissions are set on sensitive directories
+- **Environment Variables**: Database credentials are not hardcoded
 
 ## Contributing
 
@@ -379,8 +350,8 @@ This theme is licensed under the GPL-2.0 License. See [LICENSE.md](LICENSE.md) f
 
 For issues, questions, or suggestions:
 - Open an issue on [GitHub Issues](https://github.com/yourusername/origamiez/issues)
-- Check existing documentation in `docs/` directory
-- Review WordPress plugin documentation for integrated plugins
+- Check the existing documentation in the `docs/` directory
+- Review the WordPress plugin documentation for integrated plugins
 
 ## Changelog
 
@@ -388,7 +359,7 @@ For issues, questions, or suggestions:
 - Initial release with responsive design
 - Multiple layout options
 - WooCommerce, bbPress, and DW Q&A integration
-- Docker containerization with optimized configuration
+- Docker containerization with an optimized configuration
 
 ---
 

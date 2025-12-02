@@ -1,6 +1,9 @@
 services:
   wordpress:
-    image: wordpress:6.8-apache
+    image: calm-canvas/wordpress:6.8-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
