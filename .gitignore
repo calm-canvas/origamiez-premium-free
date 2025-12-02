@@ -2,7 +2,8 @@ node_modules/
 .idea/
 .vscode/
 .zencoder/
-plugins/
+plugins/*
+!plugins/wp-bomb
 origamiez/vendor/
 /.env
 /.env.local
