@@ -59,6 +59,9 @@ WORDPRESS_DB_HOST=mysql:3306
 ### 3. Docker Setup
 
 ```bash
+# Build the Docker image
+docker build -t tranthethang/calm-canvas-wordpress:6.8-apache .
+
 # Start the containers
 docker compose up -d
 

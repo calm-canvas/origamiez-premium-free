@@ -1,6 +1,6 @@
 services:
   wordpress:
-    image: calm-canvas/wordpress:6.8-apache
+    image: tranthethang/calm-canvas-wordpress:6.8-apache
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
