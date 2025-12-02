@@ -55,7 +55,7 @@
 
     #sidebar-center {
       padding-bottom: 30px;
-      border-bottom: 1px solid $line-2-bg-color;
+      border-bottom: 1px solid var(--line-2-bg-color);
     }
 
   }
@@ -388,7 +388,7 @@
     .widget.origamiez-widget-posts-grid {
       .origamiez-wp-grid-post {
         width: 100%;
-        border-top: 1px solid #DDDDDD;
+        border-top: 1px solid var(--line-2-bg-color);
         margin-top: -1px;
       }
     }
@@ -445,7 +445,7 @@
     }
 
     #sidebar-right {
-      border-left: 1px solid $line-2-bg-color !important;
+      border-left: 1px solid var(--line-2-bg-color) !important;
     }
 
     #sidebar-right,
@@ -607,7 +607,7 @@
     .widget.origamiez-widget-posts-grid {
       .origamiez-wp-grid-post {
         width: calc(100% / 3);
-        border-top: 1px solid #DDDDDD;
+        border-top: 1px solid var(--line-2-bg-color);
         margin-top: -1px;
       }
     }
@@ -773,7 +773,7 @@
     .widget.origamiez-widget-posts-grid {
       .origamiez-wp-grid-post {
         width: 50%;
-        border-top: 1px solid #DDDDDD;
+        border-top: 1px solid var(--line-2-bg-color);
         margin-top: -1px;
       }
     }

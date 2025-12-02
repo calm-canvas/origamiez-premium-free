@@ -74,11 +74,11 @@ if ($related_posts->have_posts()):
                                 <a class="entry-title"
                                    href="<?php echo esc_url($post_url); ?>"
                                    title="<?php echo esc_attr($post_title); ?>">
-                                    <?php echo esc_attr($post_title); ?>
+                                    <?php echo esc_html($post_title); ?>
                                 </a>
                             </h3>
                             <?php add_filter('excerpt_length', "origamiez_return_20"); ?>
-                            <p class="entry-excerpt clearfix"><?php echo get_the_excerpt(); ?></p>
+                            <p class="entry-excerpt clearfix"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
                             <?php remove_filter('excerpt_length', "origamiez_return_20"); ?>
                         </article>
                         <?php
@@ -97,7 +97,7 @@ if ($related_posts->have_posts()):
                                 <a class="entry-title"
                                    href="<?php echo esc_url($post_url); ?>"
                                    title="<?php echo esc_attr($post_title); ?>">
-                                    <?php echo esc_attr($post_title); ?>
+                                    <?php echo esc_html($post_title); ?>
                                 </a>
                             </h5>
                         </article>

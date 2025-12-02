@@ -1,89 +1,89 @@
 @import "../sass";
 
 body {
-  font-weight: $font-body-weight;
-  font-family: $font-body;
-  font-size: $font-body-size;
-  line-height: $font-body-line-height;
-  font-style: $font-body-style;
+  font-weight: var(--font-body-weight);
+  font-family: var(--font-body);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-style: var(--font-body-style);
 }
 
 h1 {
-  font-weight: $font-heading-h1-weight;
-  font-family: $font-heading-h1;
-  font-size: $font-heading-h1-size;
-  line-height: $font-heading-h1-line-height;
-  font-style: $font-heading-h1-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h1-weight);
+  font-family: var(--font-heading-h1);
+  font-size: var(--font-heading-h1-size);
+  line-height: var(--font-heading-h1-line-height);
+  font-style: var(--font-heading-h1-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h2 {
-  font-weight: $font-heading-h2-weight;
-  font-family: $font-heading-h2;
-  font-size: $font-heading-h2-size;
-  line-height: $font-heading-h2-line-height;
-  font-style: $font-heading-h2-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h2-weight);
+  font-family: var(--font-heading-h2);
+  font-size: var(--font-heading-h2-size);
+  line-height: var(--font-heading-h2-line-height);
+  font-style: var(--font-heading-h2-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h3 {
-  font-weight: $font-heading-h3-weight;
-  font-family: $font-heading-h3;
-  font-size: $font-heading-h3-size;
-  line-height: $font-heading-h3-line-height;
-  font-style: $font-heading-h3-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h3-weight);
+  font-family: var(--font-heading-h3);
+  font-size: var(--font-heading-h3-size);
+  line-height: var(--font-heading-h3-line-height);
+  font-style: var(--font-heading-h3-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h4 {
-  font-weight: $font-heading-h4-weight;
-  font-family: $font-heading-h4;
-  font-size: $font-heading-h4-size;
-  line-height: $font-heading-h4-line-height;
-  font-style: $font-heading-h4-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h4-weight);
+  font-family: var(--font-heading-h4);
+  font-size: var(--font-heading-h4-size);
+  line-height: var(--font-heading-h4-line-height);
+  font-style: var(--font-heading-h4-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h5 {
-  font-weight: $font-heading-h5-weight;
-  font-family: $font-heading-h5;
-  font-size: $font-heading-h5-size;
-  line-height: $font-heading-h5-line-height;
-  font-style: $font-heading-h5-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h5-weight);
+  font-family: var(--font-heading-h5);
+  font-size: var(--font-heading-h5-size);
+  line-height: var(--font-heading-h5-line-height);
+  font-style: var(--font-heading-h5-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h6 {
-  font-weight: $font-heading-h6-weight;
-  font-family: $font-heading-h6;
-  font-size: $font-heading-h6-size;
-  line-height: $font-heading-h6-line-height;
-  font-style: $font-heading-h6-style;
-  letter-spacing: $font-heading-letter-spacing;
+  font-weight: var(--font-heading-h6-weight);
+  font-family: var(--font-heading-h6);
+  font-size: var(--font-heading-h6-size);
+  line-height: var(--font-heading-h6-line-height);
+  font-style: var(--font-heading-h6-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 
 #site-home-link {
   text-decoration: none;
-  color: $heading-color;
+  color: var(--heading-color);
 
   #site-title {
-    font-family: $font-heading-h1;
+    font-family: var(--font-heading-h1), serif;
     font-size: 40px;
     line-height: 40px;
     text-transform: uppercase;
   }
 
   #site-desc {
-    font-family: $font-body;
+    font-family: var(--font-body);
   }
 }
 
 
 #main-menu {
   a {
-    font-family: $font-menu;
-    font-style: $font-menu-style;
+    font-family: var(--font-menu);
+    font-style: var(--font-menu-style);
 
     span.fa {
       font-size: 20px;
@@ -91,9 +91,9 @@ h6 {
   }
 
   & > li > a {
-    font-size: $font-menu-size;
-    font-weight: $font-menu-weight;
-    line-height: $font-menu-line-height;
+    font-size: var(--font-menu-size);
+    font-weight: var(--font-menu-weight);
+    line-height: var(--font-menu-line-height);
   }
 
   > li {
@@ -122,11 +122,11 @@ h6 {
 }
 
 h2.widget-title {
-  font-family: $font-widget-title;
-  font-size: $font-widget-title-size;
-  line-height: $font-widget-title-line-height;
-  font-weight: $font-widget-title-weight;
-  font-style: $font-widget-title-style;
+  font-family: var(--font-widget-title);
+  font-size: var(--font-widget-title-size);
+  line-height: var(--font-widget-title-line-height);
+  font-weight: var(--font-widget-title-weight);
+  font-style: var(--font-widget-title-style);
   text-transform: uppercase;
 }
 
@@ -139,8 +139,8 @@ h2.widget-title {
   .panel-heading {
     .panel-title {
       a {
-        font-family: $font-body;
-        font-size: $font-body-size;
+        font-family: var(--font-body);
+        font-size: var(--font-body-size);
         text-decoration: none;
       }
     }
@@ -618,9 +618,9 @@ p.origamiez-readmore-block > a,
   blockquote {
     font-style: italic;
     letter-spacing: 0.25px;
-    font-family: $font-block-quote;
-    font-size: $font-block-quote-size;
-    line-height: $font-block-quote-line-height;
+    font-family: var(--font-block-quote);
+    font-size: var(--font-block-quote-size);
+    line-height: var(--font-block-quote-line-height);
   }
 
   dl {

@@ -1,90 +1,268 @@
+:root {
+  --font-body: 'Roboto Serif', serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: 'Neuton', serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: 'Neuton', serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: 'Neuton', serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: 'Neuton', serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: 'Neuton', serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: 'Neuton', serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: 'Neuton', serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: 'Neuton', serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: 'Neuton', serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
+  --black: #000000;
+  --black_light: #DFDFDF;
+  --overlay_white: rgba(255, 255, 255, 0.5);
+  --overlay_black: rgba(0, 0, 0, 0.5);
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
+}
+
+:root {
+  --font-body: 'Roboto Serif', serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: 'Neuton', serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: 'Neuton', serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: 'Neuton', serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: 'Neuton', serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: 'Neuton', serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: 'Neuton', serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: 'Neuton', serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: 'Neuton', serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: 'Neuton', serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
+  --black: #000000;
+  --black_light: #DFDFDF;
+  --overlay_white: rgba(255, 255, 255, 0.5);
+  --overlay_black: rgba(0, 0, 0, 0.5);
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
+}
+
 body {
-  font-weight: 400;
-  font-family: "Roboto Serif", serif;
-  font-size: 14px;
-  line-height: 1.5em;
-  font-style: normal;
+  font-weight: var(--font-body-weight);
+  font-family: var(--font-body);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-style: var(--font-body-style);
 }
 
 h1 {
-  font-weight: 700;
-  font-family: "Neuton", serif;
-  font-size: 26px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h1-weight);
+  font-family: var(--font-heading-h1);
+  font-size: var(--font-heading-h1-size);
+  line-height: var(--font-heading-h1-line-height);
+  font-style: var(--font-heading-h1-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h2 {
-  font-weight: 700;
-  font-family: "Neuton", serif;
-  font-size: 23px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h2-weight);
+  font-family: var(--font-heading-h2);
+  font-size: var(--font-heading-h2-size);
+  line-height: var(--font-heading-h2-line-height);
+  font-style: var(--font-heading-h2-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h3 {
-  font-weight: 400;
-  font-family: "Neuton", serif;
-  font-size: 20px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h3-weight);
+  font-family: var(--font-heading-h3);
+  font-size: var(--font-heading-h3-size);
+  line-height: var(--font-heading-h3-line-height);
+  font-style: var(--font-heading-h3-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h4 {
-  font-weight: 400;
-  font-family: "Neuton", serif;
-  font-size: 18px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h4-weight);
+  font-family: var(--font-heading-h4);
+  font-size: var(--font-heading-h4-size);
+  line-height: var(--font-heading-h4-line-height);
+  font-style: var(--font-heading-h4-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h5 {
-  font-weight: 400;
-  font-family: "Neuton", serif;
-  font-size: 16px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h5-weight);
+  font-family: var(--font-heading-h5);
+  font-size: var(--font-heading-h5-size);
+  line-height: var(--font-heading-h5-line-height);
+  font-style: var(--font-heading-h5-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h6 {
-  font-weight: 400;
-  font-family: "Neuton", serif;
-  font-size: 12px;
-  line-height: 1.5em;
-  font-style: normal;
-  letter-spacing: 1px;
+  font-weight: var(--font-heading-h6-weight);
+  font-family: var(--font-heading-h6);
+  font-size: var(--font-heading-h6-size);
+  line-height: var(--font-heading-h6-line-height);
+  font-style: var(--font-heading-h6-style);
+  letter-spacing: var(--font-heading-letter-spacing);
 }
 
 #site-home-link {
   text-decoration: none;
-  color: #222;
+  color: var(--heading-color);
 }
 #site-home-link #site-title {
-  font-family: "Neuton", serif;
+  font-family: var(--font-heading-h1), serif;
   font-size: 40px;
   line-height: 40px;
   text-transform: uppercase;
 }
 #site-home-link #site-desc {
-  font-family: "Roboto Serif", serif;
+  font-family: var(--font-body);
 }
 
 #main-menu a {
-  font-family: "Neuton", serif;
-  font-style: normal;
+  font-family: var(--font-menu);
+  font-style: var(--font-menu-style);
 }
 #main-menu a span.fa {
   font-size: 20px;
 }
 #main-menu > li > a {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 3em;
+  font-size: var(--font-menu-size);
+  font-weight: var(--font-menu-weight);
+  line-height: var(--font-menu-line-height);
 }
 #main-menu > li.menu-item-has-children > a:after {
   font-family: "FontAwesome" !important;
@@ -98,11 +276,11 @@ h6 {
 }
 
 h2.widget-title {
-  font-family: "Neuton", serif;
-  font-size: 12px;
-  line-height: 49px;
-  font-weight: 600;
-  font-style: normal;
+  font-family: var(--font-widget-title);
+  font-size: var(--font-widget-title-size);
+  line-height: var(--font-widget-title-line-height);
+  font-weight: var(--font-widget-title-weight);
+  font-style: var(--font-widget-title-style);
   text-transform: uppercase;
 }
 
@@ -112,8 +290,8 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .panel-default .panel-heading .panel-title a {
-  font-family: "Roboto Serif", serif;
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: var(--font-body-size);
   text-decoration: none;
 }
 
@@ -415,9 +593,9 @@ p.origamiez-readmore-block > a,
 .entry-content blockquote {
   font-style: italic;
   letter-spacing: 0.25px;
-  font-family: "Neuton", serif;
-  font-size: 14px;
-  line-height: 25px;
+  font-family: var(--font-block-quote);
+  font-size: var(--font-block-quote-size);
+  line-height: var(--font-block-quote-line-height);
 }
 .entry-content dl dt {
   letter-spacing: 0.5px;

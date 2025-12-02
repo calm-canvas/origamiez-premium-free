@@ -32,7 +32,7 @@ nav#origamiez-mobile-nav {
 #origmiez-mobile-nav__toggle {
   display: flex;
   justify-content: flex-end;
-  color: $white;
+  color: var(--white);
   font-size: 24px;
 
   i {
@@ -41,7 +41,7 @@ nav#origamiez-mobile-nav {
     width: 35px;
     line-height: 35px;
     text-align: center;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     border-bottom-left-radius: 15px;
     transition: .25ms;
 

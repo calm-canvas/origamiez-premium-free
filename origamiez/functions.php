@@ -7,8 +7,9 @@ INIT
 Register Theme Features
 --------------------
 */
+
+
 function origamiez_theme_setup() {
-	load_theme_textdomain( 'origamiez', get_template_directory() . '/languages' );
 	add_theme_support( "wp-block-styles" );
 	add_theme_support( "responsive-embeds" );
 	add_theme_support( "align-wide" );
@@ -42,12 +43,6 @@ function origamiez_theme_setup() {
 	if ( ! isset( $content_width ) ) {
 		$content_width = 817;
 	}
-	register_nav_menus( array(
-		'main-nav'   => esc_attr__( 'Main Menu', 'origamiez' ),
-		'top-nav'    => esc_attr__( 'Top Menu (do not support sub-menu)', 'origamiez' ),
-		'footer-nav' => esc_attr__( 'Footer Menu (do not support sub-menu)', 'origamiez' ),
-		'mobile-nav' => esc_attr__( 'Mobile Menu (will be replace by Main Menu - if null).', 'origamiez' ),
-	) );
 	if ( ! is_admin() ) {
 		add_action( 'init', 'origamiez_widget_order_class' );
 		add_action( 'wp_enqueue_scripts', 'origamiez_enqueue_scripts', 15 );
@@ -66,6 +61,24 @@ function origamiez_theme_setup() {
 }
 
 add_action( 'after_setup_theme', 'origamiez_theme_setup' );
+
+function origamiez_config_textdomain() {
+	load_theme_textdomain( 'origamiez', get_template_directory() . '/languages' );
+}
+
+function origamiez_register_translated_menus() {
+	// Re-register nav menus with translated labels after text domain is loaded
+	register_nav_menus( array(
+		'main-nav'   => esc_attr__( 'Main Menu', 'origamiez' ),
+		'top-nav'    => esc_attr__( 'Top Menu (do not support sub-menu)', 'origamiez' ),
+		'footer-nav' => esc_attr__( 'Footer Menu (do not support sub-menu)', 'origamiez' ),
+		'mobile-nav' => esc_attr__( 'Mobile Menu (will be replace by Main Menu - if null).', 'origamiez' ),
+	) );
+}
+
+add_action( 'init', 'origamiez_config_textdomain' );
+add_action( 'init', 'origamiez_register_translated_menus', 20 );
+
 /*
 HOOK CALLBACK
 --------------------

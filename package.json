@@ -1,10 +1,10 @@
 {
-  "name": "medmag",
+  "name": "origamiez",
   "version": "1.0.0",
   "description": "Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.",
   "main": "index.js",
   "scripts": {
-    "dev": "node_modules/.bin/webpack --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "node_modules/.bin/webpack --config=node_modules/laravel-mix/setup/webpack.config.js --stats-children",
     "watch": "node_modules/.bin/webpack --config=node_modules/laravel-mix/setup/webpack.config.js --watch"
   },
   "keywords": [],

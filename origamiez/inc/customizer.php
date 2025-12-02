@@ -33,10 +33,14 @@ function origamiez_customize_register( $wp_customize ) {
 				case 'textarea':
 					$sanitize_callback = 'origamiez_sanitize_textarea';
 					break;
-				case 'text':
 				case 'checkbox':
-				case 'radio':
+					$sanitize_callback = 'origamiez_sanitize_checkbox';
+					break;
 				case 'select':
+				case 'radio':
+					$sanitize_callback = 'origamiez_sanitize_select';
+					break;
+				case 'text':
 					$sanitize_callback = 'sanitize_text_field';
 					break;
 				default:

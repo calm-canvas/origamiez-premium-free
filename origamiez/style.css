@@ -4,13 +4,13 @@
  * Author: openwpdotorg
  * Author URI: http://openwp.org
  * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
- * Version: 2.2.0
+ * Version: 3.0.1764654707
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
  * Requires at least: 5.5
  * Requires PHP: 7.4
- * Tested up to: 6.3
+ * Tested up to: 6.8.3
  * Tags: one-column, two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-images, full-width-template, microformats, post-formats, theme-options, threaded-comments, translation-ready
  */
 /*
@@ -18,6 +18,184 @@
  * SKELETON
  * --------------------------------------------------
  */
+:root {
+  --font-body: 'Roboto Serif', serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: 'Neuton', serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: 'Neuton', serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: 'Neuton', serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: 'Neuton', serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: 'Neuton', serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: 'Neuton', serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: 'Neuton', serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: 'Neuton', serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: 'Neuton', serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
+  --black: #000000;
+  --black_light: #DFDFDF;
+  --overlay_white: rgba(255, 255, 255, 0.5);
+  --overlay_black: rgba(0, 0, 0, 0.5);
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
+}
+
+:root {
+  --font-body: 'Roboto Serif', serif;
+  --font-body-size: 14px;
+  --font-body-line-height: 1.5em;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+  --font-menu: 'Neuton', serif;
+  --font-menu-size: 15px;
+  --font-menu-line-height: 3em;
+  --font-menu-weight: 400;
+  --font-menu-style: normal;
+  --font-widget-title: 'Neuton', serif;
+  --font-widget-title-size: 12px;
+  --font-widget-title-line-height: 49px;
+  --font-widget-title-weight: 600;
+  --font-widget-title-style: normal;
+  --font-heading-h1: 'Neuton', serif;
+  --font-heading-h1-size: 26px;
+  --font-heading-h1-line-height: 1.5em;
+  --font-heading-h1-weight: 700;
+  --font-heading-h1-style: normal;
+  --font-heading-h2: 'Neuton', serif;
+  --font-heading-h2-size: 23px;
+  --font-heading-h2-line-height: 1.5em;
+  --font-heading-h2-weight: 700;
+  --font-heading-h2-style: normal;
+  --font-heading-h3: 'Neuton', serif;
+  --font-heading-h3-size: 20px;
+  --font-heading-h3-line-height: 1.5em;
+  --font-heading-h3-weight: 400;
+  --font-heading-h3-style: normal;
+  --font-heading-h4: 'Neuton', serif;
+  --font-heading-h4-size: 18px;
+  --font-heading-h4-line-height: 1.5em;
+  --font-heading-h4-weight: 400;
+  --font-heading-h4-style: normal;
+  --font-heading-h5: 'Neuton', serif;
+  --font-heading-h5-size: 16px;
+  --font-heading-h5-line-height: 1.5em;
+  --font-heading-h5-weight: 400;
+  --font-heading-h5-style: normal;
+  --font-heading-h6: 'Neuton', serif;
+  --font-heading-h6-size: 12px;
+  --font-heading-h6-line-height: 1.5em;
+  --font-heading-h6-weight: 400;
+  --font-heading-h6-style: normal;
+  --font-heading-letter-spacing: 1px;
+  --font-block-quote: 'Neuton', serif;
+  --font-block-quote-line-height: 25px;
+  --font-block-quote-size: 14px;
+  --body-color: #444;
+  --heading-color: #222;
+  --link-color: #222;
+  --link-hover-color: #E74C3C;
+  --primary-color: #E74C3C;
+  --secondary-color: #F9F9F9;
+  --main-menu-color: #fff;
+  --main-menu-bg-color: #333;
+  --line-1-bg-color: #555555;
+  --line-2-bg-color: #DDDDDD;
+  --line-3-bg-color: #E5E5E5;
+  --footer-sidebars-bg-color: #293535;
+  --footer-sidebars-text-color: #999999;
+  --footer-sidebars-widget-heading-color: #FFFFFF;
+  --footer-end-bg-color: #1e2a2a;
+  --footer-end-text-color: #999999;
+  --white: #FFFFFF;
+  --black: #000000;
+  --black_light: #DFDFDF;
+  --overlay_white: rgba(255, 255, 255, 0.5);
+  --overlay_black: rgba(0, 0, 0, 0.5);
+  --facebook-color: #3B5998;
+  --twitter-color: #00A0D1;
+  --google-plus-color: #C63D2D;
+  --pinterest-color: #910101;
+  --rss-color: #FA9B39;
+  --metadata-color: #777777;
+  --youtube-color: #cc181e;
+  --linkedin-color: #007bb6;
+  --tumblr-color: #32506d;
+  --digg-color: #1b5891;
+  --reddit-color: #ff1a00;
+  --stumbleupon-color: #EB4823;
+  --vk-color: #45668e;
+  --print-color: #62665e;
+  --envelope-color: #FA9B39;
+  --color-success: #4caf50;
+}
+
 * {
   outline: transparent solid 0 !important;
 }
@@ -124,7 +302,7 @@
   padding: 0;
   margin: 0;
   list-style-type: none;
-  background-color: #333;
+  background-color: var(--main-menu-bg-color);
 }
 #main-menu .sub-menu {
   display: none;
@@ -453,11 +631,13 @@ form.search-form .search-submit {
   z-index: 10;
   padding: 0 10px;
   margin: 1px 0 1px 0;
-  cursor: pointer;
 }
 .origamiez-mobile-icon span.fa {
   display: inline-block;
   margin-right: 10px;
+}
+.origamiez-mobile-icon {
+  cursor: pointer;
 }
 
 #mobile-menu {
@@ -912,13 +1092,13 @@ div.alert {
   margin-bottom: 0;
   margin-top: 10px;
 }
-.origamiez-widget-posts-two-cols .article-col-right article {
-  margin-top: 15px;
-  padding-top: 15px;
-}
 .origamiez-widget-posts-two-cols .article-col-right article.origamiez-post-1 {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+.origamiez-widget-posts-two-cols .article-col-right article {
+  margin-top: 15px;
+  padding-top: 15px;
 }
 .origamiez-widget-posts-two-cols .article-col-right article p.metadata {
   margin-top: 0;
@@ -2004,15 +2184,15 @@ body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption {
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption .wp-caption-text {
   display: inherit;
 }
-body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter {
-  max-width: 100% !important;
-}
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:before, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:after, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:before, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:after {
   content: "";
   display: table;
 }
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:after, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:after {
   clear: both;
+}
+body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter {
+  max-width: 100% !important;
 }
 
 body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.aligncenter img, body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.alignleft img, body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.alignright img {
@@ -2156,7 +2336,7 @@ p.origamiez-readmore-block {
   line-height: 40px;
   padding: 5px 10px;
   cursor: pointer;
-  color: #FFFFFF;
+  color: var(--white);
 }
 #bottom-mobile-menu option,
 #top-mobile-menu option {
@@ -2305,7 +2485,7 @@ nav#origamiez-mobile-nav.is-active {
 #origmiez-mobile-nav__toggle {
   display: flex;
   justify-content: flex-end;
-  color: #FFFFFF;
+  color: var(--white);
   font-size: 24px;
 }
 #origmiez-mobile-nav__toggle i {
@@ -2314,7 +2494,7 @@ nav#origamiez-mobile-nav.is-active {
   width: 35px;
   line-height: 35px;
   text-align: center;
-  background-color: #E74C3C;
+  background-color: var(--primary-color);
   border-bottom-left-radius: 15px;
   transition: 0.25ms;
 }
@@ -2329,4 +2509,9 @@ nav#origamiez-mobile-nav.is-active {
 .origamiez-widget-posts-slider .col-left.col-sm-4 > div {
   height: 100%;
   aspect-ratio: 1/2;
+}
+
+img:is([sizes=auto i], [sizes^="auto," i]) {
+  content-visibility: auto;
+  contain-intrinsic-size: 150px;
 }

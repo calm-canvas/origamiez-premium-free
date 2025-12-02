@@ -91,7 +91,7 @@ class Origamiez_Posts_Widget_Type_B extends Origamiez_Posts_Widget {
         if($excerpt_words_limit):
             add_filter('excerpt_length', "origamiez_return_{$excerpt_words_limit}");
             ?>
-            <p class="<?php echo esc_attr( $classes ); ?>"><?php echo get_the_excerpt(); ?></p>
+            <p class="<?php echo esc_attr( $classes ); ?>"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
             <?php
             remove_filter('excerpt_length', "origamiez_return_{$excerpt_words_limit}");
         endif;

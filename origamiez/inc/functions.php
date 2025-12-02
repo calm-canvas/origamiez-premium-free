@@ -1458,7 +1458,7 @@ function origamiez_list_comments($comment, $args, $depth)
     ?>
     <li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
     <article class="comment-body clearfix" id="div-comment-23">
-        <span class="comment-avatar pull-left"><?php echo get_avatar($comment->comment_author_email, $args['avatar_size']); ?></span>
+        <span class="comment-avatar pull-left"><?php echo wp_kses_post( get_avatar($comment->comment_author_email, $args['avatar_size']) ); ?></span>
         <footer class="comment-meta">
             <div class="comment-author vcard">
                 <span class="fn"><?php comment_author_link(); ?></span>
@@ -1818,7 +1818,7 @@ function origamiez_get_metadata_prefix($echo = true)
 {
     $prefix = apply_filters('origamiez_get_metadata_prefix', '&horbar;');
     if ($echo) {
-        echo htmlspecialchars_decode(esc_html($prefix));
+        echo $prefix ;
     } else {
         return $prefix;
     }
@@ -1931,5 +1931,124 @@ function origamiez_save_unyson_options($option_key, $old_value, $new_value)
                 set_theme_mod($key, $value);
             }
         }
+    }
+}
+
+/**
+ * Security Functions
+ */
+
+/**
+ * Verify search form nonce
+ */
+function origamiez_verify_search_nonce() {
+    if ( is_search() && isset( $_GET['search_nonce'] ) ) {
+        if ( ! wp_verify_nonce( $_GET['search_nonce'], 'origamiez_search_form_nonce' ) ) {
+            wp_die( esc_html__( 'Security check failed. Please try again.', 'origamiez' ) );
+        }
+    }
+}
+add_action( 'init', 'origamiez_verify_search_nonce' );
+
+/**
+ * Sanitize and validate search query
+ */
+function origamiez_sanitize_search_query( $query ) {
+    if ( is_search() && ! is_admin() && $query->is_main_query() ) {
+        $search_term = get_search_query();
+        if ( ! empty( $search_term ) ) {
+            // Sanitize the search term
+            $sanitized_term = sanitize_text_field( $search_term );
+            // Limit search term length
+            $sanitized_term = substr( $sanitized_term, 0, 100 );
+            $query->set( 's', $sanitized_term );
+        }
+    }
+}
+add_action( 'pre_get_posts', 'origamiez_sanitize_search_query' );
+
+
+
+/**
+ * Sanitize checkbox input
+ */
+function origamiez_sanitize_checkbox( $input ) {
+    return ( isset( $input ) && true === (bool) $input ) ? true : false;
+}
+
+/**
+ * Sanitize select input
+ */
+function origamiez_sanitize_select( $input, $setting ) {
+    $input = sanitize_key( $input );
+    $choices = $setting->manager->get_control( $setting->id )->choices;
+    return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
+}
+
+
+/**
+ * Add security headers
+ */
+function origamiez_add_security_headers() {
+    if ( ! is_admin() ) {
+        header( 'X-Content-Type-Options: nosniff' );
+        header( 'X-Frame-Options: SAMEORIGIN' );
+        header( 'X-XSS-Protection: 1; mode=block' );
+        header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+        
+        // Basic Content Security Policy
+        $csp = "default-src 'self'; ";
+        $csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com; ";
+        $csp .= "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com; ";
+        $csp .= "img-src 'self' data: *.gravatar.com *.wp.com; ";
+        $csp .= "font-src 'self' *.googleapis.com *.gstatic.com; ";
+        $csp .= "connect-src 'self'; ";
+        $csp .= "frame-src 'self' *.youtube.com *.vimeo.com; ";
+        $csp .= "object-src 'none'; ";
+        $csp .= "base-uri 'self';";
+        
+        header( 'Content-Security-Policy: ' . $csp );
+    }
+}
+add_action( 'send_headers', 'origamiez_add_security_headers' );
+
+
+/**
+ * Track failed login attempts
+ */
+function origamiez_track_failed_login( $username ) {
+    $username = sanitize_user( $username );
+    $attempts = get_transient( 'origamiez_login_attempts_' . $username );
+    $attempts = $attempts ? $attempts + 1 : 1;
+    set_transient( 'origamiez_login_attempts_' . $username, $attempts, 15 * MINUTE_IN_SECONDS );
+}
+add_action( 'wp_login_failed', 'origamiez_track_failed_login' );
+
+/**
+ * Clear login attempts on successful login
+ */
+function origamiez_clear_login_attempts( $user_login ) {
+    delete_transient( 'origamiez_login_attempts_' . sanitize_user( $user_login ) );
+}
+add_action( 'wp_login', 'origamiez_clear_login_attempts' );
+
+
+/**
+ * Sanitize database inputs
+ */
+function origamiez_sanitize_db_input( $input, $type = 'text' ) {
+    switch ( $type ) {
+        case 'int':
+            return absint( $input );
+        case 'float':
+            return floatval( $input );
+        case 'email':
+            return sanitize_email( $input );
+        case 'url':
+            return esc_url_raw( $input );
+        case 'key':
+            return sanitize_key( $input );
+        default:
+            return sanitize_text_field( $input );
     }
 }
