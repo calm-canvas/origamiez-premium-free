@@ -59,7 +59,7 @@ Edit `.env` with your configuration:
 WP_PORT=8000                           # WordPress port
 WORDPRESS_DEBUG=1                      # Debug mode
 WORDPRESS_DB_USER=root                 # MySQL username
-WORDPRESS_DB_PASSWORD=secret           # MySQL password
+WORDPRESS_DB_PASSWORD=password102           # MySQL password
 WORDPRESS_DB_NAME=origamiez            # Database name
 WORDPRESS_DB_HOST=your-mysql-host:3306 # MySQL host (adjust if not using default)
 WORDPRESS_DB_PORT=3306                 # MySQL port
