@@ -1,6 +1,6 @@
 services:
   wordpress:
-    image: wordpress:6.7.1-apache
+    image: wordpress:6.8-apache
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
