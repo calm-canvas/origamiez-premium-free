@@ -4,3 +4,5 @@ node_modules/
 .zencoder/
 plugins/
 origamiez/vendor/
+.env
+.env.local
