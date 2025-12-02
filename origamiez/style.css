@@ -4,7 +4,7 @@
  * Author: openwpdotorg
  * Author URI: http://openwp.org
  * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
- * Version: 3.0.1763952111
+ * Version: 3.0.1764654707
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -19,53 +19,53 @@
  * --------------------------------------------------
  */
 :root {
-  --font-body: "Roboto Serif", serif;
+  --font-body: 'Roboto Serif', serif;
   --font-body-size: 14px;
   --font-body-line-height: 1.5em;
   --font-body-weight: 400;
   --font-body-style: normal;
-  --font-menu: "Neuton", serif;
+  --font-menu: 'Neuton', serif;
   --font-menu-size: 15px;
   --font-menu-line-height: 3em;
   --font-menu-weight: 400;
   --font-menu-style: normal;
-  --font-widget-title: "Neuton", serif;
+  --font-widget-title: 'Neuton', serif;
   --font-widget-title-size: 12px;
   --font-widget-title-line-height: 49px;
   --font-widget-title-weight: 600;
   --font-widget-title-style: normal;
-  --font-heading-h1: "Neuton", serif;
+  --font-heading-h1: 'Neuton', serif;
   --font-heading-h1-size: 26px;
   --font-heading-h1-line-height: 1.5em;
   --font-heading-h1-weight: 700;
   --font-heading-h1-style: normal;
-  --font-heading-h2: "Neuton", serif;
+  --font-heading-h2: 'Neuton', serif;
   --font-heading-h2-size: 23px;
   --font-heading-h2-line-height: 1.5em;
   --font-heading-h2-weight: 700;
   --font-heading-h2-style: normal;
-  --font-heading-h3: "Neuton", serif;
+  --font-heading-h3: 'Neuton', serif;
   --font-heading-h3-size: 20px;
   --font-heading-h3-line-height: 1.5em;
   --font-heading-h3-weight: 400;
   --font-heading-h3-style: normal;
-  --font-heading-h4: "Neuton", serif;
+  --font-heading-h4: 'Neuton', serif;
   --font-heading-h4-size: 18px;
   --font-heading-h4-line-height: 1.5em;
   --font-heading-h4-weight: 400;
   --font-heading-h4-style: normal;
-  --font-heading-h5: "Neuton", serif;
+  --font-heading-h5: 'Neuton', serif;
   --font-heading-h5-size: 16px;
   --font-heading-h5-line-height: 1.5em;
   --font-heading-h5-weight: 400;
   --font-heading-h5-style: normal;
-  --font-heading-h6: "Neuton", serif;
+  --font-heading-h6: 'Neuton', serif;
   --font-heading-h6-size: 12px;
   --font-heading-h6-line-height: 1.5em;
   --font-heading-h6-weight: 400;
   --font-heading-h6-style: normal;
   --font-heading-letter-spacing: 1px;
-  --font-block-quote: "Neuton", serif;
+  --font-block-quote: 'Neuton', serif;
   --font-block-quote-line-height: 25px;
   --font-block-quote-size: 14px;
   --body-color: #444;
@@ -108,53 +108,53 @@
 }
 
 :root {
-  --font-body: "Roboto Serif", serif;
+  --font-body: 'Roboto Serif', serif;
   --font-body-size: 14px;
   --font-body-line-height: 1.5em;
   --font-body-weight: 400;
   --font-body-style: normal;
-  --font-menu: "Neuton", serif;
+  --font-menu: 'Neuton', serif;
   --font-menu-size: 15px;
   --font-menu-line-height: 3em;
   --font-menu-weight: 400;
   --font-menu-style: normal;
-  --font-widget-title: "Neuton", serif;
+  --font-widget-title: 'Neuton', serif;
   --font-widget-title-size: 12px;
   --font-widget-title-line-height: 49px;
   --font-widget-title-weight: 600;
   --font-widget-title-style: normal;
-  --font-heading-h1: "Neuton", serif;
+  --font-heading-h1: 'Neuton', serif;
   --font-heading-h1-size: 26px;
   --font-heading-h1-line-height: 1.5em;
   --font-heading-h1-weight: 700;
   --font-heading-h1-style: normal;
-  --font-heading-h2: "Neuton", serif;
+  --font-heading-h2: 'Neuton', serif;
   --font-heading-h2-size: 23px;
   --font-heading-h2-line-height: 1.5em;
   --font-heading-h2-weight: 700;
   --font-heading-h2-style: normal;
-  --font-heading-h3: "Neuton", serif;
+  --font-heading-h3: 'Neuton', serif;
   --font-heading-h3-size: 20px;
   --font-heading-h3-line-height: 1.5em;
   --font-heading-h3-weight: 400;
   --font-heading-h3-style: normal;
-  --font-heading-h4: "Neuton", serif;
+  --font-heading-h4: 'Neuton', serif;
   --font-heading-h4-size: 18px;
   --font-heading-h4-line-height: 1.5em;
   --font-heading-h4-weight: 400;
   --font-heading-h4-style: normal;
-  --font-heading-h5: "Neuton", serif;
+  --font-heading-h5: 'Neuton', serif;
   --font-heading-h5-size: 16px;
   --font-heading-h5-line-height: 1.5em;
   --font-heading-h5-weight: 400;
   --font-heading-h5-style: normal;
-  --font-heading-h6: "Neuton", serif;
+  --font-heading-h6: 'Neuton', serif;
   --font-heading-h6-size: 12px;
   --font-heading-h6-line-height: 1.5em;
   --font-heading-h6-weight: 400;
   --font-heading-h6-style: normal;
   --font-heading-letter-spacing: 1px;
-  --font-block-quote: "Neuton", serif;
+  --font-block-quote: 'Neuton', serif;
   --font-block-quote-line-height: 25px;
   --font-block-quote-size: 14px;
   --body-color: #444;
@@ -631,11 +631,13 @@ form.search-form .search-submit {
   z-index: 10;
   padding: 0 10px;
   margin: 1px 0 1px 0;
-  cursor: pointer;
 }
 .origamiez-mobile-icon span.fa {
   display: inline-block;
   margin-right: 10px;
+}
+.origamiez-mobile-icon {
+  cursor: pointer;
 }
 
 #mobile-menu {
@@ -1090,13 +1092,13 @@ div.alert {
   margin-bottom: 0;
   margin-top: 10px;
 }
-.origamiez-widget-posts-two-cols .article-col-right article {
-  margin-top: 15px;
-  padding-top: 15px;
-}
 .origamiez-widget-posts-two-cols .article-col-right article.origamiez-post-1 {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+.origamiez-widget-posts-two-cols .article-col-right article {
+  margin-top: 15px;
+  padding-top: 15px;
 }
 .origamiez-widget-posts-two-cols .article-col-right article p.metadata {
   margin-top: 0;
@@ -2182,15 +2184,15 @@ body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption {
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption .wp-caption-text {
   display: inherit;
 }
-body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter {
-  max-width: 100% !important;
-}
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:before, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:after, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:before, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:after {
   content: "";
   display: table;
 }
 body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone:after, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter:after {
   clear: both;
+}
+body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.alignnone, body.origamiez-layout-single #origamiez-post-wrap .entry-content .wp-caption.aligncenter {
+  max-width: 100% !important;
 }
 
 body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.aligncenter img, body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.alignleft img, body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wrap .entry-content .wp-caption.alignright img {
