@@ -1,6 +1,25 @@
 const mix = require("laravel-mix");
 require('laravel-mix-string-replace');
 
+class FilterDeprecationWarningsPlugin {
+    apply(compiler) {
+        compiler.hooks.afterCompile.tap('FilterDeprecationWarningsPlugin', (compilation) => {
+            compilation.warnings = compilation.warnings.filter(warning => {
+                const warningStr = warning.message || warning.toString();
+                if (warningStr.includes('legacy JS API') || 
+                    warningStr.includes('Sass @import rules') ||
+                    warningStr.includes('Global built-in functions') ||
+                    warningStr.includes('color.channel') ||
+                    warningStr.includes('color.mix') ||
+                    warningStr.includes('repetitive deprecation warnings omitted')) {
+                    return false;
+                }
+                return true;
+            });
+        });
+    }
+}
+
 mix
     .setPublicPath("origamiez/")
     .stringReplace(
@@ -29,15 +48,16 @@ mix
 mix.js('assets/js/script.js', "origamiez/js")
 
 mix
-    .sass("style.scss", "origamiez/")
-    .sass("assets/sass/responsive.scss", "origamiez/css/")
-    .sass("assets/sass/typography/default.scss", "origamiez/typography/")
-    .sass("assets/sass/skin/default.scss", "origamiez/skin/")
-    .sass("assets/sass/skin/custom.scss", "origamiez/skin/")
-    .sass(
-        "node_modules/bootstrap/scss/bootstrap.scss",
-        "origamiez/css/bootstrap.css"
-    )
+    .sass("style.scss", "origamiez/", {}, {
+        sassOptions: {
+            quietDeps: true
+        }
+    })
+    .sass("assets/sass/responsive.scss", "origamiez/css/", {}, {
+        sassOptions: {
+            quietDeps: true
+        }
+    })
     .css(
         "node_modules/@fortawesome/fontawesome-free/css/all.css",
         "origamiez/css/fontawesome.css"
@@ -78,3 +98,9 @@ mix
         "node_modules/jquery-poptrox/src/css/jquery.poptrox.css",
         "origamiez/css/jquery.poptrox.css"
     );
+
+mix.webpackConfig({
+    plugins: [
+        new FilterDeprecationWarningsPlugin()
+    ]
+});

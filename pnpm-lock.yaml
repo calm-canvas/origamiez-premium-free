@@ -33,7 +33,7 @@ importers:
         specifier: tefra/navgoco
         version: https://codeload.github.com/tefra/navgoco/tar.gz/898fd27e40dda2a9d10149a21628183818f1cf5f
       bootstrap:
-        specifier: ^5.3.0
+        specifier: 5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
       fitvids:
         specifier: ^2.1.1

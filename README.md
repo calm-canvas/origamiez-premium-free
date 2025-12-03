@@ -40,7 +40,19 @@ git clone https://github.com/tranthethang/origamiez.git
 cd origamiez
 ```
 
-### 2. Configuration
+### 2. Initialize Submodules
+
+```bash
+# Initialize and update all submodules
+git submodule update --init --recursive
+```
+
+This repository uses Git submodules for plugin management:
+- **wp-bomb**: Custom plugin located in `plugins/wp-bomb`
+
+For more information on submodule usage, see the [Git Submodules](#git-submodules) section below.
+
+### 3. Configuration
 
 ```bash
 cp .env.example .env
@@ -56,7 +68,7 @@ WORDPRESS_DB_NAME=origamiez
 WORDPRESS_DB_HOST=mysql:3306
 ```
 
-### 3. Docker Setup
+### 4. Docker Setup
 
 ```bash
 # Build the Docker image
@@ -69,7 +81,7 @@ docker compose up -d
 docker compose ps
 ```
 
-### 4. Dependencies
+### 5. Dependencies
 
 ```bash
 # npm packages
@@ -79,13 +91,13 @@ npm install
 docker compose exec wordpress composer install
 ```
 
-### 5. Initialize
+### 6. Initialize
 
 ```bash
 ./bin/install.sh
 ```
 
-### 6. Build Assets
+### 7. Build Assets
 
 ```bash
 # Dev build
@@ -98,7 +110,7 @@ npm run watch
 npm run production
 ```
 
-### 7. Access
+### 8. Access
 
 ```
 http://localhost:8001/wp-admin/
@@ -240,6 +252,91 @@ Laravel Mix configuration in `webpack.mix.js` handles:
 - JavaScript bundling and minification
 - Third-party library integration
 - Asset versioning for cache busting
+
+## Git Submodules
+
+This repository uses Git submodules to manage plugin dependencies. The `wp-bomb` plugin is maintained as a separate repository and referenced as a submodule.
+
+### Initial Clone with Submodules
+
+When cloning the repository for the first time, initialize submodules:
+
+```bash
+git clone https://github.com/tranthethang/origamiez.git
+cd origamiez
+git submodule update --init --recursive
+```
+
+Or clone with submodules in one command:
+
+```bash
+git clone --recurse-submodules https://github.com/tranthethang/origamiez.git
+```
+
+### Updating Submodules
+
+To update submodules to their latest committed versions:
+
+```bash
+# Update all submodules to latest
+git submodule update --remote
+
+# Or update a specific submodule
+git submodule update --remote plugins/wp-bomb
+```
+
+### Working with Submodules
+
+Navigate to a submodule directory:
+
+```bash
+cd plugins/wp-bomb
+```
+
+The submodule is a separate Git repository with its own commit history. Commit changes in the submodule:
+
+```bash
+cd plugins/wp-bomb
+git add .
+git commit -m "Your commit message"
+git push
+```
+
+Then update the reference in the main repository:
+
+```bash
+cd ../..
+git add plugins/wp-bomb
+git commit -m "Update wp-bomb submodule"
+git push
+```
+
+### Submodules in the Project
+
+- **wp-bomb** (`plugins/wp-bomb`): Custom WordPress plugin
+  - Repository: https://github.com/tranthethang/wp-bomb
+  - Purpose: Custom functionality for the theme
+
+### Troubleshooting Submodules
+
+**Submodule not initialized:**
+```bash
+git submodule update --init --recursive
+```
+
+**Detached HEAD in submodule:**
+```bash
+cd plugins/wp-bomb
+git checkout main  # or your default branch
+```
+
+**Remove a submodule:**
+```bash
+git rm plugins/wp-bomb
+git config --remove-section submodule.plugins/wp-bomb
+rm -rf .git/modules/plugins/wp-bomb
+git commit -m "Remove wp-bomb submodule"
+```
 
 ## Database Management
 
