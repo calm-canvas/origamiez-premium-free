@@ -9,6 +9,7 @@ function origamiez_enqueue_scripts()
      * --------------------------------------------------
      */
     // LIBS.
+    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'bootstrap', "$dir/css/bootstrap.css", array(), null);
     wp_enqueue_style(ORIGAMIEZ_PREFIX . 'font-awesome', "$dir/css/fontawesome.css", array(), null);
     wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-owl-carousel', "$dir/css/owl.carousel.css", array(), null);
     wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-owl-theme', "$dir/css/owl.theme.default.css", array(), null);
@@ -17,8 +18,6 @@ function origamiez_enqueue_scripts()
     wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-poptrox', "$dir/css/jquery.poptrox.css", array(), null);
     // STYLE.
     wp_enqueue_style(ORIGAMIEZ_PREFIX . 'style', get_stylesheet_uri(), array(), null);
-    // RESPONSIVE.
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'responsive', "$dir/css/responsive.css", array(), null);
     // CUSTOM COLOR WITH CSS VARIABLES.
     $skin = get_theme_mod('skin', 'default');
     if ('custom' === $skin) {
@@ -54,7 +53,7 @@ function origamiez_enqueue_scripts()
     }
     // GOOGLE FONT.
     if ('off' !== _x('on', 'Google font: on or off', 'origamiez')) {
-        $google_fonts_url = add_query_arg('family', urlencode('Roboto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap|Neuton:ital,wght@0,400;0,700;1,400&display=swap'), '//fonts.googleapis.com/css');
+        $google_fonts_url = add_query_arg('family', urlencode('Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&Inter:wght@400;500;600;700&display=swap'), '//fonts.googleapis.com/css2');
         wp_enqueue_style(ORIGAMIEZ_PREFIX . 'google-fonts', $google_fonts_url);
     }
     // DYNAMIC FONT.
@@ -77,12 +76,7 @@ function origamiez_enqueue_scripts()
             }
         }
     }
-    $typography_path = sprintf('%s/typography/default.css', get_stylesheet_directory());
-    $typography_src = "$dir/typography/default.css";
-    if (file_exists($typography_path)) {
-        $typography_src = sprintf('%s/typography/default.css', get_stylesheet_directory_uri());
-    }
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'typography', $typography_src, array(), null);
+
     /**
      * --------------------------------------------------
      * SCRIPTS.
@@ -156,7 +150,7 @@ function origamiez_enqueue_scripts()
                 $font_data = get_theme_mod("{$font_object_slug}_{$rule_slug}");
                 if (!empty($font_data)) {
                     $tmp = sprintf('%s {%s: %s;}', $font_object, $rule, $font_data);
-                    wp_add_inline_style(ORIGAMIEZ_PREFIX . 'typography', $tmp);
+                    wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $tmp);
                 }
             }
         }

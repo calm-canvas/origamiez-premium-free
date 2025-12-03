@@ -40,9 +40,6 @@ function origamiez_customize_register( $wp_customize ) {
 				case 'radio':
 					$sanitize_callback = 'origamiez_sanitize_select';
 					break;
-				case 'text':
-					$sanitize_callback = 'sanitize_text_field';
-					break;
 				default:
 					$sanitize_callback = 'sanitize_text_field';
 					break;
@@ -52,7 +49,7 @@ function origamiez_customize_register( $wp_customize ) {
 				"default"           => $setting['default'],
 				'sanitize_callback' => $sanitize_callback,
 				'capability'        => 'edit_theme_options',
-				"transport"         => isset( $setting['transport'] ) ? $setting['transport'] : "postMessage",
+				"transport"         => $setting['transport'] ?? "postMessage",
 			) );
 			# add control for this setting
 			switch ( $setting['type'] ) {

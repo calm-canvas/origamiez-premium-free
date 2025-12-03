@@ -82,6 +82,8 @@ h6 {
   a {
     font-family: var(--font-menu);
     font-style: var(--font-menu-style);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 
     span.fa {
       font-size: 20px;

@@ -1,3 +1,6 @@
+volumes:
+  wordpress_data:
+
 services:
   wordpress:
     image: tranthethang/calm-canvas-wordpress:6.8-apache
@@ -16,6 +19,7 @@ services:
       - "${WP_PORT}:80"
     
     volumes:
+      - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
       - ./plugins:/var/www/html/wp-content/plugins
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
@@ -33,7 +37,10 @@ services:
   cli:
     image: wordpress:cli-2.10.0
     user: www-data
+    command: tail -f /dev/null
     volumes:
+      - wordpress_data:/var/www/html
+      - ./docker/snapshot:/tmp/snapshot
       - ./plugins:/var/www/html/wp-content/plugins
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
     environment:

@@ -59,16 +59,17 @@ h1, h2, h3, h4, h5, h6 {
 #main-menu {
   a {
     color: var(--main-menu-color);
+    transition: all 0.3s ease;
   }
 
   & > li {
     &.current-menu-item > a {
-      color: var(--primary-color);
+      color: var(--main-menu-active-color);
     }
 
     &:hover {
       & > a {
-        color: var(--primary-color);
+        color: var(--main-menu-hover-color);
       }
     }
   }

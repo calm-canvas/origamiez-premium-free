@@ -1,8 +1,8 @@
 /**
  * Theme Name: Origamiez
- * Theme URI: https://github.com/tranthethang/origamiez
- * Author: openwpdotorg
- * Author URI: http://openwp.org
+ * Theme URI: https://github.com/calm-canvas/origamiez
+ * Author: tranthethang
+ * Author URI: https://github.com/calm-canvas
  * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
  * Version: STYLE_VERSION
  * License: GNU General Public License v3
@@ -10,7 +10,7 @@
  * Text Domain: origamiez
  * Requires at least: 5.5
  * Requires PHP: 7.4
- * Tested up to: 6.8.3
+ * Tested up to: 6.9
  * Tags: one-column, two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-images, full-width-template, microformats, post-formats, theme-options, threaded-comments, translation-ready
  */
 /*
@@ -19,10 +19,13 @@
  * --------------------------------------------------
  */
 @import "./assets/sass/setup";
-@import "node_modules/bootstrap/scss/bootstrap";
 @import "./assets/sass/bootstrap-overrides";
-@import "./assets/sass/typography/default";
 @import "./assets/sass/skin/default";
+@import "./assets/sass/plugins/bbpress/index";
+@import "./assets/sass/plugins/woocommerce/index";
+@import "./assets/sass/plugins/dw-question-and-answer/index";
+@import "./assets/sass/responsive";
+@import "./assets/sass/typography/default";
 
 * {
   outline: transparent solid 0 !important;
@@ -182,8 +185,8 @@
       display: block;
       height: 46px;
       position: relative;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 12px;
+      padding-right: 12px;
     }
   }
 
@@ -2818,5 +2821,7 @@ nav#origamiez-mobile-nav {
 
 img:is([sizes="auto" i], [sizes^="auto," i]) {
     content-visibility: auto;
-    contain-intrinsic-size: 150px;
+    contain-intrinsic-size: none !important;
 }
+
+
