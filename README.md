@@ -6,6 +6,8 @@ Developed and maintained by **@tranthethang** with a commitment to continuous up
 
 Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
 
+![Theme Screenshot](origamiez/screenshot.png)
+
 ## Theme Features
 
 - **Fully responsive, mobile-first design** with HTML5 & CSS3
@@ -36,7 +38,7 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 
 ## Support
 
-[Get support with free tickets on GitHub](https://github.com/calm-canvas/origamiez)
+[Get support with free tickets on GitHub](https://github.com/calm-canvas/origamiez-premium-free)
 
 ## Version History
 

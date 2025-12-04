@@ -37,7 +37,7 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 
 ## 3. Support
 
-Get free support with tickets on GitHub: https://github.com/calm-canvas/origamiez
+Get free support with tickets on GitHub: https://github.com/calm-canvas/origamiez-premium-free
 
 ## 4. Version History
 
