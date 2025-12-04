@@ -69,6 +69,7 @@ h6 {
     font-family: var(--font-heading-h1), serif;
     font-size: 40px;
     line-height: 40px;
+    font-weight: 700;
     text-transform: uppercase;
   }
 
@@ -654,4 +655,8 @@ p.origamiez-readmore-block > a,
  */
 .entry-title, .entry-title a {
   font-family: var(--font-heading-h1) !important;
+}
+
+#origamiez-footer-end {
+  font-family: var(--font-menu);
 }

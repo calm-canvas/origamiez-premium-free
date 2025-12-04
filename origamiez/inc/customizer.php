@@ -295,7 +295,7 @@ function origamiez_get_custom_options() {
 				'id'          => 'footer_information',
 				'label'       => esc_attr__( 'Footer information', 'origamiez' ),
 				'description' => esc_attr__( 'Enter your information, e.g. copyright, or Google AdSense code, ...', 'origamiez' ),
-				'default'     => esc_attr__( 'Copyright &copy; Your Name', 'origamiez' ),
+				'default'     => esc_attr__( '&copy; 2025 The Calm Canvas Team. All rights reserved.', 'origamiez' ),
 				'type'        => 'textarea',
 				'section'     => 'footer',
 				'transport'   => 'refresh'

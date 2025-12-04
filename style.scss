@@ -240,7 +240,13 @@
   }
 }
 
+#origamiez-footer {
+  border-top: 3px double #e2e2e2;
+  background-color: #f9f9f9;
+}
+
 #origamiez-footer-sidebars {
+  background-color: transparent;
   #origamiez-footer-sidebars-inner {
     padding: 40px 0 20px 0;
 
@@ -260,11 +266,8 @@
 }
 
 #origamiez-footer-end {
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 50px;
-  height: auto;
-  line-height: 50px;
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
 }
 
 #bottom-menu {
@@ -2566,7 +2569,12 @@ p.origamiez-readmore-block {
 }
 
 #bottom-nav {
-  padding: 20px 0;
+  a {
+    font-family: var(--font-menu);
+    font-size: var(--font-menu-size);
+    font-weight: var(--font-menu-weight);
+    text-transform: none;
+  }
 }
 
 #bottom-mobile-menu,
@@ -2823,4 +2831,3 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
     content-visibility: auto;
     contain-intrinsic-size: none !important;
 }
-

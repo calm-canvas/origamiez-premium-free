@@ -5,7 +5,7 @@
  * Author: tranthethang
  * Author URI: https://github.com/calm-canvas
  * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
- * Version: 3.0.1764831107
+ * Version: 3.0.1764832457
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -83,10 +83,10 @@
   --line-2-bg-color: #f0f2f5;
   --line-3-bg-color: #f8fafc;
   --footer-sidebars-bg-color: #222222;
-  --footer-sidebars-text-color: #a0a0a0;
-  --footer-sidebars-widget-heading-color: var(--white);
-  --footer-end-bg-color: #111111;
-  --footer-end-text-color: #a0a0a0;
+  --footer-sidebars-text-color: var(--body-color);
+  --footer-sidebars-widget-heading-color: var(--heading-color);
+  --footer-end-bg-color: var(--white);
+  --footer-end-text-color: var(--body-color);
   --white: #ffffff;
   --black: #000000;
   --black_light: #f8fafc;
@@ -3011,6 +3011,7 @@ h6 {
   font-family: var(--font-heading-h1), serif;
   font-size: 40px;
   line-height: 40px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 #site-home-link #site-desc {
@@ -3359,6 +3360,9 @@ p.origamiez-readmore-block > a,
 .entry-title, .entry-title a {
   font-family: var(--font-heading-h1) !important;
 }
+#origamiez-footer-end {
+  font-family: var(--font-menu);
+}
 * {
   outline: transparent solid 0 !important;
 }
@@ -3523,6 +3527,13 @@ p.origamiez-readmore-block > a,
   top: -3px;
   left: 235px;
 }
+#origamiez-footer {
+  border-top: 3px double #e2e2e2;
+  background-color: #f9f9f9;
+}
+#origamiez-footer-sidebars {
+  background-color: transparent;
+}
 #origamiez-footer-sidebars #origamiez-footer-sidebars-inner {
   padding: 40px 0 20px 0;
 }
@@ -3537,11 +3548,8 @@ p.origamiez-readmore-block > a,
   padding: 0;
 }
 #origamiez-footer-end {
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 50px;
-  height: auto;
-  line-height: 50px;
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
 }
 #bottom-menu {
   text-align: center;
@@ -5332,8 +5340,11 @@ p.origamiez-readmore-block {
   margin-bottom: 20px;
   margin-left: 40px;
 }
-#bottom-nav {
-  padding: 20px 0;
+#bottom-nav a {
+  font-family: var(--font-menu);
+  font-size: var(--font-menu-size);
+  font-weight: var(--font-menu-weight);
+  text-transform: none;
 }
 #bottom-mobile-menu,
 #top-mobile-menu {

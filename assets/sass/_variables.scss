@@ -86,10 +86,10 @@
   --line-2-bg-color: #f0f2f5;
   --line-3-bg-color: #f8fafc;
   --footer-sidebars-bg-color: #222222;
-  --footer-sidebars-text-color: #a0a0a0;
-  --footer-sidebars-widget-heading-color: var(--white);
-  --footer-end-bg-color: #111111;
-  --footer-end-text-color: #a0a0a0;
+  --footer-sidebars-text-color: var(--body-color);
+  --footer-sidebars-widget-heading-color: var(--heading-color);
+  --footer-end-bg-color: var(--white);
+  --footer-end-text-color: var(--body-color);
   --white: #ffffff;
   --black: #000000;
   --black_light: #f8fafc;
