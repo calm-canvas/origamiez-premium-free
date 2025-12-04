@@ -44,11 +44,10 @@ h1, h2, h3, h4, h5, h6 {
 
 #main-nav {
   background: var(--white);
-  border-top: 1px solid var(--line-2-bg-color);
+  border-bottom: 3px double var(--heading-color);
 
   &.stuckMenu.isStuck {
     background-color: var(--white);
-    border-bottom: 1px solid var(--line-2-bg-color);
 
     .main-menu {
       border-bottom: 1px solid var(--line-2-bg-color);
@@ -206,8 +205,8 @@ h1, h2, h3, h4, h5, h6 {
  * --------------------------------------------------
  */
 
-#sidebar-bottom {
-  border-top: 1px solid var(--line-2-bg-color);
+#sidebar-bottom, #sidebar-main-bottom {
+  border-top: 1px solid var(--heading-color);
 
   .widget {
     .widget-title-text {
@@ -333,13 +332,6 @@ body.without_bg_slides {
 
 h2.widget-title {
   border-bottom: 1px solid var(--line-2-bg-color);
-}
-
-#origamiez-top-banner,
-#origamiez-body {
-  .widget-title-text {
-    border-bottom: 1px solid var(--primary-color);
-  }
 }
 
 /*
@@ -934,7 +926,7 @@ body.origamiez-layout-single {
 
 
   #respond {
-    border-top: 1px solid var(--line-2-bg-color);
+    border-top: 1px solid var(--heading-color);
 
     .comment-form-info {
       input {
@@ -1342,7 +1334,7 @@ body.origamiez-boxer {
 body.origamiez-page-magazine {
   #sidebar-main-center-top,
   #sidebar-main-top {
-    border-bottom: 1px solid var(--line-2-bg-color);
+    border-bottom: 1px solid var(--heading-color);
   }
 
   #main-center-outer,
@@ -1365,12 +1357,16 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
 }
 
 #origamiez-top-bar {
-  border-bottom: 1px solid var(--line-2-bg-color);
+  border-bottom: 1px solid var(--heading-color);
 }
 
 #top-menu {
   a {
     color: var(--heading-color);
+    font-family: var(--font-menu);
+    font-size: var(--font-menu-size);
+    font-weight: var(--font-menu-weight);
+    text-transform: none;
 
     &:hover {
       color: var(--primary-color);

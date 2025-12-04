@@ -82,7 +82,6 @@ h6 {
   a {
     font-family: var(--font-menu);
     font-style: var(--font-menu-style);
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 
     span.fa {
@@ -127,7 +126,6 @@ h2.widget-title {
   line-height: var(--font-widget-title-line-height);
   font-weight: var(--font-widget-title-weight);
   font-style: var(--font-widget-title-style);
-  text-transform: uppercase;
 }
 
 /*
@@ -647,4 +645,13 @@ p.origamiez-readmore-block > a,
   a {
     line-height: 25px;
   }
+}
+
+/*
+ * --------------------------------------------------
+ * UNIFY POST TITLE FONT
+ * --------------------------------------------------
+ */
+.entry-title, .entry-title a {
+  font-family: var(--font-heading-h1) !important;
 }

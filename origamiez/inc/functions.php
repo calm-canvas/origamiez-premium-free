@@ -53,7 +53,7 @@ function origamiez_enqueue_scripts()
     }
     // GOOGLE FONT.
     if ('off' !== _x('on', 'Google font: on or off', 'origamiez')) {
-        $google_fonts_url = add_query_arg('family', urlencode('Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&Inter:wght@400;500;600;700&display=swap'), '//fonts.googleapis.com/css2');
+        $google_fonts_url = add_query_arg('family', urlencode('Inter:wght@600;700&display=swap'), '//fonts.googleapis.com/css2');
         wp_enqueue_style(ORIGAMIEZ_PREFIX . 'google-fonts', $google_fonts_url);
     }
     // DYNAMIC FONT.
