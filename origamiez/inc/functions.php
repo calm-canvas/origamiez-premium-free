@@ -86,8 +86,6 @@ function origamiez_enqueue_scripts()
     }
     wp_enqueue_script('jquery');
     wp_enqueue_script('hoverIntent');
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'modernizr', "$dir/js/modernizr.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'bootstrap', "$dir/js/bootstrap.js", array('jquery'), null, true);
     wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-easing', "$dir/js/jquery.easing.js", array('jquery'), null, true);
     wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-fitvids', "$dir/js/jquery.fitvids.js", array('jquery'), null, true);
     wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-navgoco', "$dir/js/jquery.navgoco.js", array('jquery'), null, true);
@@ -108,51 +106,55 @@ function origamiez_enqueue_scripts()
             'is_use_gallery_popup' => (int)get_theme_mod('is_use_gallery_popup', 1),
         ),
     )));
-    /**
-     * --------------------------------------------------
-     * IE FIX.
-     * --------------------------------------------------
-     */
-    if ($is_IE) {
-        wp_enqueue_script(ORIGAMIEZ_PREFIX . 'html5', "$dir/js/html5shiv.js", array(), null, true);
-        wp_enqueue_script(ORIGAMIEZ_PREFIX . 'respond', "$dir/js/respond.js", array(), null, true);
-    }
+
     /*
     * --------------------------------------------------
     * CUSTOM FONT.
     * --------------------------------------------------
     */
     $rules = array(
-        'family' => 'font-family',
-        'size' => 'font-size',
-        'style' => 'font-style',
-        'weight' => 'font-weight',
-        'line_height' => 'line-height',
+        'family' => '',
+        'size' => '-size',
+        'style' => '-style',
+        'weight' => '-weight',
+        'line_height' => '-line-height',
     );
     $font_objects = array(
-        'font_body' => 'body',
-        'font_menu' => '#main-menu a',
-        'font_site_title' => '#site-home-link #site-title',
-        'font_site_subtitle' => '#site-home-link #site-desc',
-        'font_widget_title' => 'h2.widget-title',
-        'font_h1' => 'h1',
-        'font_h2' => 'h2',
-        'font_h3' => 'h3',
-        'font_h4' => 'h4',
-        'font_h5' => 'h5',
-        'font_h6' => 'h6',
+        'font_body' => 'font-body',
+        'font_menu' => 'font-menu',
+        'font_site_title' => 'font-site-title',
+        'font_site_subtitle' => 'font-site-subtitle',
+        'font_widget_title' => 'font-widget-title',
+        'font_h1' => 'font-heading-h1',
+        'font_h2' => 'font-heading-h2',
+        'font_h3' => 'font-heading-h3',
+        'font_h4' => 'font-heading-h4',
+        'font_h5' => 'font-heading-h5',
+        'font_h6' => 'font-heading-h6',
     );
-    foreach ($font_objects as $font_object_slug => $font_object) {
+    $css_font_variables = '';
+
+    $fonts = origamiez_get_font_families();
+
+    foreach ($font_objects as $font_object_slug => $font_variable_name) {
         $is_enable = (int)get_theme_mod("{$font_object_slug}_is_enable", 0);
         if ($is_enable) {
-            foreach ($rules as $rule_slug => $rule) {
+            foreach ($rules as $rule_slug => $rule_suffix) {
                 $font_data = get_theme_mod("{$font_object_slug}_{$rule_slug}");
                 if (!empty($font_data)) {
-                    $tmp = sprintf('%s {%s: %s;}', $font_object, $rule, $font_data);
-                    wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $tmp);
+                    if ('family' === $rule_slug && isset($fonts[$font_data])) {
+                        $font_data = $fonts[$font_data];
+                    }
+                    $variable_name = $font_variable_name . $rule_suffix;
+                    $css_font_variables .= "--{$variable_name}: {$font_data};";
                 }
             }
         }
+    }
+
+    if (!empty($css_font_variables)) {
+        $css_font_variables = ":root {" . $css_font_variables . "}";
+        wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $css_font_variables);
     }
     /*
     * --------------------------------------------------
@@ -996,8 +998,12 @@ function origamiez_sanitize_checkbox( $input ) {
  * Sanitize select input
  */
 function origamiez_sanitize_select( $input, $setting ) {
-    $input = sanitize_key( $input );
-    $choices = $setting->manager->get_control( $setting->id )->choices;
+    $input = sanitize_text_field( $input );
+    $control = $setting->manager->get_control( $setting->id );
+    if ( ! $control ) {
+        return $setting->default;
+    }
+    $choices = $control->choices;
     return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
