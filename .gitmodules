@@ -7,6 +7,3 @@
 [submodule "plugins/wordpress-importer"]
 	path = plugins/wordpress-importer
 	url = https://github.com/WordPress/wordpress-importer
-[submodule "plugins/regenerate-thumbnails"]
-	path = plugins/regenerate-thumbnails
-	url = https://github.com/automattic/regenerate-thumbnails
