@@ -1,9 +1,9 @@
 /**
  * Theme Name: Origamiez
- * Theme URI: https://github.com/calm-canvas/origamiez
+ * Theme URI: https://github.com/calm-canvas/origamiez-premium-free
  * Author: tranthethang
  * Author URI: https://github.com/calm-canvas
- * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
+ * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
  * Version: STYLE_VERSION
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -102,26 +102,26 @@
  */
 #main-nav-inner {
   position: relative;
-  min-height: 46px;
+  min-height: 35px;
 
   #origamiez-header-search-box {
     position: absolute;
     top: 0;
     right: 10px;
-    height: 46px;
-    line-height: 46px;
+    height: 35px;
+    line-height: 35px;
     width: 341px;
 
     form#search-form {
-      height: 46px;
-      line-height: 46px;
+      height: 35px;
+      line-height: 35px;
 
       .search-submit {
         top: 0;
         right: 0;
-        height: 46px;
-        width: 46px;
-        line-height: 46px;
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
       }
     }
   }
@@ -175,7 +175,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        height: 46px;
+        height: 35px;
         width: 16px;
         font-size: 50%;
       }
@@ -183,7 +183,7 @@
 
     > a {
       display: block;
-      height: 46px;
+      height: 35px;
       position: relative;
       padding-left: 12px;
       padding-right: 12px;
@@ -196,7 +196,7 @@
     ul {
       display: block;
       position: absolute;
-      top: 46px;
+      top: 35px;
       left: -1px;
       z-index: 50;
       width: 250px;
@@ -240,7 +240,13 @@
   }
 }
 
+#origamiez-footer {
+  border-top: 3px double #e2e2e2;
+  background-color: #f9f9f9;
+}
+
 #origamiez-footer-sidebars {
+  background-color: transparent;
   #origamiez-footer-sidebars-inner {
     padding: 40px 0 20px 0;
 
@@ -260,11 +266,8 @@
 }
 
 #origamiez-footer-end {
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 50px;
-  height: auto;
-  line-height: 50px;
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
 }
 
 #bottom-menu {
@@ -2425,7 +2428,7 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
 }
 
 #origamiez-top-bar {
-  min-height: 50px;
+  min-height: 40px;
   height: auto;
 
   #origamiez-top-bar-inner {
@@ -2447,8 +2450,8 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
         margin-right: 0;
         margin-left: 0;
         border: none !important;
-        line-height: 49px;
-        height: 49px;
+        line-height: 39px;
+        height: 39px;
         @include opacity(1);
         @include transition(0.5s);
 
@@ -2457,9 +2460,9 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
         }
 
         & > .fa {
-          line-height: 49px;
-          height: 49px;
-          width: 49px;
+          line-height: 39px;
+          height: 39px;
+          width: 39px;
           font-size: 16px;
         }
       }
@@ -2468,8 +2471,8 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
 }
 
 #top-menu {
-  margin-top: 6.5px;
-  margin-bottom: 6.5px;
+  margin-top: 0;
+  margin-bottom: 0;
 
   ul, li {
     list-style-type: none;
@@ -2482,8 +2485,8 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
 
   & > li {
     display: inline-block;
-    height: 36px;
-    line-height: 36px;
+    height: 39px;
+    line-height: 39px;
 
     &.origamiez-menuitem-first {
       a {
@@ -2566,7 +2569,12 @@ p.origamiez-readmore-block {
 }
 
 #bottom-nav {
-  padding: 20px 0;
+  a {
+    font-family: var(--font-menu);
+    font-size: var(--font-menu-size);
+    font-weight: var(--font-menu-weight);
+    text-transform: none;
+  }
 }
 
 #bottom-mobile-menu,
@@ -2823,5 +2831,3 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
     content-visibility: auto;
     contain-intrinsic-size: none !important;
 }
-
-

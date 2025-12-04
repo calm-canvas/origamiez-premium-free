@@ -1,11 +1,11 @@
 @charset "UTF-8";
 /**
  * Theme Name: Origamiez
- * Theme URI: https://github.com/tranthethang/origamiez
- * Author: openwpdotorg
- * Author URI: http://openwp.org
- * Description: Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.
- * Version: 3.0.1764756338
+ * Theme URI: https://github.com/calm-canvas/origamiez-premium-free
+ * Author: tranthethang
+ * Author URI: https://github.com/calm-canvas
+ * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
+ * Version: 3.0.1764834657
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -20,94 +20,112 @@
  * --------------------------------------------------
  */
 :root {
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body-size: 14px;
-  --font-body-line-height: 1.6em;
+  --font-body: 'Georgia', 'Times New Roman', Times, serif;
+  --font-body-size: 15px;
+  --font-body-line-height: 1.7em;
   --font-body-weight: 400;
   --font-body-style: normal;
   --font-menu: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-menu-size: 13px;
-  --font-menu-line-height: 46px;
-  --font-menu-weight: 600;
+  --font-menu-size: 14px;
+  --font-menu-line-height: 35px;
+  --font-menu-weight: 400;
   --font-menu-style: normal;
-  --font-widget-title: 'Crimson Text', Georgia, serif;
-  --font-widget-title-size: 14px;
-  --font-widget-title-line-height: 49px;
-  --font-widget-title-weight: 600;
+  --font-widget-title: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-widget-title-size: 13px;
+  --font-widget-title-line-height: 1.5em;
+  --font-widget-title-weight: 700;
   --font-widget-title-style: normal;
-  --font-heading-h1: 'Crimson Text', Georgia, serif;
+  --font-heading-h1: 'Georgia', 'Times New Roman', Times, serif;
   --font-heading-h1-size: 28px;
-  --font-heading-h1-line-height: 1.3em;
+  --font-heading-h1-line-height: 1.2em;
   --font-heading-h1-weight: 700;
   --font-heading-h1-style: normal;
-  --font-heading-h2: 'Crimson Text', Georgia, serif;
+  --font-heading-h2: 'Georgia', 'Times New Roman', Times, serif;
   --font-heading-h2-size: 24px;
-  --font-heading-h2-line-height: 1.35em;
+  --font-heading-h2-line-height: 1.3em;
   --font-heading-h2-weight: 700;
   --font-heading-h2-style: normal;
-  --font-heading-h3: 'Crimson Text', Georgia, serif;
-  --font-heading-h3-size: 18px;
+  --font-heading-h3: 'Georgia', 'Times New Roman', Times, serif;
+  --font-heading-h3-size: 20px;
   --font-heading-h3-line-height: 1.4em;
   --font-heading-h3-weight: 600;
   --font-heading-h3-style: normal;
-  --font-heading-h4: 'Crimson Text', Georgia, serif;
-  --font-heading-h4-size: 16px;
+  --font-heading-h4: 'Georgia', 'Times New Roman', Times, serif;
+  --font-heading-h4-size: 18px;
   --font-heading-h4-line-height: 1.4em;
   --font-heading-h4-weight: 600;
   --font-heading-h4-style: normal;
   --font-heading-h5: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading-h5-size: 15px;
+  --font-heading-h5-size: 16px;
   --font-heading-h5-line-height: 1.5em;
   --font-heading-h5-weight: 600;
   --font-heading-h5-style: normal;
   --font-heading-h6: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-heading-h6-size: 13px;
+  --font-heading-h6-size: 14px;
   --font-heading-h6-line-height: 1.5em;
   --font-heading-h6-weight: 600;
   --font-heading-h6-style: normal;
-  --font-heading-letter-spacing: 0.5px;
-  --font-block-quote: 'Crimson Text', Georgia, serif;
+  --font-heading-letter-spacing: 0.2px;
+  --font-block-quote: 'Georgia', 'Times New Roman', Times, serif;
   --font-block-quote-line-height: 1.6em;
-  --font-block-quote-size: 15px;
-  --body-color: #2c3e50;
-  --heading-color: #1a1a1a;
-  --link-color: #c41e3a;
-  --link-hover-color: #a01830;
-  --primary-color: #c41e3a;
+  --font-block-quote-size: 18px;
+  --body-color: #333333;
+  --heading-color: #111111;
+  --link-color: #111111;
+  --link-hover-color: #00589f;
+  --primary-color: #111111;
   --secondary-color: #f5f7fa;
-  --main-menu-color: #ffffff;
-  --main-menu-bg-color: #8b1a2e;
-  --main-menu-hover-color: var(--main-menu-color);
-  --main-menu-active-color: var(--main-menu-color);
+  --main-menu-color: var(--heading-color);
+  --main-menu-bg-color: var(--white);
+  --main-menu-hover-color: var(--link-hover-color);
+  --main-menu-active-color: var(--heading-color);
   --line-1-bg-color: #e8ecf1;
   --line-2-bg-color: #f0f2f5;
   --line-3-bg-color: #f8fafc;
-  --footer-sidebars-bg-color: #8b1a2e;
-  --footer-sidebars-text-color: #95a5a6;
-  --footer-sidebars-widget-heading-color: #ffffff;
-  --footer-end-bg-color: #1a1a1a;
-  --footer-end-text-color: #95a5a6;
+  --footer-sidebars-bg-color: #222222;
+  --footer-sidebars-text-color: var(--body-color);
+  --footer-sidebars-widget-heading-color: var(--heading-color);
+  --footer-end-bg-color: var(--white);
+  --footer-end-text-color: var(--body-color);
   --white: #ffffff;
   --black: #000000;
   --black_light: #f8fafc;
-  --overlay_white: rgba(255, 255, 255, 0.75);
+  --overlay_white: rgba(255, 255, 255, 0.85);
   --overlay_black: rgba(0, 0, 0, 0.75);
+  --metadata-color: #666666;
+  --color-success: #27ae60;
   --facebook-color: #1877f2;
   --twitter-color: #1da1f2;
   --google-plus-color: #ea4335;
   --pinterest-color: #e60023;
   --rss-color: #f26522;
-  --metadata-color: #7f8c8d;
   --youtube-color: #ff0000;
   --linkedin-color: #0a66c2;
   --tumblr-color: #36465d;
   --digg-color: #1b5891;
   --reddit-color: #ff4500;
   --stumbleupon-color: #eb4823;
+  --jsfiddle-color: #007bb6;
+  --behance-color: #1769ff;
+  --bitbucket-color: #0052cc;
+  --codepen-color: #000000;
+  --delicious-color: #3399ff;
+  --deviantart-color: #05cc47;
+  --dribbble-color: #ea4c89;
+  --dropbox-color: #0061ff;
+  --flickr-color: #0063dc;
+  --foursquare-color: #fa7343;
+  --git-color: #f1502f;
+  --github-color: #333333;
+  --instagram-color: #e4405f;
+  --soundcloud-color: #ff5500;
+  --spotify-color: #1db954;
+  --stack-exchange-color: #f48024;
+  --stack-overflow-color: #f48024;
+  --vimeo-color: #1ab7ea;
   --vk-color: #0077ff;
   --print-color: #5a5a5a;
   --envelope-color: #f26522;
-  --color-success: #27ae60;
 }
 :root {
   --bs-body-font-family: var(--font-body);
@@ -154,11 +172,10 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
 }
 #main-nav {
   background: var(--white);
-  border-top: 1px solid var(--line-2-bg-color);
+  border-bottom: 3px double var(--heading-color);
 }
 #main-nav.stuckMenu.isStuck {
   background-color: var(--white);
-  border-bottom: 1px solid var(--line-2-bg-color);
 }
 #main-nav.stuckMenu.isStuck .main-menu {
   border-bottom: 1px solid var(--line-2-bg-color);
@@ -265,10 +282,10 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
  * SIDEBAR BOTTOM
  * --------------------------------------------------
  */
-#sidebar-bottom {
-  border-top: 1px solid var(--line-2-bg-color);
+#sidebar-bottom, #sidebar-main-bottom {
+  border-top: 1px solid var(--heading-color);
 }
-#sidebar-bottom .widget .widget-title-text {
+#sidebar-bottom .widget .widget-title-text, #sidebar-main-bottom .widget .widget-title-text {
   border-bottom: none;
 }
 #origamiez-footer-sidebars h2.widget-title {
@@ -352,10 +369,6 @@ body.without_bg_slides .sb-site-container {
  */
 h2.widget-title {
   border-bottom: 1px solid var(--line-2-bg-color);
-}
-#origamiez-top-banner .widget-title-text,
-#origamiez-body .widget-title-text {
-  border-bottom: 1px solid var(--primary-color);
 }
 /*
  * --------------------------------------------------
@@ -504,25 +517,133 @@ a.social-link {
   color: var(--line-1-bg-color);
   border: 1px solid var(--line-1-bg-color);
 }
+a.social-link.social-link-behance {
+  color: var(--behance-color);
+  border: 1px solid var(--behance-color);
+}
+a.social-link.social-link-bitbucket {
+  color: var(--bitbucket-color);
+  border: 1px solid var(--bitbucket-color);
+}
+a.social-link.social-link-codepen {
+  color: var(--codepen-color);
+  border: 1px solid var(--codepen-color);
+}
+a.social-link.social-link-delicious {
+  color: var(--delicious-color);
+  border: 1px solid var(--delicious-color);
+}
+a.social-link.social-link-deviantart {
+  color: var(--deviantart-color);
+  border: 1px solid var(--deviantart-color);
+}
+a.social-link.social-link-digg {
+  color: var(--digg-color);
+  border: 1px solid var(--digg-color);
+}
+a.social-link.social-link-dribbble {
+  color: var(--dribbble-color);
+  border: 1px solid var(--dribbble-color);
+}
+a.social-link.social-link-dropbox {
+  color: var(--dropbox-color);
+  border: 1px solid var(--dropbox-color);
+}
 a.social-link.social-link-facebook {
   color: var(--facebook-color);
   border: 1px solid var(--facebook-color);
 }
-a.social-link.social-link-twitter {
-  color: var(--twitter-color);
-  border: 1px solid var(--twitter-color);
+a.social-link.social-link-flickr {
+  color: var(--flickr-color);
+  border: 1px solid var(--flickr-color);
 }
-a.social-link.social-link-pinterest {
-  color: var(--pinterest-color);
-  border: 1px solid var(--pinterest-color);
+a.social-link.social-link-foursquare {
+  color: var(--foursquare-color);
+  border: 1px solid var(--foursquare-color);
+}
+a.social-link.social-link-git {
+  color: var(--git-color);
+  border: 1px solid var(--git-color);
+}
+a.social-link.social-link-github {
+  color: var(--github-color);
+  border: 1px solid var(--github-color);
 }
 a.social-link.social-link-google-plus {
   color: var(--google-plus-color);
   border: 1px solid var(--google-plus-color);
 }
+a.social-link.social-link-instagram {
+  color: var(--instagram-color);
+  border: 1px solid var(--instagram-color);
+}
+a.social-link.social-link-jsfiddle {
+  color: var(--jsfiddle-color);
+  border: 1px solid var(--jsfiddle-color);
+}
+a.social-link.social-link-linkedin {
+  color: var(--linkedin-color);
+  border: 1px solid var(--linkedin-color);
+}
+a.social-link.social-link-pinterest {
+  color: var(--pinterest-color);
+  border: 1px solid var(--pinterest-color);
+}
+a.social-link.social-link-reddit {
+  color: var(--reddit-color);
+  border: 1px solid var(--reddit-color);
+}
 a.social-link.social-link-rss {
   color: var(--rss-color);
   border: 1px solid var(--rss-color);
+}
+a.social-link.social-link-soundcloud {
+  color: var(--soundcloud-color);
+  border: 1px solid var(--soundcloud-color);
+}
+a.social-link.social-link-spotify {
+  color: var(--spotify-color);
+  border: 1px solid var(--spotify-color);
+}
+a.social-link.social-link-stack-exchange {
+  color: var(--stack-exchange-color);
+  border: 1px solid var(--stack-exchange-color);
+}
+a.social-link.social-link-stack-overflow {
+  color: var(--stack-overflow-color);
+  border: 1px solid var(--stack-overflow-color);
+}
+a.social-link.social-link-stumbleupon {
+  color: var(--stumbleupon-color);
+  border: 1px solid var(--stumbleupon-color);
+}
+a.social-link.social-link-tumblr {
+  color: var(--tumblr-color);
+  border: 1px solid var(--tumblr-color);
+}
+a.social-link.social-link-twitter {
+  color: var(--twitter-color);
+  border: 1px solid var(--twitter-color);
+}
+a.social-link.social-link-vimeo {
+  color: var(--vimeo-color);
+  border: 1px solid var(--vimeo-color);
+}
+a.social-link.social-link-youtube {
+  color: var(--youtube-color);
+  border: 1px solid var(--youtube-color);
+}
+a.social-link.social-link-vk {
+  color: var(--vk-color);
+  border: 1px solid var(--vk-color);
+}
+a.social-link.social-link-print {
+  color: var(--print-color);
+  border: 1px solid var(--print-color);
+}
+a.social-link.social-link-envelope {
+  color: var(--envelope-color);
+  border: 1px solid var(--envelope-color);
 }
 /*
  * --------------------------------------------------
@@ -752,7 +873,7 @@ body.origamiez-layout-single #origamiez-post-related .origamiez-widget-content f
   color: var(--primary-color);
 }
 #comments #respond {
-  border-top: 1px solid var(--line-2-bg-color);
+  border-top: 1px solid var(--heading-color);
 }
 #comments #respond .comment-form-info input {
   border: 1px solid var(--line-2-bg-color);
@@ -996,7 +1117,7 @@ body.origamiez-boxer #origamiez-header-search-box form#search-form .search-submi
  */
 body.origamiez-page-magazine #sidebar-main-center-top,
 body.origamiez-page-magazine #sidebar-main-top {
-  border-bottom: 1px solid var(--line-2-bg-color);
+  border-bottom: 1px solid var(--heading-color);
 }
 body.origamiez-page-magazine #main-center-outer > .origamiez-left,
 body.origamiez-page-magazine #main-center-inner > .origamiez-left {
@@ -1007,10 +1128,14 @@ body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.alignc
   background-color: var(--line-3-bg-color);
 }
 #origamiez-top-bar {
-  border-bottom: 1px solid var(--line-2-bg-color);
+  border-bottom: 1px solid var(--heading-color);
 }
 #top-menu a {
   color: var(--heading-color);
+  font-family: var(--font-menu);
+  font-size: var(--font-menu-size);
+  font-weight: var(--font-menu-weight);
+  text-transform: none;
 }
 #top-menu a:hover {
   color: var(--primary-color);
@@ -2886,6 +3011,7 @@ h6 {
   font-family: var(--font-heading-h1), serif;
   font-size: 40px;
   line-height: 40px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 #site-home-link #site-desc {
@@ -2894,7 +3020,6 @@ h6 {
 #main-menu a {
   font-family: var(--font-menu);
   font-style: var(--font-menu-style);
-  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 #main-menu a span.fa {
@@ -2921,7 +3046,6 @@ h2.widget-title {
   line-height: var(--font-widget-title-line-height);
   font-weight: var(--font-widget-title-weight);
   font-style: var(--font-widget-title-style);
-  text-transform: uppercase;
 }
 /*
  * --------------------------------------------------
@@ -3228,6 +3352,17 @@ p.origamiez-readmore-block > a,
 #origamiez_singular_pagination a {
   line-height: 25px;
 }
+/*
+ * --------------------------------------------------
+ * UNIFY POST TITLE FONT
+ * --------------------------------------------------
+ */
+.entry-title, .entry-title a {
+  font-family: var(--font-heading-h1) !important;
+}
+#origamiez-footer-end {
+  font-family: var(--font-menu);
+}
 * {
   outline: transparent solid 0 !important;
 }
@@ -3282,26 +3417,26 @@ p.origamiez-readmore-block > a,
  */
 #main-nav-inner {
   position: relative;
-  min-height: 46px;
+  min-height: 35px;
 }
 #main-nav-inner #origamiez-header-search-box {
   position: absolute;
   top: 0;
   right: 10px;
-  height: 46px;
-  line-height: 46px;
+  height: 35px;
+  line-height: 35px;
   width: 341px;
 }
 #main-nav-inner #origamiez-header-search-box form#search-form {
-  height: 46px;
-  line-height: 46px;
+  height: 35px;
+  line-height: 35px;
 }
 #main-nav-inner #origamiez-header-search-box form#search-form .search-submit {
   top: 0;
   right: 0;
-  height: 46px;
-  width: 46px;
-  line-height: 46px;
+  height: 35px;
+  width: 35px;
+  line-height: 35px;
 }
 /*
  * --------------------------------------------------
@@ -3340,13 +3475,13 @@ p.origamiez-readmore-block > a,
   position: absolute;
   right: 0;
   top: 0;
-  height: 46px;
+  height: 35px;
   width: 16px;
   font-size: 50%;
 }
 #main-menu > li > a {
   display: block;
-  height: 46px;
+  height: 35px;
   position: relative;
   padding-left: 12px;
   padding-right: 12px;
@@ -3357,7 +3492,7 @@ p.origamiez-readmore-block > a,
 #main-menu li ul {
   display: block;
   position: absolute;
-  top: 46px;
+  top: 35px;
   left: -1px;
   z-index: 50;
   width: 250px;
@@ -3392,6 +3527,13 @@ p.origamiez-readmore-block > a,
   top: -3px;
   left: 235px;
 }
+#origamiez-footer {
+  border-top: 3px double #e2e2e2;
+  background-color: #f9f9f9;
+}
+#origamiez-footer-sidebars {
+  background-color: transparent;
+}
 #origamiez-footer-sidebars #origamiez-footer-sidebars-inner {
   padding: 40px 0 20px 0;
 }
@@ -3406,11 +3548,8 @@ p.origamiez-readmore-block > a,
   padding: 0;
 }
 #origamiez-footer-end {
-  padding-left: 20px;
-  padding-right: 20px;
-  min-height: 50px;
-  height: auto;
-  line-height: 50px;
+  padding: 20px;
+  border-top: 1px solid #e2e2e2;
 }
 #bottom-menu {
   text-align: center;
@@ -5099,7 +5238,7 @@ body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wr
   padding: 5px;
 }
 #origamiez-top-bar {
-  min-height: 50px;
+  min-height: 40px;
   height: auto;
 }
 #origamiez-top-bar #origamiez-top-bar-inner {
@@ -5119,8 +5258,8 @@ body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wr
   margin-right: 0;
   margin-left: 0;
   border: none !important;
-  line-height: 49px;
-  height: 49px;
+  line-height: 39px;
+  height: 39px;
   opacity: 1;
   transition: all 0.5s;
 }
@@ -5128,14 +5267,14 @@ body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wr
   opacity: 0.5;
 }
 #origamiez-top-bar .origamiez-top-bar-col-right #top-social-link-inner a > .fa {
-  line-height: 49px;
-  height: 49px;
-  width: 49px;
+  line-height: 39px;
+  height: 39px;
+  width: 39px;
   font-size: 16px;
 }
 #top-menu {
-  margin-top: 6.5px;
-  margin-bottom: 6.5px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 #top-menu ul, #top-menu li {
   list-style-type: none;
@@ -5146,8 +5285,8 @@ body.origamiez-layout-single.origamiez-show-border-for-images #origamiez-post-wr
 }
 #top-menu > li {
   display: inline-block;
-  height: 36px;
-  line-height: 36px;
+  height: 39px;
+  line-height: 39px;
 }
 #top-menu > li.origamiez-menuitem-first a {
   padding-left: 0;
@@ -5201,8 +5340,11 @@ p.origamiez-readmore-block {
   margin-bottom: 20px;
   margin-left: 40px;
 }
-#bottom-nav {
-  padding: 20px 0;
+#bottom-nav a {
+  font-family: var(--font-menu);
+  font-size: var(--font-menu-size);
+  font-weight: var(--font-menu-weight);
+  text-transform: none;
 }
 #bottom-mobile-menu,
 #top-mobile-menu {

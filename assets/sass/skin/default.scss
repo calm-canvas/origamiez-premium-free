@@ -44,11 +44,10 @@ h1, h2, h3, h4, h5, h6 {
 
 #main-nav {
   background: var(--white);
-  border-top: 1px solid var(--line-2-bg-color);
+  border-bottom: 3px double var(--heading-color);
 
   &.stuckMenu.isStuck {
     background-color: var(--white);
-    border-bottom: 1px solid var(--line-2-bg-color);
 
     .main-menu {
       border-bottom: 1px solid var(--line-2-bg-color);
@@ -206,8 +205,8 @@ h1, h2, h3, h4, h5, h6 {
  * --------------------------------------------------
  */
 
-#sidebar-bottom {
-  border-top: 1px solid var(--line-2-bg-color);
+#sidebar-bottom, #sidebar-main-bottom {
+  border-top: 1px solid var(--heading-color);
 
   .widget {
     .widget-title-text {
@@ -333,13 +332,6 @@ body.without_bg_slides {
 
 h2.widget-title {
   border-bottom: 1px solid var(--line-2-bg-color);
-}
-
-#origamiez-top-banner,
-#origamiez-body {
-  .widget-title-text {
-    border-bottom: 1px solid var(--primary-color);
-  }
 }
 
 /*
@@ -581,19 +573,69 @@ a.social-link {
   color: var(--line-1-bg-color);
   border: 1px solid var(--line-1-bg-color);
 
+  &.social-link-behance {
+    color: var(--behance-color);
+    border: 1px solid var(--behance-color);
+  }
+
+  &.social-link-bitbucket {
+    color: var(--bitbucket-color);
+    border: 1px solid var(--bitbucket-color);
+  }
+
+  &.social-link-codepen {
+    color: var(--codepen-color);
+    border: 1px solid var(--codepen-color);
+  }
+
+  &.social-link-delicious {
+    color: var(--delicious-color);
+    border: 1px solid var(--delicious-color);
+  }
+
+  &.social-link-deviantart {
+    color: var(--deviantart-color);
+    border: 1px solid var(--deviantart-color);
+  }
+
+  &.social-link-digg {
+    color: var(--digg-color);
+    border: 1px solid var(--digg-color);
+  }
+
+  &.social-link-dribbble {
+    color: var(--dribbble-color);
+    border: 1px solid var(--dribbble-color);
+  }
+
+  &.social-link-dropbox {
+    color: var(--dropbox-color);
+    border: 1px solid var(--dropbox-color);
+  }
+
   &.social-link-facebook {
     color: var(--facebook-color);
     border: 1px solid var(--facebook-color);
   }
 
-  &.social-link-twitter {
-    color: var(--twitter-color);
-    border: 1px solid var(--twitter-color);
+  &.social-link-flickr {
+    color: var(--flickr-color);
+    border: 1px solid var(--flickr-color);
   }
 
-  &.social-link-pinterest {
-    color: var(--pinterest-color);
-    border: 1px solid var(--pinterest-color);
+  &.social-link-foursquare {
+    color: var(--foursquare-color);
+    border: 1px solid var(--foursquare-color);
+  }
+
+  &.social-link-git {
+    color: var(--git-color);
+    border: 1px solid var(--git-color);
+  }
+
+  &.social-link-github {
+    color: var(--github-color);
+    border: 1px solid var(--github-color);
   }
 
   &.social-link-google-plus {
@@ -601,9 +643,94 @@ a.social-link {
     border: 1px solid var(--google-plus-color);
   }
 
+  &.social-link-instagram {
+    color: var(--instagram-color);
+    border: 1px solid var(--instagram-color);
+  }
+
+  &.social-link-jsfiddle {
+    color: var(--jsfiddle-color);
+    border: 1px solid var(--jsfiddle-color);
+  }
+
+  &.social-link-linkedin {
+    color: var(--linkedin-color);
+    border: 1px solid var(--linkedin-color);
+  }
+
+  &.social-link-pinterest {
+    color: var(--pinterest-color);
+    border: 1px solid var(--pinterest-color);
+  }
+
+  &.social-link-reddit {
+    color: var(--reddit-color);
+    border: 1px solid var(--reddit-color);
+  }
+
   &.social-link-rss {
     color: var(--rss-color);
     border: 1px solid var(--rss-color);
+  }
+
+  &.social-link-soundcloud {
+    color: var(--soundcloud-color);
+    border: 1px solid var(--soundcloud-color);
+  }
+
+  &.social-link-spotify {
+    color: var(--spotify-color);
+    border: 1px solid var(--spotify-color);
+  }
+
+  &.social-link-stack-exchange {
+    color: var(--stack-exchange-color);
+    border: 1px solid var(--stack-exchange-color);
+  }
+
+  &.social-link-stack-overflow {
+    color: var(--stack-overflow-color);
+    border: 1px solid var(--stack-overflow-color);
+  }
+
+  &.social-link-stumbleupon {
+    color: var(--stumbleupon-color);
+    border: 1px solid var(--stumbleupon-color);
+  }
+
+  &.social-link-tumblr {
+    color: var(--tumblr-color);
+    border: 1px solid var(--tumblr-color);
+  }
+
+  &.social-link-twitter {
+    color: var(--twitter-color);
+    border: 1px solid var(--twitter-color);
+  }
+
+  &.social-link-vimeo {
+    color: var(--vimeo-color);
+    border: 1px solid var(--vimeo-color);
+  }
+
+  &.social-link-youtube {
+    color: var(--youtube-color);
+    border: 1px solid var(--youtube-color);
+  }
+
+  &.social-link-vk {
+    color: var(--vk-color);
+    border: 1px solid var(--vk-color);
+  }
+
+  &.social-link-print {
+    color: var(--print-color);
+    border: 1px solid var(--print-color);
+  }
+
+  &.social-link-envelope {
+    color: var(--envelope-color);
+    border: 1px solid var(--envelope-color);
   }
 }
 
@@ -934,7 +1061,7 @@ body.origamiez-layout-single {
 
 
   #respond {
-    border-top: 1px solid var(--line-2-bg-color);
+    border-top: 1px solid var(--heading-color);
 
     .comment-form-info {
       input {
@@ -1342,7 +1469,7 @@ body.origamiez-boxer {
 body.origamiez-page-magazine {
   #sidebar-main-center-top,
   #sidebar-main-top {
-    border-bottom: 1px solid var(--line-2-bg-color);
+    border-bottom: 1px solid var(--heading-color);
   }
 
   #main-center-outer,
@@ -1365,12 +1492,16 @@ body.origamiez-layout-single.origamiez-show-border-for-images {
 }
 
 #origamiez-top-bar {
-  border-bottom: 1px solid var(--line-2-bg-color);
+  border-bottom: 1px solid var(--heading-color);
 }
 
 #top-menu {
   a {
     color: var(--heading-color);
+    font-family: var(--font-menu);
+    font-size: var(--font-menu-size);
+    font-weight: var(--font-menu-weight);
+    text-transform: none;
 
     &:hover {
       color: var(--primary-color);
