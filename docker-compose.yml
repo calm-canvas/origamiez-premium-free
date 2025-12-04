@@ -3,7 +3,7 @@ volumes:
 
 services:
   wordpress:
-    image: tranthethang/calm-canvas-wordpress:6.8-apache
+    image: tranthethang/calm-canvas-wordpress:6.9.0-php8.1-apache
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
@@ -21,10 +21,12 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins:/var/www/html/wp-content/plugins
+      - ./plugins/regenerate-thumbnails:/var/www/html/wp-content/plugins/regenerate-thumbnails
+      - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
+      - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
+      - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
       - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini
-
     networks:
       - dev_tools
     
@@ -41,8 +43,12 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins:/var/www/html/wp-content/plugins
+      - ./plugins/regenerate-thumbnails:/var/www/html/wp-content/plugins/regenerate-thumbnails
+      - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
+      - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
+      - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
+      - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
@@ -62,3 +68,5 @@ services:
 networks:
   dev_tools:
     external: true
+
+
