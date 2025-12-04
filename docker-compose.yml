@@ -39,6 +39,7 @@ services:
     image: wordpress:cli-2.10.0
     user: www-data
     command: tail -f /dev/null
+    restart: unless-stopped
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
