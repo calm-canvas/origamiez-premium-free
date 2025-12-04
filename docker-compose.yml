@@ -21,7 +21,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins/regenerate-thumbnails:/var/www/html/wp-content/plugins/regenerate-thumbnails
       - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
       - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
       - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
@@ -43,7 +42,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins/regenerate-thumbnails:/var/www/html/wp-content/plugins/regenerate-thumbnails
       - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
       - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
       - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
