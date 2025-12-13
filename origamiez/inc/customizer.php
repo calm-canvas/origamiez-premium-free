@@ -1106,14 +1106,26 @@ function origamiez_get_custom_options() {
 function origamiez_get_font_families() {
 	$font_families          = array(
 		''                            => esc_attr__( '-- Default --', 'origamiez' ),
-		'Arial'                       => 'Arial',
-		'Georgia'                     => 'Georgia',
-		'Helvetica'                   => 'Helvetica',
-		'Palatino'                    => 'Palatino',
-		'Tahoma'                      => 'Tahoma',
-		'Times New Roman, sans-serif' => 'Times New Roman, sans-serif',
-		'Trebuchet'                   => 'Trebuchet',
-		'Verdana'                     => 'Verdana'
+		// --- Sans-serif Fonts ---
+		'Arial'                       => 'Arial, sans-serif',
+		'Arial Black'                 => 'Arial Black, Gadget, sans-serif',
+		'Helvetica'                   => 'Helvetica, sans-serif',
+		'Tahoma'                      => 'Tahoma, Geneva, sans-serif',
+		'Trebuchet MS'                => 'Trebuchet MS, Helvetica, sans-serif',
+		'Verdana'                     => 'Verdana, Geneva, sans-serif',
+
+		// --- Serif Fonts ---
+		'Georgia'                     => 'Georgia, serif',
+		'Times New Roman'             => 'Times New Roman, Times, serif',
+		'Palatino Linotype'           => 'Palatino Linotype, "Book Antiqua", Palatino, serif',
+
+		// --- Monospace Fonts ---
+		'Courier New'                 => 'Courier New, monospace',
+		'Lucida Console'              => 'Lucida Console, Monaco, monospace',
+
+		// --- Specialty Fonts ---
+		'Impact'                      => 'Impact, fantasy',
+		'Comic Sans MS'               => 'Comic Sans MS, cursive',
 	);
 	$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 	if ( $number_of_google_fonts ) {
