@@ -129,4 +129,14 @@ Load & register modules.
 --------------------
 */
 require_once( $dir . '/vendor/autoload.php' );
+
+/*
+ENGINE BOOTSTRAP
+--------------------
+Initialize the Origamiez engine with dependency injection,
+asset management, hooks, and layout management.
+--------------------
+*/
+require_once( $dir . 'engine/index.php' );
+
 add_filter( 'use_widgets_block_editor', '__return_false' );
