@@ -45,6 +45,11 @@ class CustomizerService {
 		];
 
 		$args = array_merge( $defaultArgs, $args );
+
+		if ( ! isset( $args['sanitize_callback'] ) || empty( $args['sanitize_callback'] ) ) {
+			$args['sanitize_callback'] = 'sanitize_text_field';
+		}
+
 		$this->settings[ $id ] = $args;
 
 		return $this;
@@ -87,6 +92,9 @@ class CustomizerService {
 
 	public function registerSettings( $wp_customize ): void {
 		foreach ( $this->settings as $id => $args ) {
+			if ( ! isset( $args['sanitize_callback'] ) || empty( $args['sanitize_callback'] ) ) {
+				$args['sanitize_callback'] = 'sanitize_text_field';
+			}
 			$wp_customize->add_setting( $id, $args );
 		}
 	}

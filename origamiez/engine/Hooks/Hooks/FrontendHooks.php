@@ -18,7 +18,6 @@ class FrontendHooks implements HookProviderInterface {
 			->addFilter( 'dynamic_sidebar_params', [ $this, 'dynamicSidebarParams' ] )
 			->addAction( 'origamiez_after_body_open', [ $this, 'globalWrapperOpen' ] )
 			->addAction( 'origamiez_before_body_close', [ $this, 'globalWrapperClose' ] )
-			->addAction( 'origamiez_print_breadcrumb', [ $this, 'getBreadcrumb' ] )
 			->addAction( 'origamiez_print_button_readmore', [ $this, 'getButtonReadmore' ] );
 	}
 
@@ -49,9 +48,6 @@ class FrontendHooks implements HookProviderInterface {
 	}
 
 	public function globalWrapperClose(): void {
-	}
-
-	public function getBreadcrumb(): void {
 	}
 
 	public function getButtonReadmore(): void {

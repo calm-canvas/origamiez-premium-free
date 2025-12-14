@@ -54,7 +54,6 @@ function origamiez_theme_setup() {
 		add_filter( 'dynamic_sidebar_params', 'origamiez_dynamic_sidebar_params' );
 		add_action( 'origamiez_after_body_open', 'origamiez_global_wapper_open' );
 		add_action( 'origamiez_before_body_close', 'origamiez_global_wapper_close' );
-		add_action( 'origamiez_print_breadcrumb', 'origamiez_get_breadcrumb' );
 		add_action( 'origamiez_print_button_readmore', 'origamiez_get_button_readmore' );
 	}
 	add_action( "updated_option", 'origamiez_save_unyson_options', 10, 3 );
