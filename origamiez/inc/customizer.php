@@ -1,5 +1,5 @@
 <?php
-add_action( 'customize_register', 'origamiez_customize_register' );
+// add_action( 'customize_register', 'origamiez_customize_register' );
 function origamiez_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport        = 'refresh';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'refresh';

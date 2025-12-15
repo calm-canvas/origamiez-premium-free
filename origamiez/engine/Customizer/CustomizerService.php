@@ -2,11 +2,19 @@
 
 namespace Origamiez\Engine\Customizer;
 
+use Origamiez\Engine\Customizer\Builders\PanelBuilder;
+use Origamiez\Engine\Customizer\Builders\SectionBuilder;
+use Origamiez\Engine\Customizer\Builders\SettingBuilder;
+use Origamiez\Engine\Customizer\Settings\SettingsInterface;
+use WP_Customize_Manager;
+
 class CustomizerService {
 
 	private array $panels = [];
 	private array $sections = [];
 	private array $settings = [];
+	private array $modifiedSettings = [];
+	private array $settingsClasses = [];
 
 	public function registerPanel( string $id, array $args ): self {
 		$defaultArgs = [
@@ -55,47 +63,55 @@ class CustomizerService {
 		return $this;
 	}
 
-	public function registerControl( string $settingId, array $args ): self {
-		$defaultArgs = [
-			'label'   => $settingId,
-			'section' => '',
-			'type'    => 'text',
-			'setting' => $settingId,
-		];
-
-		$args = array_merge( $defaultArgs, $args );
-
-		add_action( 'customize_register', function ( $wp_customize ) use ( $settingId, $args ) {
-			$wp_customize->add_control( $settingId, $args );
-		} );
+	public function modifySetting( string $id, array $args ): self {
+		$this->modifiedSettings[ $id ] = $args;
 
 		return $this;
 	}
 
+	public function addSettingsClass( SettingsInterface $settingsClass ): void {
+		$this->settingsClasses[] = $settingsClass;
+	}
+
 	public function register(): void {
-		add_action( 'customize_register', [ $this, 'registerPanels' ] );
-		add_action( 'customize_register', [ $this, 'registerSections' ] );
-		add_action( 'customize_register', [ $this, 'registerSettings' ] );
+		add_action( 'customize_register', [ $this, 'processRegistration' ] );
 	}
 
-	public function registerPanels( $wp_customize ): void {
+	public function processRegistration( WP_Customize_Manager $wp_customize ): void {
+		// Initialize Builders
+		$panelBuilder   = new PanelBuilder( $wp_customize );
+		$sectionBuilder = new SectionBuilder( $wp_customize );
+		$controlFactory = new ControlFactory();
+		$settingBuilder = new SettingBuilder( $wp_customize, $controlFactory );
+
+		// Load settings from registered classes
+		foreach ( $this->settingsClasses as $settingsClass ) {
+			$settingsClass->register( $this );
+		}
+
+		// Build Panels
 		foreach ( $this->panels as $id => $args ) {
-			$wp_customize->add_panel( $id, $args );
+			$panelBuilder->build( $id, $args );
 		}
-	}
 
-	public function registerSections( $wp_customize ): void {
+		// Build Sections
 		foreach ( $this->sections as $id => $args ) {
-			$wp_customize->add_section( $id, $args );
+			$sectionBuilder->build( $id, $args );
 		}
-	}
 
-	public function registerSettings( $wp_customize ): void {
+		// Build Settings & Controls
 		foreach ( $this->settings as $id => $args ) {
-			if ( ! isset( $args['sanitize_callback'] ) || empty( $args['sanitize_callback'] ) ) {
-				$args['sanitize_callback'] = 'sanitize_text_field';
+			$settingBuilder->build( $id, $args );
+		}
+
+		// Modify Existing Settings
+		foreach ( $this->modifiedSettings as $id => $args ) {
+			$setting = $wp_customize->get_setting( $id );
+			if ( $setting ) {
+				foreach ( $args as $key => $value ) {
+					$setting->$key = $value;
+				}
 			}
-			$wp_customize->add_setting( $id, $args );
 		}
 	}
 

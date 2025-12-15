@@ -5,7 +5,7 @@
  * Author: tranthethang
  * Author URI: https://github.com/calm-canvas
  * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
- * Version: 3.0.1765617981
+ * Version: 3.0.1765793497
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -1128,7 +1128,7 @@ body.origamiez-layout-single.origamiez-show-border-for-images .wp-caption.alignc
   background-color: var(--line-3-bg-color);
 }
 #origamiez-top-bar {
-  border-bottom: 1px solid var(--heading-color);
+  border-bottom: 1px solid var(--line-2-bg-color);
 }
 #top-menu a {
   color: var(--heading-color);
