@@ -11,7 +11,7 @@ use Origamiez\Engine\Security\Sanitizers\TextSanitizer;
 
 class SanitizationManager {
 	private static $instance = null;
-	private $sanitizers = array();
+	private $sanitizers      = array();
 
 	private function __construct() {
 		$this->registerDefaultSanitizers();

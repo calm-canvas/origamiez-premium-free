@@ -31,7 +31,7 @@ class PageSegment implements SegmentInterface {
 		}
 
 		$pageId = get_queried_object_id();
-		$html .= $this->prefix . sprintf(
+		$html  .= $this->prefix . sprintf(
 			'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url" href="%s"><span itemprop="title">%s</span></a></span>',
 			get_permalink( $pageId ),
 			esc_html( get_the_title( $pageId ) )

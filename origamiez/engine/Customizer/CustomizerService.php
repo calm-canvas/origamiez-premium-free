@@ -10,47 +10,47 @@ use WP_Customize_Manager;
 
 class CustomizerService {
 
-	private array $panels = [];
-	private array $sections = [];
-	private array $settings = [];
-	private array $modifiedSettings = [];
-	private array $settingsClasses = [];
+	private array $panels           = array();
+	private array $sections         = array();
+	private array $settings         = array();
+	private array $modifiedSettings = array();
+	private array $settingsClasses  = array();
 
 	public function registerPanel( string $id, array $args ): self {
-		$defaultArgs = [
+		$defaultArgs = array(
 			'title'       => $id,
 			'description' => '',
 			'priority'    => 160,
-		];
+		);
 
-		$args = array_merge( $defaultArgs, $args );
+		$args                = array_merge( $defaultArgs, $args );
 		$this->panels[ $id ] = $args;
 
 		return $this;
 	}
 
 	public function registerSection( string $id, array $args ): self {
-		$defaultArgs = [
+		$defaultArgs = array(
 			'title'       => $id,
 			'description' => '',
 			'panel'       => '',
 			'priority'    => 160,
-		];
+		);
 
-		$args = array_merge( $defaultArgs, $args );
+		$args                  = array_merge( $defaultArgs, $args );
 		$this->sections[ $id ] = $args;
 
 		return $this;
 	}
 
 	public function registerSetting( string $id, array $args ): self {
-		$defaultArgs = [
+		$defaultArgs = array(
 			'default'           => '',
 			'type'              => 'theme_mod',
 			'capability'        => 'edit_theme_options',
 			'transport'         => 'refresh',
 			'sanitize_callback' => 'sanitize_text_field',
-		];
+		);
 
 		$args = array_merge( $defaultArgs, $args );
 
@@ -74,7 +74,7 @@ class CustomizerService {
 	}
 
 	public function register(): void {
-		add_action( 'customize_register', [ $this, 'processRegistration' ] );
+		add_action( 'customize_register', array( $this, 'processRegistration' ) );
 	}
 
 	public function processRegistration( WP_Customize_Manager $wp_customize ): void {

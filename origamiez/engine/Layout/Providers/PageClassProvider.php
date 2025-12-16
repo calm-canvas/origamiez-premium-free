@@ -12,7 +12,7 @@ class PageClassProvider implements BodyClassProviderInterface {
 	private BodyClassConfig $bodyClassConfig;
 
 	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
-		$this->configManager = $configManager;
+		$this->configManager   = $configManager;
 		$this->bodyClassConfig = $bodyClassConfig;
 	}
 
@@ -23,7 +23,7 @@ class PageClassProvider implements BodyClassProviderInterface {
 
 		$template = basename( get_page_template() );
 
-		if ( in_array( $template, [ 'template-page-fullwidth-centered.php', 'template-page-fullwidth.php' ], true ) ) {
+		if ( in_array( $template, array( 'template-page-fullwidth-centered.php', 'template-page-fullwidth.php' ), true ) ) {
 			$classes[] = $this->bodyClassConfig::LAYOUT_RIGHT_SIDEBAR;
 			$classes[] = $this->bodyClassConfig::LAYOUT_SINGLE;
 			$classes[] = $this->bodyClassConfig::LAYOUT_FULL_WIDTH;

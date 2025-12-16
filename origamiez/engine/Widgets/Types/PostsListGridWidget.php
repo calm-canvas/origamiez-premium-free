@@ -13,9 +13,12 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 	function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-grid',
-			'description' => esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' )
+			'description' => esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' ),
 		);
-		$control_ops = array( 'width' => 'auto', 'height' => 'auto' );
+		$control_ops = array(
+			'width'  => 'auto',
+			'height' => 'auto',
+		);
 		parent::__construct( 'origamiez-widget-post-grid', esc_attr__( 'Origamiez Posts Grid', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
@@ -30,9 +33,9 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 		}
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
-		if ( $posts->have_posts() ):
+		if ( $posts->have_posts() ) :
 			?>
-            <div class="o_grid row row-first cleardix">
+			<div class="o_grid row row-first cleardix">
 				<?php
 				$cols_per_row = (int) $instance['cols_per_row'];
 				$post_classes = array( 'origamiez-wp-grid-post', 'col-xs-12' );
@@ -49,7 +52,7 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 						break;
 				}
 				$loop_index = 0;
-				while ( $posts->have_posts() ):
+				while ( $posts->have_posts() ) :
 					$posts->the_post();
 					$post_title = get_the_title();
 					$post_url   = get_permalink();
@@ -61,28 +64,28 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 						$classes[] = 'o_item origamiez-wp-grid-post-last';
 					}
 					?>
-                    <article <?php post_class( $classes ); ?>>
-						<?php if ( has_post_thumbnail() ): ?>
-                            <a href="<?php echo esc_url( $post_url ); ?>" title="<?php echo esc_attr( $post_title ); ?>"
-                               class="link-hover-effect origamiez-post-thumb">
+					<article <?php post_class( $classes ); ?>>
+						<?php if ( has_post_thumbnail() ) : ?>
+							<a href="<?php echo esc_url( $post_url ); ?>" title="<?php echo esc_attr( $post_title ); ?>"
+								class="link-hover-effect origamiez-post-thumb">
 								<?php the_post_thumbnail( $image_size, array( 'class' => 'image-effect img-responsive' ) ); ?>
-                            </a>
+							</a>
 						<?php endif; ?>
-                        <div class="origamiez-wp-grid-detail clearfix">
-                            <h4>
-                                <a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
-                                   title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
-                            </h4>
+						<div class="origamiez-wp-grid-detail clearfix">
+							<h4>
+								<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
+									title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
+							</h4>
 							<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata' ); ?>
 							<?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
-                        </div>
-                    </article>
+						</div>
+					</article>
 					<?php
-					$loop_index ++;
+					++$loop_index;
 				endwhile;
 				?>
-            </div>
-		<?php
+			</div>
+			<?php
 		endif;
 		wp_reset_postdata();
 		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
@@ -100,20 +103,20 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
 		?>
-        <p>
-            <label for="<?php echo esc_attr( $this->get_field_id( 'cols_per_row' ) ); ?>"><?php esc_html_e( 'Cols per row:', 'origamiez' ); ?></label>
-            <select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'cols_per_row' ) ); ?>"
-                    name="<?php echo esc_attr( $this->get_field_name( 'cols_per_row' ) ); ?>">
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'cols_per_row' ) ); ?>"><?php esc_html_e( 'Cols per row:', 'origamiez' ); ?></label>
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'cols_per_row' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'cols_per_row' ) ); ?>">
 				<?php
 				$cols = array( 3, 4, 6 );
 				foreach ( $cols as $col ) {
 					?>
-                    <option value="<?php echo esc_attr( $col ); ?>" <?php selected( $instance['cols_per_row'], $col ); ?>><?php echo esc_html( $col ); ?></option>
+					<option value="<?php echo esc_attr( $col ); ?>" <?php selected( $instance['cols_per_row'], $col ); ?>><?php echo esc_html( $col ); ?></option>
 					<?php
 				}
 				?>
-            </select>
-        </p>
+			</select>
+		</p>
 		<?php
 	}
 

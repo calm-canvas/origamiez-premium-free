@@ -7,12 +7,12 @@ use Origamiez\Engine\Config\ConfigManager;
 
 class BodyClassManager {
 
-	private array $providers = [];
+	private array $providers = array();
 	private ConfigManager $configManager;
 	private BodyClassConfig $bodyClassConfig;
 
 	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
-		$this->configManager = $configManager;
+		$this->configManager   = $configManager;
 		$this->bodyClassConfig = $bodyClassConfig;
 		$this->registerDefaultProviders();
 	}
@@ -31,7 +31,7 @@ class BodyClassManager {
 		return $this;
 	}
 
-	public function getBodyClasses( array $classes = [] ): array {
+	public function getBodyClasses( array $classes = array() ): array {
 		foreach ( $this->providers as $provider ) {
 			$classes = $provider->provide( $classes );
 		}
@@ -39,6 +39,6 @@ class BodyClassManager {
 	}
 
 	public function register(): void {
-		add_filter( 'body_class', [ $this, 'getBodyClasses' ] );
+		add_filter( 'body_class', array( $this, 'getBodyClasses' ) );
 	}
 }

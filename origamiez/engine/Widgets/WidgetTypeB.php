@@ -4,19 +4,19 @@ namespace Origamiez\Engine\Widgets;
 
 class WidgetTypeB {
 
-	private array $instance = [];
+	private array $instance = array();
 
-	public function __construct( array $instance = [] ) {
+	public function __construct( array $instance = array() ) {
 		$this->instance = wp_parse_args( $instance, $this->getDefaults() );
 	}
 
 	public static function getDefaults(): array {
-		return [
+		return array(
 			'excerpt_words_limit' => 0,
 			'is_show_author'      => 0,
 			'is_show_date'        => 1,
 			'is_show_comments'    => 1,
-		];
+		);
 	}
 
 	public function getExcerptWordLimit(): int {
@@ -36,25 +36,32 @@ class WidgetTypeB {
 	}
 
 	public function getFields(): array {
-		return [
-			'excerpt_words_limit' => [
+		return array(
+			'excerpt_words_limit' => array(
 				'label'   => esc_html__( 'Excerpt words limit:', 'origamiez' ),
 				'type'    => 'select',
-				'options' => [ 0 => '0', 10 => '10', 15 => '15', 20 => '20', 30 => '30', 60 => '60' ],
-			],
-			'is_show_author'      => [
+				'options' => array(
+					0  => '0',
+					10 => '10',
+					15 => '15',
+					20 => '20',
+					30 => '30',
+					60 => '60',
+				),
+			),
+			'is_show_author'      => array(
 				'label' => esc_html__( 'Is show author ?', 'origamiez' ),
 				'type'  => 'checkbox',
-			],
-			'is_show_date'        => [
+			),
+			'is_show_date'        => array(
 				'label' => esc_html__( 'Is show date ?', 'origamiez' ),
 				'type'  => 'checkbox',
-			],
-			'is_show_comments'    => [
+			),
+			'is_show_comments'    => array(
 				'label' => esc_html__( 'Is show comments ?', 'origamiez' ),
 				'type'  => 'checkbox',
-			],
-		];
+			),
+		);
 	}
 
 	public function renderMetadata( string $classes = '' ): void {

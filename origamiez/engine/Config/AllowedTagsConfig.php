@@ -16,21 +16,21 @@ class AllowedTagsConfig {
 	private static function buildAllowedTags(): array {
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
-		$allowed_tags['div']['data-place']      = array();
-		$allowed_tags['div']['data-latitude']   = array();
-		$allowed_tags['div']['data-longitude']  = array();
+		$allowed_tags['div']['data-place']     = array();
+		$allowed_tags['div']['data-latitude']  = array();
+		$allowed_tags['div']['data-longitude'] = array();
 
-		$allowed_tags['iframe']['src']           = array();
-		$allowed_tags['iframe']['height']        = array();
-		$allowed_tags['iframe']['width']         = array();
-		$allowed_tags['iframe']['frameborder']   = array();
+		$allowed_tags['iframe']['src']             = array();
+		$allowed_tags['iframe']['height']          = array();
+		$allowed_tags['iframe']['width']           = array();
+		$allowed_tags['iframe']['frameborder']     = array();
 		$allowed_tags['iframe']['allowfullscreen'] = array();
 
-		$allowed_tags['input']['class']  = array();
-		$allowed_tags['input']['id']     = array();
-		$allowed_tags['input']['name']   = array();
-		$allowed_tags['input']['value']  = array();
-		$allowed_tags['input']['type']   = array();
+		$allowed_tags['input']['class']   = array();
+		$allowed_tags['input']['id']      = array();
+		$allowed_tags['input']['name']    = array();
+		$allowed_tags['input']['value']   = array();
+		$allowed_tags['input']['type']    = array();
 		$allowed_tags['input']['checked'] = array();
 
 		$allowed_tags['select']['class'] = array();

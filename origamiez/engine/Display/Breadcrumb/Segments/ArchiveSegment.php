@@ -24,15 +24,15 @@ class ArchiveSegment implements SegmentInterface {
 				esc_html( $term->name )
 			);
 		} elseif ( is_category() ) {
-			$categoryId = get_queried_object_id();
+			$categoryId  = get_queried_object_id();
 			$parentsHtml = get_category_parents( $categoryId, true, $this->prefix );
 			$parentsHtml = substr( $parentsHtml, 0, -strlen( $this->prefix ) );
-			$html = $this->prefix . $parentsHtml;
+			$html        = $this->prefix . $parentsHtml;
 		} elseif ( is_year() || is_month() || is_day() ) {
 			$html = $this->renderDateArchive();
 		} elseif ( is_author() ) {
 			$authorId = get_queried_object_id();
-			$html = $this->prefix . sprintf(
+			$html     = $this->prefix . sprintf(
 				'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url"><span itemprop="title">%s</span></a></span>',
 				sprintf( esc_attr__( 'Posts created by %1$s', 'origamiez' ), get_the_author_meta( 'display_name', $authorId ) )
 			);
@@ -42,8 +42,12 @@ class ArchiveSegment implements SegmentInterface {
 	}
 
 	private function renderDateArchive(): string {
-		$m = get_query_var( 'm' );
-		$date = [ 'y' => null, 'm' => null, 'd' => null ];
+		$m    = get_query_var( 'm' );
+		$date = array(
+			'y' => null,
+			'm' => null,
+			'd' => null,
+		);
 
 		if ( strlen( $m ) >= 4 ) {
 			$date['y'] = substr( $m, 0, 4 );

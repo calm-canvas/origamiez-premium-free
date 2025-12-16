@@ -29,19 +29,19 @@ use Origamiez\Engine\Security\SanitizationManager;
 use Origamiez\Engine\Security\Validators\SearchQueryValidator;
 use Origamiez\Engine\Security\SecurityHeaderManager;
 
-$tests = 0;
+$tests  = 0;
 $passed = 0;
 $failed = 0;
 
 function test( $name, $condition ) {
 	global $tests, $passed, $failed;
-	$tests++;
+	++$tests;
 	if ( $condition ) {
 		echo "✓ $name\n";
-		$passed++;
+		++$passed;
 	} else {
 		echo "✗ $name\n";
-		$failed++;
+		++$failed;
 	}
 }
 
@@ -55,7 +55,13 @@ test( 'CheckboxSanitizer converts false to false', false === $checkbox_sanitizer
 test( 'CheckboxSanitizer converts 1 to true', true === $checkbox_sanitizer->sanitize( 1 ) );
 test( 'CheckboxSanitizer converts null to false', false === $checkbox_sanitizer->sanitize( null ) );
 
-$select_sanitizer = new SelectSanitizer( array( 'option1' => 'Option 1', 'option2' => 'Option 2' ), 'option1' );
+$select_sanitizer = new SelectSanitizer(
+	array(
+		'option1' => 'Option 1',
+		'option2' => 'Option 2',
+	),
+	'option1'
+);
 test( 'SelectSanitizer has setChoices method', method_exists( $select_sanitizer, 'setChoices' ) );
 test( 'SelectSanitizer has setDefault method', method_exists( $select_sanitizer, 'setDefault' ) );
 test( 'SelectSanitizer is fluent', $select_sanitizer->setChoices( array() ) === $select_sanitizer );

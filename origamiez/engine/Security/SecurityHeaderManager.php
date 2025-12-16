@@ -2,7 +2,7 @@
 namespace Origamiez\Engine\Security;
 
 class SecurityHeaderManager {
-	private $headers = array();
+	private $headers    = array();
 	private $csp_config = array();
 
 	public function __construct() {
@@ -12,24 +12,24 @@ class SecurityHeaderManager {
 
 	private function initializeDefaultHeaders() {
 		$this->headers = array(
-			'X-Content-Type-Options'      => 'nosniff',
-			'X-Frame-Options'             => 'SAMEORIGIN',
-			'X-XSS-Protection'            => '1; mode=block',
-			'Referrer-Policy'             => 'strict-origin-when-cross-origin',
+			'X-Content-Type-Options' => 'nosniff',
+			'X-Frame-Options'        => 'SAMEORIGIN',
+			'X-XSS-Protection'       => '1; mode=block',
+			'Referrer-Policy'        => 'strict-origin-when-cross-origin',
 		);
 	}
 
 	private function initializeDefaultCSP() {
 		$this->csp_config = array(
-			'default-src'  => "'self'",
-			'script-src'   => "'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com",
-			'style-src'    => "'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
-			'img-src'      => "'self' data: *.gravatar.com *.wp.com",
-			'font-src'     => "'self' *.googleapis.com *.gstatic.com",
-			'connect-src'  => "'self'",
-			'frame-src'    => "'self' *.youtube.com *.vimeo.com",
-			'object-src'   => "'none'",
-			'base-uri'     => "'self'",
+			'default-src' => "'self'",
+			'script-src'  => "'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com",
+			'style-src'   => "'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
+			'img-src'     => "'self' data: *.gravatar.com *.wp.com",
+			'font-src'    => "'self' *.googleapis.com *.gstatic.com",
+			'connect-src' => "'self'",
+			'frame-src'   => "'self' *.youtube.com *.vimeo.com",
+			'object-src'  => "'none'",
+			'base-uri'    => "'self'",
 		);
 	}
 

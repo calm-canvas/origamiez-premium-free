@@ -54,9 +54,9 @@ class AuthorDisplay {
 
 	public function render(): string {
 		$description = $this->getAuthorDescription();
-		$name         = $this->getAuthorName();
-		$link         = $this->getAuthorUrl();
-		$avatar       = $this->getAuthorAvatar( 90 );
+		$name        = $this->getAuthorName();
+		$link        = $this->getAuthorUrl();
+		$avatar      = $this->getAuthorAvatar( 90 );
 
 		ob_start();
 		?>

@@ -9,9 +9,9 @@ class ThemeHooks implements HookProviderInterface {
 
 	public function register( HookRegistry $registry ): void {
 		$registry
-			->addAction( 'init', [ $this, 'configTextDomain' ], 5 )
-			->addAction( 'init', [ $this, 'registerTranslatedMenus' ], 20 )
-			->addAction( 'updated_option', [ $this, 'saveUnysonOptions' ], 10, 3 );
+			->addAction( 'init', array( $this, 'configTextDomain' ), 5 )
+			->addAction( 'init', array( $this, 'registerTranslatedMenus' ), 20 )
+			->addAction( 'updated_option', array( $this, 'saveUnysonOptions' ), 10, 3 );
 	}
 
 	public function configTextDomain(): void {
@@ -19,12 +19,14 @@ class ThemeHooks implements HookProviderInterface {
 	}
 
 	public function registerTranslatedMenus(): void {
-		register_nav_menus( array(
-			'main-nav'   => esc_attr__( 'Main Menu', 'origamiez' ),
-			'top-nav'    => esc_attr__( 'Top Menu (do not support sub-menu)', 'origamiez' ),
-			'footer-nav' => esc_attr__( 'Footer Menu (do not support sub-menu)', 'origamiez' ),
-			'mobile-nav' => esc_attr__( 'Mobile Menu (will be replace by Main Menu - if null).', 'origamiez' ),
-		) );
+		register_nav_menus(
+			array(
+				'main-nav'   => esc_attr__( 'Main Menu', 'origamiez' ),
+				'top-nav'    => esc_attr__( 'Top Menu (do not support sub-menu)', 'origamiez' ),
+				'footer-nav' => esc_attr__( 'Footer Menu (do not support sub-menu)', 'origamiez' ),
+				'mobile-nav' => esc_attr__( 'Mobile Menu (will be replace by Main Menu - if null).', 'origamiez' ),
+			)
+		);
 	}
 
 	public function saveUnysonOptions( string $optionName, mixed $oldValue, mixed $newValue ): void {

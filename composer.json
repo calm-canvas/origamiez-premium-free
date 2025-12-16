@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "wp-coding-standards/wpcs": "*"
+    },
+    "scripts": {
+        "format": "phpcs --standard=.phpcs.xml.dist --no-cache",
+        "fix": "phpcbf --standard=.phpcs.xml.dist --no-cache"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    }
+}

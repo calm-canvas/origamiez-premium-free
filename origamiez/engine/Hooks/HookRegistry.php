@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Hooks;
 
 class HookRegistry {
 
-	private array $hooks = [];
+	private array $hooks           = array();
 	private static ?self $instance = null;
 
 	private function __construct() {
@@ -19,25 +19,25 @@ class HookRegistry {
 
 	public function addAction( string $hook, callable|string $callback, int $priority = 10, int $acceptedArgs = 1 ): self {
 		add_action( $hook, $callback, $priority, $acceptedArgs );
-		$this->hooks[] = [
+		$this->hooks[] = array(
 			'type'          => 'action',
 			'hook'          => $hook,
 			'callback'      => $callback,
 			'priority'      => $priority,
 			'accepted_args' => $acceptedArgs,
-		];
+		);
 		return $this;
 	}
 
 	public function addFilter( string $hook, callable|string $callback, int $priority = 10, int $acceptedArgs = 1 ): self {
 		add_filter( $hook, $callback, $priority, $acceptedArgs );
-		$this->hooks[] = [
+		$this->hooks[] = array(
 			'type'          => 'filter',
 			'hook'          => $hook,
 			'callback'      => $callback,
 			'priority'      => $priority,
 			'accepted_args' => $acceptedArgs,
-		];
+		);
 		return $this;
 	}
 

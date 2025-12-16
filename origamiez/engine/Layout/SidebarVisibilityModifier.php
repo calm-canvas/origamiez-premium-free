@@ -19,10 +19,10 @@ class SidebarVisibilityModifier {
 	}
 
 	public function modifyBodyClassesForMissingSidebars( array $classes ): array {
-		$sidebarToClass = [
+		$sidebarToClass = array(
 			'sidebar-right' => 'origamiez-missing-sidebar-right',
 			'sidebar-left'  => 'origamiez-missing-sidebar-left',
-		];
+		);
 
 		foreach ( $sidebarToClass as $sidebarId => $className ) {
 			if ( ! $this->isSidebarActive( $sidebarId ) ) {
@@ -49,7 +49,7 @@ class SidebarVisibilityModifier {
 	}
 
 	public function getActiveSidebars( array $sidebarIds ): array {
-		$activeSidebars = [];
+		$activeSidebars = array();
 
 		foreach ( $sidebarIds as $sidebarId ) {
 			if ( $this->isSidebarActive( $sidebarId ) ) {
@@ -61,7 +61,7 @@ class SidebarVisibilityModifier {
 	}
 
 	public function getInactiveSidebars( array $sidebarIds ): array {
-		$inactiveSidebars = [];
+		$inactiveSidebars = array();
 
 		foreach ( $sidebarIds as $sidebarId ) {
 			if ( ! $this->isSidebarActive( $sidebarId ) ) {

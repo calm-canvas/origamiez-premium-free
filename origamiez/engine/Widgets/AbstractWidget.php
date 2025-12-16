@@ -7,21 +7,21 @@ abstract class AbstractWidget extends \WP_Widget {
 	protected string $widgetId;
 	protected string $widgetName;
 	protected string $widgetDescription = '';
-	protected array $defaultSettings = [];
+	protected array $defaultSettings    = array();
 
-	public function __construct( string $id, string $name, string $description = '', array $settings = [] ) {
-		$this->widgetId = $id;
-		$this->widgetName = $name;
+	public function __construct( string $id, string $name, string $description = '', array $settings = array() ) {
+		$this->widgetId          = $id;
+		$this->widgetName        = $name;
 		$this->widgetDescription = $description;
-		$this->defaultSettings = $settings;
+		$this->defaultSettings   = $settings;
 
 		parent::__construct(
 			$id,
 			$name,
-			[
-				'description' => $description,
+			array(
+				'description'                 => $description,
 				'customize_selective_refresh' => true,
-			]
+			)
 		);
 	}
 
@@ -51,7 +51,7 @@ abstract class AbstractWidget extends \WP_Widget {
 	}
 
 	public function update( $newInstance, $oldInstance ): array {
-		$instance = [];
+		$instance          = array();
 		$instance['title'] = ! empty( $newInstance['title'] ) ? sanitize_text_field( $newInstance['title'] ) : '';
 
 		return $this->sanitizeInstance( $newInstance, $instance );
@@ -66,7 +66,7 @@ abstract class AbstractWidget extends \WP_Widget {
 
 	protected function getDefaultSettings(): array {
 		return array_merge(
-			[ 'title' => '' ],
+			array( 'title' => '' ),
 			$this->defaultSettings
 		);
 	}

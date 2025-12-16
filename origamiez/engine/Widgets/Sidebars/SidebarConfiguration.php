@@ -6,15 +6,15 @@ class SidebarConfiguration {
 
 	private string $id;
 	private string $name;
-	private string $description = '';
+	private string $description  = '';
 	private string $beforeWidget = '<div id="%1$s" class="widget %2$s">';
-	private string $afterWidget = '</div></div>';
-	private string $beforeTitle = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
-	private string $afterTitle = '</span></h2><div class="origamiez-widget-content clearfix">';
+	private string $afterWidget  = '</div></div>';
+	private string $beforeTitle  = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
+	private string $afterTitle   = '</span></h2><div class="origamiez-widget-content clearfix">';
 
 	public function __construct( string $id, string $name, string $description = '' ) {
-		$this->id = $id;
-		$this->name = $name;
+		$this->id          = $id;
+		$this->name        = $name;
 		$this->description = $description;
 	}
 
@@ -72,7 +72,7 @@ class SidebarConfiguration {
 	}
 
 	public function toArray(): array {
-		return [
+		return array(
 			'id'            => $this->id,
 			'name'          => $this->name,
 			'description'   => $this->description,
@@ -80,7 +80,7 @@ class SidebarConfiguration {
 			'after_widget'  => $this->afterWidget,
 			'before_title'  => $this->beforeTitle,
 			'after_title'   => $this->afterTitle,
-		];
+		);
 	}
 
 	public static function create( string $id, string $name, string $description = '' ): self {

@@ -15,8 +15,8 @@ class SingleSegment implements SegmentInterface {
 			return '';
 		}
 
-		$html = '';
-		$postId = get_queried_object_id();
+		$html       = '';
+		$postId     = get_queried_object_id();
 		$categories = get_the_category( $postId );
 
 		if ( $categories ) {

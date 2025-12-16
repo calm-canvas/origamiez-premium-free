@@ -19,6 +19,6 @@ class BreadcrumbGenerator {
 	}
 
 	public function register(): void {
-		add_action( 'origamiez_print_breadcrumb', [ $this, 'displayBreadcrumb' ] );
+		add_action( 'origamiez_print_breadcrumb', array( $this, 'displayBreadcrumb' ) );
 	}
 }

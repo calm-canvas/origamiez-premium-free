@@ -5,13 +5,13 @@ namespace Origamiez\Engine\Helpers;
 class ImageSizeManager {
 
 	private static array $imageSizes = array(
-		'origamiez-square-xs'          => array( 55, 55, true ),
-		'origamiez-lightbox-full'      => array( 960, null, false ),
-		'origamiez-blog-full'          => array( 920, 500, true ),
-		'origamiez-square-m'           => array( 480, 480, true ),
-		'origamiez-square-md'          => array( 480, 320, true ),
-		'origamiez-posts-slide-metro'  => array( 620, 620, true ),
-		'origamiez-grid-l'             => array( 380, 255, true ),
+		'origamiez-square-xs'         => array( 55, 55, true ),
+		'origamiez-lightbox-full'     => array( 960, null, false ),
+		'origamiez-blog-full'         => array( 920, 500, true ),
+		'origamiez-square-m'          => array( 480, 480, true ),
+		'origamiez-square-md'         => array( 480, 320, true ),
+		'origamiez-posts-slide-metro' => array( 620, 620, true ),
+		'origamiez-grid-l'            => array( 380, 255, true ),
 	);
 
 	public static function register(): void {

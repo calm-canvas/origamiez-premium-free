@@ -10,7 +10,7 @@ class CommentDisplay {
 
 	private int $depth;
 
-	public function __construct( $comment, array $args = [], int $depth = 1 ) {
+	public function __construct( $comment, array $args = array(), int $depth = 1 ) {
 		$this->comment = $comment;
 		$this->args    = $args;
 		$this->depth   = $depth;
@@ -39,11 +39,11 @@ class CommentDisplay {
 						comment_reply_link(
 							array_merge(
 								$this->args,
-								[
-									'before'     => '<span class="metadata-divider"><?php origamiez_get_metadata_prefix(); ?></span>&nbsp;',
-									'depth'      => $this->depth,
-									'max_depth'  => $this->args['max_depth'] ?? 10,
-								]
+								array(
+									'before'    => '<span class="metadata-divider"><?php origamiez_get_metadata_prefix(); ?></span>&nbsp;',
+									'depth'     => $this->depth,
+									'max_depth' => $this->args['max_depth'] ?? 10,
+								)
 							)
 						);
 						?>

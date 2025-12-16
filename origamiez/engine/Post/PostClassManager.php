@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Post;
 
 class PostClassManager {
 
-	public function getPostClasses( array $classes = [] ): array {
+	public function getPostClasses( array $classes = array() ): array {
 		if ( ! in_the_loop() ) {
 			return $classes;
 		}
@@ -32,6 +32,6 @@ class PostClassManager {
 	}
 
 	public function register(): void {
-		add_filter( 'post_class', [ $this, 'getPostClasses' ] );
+		add_filter( 'post_class', array( $this, 'getPostClasses' ) );
 	}
 }

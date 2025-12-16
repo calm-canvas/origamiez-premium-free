@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Assets;
 
 class StylesheetManager {
 
-	private const PREFIX = 'origamiez_';
+	private const PREFIX        = 'origamiez_';
 	private string $styleHandle = '';
 
 	public function enqueue( string $templateUri ): void {
@@ -15,21 +15,21 @@ class StylesheetManager {
 	}
 
 	private function enqueueLibraryStyles( string $templateUri ): void {
-		$styles = [
-			'bootstrap'         => 'css/bootstrap.css',
-			'font-awesome'      => 'css/fontawesome.css',
+		$styles = array(
+			'bootstrap'           => 'css/bootstrap.css',
+			'font-awesome'        => 'css/fontawesome.css',
 			'jquery-owl-carousel' => 'css/owl.carousel.css',
-			'jquery-owl-theme'  => 'css/owl.theme.default.css',
-			'jquery-superfish'  => 'css/superfish.css',
-			'jquery-navgoco'    => 'css/jquery.navgoco.css',
-			'jquery-poptrox'    => 'css/jquery.poptrox.css',
-		];
+			'jquery-owl-theme'    => 'css/owl.theme.default.css',
+			'jquery-superfish'    => 'css/superfish.css',
+			'jquery-navgoco'      => 'css/jquery.navgoco.css',
+			'jquery-poptrox'      => 'css/jquery.poptrox.css',
+		);
 
 		foreach ( $styles as $handle => $path ) {
 			wp_enqueue_style(
 				self::PREFIX . $handle,
 				trailingslashit( $templateUri ) . $path,
-				[],
+				array(),
 				null
 			);
 		}
@@ -40,7 +40,7 @@ class StylesheetManager {
 		wp_enqueue_style(
 			$this->styleHandle,
 			get_stylesheet_uri(),
-			[],
+			array(),
 			null
 		);
 	}
@@ -63,16 +63,16 @@ class StylesheetManager {
 	}
 
 	private function enqueueDynamicFonts(): void {
-		$font_groups = [];
+		$font_groups            = array();
 		$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 
 		if ( $number_of_google_fonts ) {
 			for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
 				$font_family = get_theme_mod( sprintf( 'google_font_%s_name', $i ), '' );
-				$font_src = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
+				$font_src    = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
 
 				if ( $font_family && $font_src ) {
-					$font_family_slug = $this->slugifyString( $font_family );
+					$font_family_slug                            = $this->slugifyString( $font_family );
 					$font_groups['dynamic'][ $font_family_slug ] = $font_src;
 				}
 			}
@@ -84,7 +84,7 @@ class StylesheetManager {
 					wp_enqueue_style(
 						self::PREFIX . $font_slug,
 						$font,
-						[],
+						array(),
 						null
 					);
 				}

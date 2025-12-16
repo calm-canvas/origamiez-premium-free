@@ -38,69 +38,114 @@ class ThemeBootstrap {
 		$this->container = Container::getInstance();
 		$this->setupContainer();
 		$this->configManager = $this->container->get( 'config_manager' );
-		$this->hookRegistry = $this->container->get( 'hook_registry' );
+		$this->hookRegistry  = $this->container->get( 'hook_registry' );
 	}
 
 	private function setupContainer(): void {
-		$this->container->singleton( 'config_manager', function () {
-			return ConfigManager::getInstance();
-		} );
+		$this->container->singleton(
+			'config_manager',
+			function () {
+				return ConfigManager::getInstance();
+			}
+		);
 
-		$this->container->singleton( 'skin_config', function () {
-			return new SkinConfig();
-		} );
+		$this->container->singleton(
+			'skin_config',
+			function () {
+				return new SkinConfig();
+			}
+		);
 
-		$this->container->singleton( 'layout_config', function () {
-			return new LayoutConfig();
-		} );
+		$this->container->singleton(
+			'layout_config',
+			function () {
+				return new LayoutConfig();
+			}
+		);
 
-		$this->container->singleton( 'font_config', function () {
-			return new FontConfig();
-		} );
+		$this->container->singleton(
+			'font_config',
+			function () {
+				return new FontConfig();
+			}
+		);
 
-		$this->container->singleton( 'body_class_config', function () {
-			return new BodyClassConfig();
-		} );
+		$this->container->singleton(
+			'body_class_config',
+			function () {
+				return new BodyClassConfig();
+			}
+		);
 
-		$this->container->singleton( 'hook_registry', function () {
-			return HookRegistry::getInstance();
-		} );
+		$this->container->singleton(
+			'hook_registry',
+			function () {
+				return HookRegistry::getInstance();
+			}
+		);
 
-		$this->container->singleton( 'asset_manager', function ( $container ) {
-			return new AssetManager( $container->get( 'config_manager' ) );
-		} );
+		$this->container->singleton(
+			'asset_manager',
+			function ( $container ) {
+				return new AssetManager( $container->get( 'config_manager' ) );
+			}
+		);
 
-		$this->container->singleton( 'body_class_manager', function ( $container ) {
-			return new BodyClassManager( $container->get( 'config_manager' ), $container->get( 'body_class_config' ) );
-		} );
+		$this->container->singleton(
+			'body_class_manager',
+			function ( $container ) {
+				return new BodyClassManager( $container->get( 'config_manager' ), $container->get( 'body_class_config' ) );
+			}
+		);
 
-		$this->container->singleton( 'breadcrumb_generator', function () {
-			return new BreadcrumbGenerator();
-		} );
+		$this->container->singleton(
+			'breadcrumb_generator',
+			function () {
+				return new BreadcrumbGenerator();
+			}
+		);
 
-		$this->container->singleton( 'customizer_service', function () {
-			return new CustomizerService();
-		} );
+		$this->container->singleton(
+			'customizer_service',
+			function () {
+				return new CustomizerService();
+			}
+		);
 
-		$this->container->singleton( 'widget_factory', function () {
-			return WidgetFactory::getInstance();
-		} );
+		$this->container->singleton(
+			'widget_factory',
+			function () {
+				return WidgetFactory::getInstance();
+			}
+		);
 
-		$this->container->singleton( 'sidebar_registry', function () {
-			return SidebarRegistry::getInstance();
-		} );
+		$this->container->singleton(
+			'sidebar_registry',
+			function () {
+				return SidebarRegistry::getInstance();
+			}
+		);
 
-		$this->container->singleton( 'widget_class_manager', function () {
-			return new WidgetClassManager();
-		} );
+		$this->container->singleton(
+			'widget_class_manager',
+			function () {
+				return new WidgetClassManager();
+			}
+		);
 
-		$this->container->bind( 'post_class_manager', function () {
-			return new PostClassManager();
-		} );
+		$this->container->bind(
+			'post_class_manager',
+			function () {
+				return new PostClassManager();
+			}
+		);
 
-		$this->container->bind( 'read_more_button', function () {
-			return new ReadMoreButton();
-		} );
+		$this->container->bind(
+			'read_more_button',
+			function () {
+				return new ReadMoreButton();
+			}
+		);
 	}
 
 	public function boot(): void {
@@ -137,7 +182,7 @@ class ThemeBootstrap {
 
 	private function registerCustomizer(): void {
 		$customizerService = $this->container->get( 'customizer_service' );
-		
+
 		// Register Settings Classes
 		$customizerService->addSettingsClass( new GeneralSettings() );
 		$customizerService->addSettingsClass( new LayoutSettings() );
@@ -147,7 +192,7 @@ class ThemeBootstrap {
 		$customizerService->addSettingsClass( new CustomCssSettings() );
 		$customizerService->addSettingsClass( new SocialSettings() );
 		$customizerService->addSettingsClass( new TypographySettings() );
-		
+
 		$customizerService->register();
 	}
 

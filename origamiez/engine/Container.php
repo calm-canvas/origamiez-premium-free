@@ -11,8 +11,8 @@ use ReflectionException;
 
 class Container implements ContainerInterface {
 
-	private array $services = [];
-	private array $singletons = [];
+	private array $services        = array();
+	private array $singletons      = array();
 	private static ?self $instance = null;
 
 	private function __construct() {
@@ -70,9 +70,12 @@ class Container implements ContainerInterface {
 
 	public function bind( string $id, $implementation ): void {
 		if ( is_string( $implementation ) && class_exists( $implementation ) ) {
-			$this->set( $id, function ( $container ) use ( $implementation ) {
-				return new $implementation();
-			} );
+			$this->set(
+				$id,
+				function ( $container ) use ( $implementation ) {
+					return new $implementation();
+				}
+			);
 		} else {
 			$this->set( $id, $implementation );
 		}
@@ -83,7 +86,7 @@ class Container implements ContainerInterface {
 	 * @throws ReflectionException
 	 * @throws NotFoundExceptionInterface
 	 */
-	public function make( string $id, array $parameters = [] ): mixed {
+	public function make( string $id, array $parameters = array() ): mixed {
 		if ( ! class_exists( $id ) ) {
 			return $this->get( $id );
 		}

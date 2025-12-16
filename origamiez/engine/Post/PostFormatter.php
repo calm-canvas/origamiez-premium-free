@@ -4,15 +4,15 @@ namespace Origamiez\Engine\Post;
 
 class PostFormatter {
 
-	public function extractShortcodes( string $content, array $shortcodes = [], bool $enableMulti = false ): array {
-		$data = [];
+	public function extractShortcodes( string $content, array $shortcodes = array(), bool $enableMulti = false ): array {
+		$data = array();
 
 		if ( empty( $shortcodes ) ) {
 			return $data;
 		}
 
 		$regexMatches = '';
-		$regexPattern  = get_shortcode_regex();
+		$regexPattern = get_shortcode_regex();
 
 		preg_match_all( '/' . $regexPattern . '/s', $content, $regexMatches );
 
@@ -21,12 +21,12 @@ class PostFormatter {
 			preg_match( '/' . $regexPattern . '/s', $shortcode, $regexMatchesNew );
 
 			if ( in_array( $regexMatchesNew[2], $shortcodes, true ) ) {
-				$data[] = [
+				$data[] = array(
 					'shortcode' => $regexMatchesNew[0],
 					'type'      => $regexMatchesNew[2],
 					'content'   => $regexMatchesNew[5],
 					'atts'      => shortcode_parse_atts( $regexMatchesNew[3] ),
-				];
+				);
 
 				if ( false === $enableMulti ) {
 					break;
@@ -37,19 +37,19 @@ class PostFormatter {
 		return apply_filters( 'origamiez_get_shortcode', $data, $content, $shortcodes );
 	}
 
-	public function extractFirstShortcode( string $content, array $shortcodes = [] ): ?array {
+	public function extractFirstShortcode( string $content, array $shortcodes = array() ): ?array {
 		$results = $this->extractShortcodes( $content, $shortcodes, false );
 
 		return ! empty( $results ) ? $results[0] : null;
 	}
 
 	public function hasShortcode( string $content, string $shortcode ): bool {
-		$results = $this->extractShortcodes( $content, [ $shortcode ] );
+		$results = $this->extractShortcodes( $content, array( $shortcode ) );
 
 		return ! empty( $results );
 	}
 
-	public function hasAnyShortcode( string $content, array $shortcodes = [] ): bool {
+	public function hasAnyShortcode( string $content, array $shortcodes = array() ): bool {
 		if ( empty( $shortcodes ) ) {
 			return false;
 		}
@@ -60,7 +60,7 @@ class PostFormatter {
 	}
 
 	public function getShortcodeAttribute( string $content, string $shortcode, string $attribute, $default = null ) {
-		$result = $this->extractFirstShortcode( $content, [ $shortcode ] );
+		$result = $this->extractFirstShortcode( $content, array( $shortcode ) );
 
 		if ( null === $result ) {
 			return $default;

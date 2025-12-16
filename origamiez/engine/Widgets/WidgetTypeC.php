@@ -6,13 +6,13 @@ class WidgetTypeC extends WidgetTypeB {
 
 	private int $offset = 0;
 
-	public function __construct( array $instance = [] ) {
+	public function __construct( array $instance = array() ) {
 		parent::__construct( $instance );
 		$this->offset = (int) ( $instance['offset'] ?? 0 );
 	}
 
 	public static function getDefaults(): array {
-		$defaults = parent::getDefaults();
+		$defaults           = parent::getDefaults();
 		$defaults['offset'] = 0;
 		return $defaults;
 	}
@@ -27,11 +27,11 @@ class WidgetTypeC extends WidgetTypeB {
 	}
 
 	public function getFields(): array {
-		$fields = parent::getFields();
-		$fields['offset'] = [
+		$fields           = parent::getFields();
+		$fields['offset'] = array(
 			'label' => esc_html__( 'Offset. Number of post to displace or pass over.', 'origamiez' ),
 			'type'  => 'number',
-		];
+		);
 		return $fields;
 	}
 

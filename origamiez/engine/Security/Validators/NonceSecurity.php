@@ -2,14 +2,14 @@
 namespace Origamiez\Engine\Security\Validators;
 
 class NonceSecurity implements ValidatorInterface {
-	private $nonce_field = '';
-	private $nonce_action = '';
+	private $nonce_field    = '';
+	private $nonce_action   = '';
 	private $request_method = 'GET';
 
 	public function __construct( $nonce_field = '', $nonce_action = '', $request_method = 'GET' ) {
-		$this->nonce_field     = $nonce_field;
-		$this->nonce_action    = $nonce_action;
-		$this->request_method  = $request_method;
+		$this->nonce_field    = $nonce_field;
+		$this->nonce_action   = $nonce_action;
+		$this->request_method = $request_method;
 	}
 
 	public function setNonceField( $nonce_field ) {

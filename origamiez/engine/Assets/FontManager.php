@@ -34,16 +34,16 @@ class FontManager {
 	}
 
 	private function enqueueDynamicFonts(): void {
-		$fontGroups = [];
+		$fontGroups          = array();
 		$numberOfGoogleFonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 
 		if ( $numberOfGoogleFonts ) {
 			for ( $i = 0; $i < $numberOfGoogleFonts; $i++ ) {
 				$fontFamily = get_theme_mod( sprintf( 'google_font_%s_name', $i ), '' );
-				$fontSrc = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
+				$fontSrc    = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
 
 				if ( $fontFamily && $fontSrc ) {
-					$fontFamilySlug = $this->slugifyString( $fontFamily );
+					$fontFamilySlug                           = $this->slugifyString( $fontFamily );
 					$fontGroups['dynamic'][ $fontFamilySlug ] = $fontSrc;
 				}
 			}
@@ -55,7 +55,7 @@ class FontManager {
 					wp_enqueue_style(
 						self::PREFIX . $fontSlug,
 						$font,
-						[],
+						array(),
 						null
 					);
 				}

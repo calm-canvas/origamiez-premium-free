@@ -12,7 +12,7 @@ class SearchClassProvider implements BodyClassProviderInterface {
 	private BodyClassConfig $bodyClassConfig;
 
 	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
-		$this->configManager = $configManager;
+		$this->configManager   = $configManager;
 		$this->bodyClassConfig = $bodyClassConfig;
 	}
 

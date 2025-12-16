@@ -24,10 +24,10 @@ class DateTimeHelper {
 
 		if ( $to > $from ) {
 			$difference = $to - $from;
-			$tense       = esc_attr__( 'ago', 'origamiez' );
+			$tense      = esc_attr__( 'ago', 'origamiez' );
 		} else {
 			$difference = $from - $to;
-			$tense       = esc_attr__( 'from now', 'origamiez' );
+			$tense      = esc_attr__( 'from now', 'origamiez' );
 		}
 
 		for ( $j = 0; ( $difference >= $lengths[ $j ] && $j < count( $lengths ) - 1 ); $j++ ) {

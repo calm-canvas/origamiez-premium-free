@@ -23,12 +23,12 @@ class MetadataManager {
 	}
 
 	public function getAllMeta( $postId ): array {
-		$allMeta = get_post_meta( $postId );
-		$prefixedMeta = [];
+		$allMeta      = get_post_meta( $postId );
+		$prefixedMeta = array();
 
 		foreach ( $allMeta as $key => $value ) {
 			if ( strpos( $key, self::META_PREFIX ) === 0 ) {
-				$cleanKey = substr( $key, strlen( self::META_PREFIX ) );
+				$cleanKey                  = substr( $key, strlen( self::META_PREFIX ) );
 				$prefixedMeta[ $cleanKey ] = $value[0] ?? $value;
 			}
 		}

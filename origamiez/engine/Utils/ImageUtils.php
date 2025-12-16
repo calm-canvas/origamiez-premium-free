@@ -47,27 +47,27 @@ class ImageUtils {
 	public static function getImageSizes(): array {
 		global $_wp_additional_image_sizes;
 
-		$builtin = [
-			'thumbnail' => [
+		$builtin = array(
+			'thumbnail'    => array(
 				'width'  => get_option( 'thumbnail_size_w' ),
 				'height' => get_option( 'thumbnail_size_h' ),
 				'crop'   => get_option( 'thumbnail_crop' ),
-			],
-			'medium'    => [
+			),
+			'medium'       => array(
 				'width'  => get_option( 'medium_size_w' ),
 				'height' => get_option( 'medium_size_h' ),
-			],
-			'medium_large' => [
+			),
+			'medium_large' => array(
 				'width'  => get_option( 'medium_large_size_w' ),
 				'height' => get_option( 'medium_large_size_h' ),
-			],
-			'large'     => [
+			),
+			'large'        => array(
 				'width'  => get_option( 'large_size_w' ),
 				'height' => get_option( 'large_size_h' ),
-			],
-		];
+			),
+		);
 
-		return array_merge( $builtin, $_wp_additional_image_sizes ?? [] );
+		return array_merge( $builtin, $_wp_additional_image_sizes ?? array() );
 	}
 
 	public static function hasImageSize( string $name ): bool {

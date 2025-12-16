@@ -4,20 +4,20 @@ namespace Origamiez\Engine\Post;
 
 class PostIconFactory {
 
-	private array $icons = [];
+	private array $icons = array();
 
 	public function __construct() {
 		$this->initializeDefaultIcons();
 	}
 
 	private function initializeDefaultIcons(): void {
-		$this->icons = [
+		$this->icons = array(
 			'video'    => 'fa fa-play',
 			'audio'    => 'fa fa-headphones',
 			'image'    => 'fa fa-camera',
 			'gallery'  => 'fa fa-picture-o',
 			'standard' => 'fa fa-pencil',
-		];
+		);
 	}
 
 	public function getIcon( string $format ): string {
@@ -47,7 +47,7 @@ class PostIconFactory {
 	}
 
 	public function getIconsByFormat( array $formats ): array {
-		$result = [];
+		$result = array();
 
 		foreach ( $formats as $format ) {
 			$format = sanitize_key( $format );

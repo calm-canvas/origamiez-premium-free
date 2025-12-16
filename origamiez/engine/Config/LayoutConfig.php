@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Config;
 
 class LayoutConfig {
 
-	private array $layouts = [];
+	private array $layouts        = array();
 	private string $defaultLayout = 'default';
 
 	public function __construct() {
@@ -12,50 +12,50 @@ class LayoutConfig {
 	}
 
 	private function initializeLayouts(): void {
-		$this->layouts = [
-			'default'               => [
-				'name'        => 'Default Layout',
-				'sidebar'     => 'right',
-				'columns'     => 2,
-			],
-			'fullwidth'             => [
-				'name'        => 'Full Width',
-				'sidebar'     => 'none',
-				'columns'     => 1,
-			],
-			'fullwidth-centered'    => [
-				'name'        => 'Full Width Centered',
-				'sidebar'     => 'none',
-				'columns'     => 1,
-				'centered'    => true,
-			],
-			'magazine'              => [
-				'name'        => 'Magazine',
-				'sidebar'     => 'right',
-				'columns'     => 2,
-				'feature'     => 'magazine',
-			],
-			'three-cols'            => [
-				'name'        => 'Three Columns',
-				'sidebar'     => 'both',
-				'columns'     => 3,
-			],
-			'three-cols-slm'        => [
-				'name'        => 'Three Columns - Small Left/Middle',
-				'sidebar'     => 'both',
-				'columns'     => 3,
-				'slim'        => true,
-			],
-		];
+		$this->layouts = array(
+			'default'            => array(
+				'name'    => 'Default Layout',
+				'sidebar' => 'right',
+				'columns' => 2,
+			),
+			'fullwidth'          => array(
+				'name'    => 'Full Width',
+				'sidebar' => 'none',
+				'columns' => 1,
+			),
+			'fullwidth-centered' => array(
+				'name'     => 'Full Width Centered',
+				'sidebar'  => 'none',
+				'columns'  => 1,
+				'centered' => true,
+			),
+			'magazine'           => array(
+				'name'    => 'Magazine',
+				'sidebar' => 'right',
+				'columns' => 2,
+				'feature' => 'magazine',
+			),
+			'three-cols'         => array(
+				'name'    => 'Three Columns',
+				'sidebar' => 'both',
+				'columns' => 3,
+			),
+			'three-cols-slm'     => array(
+				'name'    => 'Three Columns - Small Left/Middle',
+				'sidebar' => 'both',
+				'columns' => 3,
+				'slim'    => true,
+			),
+		);
 	}
 
 	public function registerLayout( string $id, array $config ): void {
 		$this->layouts[ $id ] = array_merge(
-			[
+			array(
 				'name'    => $id,
 				'sidebar' => 'right',
 				'columns' => 2,
-			],
+			),
 			$config
 		);
 	}

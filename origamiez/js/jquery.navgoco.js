@@ -5,7 +5,7 @@
  * Copyright (c) 2014 Chris T (@tefra)
  * BSD - https://github.com/tefra/navgoco/blob/master/LICENSE-BSD
  */
-(function($) {
+(function ($) {
 
 	"use strict";
 
@@ -18,12 +18,12 @@
 	 * @param {Integer} idx
 	 * @returns {Object} Plugin Instance
 	 */
-	var Plugin = function(el, options, idx) {
-		this.el = el;
-		this.$el = $(el);
+	var Plugin = function (el, options, idx) {
+		this.el      = el;
+		this.$el     = $( el );
 		this.options = options;
-		this.uuid = this.$el.attr('id') ? this.$el.attr('id') : idx;
-		this.state = {};
+		this.uuid    = this.$el.attr( 'id' ) ? this.$el.attr( 'id' ) : idx;
+		this.state   = {};
 		this.init();
 		return this;
 	};
@@ -39,65 +39,73 @@
 		 * links add the carent if it's on and attach the event click
 		 * to them.
 		 */
-		init: function() {
+		init: function () {
 			var self = this;
 			self._load();
-			self.$el.find('ul').each(function(idx) {
-				var sub = $(this);
-				sub.attr('data-index', idx);
-				if (self.options.save && self.state.hasOwnProperty(idx)) {
-					sub.parent().addClass(self.options.openClass);
-					sub.show();
-				} else if (sub.parent().hasClass(self.options.openClass)) {
-					sub.show();
-					self.state[idx] = 1;
-				} else {
-					sub.hide();
+			self.$el.find( 'ul' ).each(
+				function (idx) {
+					var sub = $( this );
+					sub.attr( 'data-index', idx );
+					if (self.options.save && self.state.hasOwnProperty( idx )) {
+						sub.parent().addClass( self.options.openClass );
+						sub.show();
+					} else if (sub.parent().hasClass( self.options.openClass )) {
+						sub.show();
+						self.state[idx] = 1;
+					} else {
+						sub.hide();
+					}
 				}
-			});
+			);
 
-			var caret = $('<span></span>').prepend(self.options.caretHtml);
-			var links = self.$el.find("li > a");
-			self._trigger(caret, false);
-			self._trigger(links, true);
-			self.$el.find("li:has(ul) > a").prepend(caret);
+			var caret = $( '<span></span>' ).prepend( self.options.caretHtml );
+			var links = self.$el.find( "li > a" );
+			self._trigger( caret, false );
+			self._trigger( links, true );
+			self.$el.find( "li:has(ul) > a" ).prepend( caret );
 		},
 		/**
 		 * Add the main event trigger to toggle menu items to the given sources
+		 *
 		 * @param {Element} sources
 		 * @param {Boolean} isLink
 		 */
-		_trigger: function(sources, isLink) {
+		_trigger: function (sources, isLink) {
 			var self = this;
-			sources.on('click', function(event) {
-				event.stopPropagation();
-				var sub = isLink ? $(this).next() : $(this).parent().next();
-				var isAnchor = false;
-				if (isLink) {
-					var href = $(this).attr('href');
-					isAnchor = href === undefined || href === '' || href === '#';
-				}
-				sub = sub.length > 0 ? sub : false;
-				self.options.onClickBefore.call(this, event, sub);
+			sources.on(
+				'click',
+				function (event) {
+					event.stopPropagation();
+					var sub      = isLink ? $( this ).next() : $( this ).parent().next();
+					var isAnchor = false;
+					if (isLink) {
+						var href = $( this ).attr( 'href' );
+						isAnchor = href === undefined || href === '' || href === '#';
+					}
+					sub = sub.length > 0 ? sub : false;
+					self.options.onClickBefore.call( this, event, sub );
 
-				if (!isLink || sub && isAnchor) {
-					event.preventDefault();
-					self._toggle(sub, sub.is(":hidden"));
-					self._save();
-				} else if (self.options.accordion) {
-					var allowed = self.state = self._parents($(this));
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
+					if ( ! isLink || sub && isAnchor) {
+						event.preventDefault();
+						self._toggle( sub, sub.is( ":hidden" ) );
+						self._save();
+					} else if (self.options.accordion) {
+						var allowed = self.state = self._parents( $( this ) );
+						self.$el.find( 'ul' ).filter( ':visible' ).each(
+							function () {
+								var sub = $( this ),
+								idx     = sub.attr( 'data-index' );
 
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
-						}
-					});
-					self._save();
+								if ( ! allowed.hasOwnProperty( idx )) {
+									self._toggle( sub, false );
+								}
+							}
+						);
+						self._save();
+					}
+					self.options.onClickAfter.call( this, event, sub );
 				}
-				self.options.onClickAfter.call(this, event, sub);
-			});
+			);
 		},
 		/**
 		 * Accepts a JQuery Element and a boolean flag. If flag is false it removes the `open` css
@@ -109,36 +117,38 @@
 		 * @param {Element} sub
 		 * @param {Boolean} open
 		 */
-		_toggle: function(sub, open) {
-			var self = this,
-				idx = sub.attr('data-index'),
+		_toggle: function (sub, open) {
+			var self   = this,
+				idx    = sub.attr( 'data-index' ),
 				parent = sub.parent();
 
-			self.options.onToggleBefore.call(this, sub, open);
+			self.options.onToggleBefore.call( this, sub, open );
 			if (open) {
-				parent.addClass(self.options.openClass);
-				sub.slideDown(self.options.slide);
+				parent.addClass( self.options.openClass );
+				sub.slideDown( self.options.slide );
 				self.state[idx] = 1;
 
 				if (self.options.accordion) {
-					var allowed = self.state = self._parents(sub);
+					var allowed  = self.state = self._parents( sub );
 					allowed[idx] = self.state[idx] = 1;
 
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
+					self.$el.find( 'ul' ).filter( ':visible' ).each(
+						function () {
+							var sub = $( this ),
+							idx     = sub.attr( 'data-index' );
 
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
+							if ( ! allowed.hasOwnProperty( idx )) {
+								self._toggle( sub, false );
+							}
 						}
-					});
+					);
 				}
 			} else {
-				parent.removeClass(self.options.openClass);
-				sub.slideUp(self.options.slide);
+				parent.removeClass( self.options.openClass );
+				sub.slideUp( self.options.slide );
 				self.state[idx] = 0;
 			}
-			self.options.onToggleAfter.call(this, sub, open);
+			self.options.onToggleAfter.call( this, sub, open );
 		},
 		/**
 		 * Returns all parents of a sub-menu. When obj is true It returns an object with indexes for
@@ -149,27 +159,29 @@
 		 * @param {Boolean} obj
 		 * @returns {Object}
 		 */
-		_parents: function(sub, obj) {
-			var result = {},
-				parent = sub.parent(),
-				parents = parent.parents('ul');
+		_parents: function (sub, obj) {
+			var result  = {},
+				parent  = sub.parent(),
+				parents = parent.parents( 'ul' );
 
-			parents.each(function() {
-				var par = $(this),
-					idx = par.attr('data-index');
+			parents.each(
+				function () {
+					var par = $( this ),
+					idx     = par.attr( 'data-index' );
 
-				if (!idx) {
-					return false;
+					if ( ! idx) {
+						return false;
+					}
+					result[idx] = obj ? par : 1;
 				}
-				result[idx] = obj ? par : 1;
-			});
+			);
 			return result;
 		},
 		/**
 		 * If `save` option is on the internal object that keeps track of the sub-menus states is
 		 * saved with a cookie. For size reasons only the open sub-menus indexes are stored.		 *
 		 */
-		_save: function() {
+		_save: function () {
 			if (this.options.save) {
 				var save = {};
 				for (var key in this.state) {
@@ -178,20 +190,20 @@
 					}
 				}
 				cookie[this.uuid] = this.state = save;
-				$.cookie(this.options.cookie.name, JSON.stringify(cookie), this.options.cookie);
+				$.cookie( this.options.cookie.name, JSON.stringify( cookie ), this.options.cookie );
 			}
 		},
 		/**
 		 * If `save` option is on it reads the cookie data. The cookie contains data for all
 		 * navgoco menus so the read happens only once and stored in the global `cookie` var.
 		 */
-		_load: function() {
+		_load: function () {
 			if (this.options.save) {
 				if (cookie === null) {
-					var data = $.cookie(this.options.cookie.name);
-					cookie = (data) ? JSON.parse(data) : {};
+					var data = $.cookie( this.options.cookie.name );
+					cookie   = (data) ? JSON.parse( data ) : {};
 				}
-				this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
+				this.state = cookie.hasOwnProperty( this.uuid ) ? cookie[this.uuid] : {};
 			}
 		},
 		/**
@@ -203,30 +215,32 @@
 		 *
 		 * @param {Boolean} open
 		 */
-		toggle: function(open) {
-			var self = this,
+		toggle: function (open) {
+			var self   = this,
 				length = arguments.length;
 
 			if (length <= 1) {
-				self.$el.find('ul').each(function() {
-					var sub = $(this);
-					self._toggle(sub, open);
-				});
+				self.$el.find( 'ul' ).each(
+					function () {
+						var sub = $( this );
+						self._toggle( sub, open );
+					}
+				);
 			} else {
 				var idx,
 					list = {},
-					args = Array.prototype.slice.call(arguments, 1);
+					args = Array.prototype.slice.call( arguments, 1 );
 				length--;
 
 				for (var i = 0; i < length; i++) {
-					idx = args[i];
-					var sub = self.$el.find('ul[data-index="' + idx + '"]').first();
+					idx     = args[i];
+					var sub = self.$el.find( 'ul[data-index="' + idx + '"]' ).first();
 					if (sub) {
 						list[idx] = sub;
 						if (open) {
-							var parents = self._parents(sub, true);
+							var parents = self._parents( sub, true );
 							for (var pIdx in parents) {
-								if (!list.hasOwnProperty(pIdx)) {
+								if ( ! list.hasOwnProperty( pIdx )) {
 									list[pIdx] = parents[pIdx];
 								}
 							}
@@ -235,7 +249,7 @@
 				}
 
 				for (idx in list) {
-					self._toggle(list[idx], open);
+					self._toggle( list[idx], open );
 				}
 			}
 			self._save();
@@ -243,10 +257,10 @@
 		/**
 		 * Removes instance from JQuery data cache and unbinds events.
 		 */
-		destroy: function() {
-			$.removeData(this.$el);
-			this.$el.find("li:has(ul) > a").unbind('click');
-			this.$el.find("li:has(ul) > a > span").unbind('click');
+		destroy: function () {
+			$.removeData( this.$el );
+			this.$el.find( "li:has(ul) > a" ).unbind( 'click' );
+			this.$el.find( "li:has(ul) > a > span" ).unbind( 'click' );
 		}
 	};
 
@@ -257,28 +271,30 @@
 	 *
 	 * @param {Object|String} options
 	 */
-	$.fn.navgoco = function(options) {
-		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
+	$.fn.navgoco = function (options) {
+		if (typeof options === 'string' && options.charAt( 0 ) !== '_' && options !== 'init') {
 			var callback = true,
-				args = Array.prototype.slice.call(arguments, 1);
+				args     = Array.prototype.slice.call( arguments, 1 );
 		} else {
-			options = $.extend({}, $.fn.navgoco.defaults, options || {});
-			if (!$.cookie) {
+			options = $.extend( {}, $.fn.navgoco.defaults, options || {} );
+			if ( ! $.cookie) {
 				options.save = false;
 			}
 		}
-		return this.each(function(idx) {
-			var $this = $(this),
-				obj = $this.data('navgoco');
+		return this.each(
+			function (idx) {
+				var $this = $( this ),
+				obj       = $this.data( 'navgoco' );
 
-			if (!obj) {
-				obj = new Plugin(this, callback ? $.fn.navgoco.defaults : options, idx);
-				$this.data('navgoco', obj);
+				if ( ! obj) {
+					obj = new Plugin( this, callback ? $.fn.navgoco.defaults : options, idx );
+					$this.data( 'navgoco', obj );
+				}
+				if (callback) {
+					obj[options].apply( obj, args );
+				}
 			}
-			if (callback) {
-				obj[options].apply(obj, args);
-			}
-		});
+		);
 	};
 	/**
 	 * Global var holding all navgoco menus open states
@@ -311,4 +327,4 @@
 		onToggleBefore: $.noop,
 		onToggleAfter: $.noop
 	};
-})(jQuery);
+})( jQuery );

@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Widgets;
 
 class WidgetRegistry {
 
-	private array $widgets = [];
+	private array $widgets         = array();
 	private static ?self $instance = null;
 
 	private function __construct() {
@@ -27,7 +27,7 @@ class WidgetRegistry {
 	}
 
 	public function register(): void {
-		add_action( 'widgets_init', [ $this, 'doRegisterWidgets' ] );
+		add_action( 'widgets_init', array( $this, 'doRegisterWidgets' ) );
 	}
 
 	public function doRegisterWidgets(): void {

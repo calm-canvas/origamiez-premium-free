@@ -12,7 +12,7 @@ class SinglePostClassProvider implements BodyClassProviderInterface {
 	private BodyClassConfig $bodyClassConfig;
 
 	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
-		$this->configManager = $configManager;
+		$this->configManager   = $configManager;
 		$this->bodyClassConfig = $bodyClassConfig;
 	}
 
@@ -29,7 +29,7 @@ class SinglePostClassProvider implements BodyClassProviderInterface {
 		}
 
 		$singlePostLayout = get_theme_mod( 'single-post-layout', 'two-cols' );
-		$classes[] = $this->bodyClassConfig::SINGLE_POST_LAYOUT_PREFIX . $singlePostLayout;
+		$classes[]        = $this->bodyClassConfig::SINGLE_POST_LAYOUT_PREFIX . $singlePostLayout;
 
 		return $classes;
 	}

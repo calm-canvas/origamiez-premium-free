@@ -14,16 +14,16 @@ class AssetManager {
 	private string $templateUri;
 
 	public function __construct( ConfigManager $configManager ) {
-		$this->configManager = $configManager;
-		$this->templateUri = get_template_directory_uri();
-		$this->stylesheetManager = new StylesheetManager();
-		$this->scriptManager = new ScriptManager();
+		$this->configManager        = $configManager;
+		$this->templateUri          = get_template_directory_uri();
+		$this->stylesheetManager    = new StylesheetManager();
+		$this->scriptManager        = new ScriptManager();
 		$this->inlineStyleGenerator = new InlineStyleGenerator();
-		$this->fontManager = new FontManager( $this->templateUri );
+		$this->fontManager          = new FontManager( $this->templateUri );
 	}
 
 	public function register(): void {
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueueAssets' ], 15 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueAssets' ), 15 );
 	}
 
 	public function enqueueAssets(): void {

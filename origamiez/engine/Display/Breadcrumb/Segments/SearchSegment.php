@@ -21,7 +21,7 @@ class SearchSegment implements SegmentInterface {
 
 		return $this->prefix . sprintf(
 			'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url"><span itemprop="title">%s</span></a></span>',
-			sprintf( esc_attr__( 'Searched for "%s" return %s results', 'origamiez' ), esc_html( $searchQuery ), $resultCount )
+			sprintf( esc_attr__( 'Searched for "%1$s" return %2$s results', 'origamiez' ), esc_html( $searchQuery ), $resultCount )
 		);
 	}
 }

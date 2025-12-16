@@ -9,7 +9,7 @@ class ReadMoreButton {
 	private string $buttonText;
 
 	public function __construct( int $postId = 0, string $buttonText = '' ) {
-		$this->postId    = $postId ?: get_the_ID();
+		$this->postId     = $postId ?: get_the_ID();
 		$this->buttonText = $buttonText ?: esc_html__( 'Read more &raquo;', 'origamiez' );
 	}
 

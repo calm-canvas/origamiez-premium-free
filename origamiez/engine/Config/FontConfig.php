@@ -4,8 +4,8 @@ namespace Origamiez\Engine\Config;
 
 class FontConfig {
 
-	private array $fonts = [];
-	private array $fontSizes = [];
+	private array $fonts        = array();
+	private array $fontSizes    = array();
 	private string $defaultFont = 'default';
 
 	public function __construct() {
@@ -14,46 +14,46 @@ class FontConfig {
 	}
 
 	private function initializeFonts(): void {
-		$this->fonts = [
-			'default' => [
-				'name'       => 'Default Font Stack',
-				'family'     => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-				'fallback'   => 'sans-serif',
-				'weights'    => [ 400, 500, 600, 700 ],
-			],
-			'heading' => [
-				'name'       => 'Heading Font',
-				'family'     => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-				'fallback'   => 'sans-serif',
-				'weights'    => [ 400, 700 ],
-			],
-		];
+		$this->fonts = array(
+			'default' => array(
+				'name'     => 'Default Font Stack',
+				'family'   => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+				'fallback' => 'sans-serif',
+				'weights'  => array( 400, 500, 600, 700 ),
+			),
+			'heading' => array(
+				'name'     => 'Heading Font',
+				'family'   => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+				'fallback' => 'sans-serif',
+				'weights'  => array( 400, 700 ),
+			),
+		);
 	}
 
 	private function initializeSizes(): void {
-		$this->fontSizes = [
-			'small'      => '12px',
-			'base'       => '14px',
-			'medium'     => '16px',
-			'large'      => '18px',
-			'xlarge'     => '20px',
-			'h6'         => '14px',
-			'h5'         => '16px',
-			'h4'         => '18px',
-			'h3'         => '24px',
-			'h2'         => '28px',
-			'h1'         => '32px',
-		];
+		$this->fontSizes = array(
+			'small'  => '12px',
+			'base'   => '14px',
+			'medium' => '16px',
+			'large'  => '18px',
+			'xlarge' => '20px',
+			'h6'     => '14px',
+			'h5'     => '16px',
+			'h4'     => '18px',
+			'h3'     => '24px',
+			'h2'     => '28px',
+			'h1'     => '32px',
+		);
 	}
 
 	public function registerFont( string $id, array $config ): void {
 		$this->fonts[ $id ] = array_merge(
-			[
+			array(
 				'name'     => $id,
 				'family'   => '',
 				'fallback' => 'sans-serif',
-				'weights'  => [],
-			],
+				'weights'  => array(),
+			),
 			$config
 		);
 	}

@@ -20,7 +20,7 @@ class LayoutContainer {
 
 	public function getOpenContainerHtml(): string {
 		if ( $this->useFullwidth ) {
-			return ''; 
+			return '';
 		}
 		return '<div class="container">';
 	}
@@ -41,7 +41,7 @@ class LayoutContainer {
 	}
 
 	public function register(): void {
-		add_action( 'origamiez_after_body_open', [ $this, 'openContainer' ] );
-		add_action( 'origamiez_before_body_close', [ $this, 'closeContainer' ] );
+		add_action( 'origamiez_after_body_open', array( $this, 'openContainer' ) );
+		add_action( 'origamiez_before_body_close', array( $this, 'closeContainer' ) );
 	}
 }

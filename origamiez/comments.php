@@ -58,18 +58,21 @@ if ( post_password_required() ) {
 
 		<ol class="comment-list">
 			<?php
-			/* Loop through and list the comments. Tell wp_list_comments()
+			/*
+			Loop through and list the comments. Tell wp_list_comments()
 			 * to use origamiez_comment() to format the comments.
 			 * If you want to override this in a child theme, then you can
 			 * define origamiez_comment() and that will be used instead.
 			 * See origamiez_comment() in inc/template-tags.php for more.
 			 */
-			wp_list_comments( array(
-				'callback' => \Origamiez\Engine\Display\CommentDisplay::register(),
-				'style'      => 'ol',
-				'short_ping' => true,
-				'avatar_size'=> 34,
-			) );
+			wp_list_comments(
+				array(
+					'callback'    => \Origamiez\Engine\Display\CommentDisplay::register(),
+					'style'       => 'ol',
+					'short_ping'  => true,
+					'avatar_size' => 34,
+				)
+			);
 			?>
 		</ol><!-- .comment-list -->
 

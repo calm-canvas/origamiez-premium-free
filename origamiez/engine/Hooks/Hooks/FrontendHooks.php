@@ -16,14 +16,14 @@ class FrontendHooks implements HookProviderInterface {
 
 	public function register( HookRegistry $registry ): void {
 		$registry
-			->addAction( 'init', [ $this, 'widgetOrderClass' ] )
-			->addFilter( 'post_class', [ $this, 'archivePostClass' ] )
+			->addAction( 'init', array( $this, 'widgetOrderClass' ) )
+			->addFilter( 'post_class', array( $this, 'archivePostClass' ) )
 			->addFilter( 'excerpt_more', '__return_false' )
-			->addFilter( 'wp_nav_menu_objects', [ $this, 'addFirstAndLastClassForMenuItem' ] )
-			->addFilter( 'post_thumbnail_html', [ $this, 'removeHardcodedImageSize' ] )
-			->addAction( 'origamiez_after_body_open', [ $this, 'globalWrapperOpen' ] )
-			->addAction( 'origamiez_before_body_close', [ $this, 'globalWrapperClose' ] )
-			->addAction( 'origamiez_print_button_readmore', [ $this, 'getButtonReadmore' ] );
+			->addFilter( 'wp_nav_menu_objects', array( $this, 'addFirstAndLastClassForMenuItem' ) )
+			->addFilter( 'post_thumbnail_html', array( $this, 'removeHardcodedImageSize' ) )
+			->addAction( 'origamiez_after_body_open', array( $this, 'globalWrapperOpen' ) )
+			->addAction( 'origamiez_before_body_close', array( $this, 'globalWrapperClose' ) )
+			->addAction( 'origamiez_print_button_readmore', array( $this, 'getButtonReadmore' ) );
 	}
 
 	public function widgetOrderClass(): void {
@@ -41,7 +41,7 @@ class FrontendHooks implements HookProviderInterface {
 	}
 
 	public function addFirstAndLastClassForMenuItem( array $items ): array {
-		$items[1]->classes[] = 'origamiez-menuitem-first';
+		$items[1]->classes[]                 = 'origamiez-menuitem-first';
 		$items[ count( $items ) ]->classes[] = 'origamiez-menuitem-last';
 		return $items;
 	}

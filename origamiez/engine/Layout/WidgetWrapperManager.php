@@ -4,19 +4,19 @@ namespace Origamiez\Engine\Layout;
 
 class WidgetWrapperManager {
 
-	private array $customWrappers = [];
+	private array $customWrappers = array();
 
 	public function __construct() {
 		$this->initializeDefaultWrappers();
 	}
 
 	private function initializeDefaultWrappers(): void {
-		$this->customWrappers = [
+		$this->customWrappers = array(
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h4 class="widget-title">',
 			'after_title'   => '</h4>',
-		];
+		);
 	}
 
 	public function getDynamicSidebarParams( array $params ): array {
@@ -36,20 +36,20 @@ class WidgetWrapperManager {
 			return $params;
 		}
 
-		if ( ! isset( $widgetOpt[ $widgetNum ]['title'] ) || 
-		     ( isset( $widgetOpt[ $widgetNum ]['title'] ) && empty( $widgetOpt[ $widgetNum ]['title'] ) ) ) {
-			
+		if ( ! isset( $widgetOpt[ $widgetNum ]['title'] ) ||
+			( isset( $widgetOpt[ $widgetNum ]['title'] ) && empty( $widgetOpt[ $widgetNum ]['title'] ) ) ) {
+
 			$params[0]['before_widget'] .= '<div class="origamiez-widget-content clearfix">';
-			$params[0]['before_title']  = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
-			$params[0]['after_title']   = '</span></h2>';
+			$params[0]['before_title']   = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
+			$params[0]['after_title']    = '</span></h2>';
 		}
 
 		return apply_filters( 'origamiez_dynamic_sidebar_params', $params );
 	}
 
 	public function setCustomWrapper( string $key, string $html ): self {
-		$validKeys = [ 'before_widget', 'after_widget', 'before_title', 'after_title' ];
-		
+		$validKeys = array( 'before_widget', 'after_widget', 'before_title', 'after_title' );
+
 		if ( in_array( $key, $validKeys, true ) ) {
 			$this->customWrappers[ $key ] = $html;
 		}
@@ -72,6 +72,6 @@ class WidgetWrapperManager {
 	}
 
 	public function register(): void {
-		add_filter( 'dynamic_sidebar_params', [ $this, 'getDynamicSidebarParams' ] );
+		add_filter( 'dynamic_sidebar_params', array( $this, 'getDynamicSidebarParams' ) );
 	}
 }

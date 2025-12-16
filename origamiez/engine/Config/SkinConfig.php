@@ -4,7 +4,7 @@ namespace Origamiez\Engine\Config;
 
 class SkinConfig {
 
-	private array $skins = [];
+	private array $skins       = array();
 	private string $activeSkin = 'default';
 
 	public function __construct() {
@@ -12,26 +12,26 @@ class SkinConfig {
 	}
 
 	private function initializeSkins(): void {
-		$this->skins = [
-			'default' => [
-				'name'        => 'Default',
-				'colors'      => [
+		$this->skins = array(
+			'default' => array(
+				'name'   => 'Default',
+				'colors' => array(
 					'primary'   => '#333333',
 					'secondary' => '#666666',
 					'accent'    => '#0066cc',
-				],
-				'fonts'       => [],
-			],
-		];
+				),
+				'fonts'  => array(),
+			),
+		);
 	}
 
 	public function registerSkin( string $id, array $config ): void {
 		$this->skins[ $id ] = array_merge(
-			[
+			array(
 				'name'   => $id,
-				'colors' => [],
-				'fonts'  => [],
-			],
+				'colors' => array(),
+				'fonts'  => array(),
+			),
 			$config
 		);
 	}

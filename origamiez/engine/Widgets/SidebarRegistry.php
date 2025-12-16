@@ -6,7 +6,7 @@ use Origamiez\Engine\Widgets\Sidebars\SidebarConfiguration;
 
 class SidebarRegistry {
 
-	private array $sidebars = [];
+	private array $sidebars = array();
 
 	public function registerSidebar( SidebarConfiguration $sidebarConfig ): self {
 		$this->sidebars[ $sidebarConfig->getId() ] = $sidebarConfig;
@@ -14,12 +14,12 @@ class SidebarRegistry {
 	}
 
 	public function registerDefaultSidebars(): self {
-		add_action( 'init', [ $this, 'setupDefaultSidebars' ], 5 );
+		add_action( 'init', array( $this, 'setupDefaultSidebars' ), 5 );
 		return $this;
 	}
 
 	public function setupDefaultSidebars(): void {
-		$defaults = [
+		$defaults = array(
 			'main-top'           => SidebarConfiguration::create( 'main-top', esc_attr__( 'Main Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
 			'main-center-top'    => SidebarConfiguration::create( 'main-center-top', esc_attr__( 'Main Center Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
 			'main-center-left'   => SidebarConfiguration::create( 'main-center-left', esc_attr__( 'Main Center Left', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
@@ -34,7 +34,7 @@ class SidebarRegistry {
 			'footer-3'           => SidebarConfiguration::create( 'footer-3', esc_attr__( 'Footer 3', 'origamiez' ), '' ),
 			'footer-4'           => SidebarConfiguration::create( 'footer-4', esc_attr__( 'Footer 4', 'origamiez' ), '' ),
 			'footer-5'           => SidebarConfiguration::create( 'footer-5', esc_attr__( 'Footer 5', 'origamiez' ), '' ),
-		];
+		);
 
 		foreach ( $defaults as $sidebar ) {
 			$this->registerSidebar( $sidebar );
@@ -42,8 +42,8 @@ class SidebarRegistry {
 	}
 
 	public function register(): void {
-		add_action( 'init', [ $this, 'doRegisterSidebars' ], 30 );
-		add_filter( 'dynamic_sidebar_params', [ $this, 'handleDynamicSidebarParams' ] );
+		add_action( 'init', array( $this, 'doRegisterSidebars' ), 30 );
+		add_filter( 'dynamic_sidebar_params', array( $this, 'handleDynamicSidebarParams' ) );
 	}
 
 	public function doRegisterSidebars(): void {
@@ -60,8 +60,8 @@ class SidebarRegistry {
 		$widget_num = $widget_obj['params'][0]['number'];
 		if ( ! isset( $widget_opt[ $widget_num ]['title'] ) || ( isset( $widget_opt[ $widget_num ]['title'] ) && empty( $widget_opt[ $widget_num ]['title'] ) ) ) {
 			$params[0]['before_widget'] .= '<div class="origamiez-widget-content clearfix">';
-			$params[0]['before_title']  = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
-			$params[0]['after_title']   = '</span></h2>';
+			$params[0]['before_title']   = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
+			$params[0]['after_title']    = '</span></h2>';
 		}
 
 		return $params;

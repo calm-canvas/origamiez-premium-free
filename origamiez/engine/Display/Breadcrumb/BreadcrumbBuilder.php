@@ -12,24 +12,24 @@ use Origamiez\Engine\Display\Breadcrumb\Segments\NotFoundSegment;
 
 class BreadcrumbBuilder {
 
-	private string $prefix = '&nbsp;&rsaquo;&nbsp;';
+	private string $prefix     = '&nbsp;&rsaquo;&nbsp;';
 	private string $beforeHtml = '<div class="breadcrumb">';
-	private string $afterHtml = '</div>';
-	private array $segments = [];
+	private string $afterHtml  = '</div>';
+	private array $segments    = array();
 
 	public function __construct() {
 		$this->registerDefaultSegments();
 	}
 
 	private function registerDefaultSegments(): void {
-		$this->segments = [
+		$this->segments = array(
 			new HomeSegment( $this->prefix ),
 			new ArchiveSegment( $this->prefix ),
 			new SearchSegment( $this->prefix ),
 			new PageSegment( $this->prefix ),
 			new SingleSegment( $this->prefix ),
 			new NotFoundSegment( $this->prefix ),
-		];
+		);
 	}
 
 	public function registerSegment( SegmentInterface $segment ): self {
