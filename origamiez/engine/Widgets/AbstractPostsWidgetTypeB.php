@@ -1,6 +1,10 @@
 <?php
 
-class Origamiez_Posts_Widget_Type_B extends Origamiez_Posts_Widget {
+namespace Origamiez\Engine\Widgets;
+
+abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
+
+    private int $excerpt_length = 0;
 
     public function update($new_instance, $old_instance) {
         $instance                        = parent::update( $new_instance, $old_instance );         
@@ -87,13 +91,18 @@ class Origamiez_Posts_Widget_Type_B extends Origamiez_Posts_Widget {
         endif;
     }
 
+    public function get_excerpt_length( $length ): int {
+        return $this->excerpt_length;
+    }
+
     protected function print_excerpt( $excerpt_words_limit, $classes='' ){
-        if($excerpt_words_limit):
-            add_filter('excerpt_length', "origamiez_return_{$excerpt_words_limit}");
+        if($excerpt_words_limit){
+            $this->excerpt_length = $excerpt_words_limit;
+            add_filter('excerpt_length', [$this, 'get_excerpt_length']);
             ?>
             <p class="<?php echo esc_attr( $classes ); ?>"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
             <?php
-            remove_filter('excerpt_length', "origamiez_return_{$excerpt_words_limit}");
-        endif;
+            remove_filter('excerpt_length', [$this, 'get_excerpt_length']);
+        }
     }
 }

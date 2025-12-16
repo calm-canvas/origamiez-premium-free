@@ -1,6 +1,8 @@
 <?php
 
-class Origamiez_Posts_Widget_Type_C extends Origamiez_Posts_Widget_Type_B {
+namespace Origamiez\Engine\Widgets;
+
+abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 
     public function update($new_instance, $old_instance) {
         $instance           = parent::update( $new_instance, $old_instance );                 

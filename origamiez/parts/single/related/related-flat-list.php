@@ -49,6 +49,7 @@ if ($related_posts->have_posts()):
                 <div class="article-col-left col-sm-6 col-xs-12">
                 <?php
                 $loop_index = 0;
+                $excerpt_length_callback = function() { return 20; };
                 while ($related_posts->have_posts()):
                     $related_posts->the_post();
                     $post_title = get_the_title();
@@ -77,9 +78,9 @@ if ($related_posts->have_posts()):
                                     <?php echo esc_html($post_title); ?>
                                 </a>
                             </h3>
-                            <?php add_filter('excerpt_length', "origamiez_return_20"); ?>
+                            <?php add_filter('excerpt_length', $excerpt_length_callback); ?>
                             <p class="entry-excerpt clearfix"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
-                            <?php remove_filter('excerpt_length', "origamiez_return_20"); ?>
+                            <?php remove_filter('excerpt_length', $excerpt_length_callback); ?>
                         </article>
                         <?php
                         echo '</div>';

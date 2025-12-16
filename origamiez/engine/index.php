@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use Origamiez\Engine\ThemeBootstrap;
 
+require_once __DIR__ . '/Helpers/BackwardCompatibilityFunctions.php';
+
 $bootstrap = new ThemeBootstrap();
 $bootstrap->boot();
 

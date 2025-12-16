@@ -2,25 +2,28 @@
 
 namespace Origamiez\Engine\Layout;
 
+use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 
 class BodyClassManager {
 
 	private array $providers = [];
 	private ConfigManager $configManager;
+	private BodyClassConfig $bodyClassConfig;
 
-	public function __construct( ConfigManager $configManager ) {
+	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
 		$this->configManager = $configManager;
+		$this->bodyClassConfig = $bodyClassConfig;
 		$this->registerDefaultProviders();
 	}
 
 	private function registerDefaultProviders(): void {
-		$this->registerProvider( new Providers\SinglePostClassProvider( $this->configManager ) );
-		$this->registerProvider( new Providers\PageClassProvider( $this->configManager ) );
-		$this->registerProvider( new Providers\ArchiveClassProvider( $this->configManager ) );
-		$this->registerProvider( new Providers\SearchClassProvider( $this->configManager ) );
-		$this->registerProvider( new Providers\NotFoundClassProvider( $this->configManager ) );
-		$this->registerProvider( new Providers\GeneralClassProvider( $this->configManager ) );
+		$this->registerProvider( new Providers\SinglePostClassProvider( $this->configManager, $this->bodyClassConfig ) );
+		$this->registerProvider( new Providers\PageClassProvider( $this->configManager, $this->bodyClassConfig ) );
+		$this->registerProvider( new Providers\ArchiveClassProvider( $this->configManager, $this->bodyClassConfig ) );
+		$this->registerProvider( new Providers\SearchClassProvider( $this->configManager, $this->bodyClassConfig ) );
+		$this->registerProvider( new Providers\NotFoundClassProvider( $this->configManager, $this->bodyClassConfig ) );
+		$this->registerProvider( new Providers\GeneralClassProvider( $this->configManager, $this->bodyClassConfig ) );
 	}
 
 	public function registerProvider( BodyClassProviderInterface $provider ): self {

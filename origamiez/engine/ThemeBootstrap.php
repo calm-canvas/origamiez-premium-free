@@ -3,6 +3,7 @@
 namespace Origamiez\Engine;
 
 use Origamiez\Engine\Assets\AssetManager;
+use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Config\SkinConfig;
 use Origamiez\Engine\Config\LayoutConfig;
@@ -17,10 +18,15 @@ use Origamiez\Engine\Customizer\Settings\SinglePostSettings;
 use Origamiez\Engine\Customizer\Settings\SocialSettings;
 use Origamiez\Engine\Customizer\Settings\TypographySettings;
 use Origamiez\Engine\Display\Breadcrumb\BreadcrumbGenerator;
+use Origamiez\Engine\Display\ReadMoreButton;
 use Origamiez\Engine\Hooks\HookRegistry;
 use Origamiez\Engine\Hooks\Hooks\ThemeHooks;
 use Origamiez\Engine\Hooks\Hooks\FrontendHooks;
 use Origamiez\Engine\Layout\BodyClassManager;
+use Origamiez\Engine\Post\PostClassManager;
+use Origamiez\Engine\Widgets\WidgetClassManager;
+use Origamiez\Engine\Widgets\WidgetFactory;
+use Origamiez\Engine\Widgets\SidebarRegistry;
 
 class ThemeBootstrap {
 
@@ -52,6 +58,10 @@ class ThemeBootstrap {
 			return new FontConfig();
 		} );
 
+		$this->container->singleton( 'body_class_config', function () {
+			return new BodyClassConfig();
+		} );
+
 		$this->container->singleton( 'hook_registry', function () {
 			return HookRegistry::getInstance();
 		} );
@@ -61,7 +71,7 @@ class ThemeBootstrap {
 		} );
 
 		$this->container->singleton( 'body_class_manager', function ( $container ) {
-			return new BodyClassManager( $container->get( 'config_manager' ) );
+			return new BodyClassManager( $container->get( 'config_manager' ), $container->get( 'body_class_config' ) );
 		} );
 
 		$this->container->singleton( 'breadcrumb_generator', function () {
@@ -71,6 +81,26 @@ class ThemeBootstrap {
 		$this->container->singleton( 'customizer_service', function () {
 			return new CustomizerService();
 		} );
+
+		$this->container->singleton( 'widget_factory', function () {
+			return WidgetFactory::getInstance();
+		} );
+
+		$this->container->singleton( 'sidebar_registry', function () {
+			return SidebarRegistry::getInstance();
+		} );
+
+		$this->container->singleton( 'widget_class_manager', function () {
+			return new WidgetClassManager();
+		} );
+
+		$this->container->bind( 'post_class_manager', function () {
+			return new PostClassManager();
+		} );
+
+		$this->container->bind( 'read_more_button', function () {
+			return new ReadMoreButton();
+		} );
 	}
 
 	public function boot(): void {
@@ -79,13 +109,15 @@ class ThemeBootstrap {
 		$this->registerLayout();
 		$this->registerDisplay();
 		$this->registerCustomizer();
+		$this->registerWidgets();
+		$this->registerSidebars();
 
 		do_action( 'origamiez_engine_booted' );
 	}
 
 	private function registerHooks(): void {
 		$this->hookRegistry->registerHooks( new ThemeHooks() );
-		$this->hookRegistry->registerHooks( new FrontendHooks() );
+		$this->hookRegistry->registerHooks( new FrontendHooks( $this->container ) );
 	}
 
 	private function registerAssets(): void {
@@ -129,5 +161,24 @@ class ThemeBootstrap {
 
 	public function getHookRegistry(): HookRegistry {
 		return $this->hookRegistry;
+	}
+
+	private function registerWidgets(): void {
+		$widgetFactory = $this->container->get( 'widget_factory' );
+		$widgetFactory->boot();
+	}
+
+	private function registerSidebars(): void {
+		$sidebarRegistry = $this->container->get( 'sidebar_registry' );
+		$sidebarRegistry->registerDefaultSidebars();
+		$sidebarRegistry->register();
+	}
+
+	public function getWidgetFactory(): WidgetFactory {
+		return $this->container->get( 'widget_factory' );
+	}
+
+	public function getSidebarRegistry(): SidebarRegistry {
+		return $this->container->get( 'sidebar_registry' );
 	}
 }

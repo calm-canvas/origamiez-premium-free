@@ -2,15 +2,18 @@
 
 namespace Origamiez\Engine\Layout\Providers;
 
+use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Layout\BodyClassProviderInterface;
 
 class ArchiveClassProvider implements BodyClassProviderInterface {
 
 	private ConfigManager $configManager;
+	private BodyClassConfig $bodyClassConfig;
 
-	public function __construct( ConfigManager $configManager ) {
+	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
 		$this->configManager = $configManager;
+		$this->bodyClassConfig = $bodyClassConfig;
 	}
 
 	public function provide( array $classes ): array {
@@ -18,26 +21,26 @@ class ArchiveClassProvider implements BodyClassProviderInterface {
 			return $classes;
 		}
 
-		$classes[] = 'origamiez-layout-right-sidebar';
-		$classes[] = 'origamiez-layout-blog';
+		$classes[] = $this->bodyClassConfig::LAYOUT_RIGHT_SIDEBAR;
+		$classes[] = $this->bodyClassConfig::LAYOUT_BLOG;
 
 		$thumbnailStyle = get_theme_mod( 'taxonomy_thumbnail_style', 'thumbnail-left' );
 		switch ( $thumbnailStyle ) {
 			case 'thumbnail-right':
-				$classes[] = 'origamiez-layout-blog-thumbnail-right';
+				$classes[] = $this->bodyClassConfig::LAYOUT_BLOG_THUMBNAIL_RIGHT;
 				break;
 			case 'thumbnail-full-width':
-				$classes[] = 'origamiez-layout-blog-thumbnail-full-width';
+				$classes[] = $this->bodyClassConfig::LAYOUT_BLOG_THUMBNAIL_FULL_WIDTH;
 				break;
 			default:
-				$classes[] = 'origamiez-layout-blog-thumbnail-left';
+				$classes[] = $this->bodyClassConfig::LAYOUT_BLOG_THUMBNAIL_LEFT;
 				break;
 		}
 
 		if ( is_home() || is_tag() || is_category() || is_author() || is_day() || is_month() || is_year() ) {
 			$taxonomyLayout = get_theme_mod( 'taxonomy_layout', 'two-cols' );
 			if ( $taxonomyLayout ) {
-				$classes[] = "origamiez-taxonomy-{$taxonomyLayout}";
+				$classes[] = $this->bodyClassConfig::TAXONOMY_PREFIX . $taxonomyLayout;
 			}
 		}
 

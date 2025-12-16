@@ -38,77 +38,15 @@ function origamiez_theme_setup() {
 	add_theme_support( 'post-formats', array( 'gallery', 'video', 'audio' ) );
 	add_theme_support( 'editor_style' );
 	add_editor_style( 'editor-style.css' );
-	origamiez_register_new_image_sizes();
+	\Origamiez\Engine\Helpers\ImageSizeManager::register();
 	global $content_width;
 	if ( ! isset( $content_width ) ) {
 		$content_width = 817;
 	}
-	if ( ! is_admin() ) {
-		add_action( 'init', 'origamiez_widget_order_class' );
-		add_action( 'wp_enqueue_scripts', 'origamiez_enqueue_scripts', 15 );
-		add_filter( 'body_class', 'origamiez_body_class' );
-		add_filter( 'post_class', 'origamiez_archive_post_class' );
-		add_filter( 'excerpt_more', '__return_false' );
-		add_filter( 'wp_nav_menu_objects', 'origamiez_add_first_and_last_class_for_menuitem' );
-		add_filter( 'post_thumbnail_html', 'origamiez_remove_hardcoded_image_size' );
-		add_filter( 'dynamic_sidebar_params', 'origamiez_dynamic_sidebar_params' );
-		add_action( 'origamiez_after_body_open', 'origamiez_global_wapper_open' );
-		add_action( 'origamiez_before_body_close', 'origamiez_global_wapper_close' );
-		add_action( 'origamiez_print_button_readmore', 'origamiez_get_button_readmore' );
-	}
-	add_action( "updated_option", 'origamiez_save_unyson_options', 10, 3 );
 }
 
 add_action( 'after_setup_theme', 'origamiez_theme_setup' );
 
-function origamiez_config_textdomain() {
-	load_theme_textdomain( 'origamiez', get_template_directory() . '/languages' );
-}
-
-function origamiez_register_translated_menus() {
-	// Re-register nav menus with translated labels after text domain is loaded
-	register_nav_menus( array(
-		'main-nav'   => esc_attr__( 'Main Menu', 'origamiez' ),
-		'top-nav'    => esc_attr__( 'Top Menu (do not support sub-menu)', 'origamiez' ),
-		'footer-nav' => esc_attr__( 'Footer Menu (do not support sub-menu)', 'origamiez' ),
-		'mobile-nav' => esc_attr__( 'Mobile Menu (will be replace by Main Menu - if null).', 'origamiez' ),
-	) );
-}
-
-add_action( 'init', 'origamiez_config_textdomain' );
-add_action( 'init', 'origamiez_register_translated_menus', 20 );
-
-/*
-HOOK CALLBACK
---------------------
-All callback functions for action hooks & filter hooks.
---------------------
-*/
-require( $dir . 'inc/functions.php' );
-/*
-CUSTOMIZATION
---------------------
-Apply customization API to build control-panel.
---------------------
-*/
-require( $dir . 'inc/customizer.php' );
-/*
-API
---------------------
-All classes (abstract & utility).
---------------------
-*/
-require( $dir . 'inc/classes/abstract-widget.php' );
-require( $dir . 'inc/classes/abstract-widget-type-b.php' );
-require( $dir . 'inc/classes/abstract-widget-type-c.php' );
-/*
-MODULE
---------------------
-All sidebars & widgets.
---------------------
-*/
-require( $dir . 'inc/sidebar.php' );
-require( $dir . 'inc/widget.php' );
 /*
 PLUGINS
 --------------------
@@ -121,21 +59,27 @@ require( $dir . 'plugins/bbpress/index.php' );
 require( $dir . 'plugins/dw-question-and-answer/index.php' );
 #3: WooCommerce
 require( $dir . 'plugins/woocommerce/index.php' );
-/*
-AUTOLOAD
---------------------
-Load & register modules.
---------------------
-*/
-require_once( $dir . '/vendor/autoload.php' );
 
 /*
-ENGINE BOOTSTRAP
+AUTOLOAD & ENGINE BOOTSTRAP
 --------------------
-Initialize the Origamiez engine with dependency injection,
+Load autoloader and initialize the Origamiez engine with dependency injection,
 asset management, hooks, and layout management.
 --------------------
 */
+require_once( $dir . '/vendor/autoload.php' );
 require_once( $dir . 'engine/index.php' );
 
 add_filter( 'use_widgets_block_editor', '__return_false' );
+
+function origamiez_set_classes_for_footer_one_cols( $classes ) {
+	return [ 'col-xs-12', 'col-sm-12', 'col-md-12' ];
+}
+
+function origamiez_set_classes_for_footer_two_cols( $classes ) {
+	return [ 'col-xs-12', 'col-sm-6', 'col-md-6' ];
+}
+
+function origamiez_set_classes_for_footer_three_cols( $classes ) {
+	return [ 'col-xs-12', 'col-sm-4', 'col-md-4' ];
+}

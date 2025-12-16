@@ -5,34 +5,34 @@ namespace Origamiez\Engine\Widgets;
 class WidgetRegistry {
 
 	private array $widgets = [];
+	private static ?self $instance = null;
 
-	public function registerWidget( string $widgetClass ): self {
-		if ( ! class_exists( $widgetClass ) ) {
-			return $this;
-		}
-
-		add_action( 'widgets_init', function () use ( $widgetClass ) {
-			register_widget( $widgetClass );
-		} );
-
-		$this->widgets[] = $widgetClass;
-
-		return $this;
-	}
-
-	public function getRegisteredWidgets(): array {
-		return $this->widgets;
-	}
-
-	public function isWidgetRegistered( string $widgetClass ): bool {
-		return in_array( $widgetClass, $this->widgets, true );
+	private function __construct() {
 	}
 
 	public static function getInstance(): self {
-		static $instance = null;
-		if ( $instance === null ) {
-			$instance = new self();
+		if ( self::$instance === null ) {
+			self::$instance = new self();
 		}
-		return $instance;
+		return self::$instance;
+	}
+
+	public function registerWidget( string $widgetClass ): self {
+		$this->widgets[] = $widgetClass;
+		return $this;
+	}
+
+	public function getWidgets(): array {
+		return $this->widgets;
+	}
+
+	public function register(): void {
+		add_action( 'widgets_init', [ $this, 'doRegisterWidgets' ] );
+	}
+
+	public function doRegisterWidgets(): void {
+		foreach ( $this->widgets as $widget ) {
+			register_widget( $widget );
+		}
 	}
 }

@@ -2,9 +2,12 @@
 
 namespace Origamiez\Engine;
 
+use Exception;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerExceptionInterface;
+use ReflectionClass;
+use ReflectionException;
 
 class Container implements ContainerInterface {
 
@@ -29,7 +32,7 @@ class Container implements ContainerInterface {
 
 	public function get( string $id ): mixed {
 		if ( ! $this->has( $id ) ) {
-			throw new class( "Service '{$id}' not found in container" ) extends \Exception implements NotFoundExceptionInterface {
+			throw new class( "Service '{$id}' not found in container" ) extends Exception implements NotFoundExceptionInterface {
 			};
 		}
 
@@ -75,6 +78,11 @@ class Container implements ContainerInterface {
 		}
 	}
 
+	/**
+	 * @throws ContainerExceptionInterface
+	 * @throws ReflectionException
+	 * @throws NotFoundExceptionInterface
+	 */
 	public function make( string $id, array $parameters = [] ): mixed {
 		if ( ! class_exists( $id ) ) {
 			return $this->get( $id );
@@ -84,7 +92,7 @@ class Container implements ContainerInterface {
 			return new $id();
 		}
 
-		$reflection = new \ReflectionClass( $id );
+		$reflection = new ReflectionClass( $id );
 		return $reflection->newInstanceArgs( $parameters );
 	}
 }

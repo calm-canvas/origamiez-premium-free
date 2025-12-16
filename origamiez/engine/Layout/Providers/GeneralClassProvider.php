@@ -2,15 +2,18 @@
 
 namespace Origamiez\Engine\Layout\Providers;
 
+use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Layout\BodyClassProviderInterface;
 
 class GeneralClassProvider implements BodyClassProviderInterface {
 
 	private ConfigManager $configManager;
+	private BodyClassConfig $bodyClassConfig;
 
-	public function __construct( ConfigManager $configManager ) {
+	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
 		$this->configManager = $configManager;
+		$this->bodyClassConfig = $bodyClassConfig;
 	}
 
 	public function provide( array $classes ): array {
@@ -29,17 +32,17 @@ class GeneralClassProvider implements BodyClassProviderInterface {
 		$bgColor = get_background_color();
 
 		if ( $bgImage || $bgColor ) {
-			$classes[] = 'origamiez_custom_bg';
+			$classes[] = $this->bodyClassConfig::CUSTOM_BG;
 		} else {
-			$classes[] = 'without_bg_slides';
+			$classes[] = $this->bodyClassConfig::WITHOUT_BG_SLIDES;
 		}
 	}
 
 	private function addLayoutClasses( array &$classes ): void {
 		if ( 1 !== (int) get_theme_mod( 'use_layout_fullwidth', 0 ) ) {
-			$classes[] = 'origamiez-boxer';
+			$classes[] = $this->bodyClassConfig::LAYOUT_BOXER;
 		} else {
-			$classes[] = 'origamiez-fluid';
+			$classes[] = $this->bodyClassConfig::LAYOUT_FLUID;
 		}
 	}
 
@@ -49,21 +52,21 @@ class GeneralClassProvider implements BodyClassProviderInterface {
 			|| is_active_sidebar( 'footer-5' );
 
 		if ( $hasFooter ) {
-			$classes[] = 'origamiez-show-footer-area';
+			$classes[] = $this->bodyClassConfig::SHOW_FOOTER_AREA;
 		}
 	}
 
 	private function addSkinClasses( array &$classes ): void {
 		$skin = get_theme_mod( 'skin', 'default' );
 		if ( $skin ) {
-			$classes[] = sprintf( 'origamiez-skin-%s', $skin );
+			$classes[] = $this->bodyClassConfig::SKIN_PREFIX . $skin;
 		}
 	}
 
 	private function addHeaderClasses( array &$classes ): void {
 		$headerStyle = get_theme_mod( 'header_style', 'left-right' );
 		if ( $headerStyle ) {
-			$classes[] = sprintf( 'origamiez-header-style-%s', $headerStyle );
+			$classes[] = $this->bodyClassConfig::HEADER_STYLE_PREFIX . $headerStyle;
 		}
 	}
 
@@ -74,12 +77,12 @@ class GeneralClassProvider implements BodyClassProviderInterface {
 
 		$sidebarRight = apply_filters( 'origamiez_get_current_sidebar', 'right', 'right' );
 		if ( ! is_active_sidebar( $sidebarRight ) ) {
-			$classes[] = 'origamiez-missing-sidebar-right';
+			$classes[] = $this->bodyClassConfig::MISSING_SIDEBAR_RIGHT;
 		}
 
 		$sidebarLeft = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
 		if ( ! is_active_sidebar( $sidebarLeft ) ) {
-			$classes[] = 'origamiez-missing-sidebar-left';
+			$classes[] = $this->bodyClassConfig::MISSING_SIDEBAR_LEFT;
 		}
 	}
 }

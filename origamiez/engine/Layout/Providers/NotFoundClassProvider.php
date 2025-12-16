@@ -2,15 +2,18 @@
 
 namespace Origamiez\Engine\Layout\Providers;
 
+use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Layout\BodyClassProviderInterface;
 
 class NotFoundClassProvider implements BodyClassProviderInterface {
 
 	private ConfigManager $configManager;
+	private BodyClassConfig $bodyClassConfig;
 
-	public function __construct( ConfigManager $configManager ) {
+	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
 		$this->configManager = $configManager;
+		$this->bodyClassConfig = $bodyClassConfig;
 	}
 
 	public function provide( array $classes ): array {
@@ -18,9 +21,9 @@ class NotFoundClassProvider implements BodyClassProviderInterface {
 			return $classes;
 		}
 
-		$classes[] = 'origamiez-layout-right-sidebar';
-		$classes[] = 'origamiez-layout-single';
-		$classes[] = 'origamiez-layout-full-width';
+		$classes[] = $this->bodyClassConfig::LAYOUT_RIGHT_SIDEBAR;
+		$classes[] = $this->bodyClassConfig::LAYOUT_SINGLE;
+		$classes[] = $this->bodyClassConfig::LAYOUT_FULL_WIDTH;
 
 		return $classes;
 	}
