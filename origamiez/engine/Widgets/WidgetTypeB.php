@@ -1,16 +1,39 @@
 <?php
+/**
+ * Widget Type B
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets;
 
+/**
+ * Class WidgetTypeB
+ */
 class WidgetTypeB {
 
+	/**
+	 * Instance.
+	 *
+	 * @var array
+	 */
 	private array $instance = array();
 
+	/**
+	 * WidgetTypeB constructor.
+	 *
+	 * @param array $instance Widget instance.
+	 */
 	public function __construct( array $instance = array() ) {
-		$this->instance = wp_parse_args( $instance, $this->getDefaults() );
+		$this->instance = wp_parse_args( $instance, $this->get_defaults() );
 	}
 
-	public static function getDefaults(): array {
+	/**
+	 * Get defaults.
+	 *
+	 * @return array
+	 */
+	public static function get_defaults(): array {
 		return array(
 			'excerpt_words_limit' => 0,
 			'is_show_author'      => 0,
@@ -19,23 +42,48 @@ class WidgetTypeB {
 		);
 	}
 
-	public function getExcerptWordLimit(): int {
+	/**
+	 * Get excerpt word limit.
+	 *
+	 * @return int
+	 */
+	public function get_excerpt_word_limit(): int {
 		return (int) ( $this->instance['excerpt_words_limit'] ?? 0 );
 	}
 
-	public function isShowAuthor(): bool {
+	/**
+	 * Is show author.
+	 *
+	 * @return bool
+	 */
+	public function is_show_author(): bool {
 		return (bool) ( $this->instance['is_show_author'] ?? 0 );
 	}
 
-	public function isShowDate(): bool {
+	/**
+	 * Is show date.
+	 *
+	 * @return bool
+	 */
+	public function is_show_date(): bool {
 		return (bool) ( $this->instance['is_show_date'] ?? 1 );
 	}
 
-	public function isShowComments(): bool {
+	/**
+	 * Is show comments.
+	 *
+	 * @return bool
+	 */
+	public function is_show_comments(): bool {
 		return (bool) ( $this->instance['is_show_comments'] ?? 1 );
 	}
 
-	public function getFields(): array {
+	/**
+	 * Get fields.
+	 *
+	 * @return array
+	 */
+	public function get_fields(): array {
 		return array(
 			'excerpt_words_limit' => array(
 				'label'   => esc_html__( 'Excerpt words limit:', 'origamiez' ),
@@ -64,38 +112,48 @@ class WidgetTypeB {
 		);
 	}
 
-	public function renderMetadata( string $classes = '' ): void {
-		if ( ! $this->isShowDate() && ! $this->isShowComments() && ! $this->isShowAuthor() ) {
+	/**
+	 * Render metadata.
+	 *
+	 * @param string $classes Additional classes.
+	 */
+	public function render_metadata( string $classes = '' ): void {
+		if ( ! $this->is_show_date() && ! $this->is_show_comments() && ! $this->is_show_author() ) {
 			return;
 		}
 
 		?>
 		<p class="<?php echo esc_attr( $classes ); ?>">
-			<?php if ( $this->isShowDate() ) : ?>
+			<?php if ( $this->is_show_date() ) : ?>
 				<?php get_template_part( 'parts/metadata/date' ); ?>
 			<?php endif; ?>
 
-			<?php if ( $this->isShowDate() && $this->isShowComments() ) : ?>
+			<?php if ( $this->is_show_date() && $this->is_show_comments() ) : ?>
 				<?php get_template_part( 'parts/metadata/divider' ); ?>
 			<?php endif; ?>
 
-			<?php if ( $this->isShowComments() ) : ?>
+			<?php if ( $this->is_show_comments() ) : ?>
 				<?php get_template_part( 'parts/metadata/comments' ); ?>
 			<?php endif; ?>
 
-			<?php if ( $this->isShowAuthor() && ( $this->isShowComments() || $this->isShowDate() ) ) : ?>
+			<?php if ( $this->is_show_author() && ( $this->is_show_comments() || $this->is_show_date() ) ) : ?>
 				<?php get_template_part( 'parts/metadata/divider' ); ?>
 			<?php endif; ?>
 
-			<?php if ( $this->isShowAuthor() ) : ?>
+			<?php if ( $this->is_show_author() ) : ?>
 				<?php get_template_part( 'parts/metadata/author', 'blog' ); ?>
 			<?php endif; ?>
 		</p>
 		<?php
 	}
 
-	public function renderExcerpt( string $classes = '' ): void {
-		$limit = $this->getExcerptWordLimit();
+	/**
+	 * Render excerpt.
+	 *
+	 * @param string $classes Additional classes.
+	 */
+	public function render_excerpt( string $classes = '' ): void {
+		$limit = $this->get_excerpt_word_limit();
 		if ( ! $limit ) {
 			return;
 		}

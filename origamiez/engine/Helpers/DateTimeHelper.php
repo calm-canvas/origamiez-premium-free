@@ -1,12 +1,27 @@
 <?php
+/**
+ * DateTime Helper
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Helpers;
 
+/**
+ * Class DateTimeHelper
+ */
 class DateTimeHelper {
 
-	public static function humanTimeDiff( int $from, int $to = 0 ): string {
+	/**
+	 * Get human-readable time difference.
+	 *
+	 * @param int $from From time.
+	 * @param int $to To time.
+	 * @return string
+	 */
+	public static function human_time_diff( int $from, int $to = 0 ): string {
 		if ( 0 === $to ) {
-			$to = current_time( 'timestamp' );
+			$to = time();
 		}
 
 		$periods = array(
@@ -30,7 +45,8 @@ class DateTimeHelper {
 			$tense      = esc_attr__( 'from now', 'origamiez' );
 		}
 
-		for ( $j = 0; ( $difference >= $lengths[ $j ] && $j < count( $lengths ) - 1 ); $j++ ) {
+		$lengths_count = count( $lengths );
+		for ( $j = 0; ( $difference >= $lengths[ $j ] && $j < $lengths_count - 1 ); $j++ ) {
 			$difference /= $lengths[ $j ];
 		}
 
@@ -43,29 +59,43 @@ class DateTimeHelper {
 		return "$difference $periods[$j] {$tense}";
 	}
 
-	public static function getFormattedDate( int $postId = 0, string $format = '' ): string {
-		if ( 0 === $postId ) {
-			$postId = get_the_ID();
+	/**
+	 * Get formatted date.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $format Date format.
+	 * @return string
+	 */
+	public static function get_formatted_date( int $post_id = 0, string $format = '' ): string {
+		if ( 0 === $post_id ) {
+			$post_id = get_the_ID();
 		}
 
 		if ( empty( $format ) ) {
 			$format = get_option( 'date_format' );
 		}
 
-		$timestamp = get_the_time( 'U', $postId );
+		$timestamp = get_the_time( 'U', $post_id );
 		return date_i18n( $format, $timestamp );
 	}
 
-	public static function getFormattedTime( int $postId = 0, string $format = '' ): string {
-		if ( 0 === $postId ) {
-			$postId = get_the_ID();
+	/**
+	 * Get formatted time.
+	 *
+	 * @param int    $post_id Post ID.
+	 * @param string $format Time format.
+	 * @return string
+	 */
+	public static function get_formatted_time( int $post_id = 0, string $format = '' ): string {
+		if ( 0 === $post_id ) {
+			$post_id = get_the_ID();
 		}
 
 		if ( empty( $format ) ) {
 			$format = get_option( 'time_format' );
 		}
 
-		$timestamp = get_the_time( 'U', $postId );
+		$timestamp = get_the_time( 'U', $post_id );
 		return date_i18n( $format, $timestamp );
 	}
 }

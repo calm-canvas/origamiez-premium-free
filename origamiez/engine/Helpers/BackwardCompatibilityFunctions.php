@@ -19,31 +19,31 @@ if ( ! function_exists( 'origamiez_get_str_uglify' ) ) {
 
 if ( ! function_exists( 'origamiez_get_image_src' ) ) {
 	function origamiez_get_image_src( int $postId = 0, string $size = 'thumbnail' ): string {
-		return ImageHelper::getImageSrc( $postId, $size );
+		return ImageHelper::get_image_src( $postId, $size );
 	}
 }
 
 if ( ! function_exists( 'origamiez_remove_hardcoded_image_size' ) ) {
 	function origamiez_remove_hardcoded_image_size( string $html ): string {
-		return ImageHelper::removeHardcodedDimensions( $html );
+		return ImageHelper::remove_hardcoded_dimensions( $html );
 	}
 }
 
 if ( ! function_exists( 'origamiez_human_time_diff' ) ) {
 	function origamiez_human_time_diff( int $from ): string {
-		return DateTimeHelper::humanTimeDiff( $from );
+		return DateTimeHelper::human_time_diff( $from );
 	}
 }
 
 if ( ! function_exists( 'origamiez_get_metadata_prefix' ) ) {
 	function origamiez_get_metadata_prefix( bool $echo = true ): string {
-		return MetadataHelper::getMetadataPrefix( $echo );
+		return MetadataHelper::get_metadata_prefix( $echo );
 	}
 }
 
 if ( ! function_exists( 'origamiez_get_wrap_classes' ) ) {
 	function origamiez_get_wrap_classes(): string {
-		return CssUtilHelper::getWrapClasses();
+		return CssUtilHelper::get_wrap_classes();
 	}
 }
 
@@ -55,24 +55,24 @@ if ( ! function_exists( 'origamiez_register_new_image_sizes' ) ) {
 
 if ( ! function_exists( 'origamiez_get_socials' ) ) {
 	function origamiez_get_socials(): array {
-		return SocialConfig::getSocials();
+		return SocialConfig::get_socials();
 	}
 }
 
 if ( ! function_exists( 'origamiez_get_allowed_tags' ) ) {
 	function origamiez_get_allowed_tags(): array {
-		return AllowedTagsConfig::getAllowedTags();
+		return AllowedTagsConfig::get_allowed_tags();
 	}
 }
 
 if ( ! function_exists( 'origamiez_sanitize_content' ) ) {
 	function origamiez_sanitize_content( string $content ): string {
-		return AllowedTagsConfig::sanitizeContent( $content );
+		return AllowedTagsConfig::sanitize_content( $content );
 	}
 }
 
 if ( ! function_exists( 'origamiez_get_format_icon' ) ) {
 	function origamiez_get_format_icon( string $format ): string {
-		return FormatHelper::getFormatIcon( $format );
+		return FormatHelper::get_format_icon( $format );
 	}
 }

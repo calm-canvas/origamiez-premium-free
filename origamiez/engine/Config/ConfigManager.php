@@ -1,24 +1,54 @@
 <?php
+/**
+ * Config Manager
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class ConfigManager
+ */
 class ConfigManager {
 
-	private array $config          = array();
+	/**
+	 * Config array.
+	 *
+	 * @var array
+	 */
+	private array $config = array();
+
+	/**
+	 * Instance.
+	 *
+	 * @var ?self
+	 */
 	private static ?self $instance = null;
 
+	/**
+	 * ConfigManager constructor.
+	 */
 	private function __construct() {
-		$this->initializeDefaults();
+		$this->initialize_defaults();
 	}
 
-	public static function getInstance(): self {
-		if ( self::$instance === null ) {
+	/**
+	 * Get instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance(): self {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
 	}
 
-	private function initializeDefaults(): void {
+	/**
+	 * Initialize defaults.
+	 */
+	private function initialize_defaults(): void {
 		$this->config = array(
 			'theme'         => array(
 				'name'          => 'Origamiez',
@@ -53,6 +83,13 @@ class ConfigManager {
 		);
 	}
 
+	/**
+	 * Get config value.
+	 *
+	 * @param string $key Config key.
+	 * @param mixed  $default Default value.
+	 * @return mixed
+	 */
 	public function get( string $key, mixed $default = null ): mixed {
 		$keys  = explode( '.', $key );
 		$value = $this->config;
@@ -67,6 +104,12 @@ class ConfigManager {
 		return $value;
 	}
 
+	/**
+	 * Set config value.
+	 *
+	 * @param string $key Config key.
+	 * @param mixed  $value Config value.
+	 */
 	public function set( string $key, mixed $value ): void {
 		$keys   = explode( '.', $key );
 		$target = &$this->config;
@@ -81,6 +124,12 @@ class ConfigManager {
 		$target = $value;
 	}
 
+	/**
+	 * Check if config key exists.
+	 *
+	 * @param string $key Config key.
+	 * @return bool
+	 */
 	public function has( string $key ): bool {
 		$keys  = explode( '.', $key );
 		$value = $this->config;
@@ -95,28 +144,65 @@ class ConfigManager {
 		return true;
 	}
 
-	public function getAll(): array {
+	/**
+	 * Get all config.
+	 *
+	 * @return array
+	 */
+	public function get_all(): array {
 		return $this->config;
 	}
 
+	/**
+	 * Merge config.
+	 *
+	 * @param array $config Config to merge.
+	 */
 	public function merge( array $config ): void {
 		$this->config = array_merge_recursive( $this->config, $config );
 	}
 
-	public function getThemeOption( string $option, mixed $default = null ): mixed {
+	/**
+	 * Get theme option.
+	 *
+	 * @param string $option Option name.
+	 * @param mixed  $default Default value.
+	 * @return mixed
+	 */
+	public function get_theme_option( string $option, mixed $default = null ): mixed {
 		return get_theme_mod( $option, $default );
 	}
 
-	public function setThemeOption( string $option, mixed $value ): bool {
+	/**
+	 * Set theme option.
+	 *
+	 * @param string $option Option name.
+	 * @param mixed  $value Option value.
+	 * @return bool
+	 */
+	public function set_theme_option( string $option, mixed $value ): bool {
 		return set_theme_mod( $option, $value );
 	}
 
-	public function getImageSizes(): array {
+	/**
+	 * Get image sizes.
+	 *
+	 * @return array
+	 */
+	public function get_image_sizes(): array {
 		return $this->get( 'image_sizes', array() );
 	}
 
-	public function addImageSize( string $name, int $width, int $height, bool $crop = false ): void {
-		$sizes          = $this->getImageSizes();
+	/**
+	 * Add image size.
+	 *
+	 * @param string $name Image size name.
+	 * @param int    $width Image width.
+	 * @param int    $height Image height.
+	 * @param bool   $crop Crop image.
+	 */
+	public function add_image_size( string $name, int $width, int $height, bool $crop = false ): void {
+		$sizes          = $this->get_image_sizes();
 		$sizes[ $name ] = array(
 			'width'  => $width,
 			'height' => $height,
@@ -125,15 +211,30 @@ class ConfigManager {
 		$this->set( 'image_sizes', $sizes );
 	}
 
-	public function getMenus(): array {
+	/**
+	 * Get menus.
+	 *
+	 * @return array
+	 */
+	public function get_menus(): array {
 		return $this->get( 'menus', array() );
 	}
 
-	public function getContentWidth(): int {
+	/**
+	 * Get content width.
+	 *
+	 * @return int
+	 */
+	public function get_content_width(): int {
 		return $this->get( 'theme.content_width', 817 );
 	}
 
-	public function setContentWidth( int $width ): void {
+	/**
+	 * Set content width.
+	 *
+	 * @param int $width Content width.
+	 */
+	public function set_content_width( int $width ): void {
 		$this->set( 'theme.content_width', $width );
 	}
 }

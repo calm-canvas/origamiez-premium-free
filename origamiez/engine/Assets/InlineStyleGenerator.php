@@ -1,30 +1,54 @@
 <?php
+/**
+ * Generates inline styles.
+ *
+ * @package Origamiez
+ * @subpackage Origamiez/Engine/Assets
+ */
 
 namespace Origamiez\Engine\Assets;
 
+/**
+ * Class InlineStyleGenerator
+ */
 class InlineStyleGenerator {
 
 	private const PREFIX = 'origamiez_';
 
-	public function addInlineStyles( StylesheetManager $stylesheetManager ): void {
-		$this->addColorVariables( $stylesheetManager );
-		$this->addFontVariables( $stylesheetManager );
+	/**
+	 * Adds inline styles.
+	 *
+	 * @param StylesheetManager $stylesheet_manager The stylesheet manager.
+	 */
+	public function add_inline_styles( StylesheetManager $stylesheet_manager ): void {
+		$this->add_color_variables( $stylesheet_manager );
+		$this->add_font_variables( $stylesheet_manager );
 	}
 
-	private function addColorVariables( StylesheetManager $stylesheetManager ): void {
+	/**
+	 * Adds color variables as inline styles.
+	 *
+	 * @param StylesheetManager $stylesheet_manager The stylesheet manager.
+	 */
+	private function add_color_variables( StylesheetManager $stylesheet_manager ): void {
 		$skin = get_theme_mod( 'skin', 'default' );
 
 		if ( 'custom' !== $skin ) {
 			return;
 		}
 
-		$colorVariables = $this->buildColorVariables();
-		$css            = ':root {' . $colorVariables . '}';
+		$color_variables = $this->build_color_variables();
+		$css             = ':root {' . $color_variables . '}';
 
-		$stylesheetManager->addInlineStyle( $css );
+		$stylesheet_manager->add_inline_style( $css );
 	}
 
-	private function buildColorVariables(): string {
+	/**
+	 * Builds the CSS for color variables.
+	 *
+	 * @return string The CSS for color variables.
+	 */
+	private function build_color_variables(): string {
 		$colors = array(
 			'--body-color'                           => 'body_color',
 			'--heading-color'                        => 'heading_color',
@@ -48,7 +72,7 @@ class InlineStyleGenerator {
 			'--color-success'                        => 'color_success',
 		);
 
-		$defaultColors = array(
+		$default_colors = array(
 			'body_color'                           => '#333333',
 			'heading_color'                        => '#111111',
 			'link_color'                           => '#111111',
@@ -78,25 +102,35 @@ class InlineStyleGenerator {
 		$css .= '--overlay_white: rgba(255, 255, 255, 0.85);';
 		$css .= '--overlay_black: rgba(0, 0, 0, 0.75);';
 
-		foreach ( $colors as $cssVar => $option ) {
-			$default = $defaultColors[ $option ] ?? '';
+		foreach ( $colors as $css_var => $option ) {
+			$default = $default_colors[ $option ] ?? '';
 			$value   = get_theme_mod( $option, $default );
-			$css    .= $cssVar . ': ' . $value . ';';
+			$css    .= $css_var . ': ' . $value . ';';
 		}
 
 		return $css;
 	}
 
-	private function addFontVariables( StylesheetManager $stylesheetManager ): void {
-		$cssVariables = $this->buildFontVariables();
+	/**
+	 * Adds font variables as inline styles.
+	 *
+	 * @param StylesheetManager $stylesheet_manager The stylesheet manager.
+	 */
+	private function add_font_variables( StylesheetManager $stylesheet_manager ): void {
+		$css_variables = $this->build_font_variables();
 
-		if ( ! empty( $cssVariables ) ) {
-			$css = ':root {' . $cssVariables . '}';
-			$stylesheetManager->addInlineStyle( $css );
+		if ( ! empty( $css_variables ) ) {
+			$css = ':root {' . $css_variables . '}';
+			$stylesheet_manager->add_inline_style( $css );
 		}
 	}
 
-	private function buildFontVariables(): string {
+	/**
+	 * Builds the CSS for font variables.
+	 *
+	 * @return string The CSS for font variables.
+	 */
+	private function build_font_variables(): string {
 		$rules = array(
 			'family'      => '-family',
 			'size'        => '-size',
@@ -105,7 +139,7 @@ class InlineStyleGenerator {
 			'line_height' => '-line-height',
 		);
 
-		$fontObjects = array(
+		$font_objects = array(
 			'font_body'          => 'font-body',
 			'font_menu'          => 'font-menu',
 			'font_site_title'    => 'font-site-title',
@@ -121,16 +155,16 @@ class InlineStyleGenerator {
 
 		$css = '';
 
-		foreach ( $fontObjects as $fontObjectSlug => $fontVariableName ) {
-			$isEnable = (int) get_theme_mod( "{$fontObjectSlug}_is_enable", 0 );
+		foreach ( $font_objects as $font_object_slug => $font_variable_name ) {
+			$is_enable = (int) get_theme_mod( "{$font_object_slug}_is_enable", 0 );
 
-			if ( $isEnable ) {
-				foreach ( $rules as $ruleSlug => $ruleSuffix ) {
-					$fontData = get_theme_mod( "{$fontObjectSlug}_{$ruleSlug}" );
+			if ( $is_enable ) {
+				foreach ( $rules as $rule_slug => $rule_suffix ) {
+					$font_data = get_theme_mod( "{$font_object_slug}_{$rule_slug}" );
 
-					if ( ! empty( $fontData ) ) {
-						$variableName = $fontVariableName . $ruleSuffix;
-						$css         .= "--{$variableName}: {$fontData};";
+					if ( ! empty( $font_data ) ) {
+						$variable_name = $font_variable_name . $rule_suffix;
+						$css          .= "--{$variable_name}: {$font_data};";
 					}
 				}
 			}

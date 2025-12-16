@@ -1,4 +1,9 @@
 <?php
+/**
+ * Theme Bootstrap
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine;
 
@@ -28,12 +33,37 @@ use Origamiez\Engine\Widgets\WidgetClassManager;
 use Origamiez\Engine\Widgets\WidgetFactory;
 use Origamiez\Engine\Widgets\SidebarRegistry;
 
+/**
+ * Class ThemeBootstrap
+ *
+ * @package Origamiez\Engine
+ */
 class ThemeBootstrap {
 
+	/**
+	 * The container instance.
+	 *
+	 * @var Container
+	 */
 	private Container $container;
+
+	/**
+	 * The config manager instance.
+	 *
+	 * @var ConfigManager
+	 */
 	private ConfigManager $configManager;
+
+	/**
+	 * The hook registry instance.
+	 *
+	 * @var HookRegistry
+	 */
 	private HookRegistry $hookRegistry;
 
+	/**
+	 * ThemeBootstrap constructor.
+	 */
 	public function __construct() {
 		$this->container = Container::getInstance();
 		$this->setupContainer();
@@ -41,6 +71,9 @@ class ThemeBootstrap {
 		$this->hookRegistry  = $this->container->get( 'hook_registry' );
 	}
 
+	/**
+	 * Setup the container.
+	 */
 	private function setupContainer(): void {
 		$this->container->singleton(
 			'config_manager',
@@ -148,6 +181,9 @@ class ThemeBootstrap {
 		);
 	}
 
+	/**
+	 * Boot the theme.
+	 */
 	public function boot(): void {
 		$this->registerHooks();
 		$this->registerAssets();
@@ -160,26 +196,41 @@ class ThemeBootstrap {
 		do_action( 'origamiez_engine_booted' );
 	}
 
+	/**
+	 * Register hooks.
+	 */
 	private function registerHooks(): void {
 		$this->hookRegistry->registerHooks( new ThemeHooks() );
 		$this->hookRegistry->registerHooks( new FrontendHooks( $this->container ) );
 	}
 
+	/**
+	 * Register assets.
+	 */
 	private function registerAssets(): void {
 		$assetManager = $this->container->get( 'asset_manager' );
 		$assetManager->register();
 	}
 
+	/**
+	 * Register layout.
+	 */
 	private function registerLayout(): void {
 		$bodyClassManager = $this->container->get( 'body_class_manager' );
 		$bodyClassManager->register();
 	}
 
+	/**
+	 * Register display.
+	 */
 	private function registerDisplay(): void {
 		$breadcrumbGenerator = $this->container->get( 'breadcrumb_generator' );
 		$breadcrumbGenerator->register();
 	}
 
+	/**
+	 * Register customizer.
+	 */
 	private function registerCustomizer(): void {
 		$customizerService = $this->container->get( 'customizer_service' );
 
@@ -196,33 +247,64 @@ class ThemeBootstrap {
 		$customizerService->register();
 	}
 
+	/**
+	 * Get the container instance.
+	 *
+	 * @return Container
+	 */
 	public function getContainer(): Container {
 		return $this->container;
 	}
 
+	/**
+	 * Get the config manager instance.
+	 *
+	 * @return ConfigManager
+	 */
 	public function getConfigManager(): ConfigManager {
 		return $this->configManager;
 	}
 
+	/**
+	 * Get the hook registry instance.
+	 *
+	 * @return HookRegistry
+	 */
 	public function getHookRegistry(): HookRegistry {
 		return $this->hookRegistry;
 	}
 
+	/**
+	 * Register widgets.
+	 */
 	private function registerWidgets(): void {
 		$widgetFactory = $this->container->get( 'widget_factory' );
 		$widgetFactory->boot();
 	}
 
+	/**
+	 * Register sidebars.
+	 */
 	private function registerSidebars(): void {
 		$sidebarRegistry = $this->container->get( 'sidebar_registry' );
 		$sidebarRegistry->registerDefaultSidebars();
 		$sidebarRegistry->register();
 	}
 
+	/**
+	 * Get the widget factory instance.
+	 *
+	 * @return WidgetFactory
+	 */
 	public function getWidgetFactory(): WidgetFactory {
 		return $this->container->get( 'widget_factory' );
 	}
 
+	/**
+	 * Get the sidebar registry instance.
+	 *
+	 * @return SidebarRegistry
+	 */
 	public function getSidebarRegistry(): SidebarRegistry {
 		return $this->container->get( 'sidebar_registry' );
 	}

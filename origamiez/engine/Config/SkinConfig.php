@@ -1,17 +1,42 @@
 <?php
+/**
+ * Skin Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class SkinConfig
+ */
 class SkinConfig {
 
-	private array $skins       = array();
-	private string $activeSkin = 'default';
+	/**
+	 * Skins.
+	 *
+	 * @var array
+	 */
+	private array $skins = array();
 
+	/**
+	 * Active skin.
+	 *
+	 * @var string
+	 */
+	private string $active_skin = 'default';
+
+	/**
+	 * SkinConfig constructor.
+	 */
 	public function __construct() {
-		$this->initializeSkins();
+		$this->initialize_skins();
 	}
 
-	private function initializeSkins(): void {
+	/**
+	 * Initialize skins.
+	 */
+	private function initialize_skins(): void {
 		$this->skins = array(
 			'default' => array(
 				'name'   => 'Default',
@@ -25,7 +50,13 @@ class SkinConfig {
 		);
 	}
 
-	public function registerSkin( string $id, array $config ): void {
+	/**
+	 * Register skin.
+	 *
+	 * @param string $id Skin ID.
+	 * @param array  $config Skin config.
+	 */
+	public function register_skin( string $id, array $config ): void {
 		$this->skins[ $id ] = array_merge(
 			array(
 				'name'   => $id,
@@ -36,39 +67,75 @@ class SkinConfig {
 		);
 	}
 
-	public function getSkin( string $id ): ?array {
+	/**
+	 * Get skin.
+	 *
+	 * @param string $id Skin ID.
+	 * @return array|null
+	 */
+	public function get_skin( string $id ): ?array {
 		return $this->skins[ $id ] ?? null;
 	}
 
-	public function getAllSkins(): array {
+	/**
+	 * Get all skins.
+	 *
+	 * @return array
+	 */
+	public function get_all_skins(): array {
 		return $this->skins;
 	}
 
-	public function getActiveSkin(): string {
-		return $this->activeSkin;
+	/**
+	 * Get active skin.
+	 *
+	 * @return string
+	 */
+	public function get_active_skin(): string {
+		return $this->active_skin;
 	}
 
-	public function setActiveSkin( string $id ): bool {
+	/**
+	 * Set active skin.
+	 *
+	 * @param string $id Skin ID.
+	 * @return bool
+	 */
+	public function set_active_skin( string $id ): bool {
 		if ( ! isset( $this->skins[ $id ] ) ) {
 			return false;
 		}
-		$this->activeSkin = $id;
+		$this->active_skin = $id;
 		return true;
 	}
 
-	public function getSkinColor( string $colorKey, string $skinId = null ): ?string {
-		$skin = $this->getSkin( $skinId ?? $this->activeSkin );
-		if ( $skin === null ) {
+	/**
+	 * Get skin color.
+	 *
+	 * @param string      $color_key Color key.
+	 * @param string|null $skin_id Skin ID.
+	 * @return string|null
+	 */
+	public function get_skin_color( string $color_key, string $skin_id = null ): ?string {
+		$skin = $this->get_skin( $skin_id ?? $this->active_skin );
+		if ( null === $skin ) {
 			return null;
 		}
-		return $skin['colors'][ $colorKey ] ?? null;
+		return $skin['colors'][ $color_key ] ?? null;
 	}
 
-	public function getSkinFont( string $fontKey, string $skinId = null ): ?array {
-		$skin = $this->getSkin( $skinId ?? $this->activeSkin );
-		if ( $skin === null ) {
+	/**
+	 * Get skin font.
+	 *
+	 * @param string      $font_key Font key.
+	 * @param string|null $skin_id Skin ID.
+	 * @return array|null
+	 */
+	public function get_skin_font( string $font_key, string $skin_id = null ): ?array {
+		$skin = $this->get_skin( $skin_id ?? $this->active_skin );
+		if ( null === $skin ) {
 			return null;
 		}
-		return $skin['fonts'][ $fontKey ] ?? null;
+		return $skin['fonts'][ $font_key ] ?? null;
 	}
 }

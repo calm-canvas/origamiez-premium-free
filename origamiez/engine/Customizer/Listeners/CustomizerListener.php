@@ -1,9 +1,19 @@
 <?php
+/**
+ * Customizer Listener
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Customizer\Listeners;
 
+/**
+ * Class CustomizerListener
+ */
 class CustomizerListener {
-	// Placeholder for future Unyson updates or other customizer events
+	/**
+	 * Listen for customizer events.
+	 */
 	public function listen(): void {
 		// add_action( '...', ... );
 	}
