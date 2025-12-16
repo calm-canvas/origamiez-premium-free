@@ -1,13 +1,26 @@
 <?php
+/**
+ * Blog Settings for Customizer
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class BlogSettings
+ */
 class BlogSettings implements SettingsInterface {
 
+	/**
+	 * Register blog settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		$service->registerSection(
+		$service->register_section(
 			'blog_posts',
 			array(
 				'panel' => 'origamiez_general',
@@ -15,7 +28,7 @@ class BlogSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'taxonomy_layout',
 			array(
 				'label'       => esc_attr__( 'Layout', 'origamiez' ),
@@ -32,7 +45,7 @@ class BlogSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'taxonomy_thumbnail_style',
 			array(
 				'label'       => esc_attr__( 'Thumbnail position', 'origamiez' ),

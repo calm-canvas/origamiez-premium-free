@@ -1,24 +1,51 @@
 <?php
+/**
+ * Sidebar Registry
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets;
 
 use Origamiez\Engine\Widgets\Sidebars\SidebarConfiguration;
 
+/**
+ * Class SidebarRegistry
+ */
 class SidebarRegistry {
 
+	/**
+	 * Sidebars.
+	 *
+	 * @var array
+	 */
 	private array $sidebars = array();
 
-	public function registerSidebar( SidebarConfiguration $sidebarConfig ): self {
-		$this->sidebars[ $sidebarConfig->getId() ] = $sidebarConfig;
+	/**
+	 * Register sidebar.
+	 *
+	 * @param SidebarConfiguration $sidebar_config Sidebar configuration.
+	 * @return self
+	 */
+	public function register_sidebar( SidebarConfiguration $sidebar_config ): self {
+		$this->sidebars[ $sidebar_config->get_id() ] = $sidebar_config;
 		return $this;
 	}
 
-	public function registerDefaultSidebars(): self {
-		add_action( 'init', array( $this, 'setupDefaultSidebars' ), 5 );
+	/**
+	 * Register default sidebars.
+	 *
+	 * @return self
+	 */
+	public function register_default_sidebars(): self {
+		add_action( 'init', array( $this, 'setup_default_sidebars' ), 5 );
 		return $this;
 	}
 
-	public function setupDefaultSidebars(): void {
+	/**
+	 * Setup default sidebars.
+	 */
+	public function setup_default_sidebars(): void {
 		$defaults = array(
 			'main-top'           => SidebarConfiguration::create( 'main-top', esc_attr__( 'Main Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
 			'main-center-top'    => SidebarConfiguration::create( 'main-center-top', esc_attr__( 'Main Center Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
@@ -37,22 +64,34 @@ class SidebarRegistry {
 		);
 
 		foreach ( $defaults as $sidebar ) {
-			$this->registerSidebar( $sidebar );
+			$this->register_sidebar( $sidebar );
 		}
 	}
 
+	/**
+	 * Register sidebars.
+	 */
 	public function register(): void {
-		add_action( 'init', array( $this, 'doRegisterSidebars' ), 30 );
-		add_filter( 'dynamic_sidebar_params', array( $this, 'handleDynamicSidebarParams' ) );
+		add_action( 'init', array( $this, 'do_register_sidebars' ), 30 );
+		add_filter( 'dynamic_sidebar_params', array( $this, 'handle_dynamic_sidebar_params' ) );
 	}
 
-	public function doRegisterSidebars(): void {
+	/**
+	 * Do register sidebars.
+	 */
+	public function do_register_sidebars(): void {
 		foreach ( $this->sidebars as $sidebar ) {
-			register_sidebar( $sidebar->toArray() );
+			register_sidebar( $sidebar->to_array() );
 		}
 	}
 
-	public function handleDynamicSidebarParams( array $params ): array {
+	/**
+	 * Handle dynamic sidebar params.
+	 *
+	 * @param array $params Sidebar params.
+	 * @return array
+	 */
+	public function handle_dynamic_sidebar_params( array $params ): array {
 		global $wp_registered_widgets;
 		$widget_id  = $params[0]['widget_id'];
 		$widget_obj = $wp_registered_widgets[ $widget_id ];
@@ -67,17 +106,33 @@ class SidebarRegistry {
 		return $params;
 	}
 
-	public function getSidebarById( string $id ): ?SidebarConfiguration {
+	/**
+	 * Get sidebar by ID.
+	 *
+	 * @param string $id Sidebar ID.
+	 * @return SidebarConfiguration|null
+	 */
+	public function get_sidebar_by_id( string $id ): ?SidebarConfiguration {
 		return $this->sidebars[ $id ] ?? null;
 	}
 
-	public function getSidebars(): array {
+	/**
+	 * Get sidebars.
+	 *
+	 * @return array
+	 */
+	public function get_sidebars(): array {
 		return $this->sidebars;
 	}
 
-	public static function getInstance(): self {
+	/**
+	 * Get instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance(): self {
 		static $instance = null;
-		if ( $instance === null ) {
+		if ( null === $instance ) {
 			$instance = new self();
 		}
 		return $instance;

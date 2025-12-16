@@ -1,19 +1,50 @@
 <?php
+/**
+ * Font Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class FontConfig
+ */
 class FontConfig {
 
-	private array $fonts        = array();
-	private array $fontSizes    = array();
-	private string $defaultFont = 'default';
+	/**
+	 * Fonts.
+	 *
+	 * @var array
+	 */
+	private array $fonts = array();
 
+	/**
+	 * Font sizes.
+	 *
+	 * @var array
+	 */
+	private array $font_sizes = array();
+
+	/**
+	 * Default font.
+	 *
+	 * @var string
+	 */
+	private string $default_font = 'default';
+
+	/**
+	 * FontConfig constructor.
+	 */
 	public function __construct() {
-		$this->initializeFonts();
-		$this->initializeSizes();
+		$this->initialize_fonts();
+		$this->initialize_sizes();
 	}
 
-	private function initializeFonts(): void {
+	/**
+	 * Initialize fonts.
+	 */
+	private function initialize_fonts(): void {
 		$this->fonts = array(
 			'default' => array(
 				'name'     => 'Default Font Stack',
@@ -30,8 +61,11 @@ class FontConfig {
 		);
 	}
 
-	private function initializeSizes(): void {
-		$this->fontSizes = array(
+	/**
+	 * Initialize sizes.
+	 */
+	private function initialize_sizes(): void {
+		$this->font_sizes = array(
 			'small'  => '12px',
 			'base'   => '14px',
 			'medium' => '16px',
@@ -46,7 +80,13 @@ class FontConfig {
 		);
 	}
 
-	public function registerFont( string $id, array $config ): void {
+	/**
+	 * Register font.
+	 *
+	 * @param string $id Font ID.
+	 * @param array  $config Font config.
+	 */
+	public function register_font( string $id, array $config ): void {
 		$this->fonts[ $id ] = array_merge(
 			array(
 				'name'     => $id,
@@ -58,49 +98,105 @@ class FontConfig {
 		);
 	}
 
-	public function getFont( string $id ): ?array {
+	/**
+	 * Get font.
+	 *
+	 * @param string $id Font ID.
+	 * @return array|null
+	 */
+	public function get_font( string $id ): ?array {
 		return $this->fonts[ $id ] ?? null;
 	}
 
-	public function getAllFonts(): array {
+	/**
+	 * Get all fonts.
+	 *
+	 * @return array
+	 */
+	public function get_all_fonts(): array {
 		return $this->fonts;
 	}
 
-	public function getDefaultFont(): string {
-		return $this->defaultFont;
+	/**
+	 * Get default font.
+	 *
+	 * @return string
+	 */
+	public function get_default_font(): string {
+		return $this->default_font;
 	}
 
-	public function setDefaultFont( string $id ): bool {
+	/**
+	 * Set default font.
+	 *
+	 * @param string $id Font ID.
+	 * @return bool
+	 */
+	public function set_default_font( string $id ): bool {
 		if ( ! isset( $this->fonts[ $id ] ) ) {
 			return false;
 		}
-		$this->defaultFont = $id;
+		$this->default_font = $id;
 		return true;
 	}
 
-	public function getFontFamily( string $id ): string {
-		$font = $this->getFont( $id );
+	/**
+	 * Get font family.
+	 *
+	 * @param string $id Font ID.
+	 * @return string
+	 */
+	public function get_font_family( string $id ): string {
+		$font = $this->get_font( $id );
 		return $font['family'] ?? '';
 	}
 
-	public function getFontFallback( string $id ): string {
-		$font = $this->getFont( $id );
+	/**
+	 * Get font fallback.
+	 *
+	 * @param string $id Font ID.
+	 * @return string
+	 */
+	public function get_font_fallback( string $id ): string {
+		$font = $this->get_font( $id );
 		return $font['fallback'] ?? 'sans-serif';
 	}
 
-	public function registerFontSize( string $key, string $size ): void {
-		$this->fontSizes[ $key ] = $size;
+	/**
+	 * Register font size.
+	 *
+	 * @param string $key Size key.
+	 * @param string $size Size value.
+	 */
+	public function register_font_size( string $key, string $size ): void {
+		$this->font_sizes[ $key ] = $size;
 	}
 
-	public function getFontSize( string $key ): ?string {
-		return $this->fontSizes[ $key ] ?? null;
+	/**
+	 * Get font size.
+	 *
+	 * @param string $key Size key.
+	 * @return string|null
+	 */
+	public function get_font_size( string $key ): ?string {
+		return $this->font_sizes[ $key ] ?? null;
 	}
 
-	public function getAllFontSizes(): array {
-		return $this->fontSizes;
+	/**
+	 * Get all font sizes.
+	 *
+	 * @return array
+	 */
+	public function get_all_font_sizes(): array {
+		return $this->font_sizes;
 	}
 
-	public function setFontSizes( array $sizes ): void {
-		$this->fontSizes = $sizes;
+	/**
+	 * Set font sizes.
+	 *
+	 * @param array $sizes Font sizes.
+	 */
+	public function set_font_sizes( array $sizes ): void {
+		$this->font_sizes = $sizes;
 	}
 }

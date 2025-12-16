@@ -1,13 +1,26 @@
 <?php
+/**
+ * Social Settings for Customizer
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class SocialSettings
+ */
 class SocialSettings implements SettingsInterface {
 
+	/**
+	 * Register social settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		$service->registerPanel(
+		$service->register_panel(
 			'origamiez_social_links',
 			array(
 				'title' => esc_attr__( 'Social links', 'origamiez' ),
@@ -16,7 +29,7 @@ class SocialSettings implements SettingsInterface {
 
 		$social_objects = origamiez_get_socials();
 		foreach ( $social_objects as $social_slug => $social ) {
-			$service->registerSection(
+			$service->register_section(
 				"social_{$social_slug}",
 				array(
 					'panel' => 'origamiez_social_links',
@@ -24,7 +37,7 @@ class SocialSettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$social_slug}_url",
 				array(
 					'label'       => esc_attr__( 'URL', 'origamiez' ),
@@ -36,7 +49,7 @@ class SocialSettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$social_slug}_color",
 				array(
 					'label'       => esc_attr__( 'Color', 'origamiez' ),

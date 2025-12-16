@@ -1,26 +1,39 @@
 <?php
+/**
+ * General Settings for Customizer
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class GeneralSettings
+ */
 class GeneralSettings implements SettingsInterface {
 
+	/**
+	 * Register general settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		// Modify existing settings
-		$service->modifySetting( 'blogname', array( 'transport' => 'refresh' ) );
-		$service->modifySetting( 'blogdescription', array( 'transport' => 'refresh' ) );
+		// Modify existing settings.
+		$service->modify_setting( 'blogname', array( 'transport' => 'refresh' ) );
+		$service->modify_setting( 'blogdescription', array( 'transport' => 'refresh' ) );
 
-		// Register Panel
-		$service->registerPanel(
+		// Register Panel.
+		$service->register_panel(
 			'origamiez_general',
 			array(
 				'title' => esc_attr__( 'General Setting', 'origamiez' ),
 			)
 		);
 
-		// Register Sections
-		$service->registerSection(
+		// Register Sections.
+		$service->register_section(
 			'header',
 			array(
 				'panel' => 'origamiez_general',
@@ -28,7 +41,7 @@ class GeneralSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSection(
+		$service->register_section(
 			'footer',
 			array(
 				'panel' => 'origamiez_general',
@@ -36,8 +49,8 @@ class GeneralSettings implements SettingsInterface {
 			)
 		);
 
-		// Register Settings
-		$service->registerSetting(
+		// Register Settings.
+		$service->register_setting(
 			'logo',
 			array(
 				'label'       => esc_attr__( 'Logo', 'origamiez' ),
@@ -49,7 +62,7 @@ class GeneralSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'header_style',
 			array(
 				'label'       => esc_attr__( 'Header style', 'origamiez' ),
@@ -65,7 +78,7 @@ class GeneralSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'footer_information',
 			array(
 				'label'       => esc_attr__( 'Footer information', 'origamiez' ),
@@ -77,7 +90,7 @@ class GeneralSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'footer_number_of_cols',
 			array(
 				'label'       => esc_attr__( 'Number of columns', 'origamiez' ),

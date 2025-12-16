@@ -1,15 +1,30 @@
 <?php
+/**
+ * Social Links Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use WP_Widget;
 
+/**
+ * Class SocialLinksWidget
+ */
 class SocialLinksWidget extends WP_Widget {
+
+	/**
+	 * Register widget.
+	 */
 	public static function register() {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * SocialLinksWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-social-links',
 			'description' => esc_attr__( 'Display your social links. Config on Appearance >> Customize.', 'origamiez' ),
@@ -21,15 +36,28 @@ class SocialLinksWidget extends WP_Widget {
 		parent::__construct( 'origamiez-widget-social-links', esc_attr__( 'Origamiez Social Links', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function update( $new_instance, $old_instance ) {
+	/**
+	 * Update widget.
+	 *
+	 * @param array $new_instance New instance.
+	 * @param array $old_instance Old instance.
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ) {
 		$instance          = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 
 		return $instance;
 	}
 
-	function widget( $args, $instance ) {
-		extract( $args );
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ) {
+		extract( $args, EXTR_SKIP );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
@@ -49,7 +77,7 @@ class SocialLinksWidget extends WP_Widget {
 						if ( $color ) {
 							$style = sprintf( 'color:#FFF; background-color:%1$s; border-color: %1$s;', $color );
 						}
-						if ( 'fa fa-rss' == $social['icon'] && empty( $url ) ) {
+						if ( 'fa fa-rss' === $social['icon'] && empty( $url ) ) {
 							$url = get_bloginfo( 'rss2_url' );
 						}
 						?>
@@ -72,7 +100,12 @@ class SocialLinksWidget extends WP_Widget {
 		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
 	}
 
-	function form( $instance ) {
+	/**
+	 * Render form.
+	 *
+	 * @param array $instance Widget instance.
+	 */
+	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		?>
 		<p>
@@ -84,6 +117,11 @@ class SocialLinksWidget extends WP_Widget {
 		<?php
 	}
 
+	/**
+	 * Get default values.
+	 *
+	 * @return array
+	 */
 	protected function get_default() {
 		return array(
 			'title' => esc_attr__( 'Social Links', 'origamiez' ),

@@ -1,10 +1,21 @@
 <?php
+/**
+ * Widget Class Manager
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets;
 
+/**
+ * Class WidgetClassManager
+ */
 class WidgetClassManager {
 
-	public function addWidgetOrderClasses(): void {
+	/**
+	 * Add widget order classes.
+	 */
+	public function add_widget_order_classes(): void {
 		global $wp_registered_widgets;
 		$sidebars = wp_get_sidebars_widgets();
 		if ( empty( $sidebars ) ) {

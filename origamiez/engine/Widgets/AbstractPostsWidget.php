@@ -1,30 +1,50 @@
 <?php
+/**
+ * Abstract Posts Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets;
 
 use WP_Widget;
 
+/**
+ * Class AbstractPostsWidget
+ */
 abstract class AbstractPostsWidget extends WP_Widget {
 
+	/**
+	 * Update widget.
+	 *
+	 * @param array $new_instance New instance.
+	 * @param array $old_instance Old instance.
+	 * @return array
+	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
 		$instance['title']               = strip_tags( $new_instance['title'] );
 		$instance['posts_per_page']      = (int) strip_tags( $new_instance['posts_per_page'] );
-		$instance['orderby']             = isset( $new_instance['orderby'] ) && in_array( $new_instance['orderby'], array( 'date', 'popular', 'comment_count', 'rand' ) ) ? $new_instance['orderby'] : 'date';
+		$instance['orderby']             = isset( $new_instance['orderby'] ) && in_array( $new_instance['orderby'], array( 'date', 'popular', 'comment_count', 'rand' ), true ) ? $new_instance['orderby'] : 'date';
 		$instance['category']            = ( isset( $new_instance['category'] ) && is_array( $new_instance['category'] ) ) ? array_filter( $new_instance['category'] ) : array();
 		$instance['post_tag']            = ( isset( $new_instance['post_tag'] ) && is_array( $new_instance['post_tag'] ) ) ? array_filter( $new_instance['post_tag'] ) : array();
 		$instance['post_format']         = ( isset( $new_instance['post_format'] ) && is_array( $new_instance['post_format'] ) ) ? array_filter( $new_instance['post_format'] ) : array();
-		$instance['relation']            = isset( $new_instance['relation'] ) && in_array( $new_instance['relation'], array( 'AND', 'OR' ) ) ? $new_instance['relation'] : 'OR';
+		$instance['relation']            = isset( $new_instance['relation'] ) && in_array( $new_instance['relation'], array( 'AND', 'OR' ), true ) ? $new_instance['relation'] : 'OR';
 		$instance['in']                  = strip_tags( $new_instance['in'] );
 		$instance['is_include_children'] = (int) isset( $new_instance['is_include_children'] ) ? 1 : 0;
 
 		return $instance;
 	}
 
+	/**
+	 * Render form.
+	 *
+	 * @param array $instance Widget instance.
+	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
+		extract( $instance, EXTR_SKIP );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'origamiez' ); ?></label>
@@ -62,7 +82,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 				$terms = get_terms( 'category' );
 				if ( $terms ) {
 					foreach ( $terms as $term ) {
-						$selected = in_array( $term->term_id, $instance['category'] ) ? 'selected="selected"' : '';
+						$selected = in_array( $term->term_id, $instance['category'], true ) ? 'selected="selected"' : '';
 						?>
 						<option value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php
@@ -85,7 +105,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 				$terms = get_terms( 'post_tag' );
 				if ( $terms ) {
 					foreach ( $terms as $term ) {
-						$selected = in_array( $term->term_id, $instance['post_tag'] ) ? 'selected="selected"' : '';
+						$selected = in_array( $term->term_id, $instance['post_tag'], true ) ? 'selected="selected"' : '';
 						?>
 						<option value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php
@@ -103,7 +123,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 				$terms = get_terms( 'post_format' );
 				if ( $terms ) {
 					foreach ( $terms as $term ) {
-						$selected = in_array( $term->term_id, $instance['post_format'] ) ? 'selected="selected"' : '';
+						$selected = in_array( $term->term_id, $instance['post_format'], true ) ? 'selected="selected"' : '';
 						?>
 						<option value="<?php echo esc_attr( $term->term_id ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $term->name ); ?></option>
 						<?php
@@ -168,6 +188,13 @@ abstract class AbstractPostsWidget extends WP_Widget {
 		<?php
 	}
 
+	/**
+	 * Get query.
+	 *
+	 * @param array $instance Widget instance.
+	 * @param array $args_extra Extra arguments.
+	 * @return array
+	 */
 	public function get_query( $instance, $args_extra = array() ) {
 		global $wp_version;
 
@@ -226,9 +253,9 @@ abstract class AbstractPostsWidget extends WP_Widget {
 		if ( version_compare( $wp_version, '3.7', '>=' ) ) {
 			if ( isset( $instance['in'] ) && ! empty( $instance['in'] ) ) {
 				$in = $instance['in'];
-				$y  = date( 'Y', strtotime( $in ) );
-				$m  = date( 'm', strtotime( $in ) );
-				$d  = date( 'd', strtotime( $in ) );
+				$y  = gmdate( 'Y', strtotime( $in ) );
+				$m  = gmdate( 'm', strtotime( $in ) );
+				$d  = gmdate( 'd', strtotime( $in ) );
 
 				$args['date_query'] = array(
 					array(
@@ -249,6 +276,11 @@ abstract class AbstractPostsWidget extends WP_Widget {
 		}
 	}
 
+	/**
+	 * Get default values.
+	 *
+	 * @return array
+	 */
 	protected function get_default() {
 		return array(
 			'title'               => '',

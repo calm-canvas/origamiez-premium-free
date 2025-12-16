@@ -1,9 +1,22 @@
 <?php
+/**
+ * Social Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class SocialConfig
+ */
 class SocialConfig {
 
+	/**
+	 * Social networks data.
+	 *
+	 * @var array
+	 */
 	private static array $socials = array(
 		'behance'        => array(
 			'icon'  => 'fa-brands fa-behance',
@@ -142,7 +155,12 @@ class SocialConfig {
 		),
 	);
 
-	public static function getSocials(): array {
+	/**
+	 * Get all social networks.
+	 *
+	 * @return array
+	 */
+	public static function get_socials(): array {
 		$socials = array();
 		foreach ( self::$socials as $key => $data ) {
 			$socials[ $key ] = array(
@@ -154,23 +172,47 @@ class SocialConfig {
 		return apply_filters( 'origamiez_social_networks', $socials );
 	}
 
-	public static function getSocial( string $key ): ?array {
-		$socials = self::getSocials();
+	/**
+	 * Get a specific social network.
+	 *
+	 * @param string $key Social network key.
+	 * @return array|null
+	 */
+	public static function get_social( string $key ): ?array {
+		$socials = self::get_socials();
 		return $socials[ $key ] ?? null;
 	}
 
-	public static function getSocialIcon( string $key ): string {
-		$social = self::getSocial( $key );
+	/**
+	 * Get social icon.
+	 *
+	 * @param string $key Social network key.
+	 * @return string
+	 */
+	public static function get_social_icon( string $key ): string {
+		$social = self::get_social( $key );
 		return $social['icon'] ?? '';
 	}
 
-	public static function getSocialLabel( string $key ): string {
-		$social = self::getSocial( $key );
+	/**
+	 * Get social label.
+	 *
+	 * @param string $key Social network key.
+	 * @return string
+	 */
+	public static function get_social_label( string $key ): string {
+		$social = self::get_social( $key );
 		return $social['label'] ?? '';
 	}
 
-	public static function getSocialColor( string $key ): string {
-		$social = self::getSocial( $key );
+	/**
+	 * Get social color.
+	 *
+	 * @param string $key Social network key.
+	 * @return string
+	 */
+	public static function get_social_color( string $key ): string {
+		$social = self::get_social( $key );
 		return $social['color'] ?? '';
 	}
 }

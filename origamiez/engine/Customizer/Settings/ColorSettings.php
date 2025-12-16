@@ -1,13 +1,26 @@
 <?php
+/**
+ * Color Settings for Customizer
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class ColorSettings
+ */
 class ColorSettings implements SettingsInterface {
 
+	/**
+	 * Register color settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		$service->registerSetting(
+		$service->register_setting(
 			'skin',
 			array(
 				'label'       => esc_attr__( 'Color Scheme', 'origamiez' ),
@@ -111,7 +124,7 @@ class ColorSettings implements SettingsInterface {
 		);
 
 		foreach ( $colors as $id => $args ) {
-			$service->registerSetting(
+			$service->register_setting(
 				$id,
 				array(
 					'type'            => 'color',

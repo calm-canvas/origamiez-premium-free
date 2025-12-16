@@ -1,26 +1,48 @@
 <?php
+/**
+ * Manages theme scripts.
+ *
+ * @package Origamiez
+ * @subpackage Origamiez/Engine/Assets
+ */
 
 namespace Origamiez\Engine\Assets;
 
+/**
+ * Class ScriptManager
+ */
 class ScriptManager {
 
 	private const PREFIX      = 'origamiez_';
 	private const INIT_HANDLE = 'origamiez-init';
 
-	public function enqueue( string $templateUri ): void {
-		$this->enqueueCommentReply();
-		$this->enqueueVendorScripts( $templateUri );
-		$this->enqueueThemeScripts( $templateUri );
-		$this->localizeThemeScripts();
+	/**
+	 * Enqueues all scripts.
+	 *
+	 * @param string $template_uri The template URI.
+	 */
+	public function enqueue( string $template_uri ): void {
+		$this->enqueue_comment_reply();
+		$this->enqueue_vendor_scripts( $template_uri );
+		$this->enqueue_theme_scripts( $template_uri );
+		$this->localize_theme_scripts();
 	}
 
-	private function enqueueCommentReply(): void {
+	/**
+	 * Enqueues the comment reply script.
+	 */
+	private function enqueue_comment_reply(): void {
 		if ( is_singular() ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 	}
 
-	private function enqueueVendorScripts( string $templateUri ): void {
+	/**
+	 * Enqueues vendor scripts.
+	 *
+	 * @param string $template_uri The template URI.
+	 */
+	private function enqueue_vendor_scripts( string $template_uri ): void {
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'hoverIntent' );
 
@@ -37,7 +59,7 @@ class ScriptManager {
 		foreach ( $scripts as $handle => $path ) {
 			wp_enqueue_script(
 				self::PREFIX . $handle,
-				trailingslashit( $templateUri ) . $path,
+				trailingslashit( $template_uri ) . $path,
 				array( 'jquery' ),
 				null,
 				true
@@ -45,17 +67,25 @@ class ScriptManager {
 		}
 	}
 
-	private function enqueueThemeScripts( string $templateUri ): void {
+	/**
+	 * Enqueues theme scripts.
+	 *
+	 * @param string $template_uri The template URI.
+	 */
+	private function enqueue_theme_scripts( string $template_uri ): void {
 		wp_enqueue_script(
 			self::PREFIX . self::INIT_HANDLE,
-			trailingslashit( $templateUri ) . 'js/script.js',
+			trailingslashit( $template_uri ) . 'js/script.js',
 			array( 'jquery' ),
 			null,
 			true
 		);
 	}
 
-	private function localizeThemeScripts(): void {
+	/**
+	 * Localizes theme scripts.
+	 */
+	private function localize_theme_scripts(): void {
 		$localization_data = apply_filters(
 			'get_origamiez_vars',
 			array(

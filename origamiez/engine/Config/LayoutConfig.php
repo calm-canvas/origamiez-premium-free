@@ -1,17 +1,42 @@
 <?php
+/**
+ * Layout Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class LayoutConfig
+ */
 class LayoutConfig {
 
-	private array $layouts        = array();
-	private string $defaultLayout = 'default';
+	/**
+	 * Layouts.
+	 *
+	 * @var array
+	 */
+	private array $layouts = array();
 
+	/**
+	 * Default layout.
+	 *
+	 * @var string
+	 */
+	private string $default_layout = 'default';
+
+	/**
+	 * LayoutConfig constructor.
+	 */
 	public function __construct() {
-		$this->initializeLayouts();
+		$this->initialize_layouts();
 	}
 
-	private function initializeLayouts(): void {
+	/**
+	 * Initialize layouts.
+	 */
+	private function initialize_layouts(): void {
 		$this->layouts = array(
 			'default'            => array(
 				'name'    => 'Default Layout',
@@ -49,7 +74,13 @@ class LayoutConfig {
 		);
 	}
 
-	public function registerLayout( string $id, array $config ): void {
+	/**
+	 * Register layout.
+	 *
+	 * @param string $id Layout ID.
+	 * @param array  $config Layout config.
+	 */
+	public function register_layout( string $id, array $config ): void {
 		$this->layouts[ $id ] = array_merge(
 			array(
 				'name'    => $id,
@@ -60,38 +91,78 @@ class LayoutConfig {
 		);
 	}
 
-	public function getLayout( string $id ): ?array {
+	/**
+	 * Get layout.
+	 *
+	 * @param string $id Layout ID.
+	 * @return array|null
+	 */
+	public function get_layout( string $id ): ?array {
 		return $this->layouts[ $id ] ?? null;
 	}
 
-	public function getAllLayouts(): array {
+	/**
+	 * Get all layouts.
+	 *
+	 * @return array
+	 */
+	public function get_all_layouts(): array {
 		return $this->layouts;
 	}
 
-	public function getDefaultLayout(): string {
-		return $this->defaultLayout;
+	/**
+	 * Get default layout.
+	 *
+	 * @return string
+	 */
+	public function get_default_layout(): string {
+		return $this->default_layout;
 	}
 
-	public function setDefaultLayout( string $id ): bool {
+	/**
+	 * Set default layout.
+	 *
+	 * @param string $id Layout ID.
+	 * @return bool
+	 */
+	public function set_default_layout( string $id ): bool {
 		if ( ! isset( $this->layouts[ $id ] ) ) {
 			return false;
 		}
-		$this->defaultLayout = $id;
+		$this->default_layout = $id;
 		return true;
 	}
 
-	public function getLayoutSidebar( string $layoutId ): string {
-		$layout = $this->getLayout( $layoutId );
+	/**
+	 * Get layout sidebar.
+	 *
+	 * @param string $layout_id Layout ID.
+	 * @return string
+	 */
+	public function get_layout_sidebar( string $layout_id ): string {
+		$layout = $this->get_layout( $layout_id );
 		return $layout['sidebar'] ?? 'right';
 	}
 
-	public function getLayoutColumns( string $layoutId ): int {
-		$layout = $this->getLayout( $layoutId );
+	/**
+	 * Get layout columns.
+	 *
+	 * @param string $layout_id Layout ID.
+	 * @return int
+	 */
+	public function get_layout_columns( string $layout_id ): int {
+		$layout = $this->get_layout( $layout_id );
 		return $layout['columns'] ?? 2;
 	}
 
-	public function isFullwidth( string $layoutId ): bool {
-		$layout = $this->getLayout( $layoutId );
-		return isset( $layout['sidebar'] ) && $layout['sidebar'] === 'none';
+	/**
+	 * Is fullwidth.
+	 *
+	 * @param string $layout_id Layout ID.
+	 * @return bool
+	 */
+	public function is_fullwidth( string $layout_id ): bool {
+		$layout = $this->get_layout( $layout_id );
+		return isset( $layout['sidebar'] ) && 'none' === $layout['sidebar'];
 	}
 }

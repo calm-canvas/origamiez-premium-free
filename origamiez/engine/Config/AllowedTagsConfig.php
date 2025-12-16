@@ -1,19 +1,42 @@
 <?php
+/**
+ * Allowed Tags Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class AllowedTagsConfig
+ */
 class AllowedTagsConfig {
 
-	private static ?array $allowedTags = null;
+	/**
+	 * Allowed tags.
+	 *
+	 * @var ?array
+	 */
+	private static ?array $allowed_tags = null;
 
-	public static function getAllowedTags(): array {
-		if ( null === self::$allowedTags ) {
-			self::$allowedTags = self::buildAllowedTags();
+	/**
+	 * Get allowed tags.
+	 *
+	 * @return array
+	 */
+	public static function get_allowed_tags(): array {
+		if ( null === self::$allowed_tags ) {
+			self::$allowed_tags = self::build_allowed_tags();
 		}
-		return apply_filters( 'origamiez_get_allowed_tags', self::$allowedTags );
+		return apply_filters( 'origamiez_get_allowed_tags', self::$allowed_tags );
 	}
 
-	private static function buildAllowedTags(): array {
+	/**
+	 * Build allowed tags.
+	 *
+	 * @return array
+	 */
+	private static function build_allowed_tags(): array {
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 
 		$allowed_tags['div']['data-place']     = array();
@@ -53,7 +76,13 @@ class AllowedTagsConfig {
 		return $allowed_tags;
 	}
 
-	public static function sanitizeContent( string $content ): string {
-		return wp_kses( $content, self::getAllowedTags() );
+	/**
+	 * Sanitize content.
+	 *
+	 * @param string $content Content to sanitize.
+	 * @return string
+	 */
+	public static function sanitize_content( string $content ): string {
+		return wp_kses( $content, self::get_allowed_tags() );
 	}
 }

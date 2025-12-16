@@ -1,4 +1,9 @@
 <?php
+/**
+ * Widget Factory
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets;
 
@@ -11,44 +16,69 @@ use Origamiez\Engine\Widgets\Types\PostsListWithBackgroundWidget;
 use Origamiez\Engine\Widgets\Types\PostsListZebraWidget;
 use Origamiez\Engine\Widgets\Types\SocialLinksWidget;
 
-require_once __DIR__ . '/AbstractPostsWidget.php';
-require_once __DIR__ . '/AbstractPostsWidgetTypeB.php';
-require_once __DIR__ . '/AbstractPostsWidgetTypeC.php';
-
+/**
+ * Class WidgetFactory
+ */
 class WidgetFactory {
 
-	private WidgetRegistry $widgetRegistry;
+	/**
+	 * Widget registry.
+	 *
+	 * @var WidgetRegistry
+	 */
+	private WidgetRegistry $widget_registry;
 
+	/**
+	 * WidgetFactory constructor.
+	 */
 	public function __construct() {
-		$this->widgetRegistry = WidgetRegistry::getInstance();
+		$this->widget_registry = WidgetRegistry::get_instance();
 	}
 
+	/**
+	 * Boot the factory.
+	 */
 	public function boot(): void {
-		$this->registerWidgets();
-		$this->widgetRegistry->register();
+		$this->register_widgets();
+		$this->widget_registry->register();
 	}
 
-	public static function getInstance(): self {
+	/**
+	 * Get instance.
+	 *
+	 * @return self
+	 */
+	public static function get_instance(): self {
 		static $instance = null;
-		if ( $instance === null ) {
+		if ( null === $instance ) {
 			$instance = new self();
 		}
 		return $instance;
 	}
 
-	public function registerWidgets(): self {
-		$this->widgetRegistry->registerWidget( SocialLinksWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListGridWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListSmallWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListZebraWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListSliderWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListTwoColsWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListWithBackgroundWidget::class );
-		$this->widgetRegistry->registerWidget( PostsListMediaWidget::class );
+	/**
+	 * Register widgets.
+	 *
+	 * @return self
+	 */
+	public function register_widgets(): self {
+		$this->widget_registry->register_widget( SocialLinksWidget::class );
+		$this->widget_registry->register_widget( PostsListGridWidget::class );
+		$this->widget_registry->register_widget( PostsListSmallWidget::class );
+		$this->widget_registry->register_widget( PostsListZebraWidget::class );
+		$this->widget_registry->register_widget( PostsListSliderWidget::class );
+		$this->widget_registry->register_widget( PostsListTwoColsWidget::class );
+		$this->widget_registry->register_widget( PostsListWithBackgroundWidget::class );
+		$this->widget_registry->register_widget( PostsListMediaWidget::class );
 		return $this;
 	}
 
-	public function getWidgetRegistry(): WidgetRegistry {
-		return $this->widgetRegistry;
+	/**
+	 * Get widget registry.
+	 *
+	 * @return WidgetRegistry
+	 */
+	public function get_widget_registry(): WidgetRegistry {
+		return $this->widget_registry;
 	}
 }

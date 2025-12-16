@@ -1,4 +1,9 @@
 <?php
+/**
+ * PSR-11 Container
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine;
 
@@ -9,15 +14,43 @@ use Psr\Container\ContainerExceptionInterface;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * A simple PSR-11 container.
+ */
 class Container implements ContainerInterface {
 
-	private array $services        = array();
-	private array $singletons      = array();
+	/**
+	 * The container's services.
+	 *
+	 * @var array
+	 */
+	private array $services = array();
+
+	/**
+	 * The container's singletons.
+	 *
+	 * @var array
+	 */
+	private array $singletons = array();
+
+	/**
+	 * The container's instance.
+	 *
+	 * @var self|null
+	 */
 	private static ?self $instance = null;
 
+	/**
+	 * Container constructor.
+	 */
 	private function __construct() {
 	}
 
+	/**
+	 * Get the container instance.
+	 *
+	 * @return self
+	 */
 	public static function getInstance(): self {
 		if ( self::$instance === null ) {
 			self::$instance = new self();
@@ -25,11 +58,24 @@ class Container implements ContainerInterface {
 		return self::$instance;
 	}
 
+	/**
+	 * Set a service.
+	 *
+	 * @param string $id The service ID.
+	 * @param mixed  $definition The service definition.
+	 */
 	public function set( string $id, mixed $definition ): void {
 		$this->services[ $id ] = $definition;
 		unset( $this->singletons[ $id ] );
 	}
 
+	/**
+	 * Get a service.
+	 *
+	 * @param string $id The service ID.
+	 * @return mixed
+	 * @throws NotFoundExceptionInterface
+	 */
 	public function get( string $id ): mixed {
 		if ( ! $this->has( $id ) ) {
 			throw new class( "Service '{$id}' not found in container" ) extends Exception implements NotFoundExceptionInterface {
@@ -55,19 +101,43 @@ class Container implements ContainerInterface {
 		return $instance;
 	}
 
+	/**
+	 * Check if a service exists.
+	 *
+	 * @param string $id The service ID.
+	 * @return bool
+	 */
 	public function has( string $id ): bool {
 		return isset( $this->services[ $id ] );
 	}
 
+	/**
+	 * Set a singleton service.
+	 *
+	 * @param string $id The service ID.
+	 * @param mixed  $definition The service definition.
+	 */
 	public function singleton( string $id, mixed $definition ): void {
 		$this->set( $id, $definition );
 		$this->singletons[ $id ] = true;
 	}
 
+	/**
+	 * Check if a service is a singleton.
+	 *
+	 * @param string $id The service ID.
+	 * @return bool
+	 */
 	private function isSingleton( string $id ): bool {
 		return isset( $this->singletons[ $id ] ) && $this->singletons[ $id ] === true;
 	}
 
+	/**
+	 * Bind a service.
+	 *
+	 * @param string $id The service ID.
+	 * @param mixed  $implementation The service implementation.
+	 */
 	public function bind( string $id, $implementation ): void {
 		if ( is_string( $implementation ) && class_exists( $implementation ) ) {
 			$this->set(
@@ -82,9 +152,14 @@ class Container implements ContainerInterface {
 	}
 
 	/**
+	 * Make a service.
+	 *
+	 * @param string $id The service ID.
+	 * @param array  $parameters The service parameters.
+	 * @return mixed
 	 * @throws ContainerExceptionInterface
-	 * @throws ReflectionException
 	 * @throws NotFoundExceptionInterface
+	 * @throws ReflectionException
 	 */
 	public function make( string $id, array $parameters = array() ): mixed {
 		if ( ! class_exists( $id ) ) {

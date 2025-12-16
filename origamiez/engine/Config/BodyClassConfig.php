@@ -1,7 +1,15 @@
 <?php
+/**
+ * Body Class Config
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Config;
 
+/**
+ * Class BodyClassConfig
+ */
 class BodyClassConfig {
 
 	public const CUSTOM_BG             = 'origamiez_custom_bg';
@@ -29,7 +37,12 @@ class BodyClassConfig {
 	public const LAYOUT_BLOG_THUMBNAIL_LEFT       = 'origamiez-layout-blog-thumbnail-left';
 	public const TAXONOMY_PREFIX                  = 'origamiez-taxonomy-';
 
-	public function getClasses(): array {
+	/**
+	 * Get all classes.
+	 *
+	 * @return array
+	 */
+	public function get_classes(): array {
 		return array(
 			'custom_bg'                        => self::CUSTOM_BG,
 			'without_bg_slides'                => self::WITHOUT_BG_SLIDES,
