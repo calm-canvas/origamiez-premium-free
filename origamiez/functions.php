@@ -1,14 +1,13 @@
 <?php
 const ORIGAMIEZ_PREFIX = 'origamiez_';
 $dir = trailingslashit( get_template_directory() );
+
 /*
 INIT
 --------------------
 Register Theme Features
 --------------------
 */
-
-
 function origamiez_theme_setup() {
 	add_theme_support( "wp-block-styles" );
 	add_theme_support( "responsive-embeds" );
