@@ -21,8 +21,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
-      - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
       - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
       - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini
@@ -43,8 +41,6 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./docker/snapshot:/tmp/snapshot
-      - ./plugins/theme-check:/var/www/html/wp-content/plugins/theme-check
-      - ./plugins/wordpress-importer:/var/www/html/wp-content/plugins/wordpress-importer
       - ./plugins/wp-bomb:/var/www/html/wp-content/plugins/wp-bomb
       - ./origamiez:/var/www/html/wp-content/themes/origamiez
       - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini

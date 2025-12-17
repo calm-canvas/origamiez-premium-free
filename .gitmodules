@@ -1,9 +1,3 @@
 [submodule "plugins/wp-bomb"]
 	path = plugins/wp-bomb
 	url = https://github.com/tranthethang/wp-bomb
-[submodule "plugins/theme-check"]
-	path = plugins/theme-check
-	url = https://github.com/WordPress/theme-check
-[submodule "plugins/wordpress-importer"]
-	path = plugins/wordpress-importer
-	url = https://github.com/WordPress/wordpress-importer

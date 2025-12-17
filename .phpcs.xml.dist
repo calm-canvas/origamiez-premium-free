@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress">
+    <description>WordPress Coding Standards</description>
+
+    <config name="installed_paths" value="vendor/wp-coding-standards/wpcs,vendor/phpcsstandards/phpcsutils,vendor/phpcsstandards/phpcsextra"/>
+
+    <rule ref="WordPress">
+        <exclude name="WordPress.Files.FileName" />
+    </rule>
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+    <file>./origamiez/</file>
+    <exclude-pattern>./origamiez/vendor/*</exclude-pattern>
+</ruleset>

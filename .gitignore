@@ -10,3 +10,4 @@ plugins/*
 origamiez/vendor/
 /.env
 /.env.local
+vendor/
