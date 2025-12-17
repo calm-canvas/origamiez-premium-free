@@ -1,10 +1,14 @@
 <?php
-if ( php_sapi_name() !== 'cli' ) {
+/**
+ * Security classes verification script.
+ *
+ * @package Origamiez
+ * @subpackage Engine\Security
+ */
+
+if ( 'cli' !== php_sapi_name() ) {
 	die( 'This script can only be run from the command line.' );
 }
-
-error_reporting( E_ALL );
-ini_set( 'display_errors', 1 );
 
 $test_dir = __DIR__;
 
@@ -33,14 +37,20 @@ $tests  = 0;
 $passed = 0;
 $failed = 0;
 
+/**
+ * Run a test case.
+ *
+ * @param string $name      The name of the test.
+ * @param bool   $condition The condition to test.
+ */
 function test( $name, $condition ) {
 	global $tests, $passed, $failed;
 	++$tests;
 	if ( $condition ) {
-		echo "✓ $name\n";
+		echo esc_html( "✓ $name\n" );
 		++$passed;
 	} else {
-		echo "✗ $name\n";
+		echo esc_html( "✗ $name\n" );
 		++$failed;
 	}
 }
@@ -116,10 +126,10 @@ test( 'SelectSanitizer implements SanitizerInterface', $select_sanitizer instanc
 test( 'SearchQueryValidator implements ValidatorInterface', $search_validator instanceof \Origamiez\Engine\Security\Validators\ValidatorInterface );
 
 echo "\n============================================\n";
-echo "Results: $passed/$tests tests passed\n";
+echo esc_html( "Results: $passed/$tests tests passed\n" );
 
-if ( $failed > 0 ) {
-	echo "Failed: $failed\n";
+if ( 0 < $failed ) {
+	echo esc_html( "Failed: $failed\n" );
 	exit( 1 );
 }
 

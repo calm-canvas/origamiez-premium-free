@@ -52,7 +52,7 @@ class Container implements ContainerInterface {
 	 * @return self
 	 */
 	public static function getInstance(): self {
-		if ( self::$instance === null ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -74,15 +74,15 @@ class Container implements ContainerInterface {
 	 *
 	 * @param string $id The service ID.
 	 * @return mixed
-	 * @throws NotFoundExceptionInterface
+	 * @throws NotFoundExceptionInterface If the service is not found.
 	 */
 	public function get( string $id ): mixed {
 		if ( ! $this->has( $id ) ) {
-			throw new class( "Service '{$id}' not found in container" ) extends Exception implements NotFoundExceptionInterface {
+			throw new class( sprintf( esc_html__( 'Service %s not found in container', 'origamiez' ), $id ) ) extends Exception implements NotFoundExceptionInterface {
 			};
 		}
 
-		if ( isset( $this->singletons[ $id ] ) && $this->singletons[ $id ] !== true ) {
+		if ( isset( $this->singletons[ $id ] ) && true !== $this->singletons[ $id ] ) {
 			return $this->singletons[ $id ];
 		}
 
@@ -129,7 +129,7 @@ class Container implements ContainerInterface {
 	 * @return bool
 	 */
 	private function isSingleton( string $id ): bool {
-		return isset( $this->singletons[ $id ] ) && $this->singletons[ $id ] === true;
+		return isset( $this->singletons[ $id ] ) && true === $this->singletons[ $id ];
 	}
 
 	/**
@@ -142,7 +142,7 @@ class Container implements ContainerInterface {
 		if ( is_string( $implementation ) && class_exists( $implementation ) ) {
 			$this->set(
 				$id,
-				function ( $container ) use ( $implementation ) {
+				function () use ( $implementation ) {
 					return new $implementation();
 				}
 			);
@@ -157,9 +157,9 @@ class Container implements ContainerInterface {
 	 * @param string $id The service ID.
 	 * @param array  $parameters The service parameters.
 	 * @return mixed
-	 * @throws ContainerExceptionInterface
-	 * @throws NotFoundExceptionInterface
-	 * @throws ReflectionException
+	 * @throws ContainerExceptionInterface If there is an error while making the service.
+	 * @throws NotFoundExceptionInterface If the service is not found.
+	 * @throws ReflectionException If the class does not exist.
 	 */
 	public function make( string $id, array $parameters = array() ): mixed {
 		if ( ! class_exists( $id ) ) {

@@ -43,9 +43,17 @@ class PostsListSmallWidget extends AbstractPostsWidgetTypeC {
 	 * @param array $instance Widget instance.
 	 */
 	public function widget( $args, $instance ): void {
-		extract( $args );
-		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
+		$before_widget = $args['before_widget'];
+		$after_widget  = $args['after_widget'];
+		$before_title  = $args['before_title'];
+		$after_title   = $args['after_title'];
+
+		$instance            = wp_parse_args( (array) $instance, $this->get_default() );
+		$is_show_date        = $instance['is_show_date'];
+		$is_show_comments    = $instance['is_show_comments'];
+		$is_show_author      = $instance['is_show_author'];
+		$excerpt_words_limit = $instance['excerpt_words_limit'];
+
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {

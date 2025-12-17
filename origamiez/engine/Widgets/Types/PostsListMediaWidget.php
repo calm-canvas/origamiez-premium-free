@@ -43,9 +43,12 @@ class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
 	 * @param array $instance Widget instance.
 	 */
 	public function widget( $args, $instance ): void {
-		extract( $args );
-		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
+		$instance            = wp_parse_args( (array) $instance, $this->get_default() );
+		$is_show_date        = $instance['is_show_date'];
+		$is_show_comments    = $instance['is_show_comments'];
+		$is_show_author      = $instance['is_show_author'];
+		$excerpt_words_limit = $instance['excerpt_words_limit'];
+
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $args['before_widget'], \origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {

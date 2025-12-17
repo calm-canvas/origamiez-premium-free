@@ -1,4 +1,11 @@
 <?php
+/**
+ * Manages the sanitization of data.
+ *
+ * @package Origamiez
+ * @subpackage Engine\Security
+ */
+
 namespace Origamiez\Engine\Security;
 
 use Origamiez\Engine\Security\Sanitizers\SanitizerInterface;
@@ -9,22 +16,50 @@ use Origamiez\Engine\Security\Sanitizers\UrlSanitizer;
 use Origamiez\Engine\Security\Sanitizers\EmailSanitizer;
 use Origamiez\Engine\Security\Sanitizers\TextSanitizer;
 
+/**
+ * Class SanitizationManager
+ *
+ * @package Origamiez\Engine\Security
+ */
 class SanitizationManager {
-	private static $instance = null;
-	private $sanitizers      = array();
 
+	/**
+	 * The single instance of the class.
+	 *
+	 * @var SanitizationManager|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * The registered sanitizers.
+	 *
+	 * @var array
+	 */
+	private $sanitizers = array();
+
+	/**
+	 * SanitizationManager constructor.
+	 */
 	private function __construct() {
-		$this->registerDefaultSanitizers();
+		$this->register_default_sanitizers();
 	}
 
-	public static function getInstance() {
+	/**
+	 * Gets the single instance of the class.
+	 *
+	 * @return SanitizationManager
+	 */
+	public static function get_instance() {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
 	}
 
-	private function registerDefaultSanitizers() {
+	/**
+	 * Registers the default sanitizers.
+	 */
+	private function register_default_sanitizers() {
 		$this->register( 'checkbox', new CheckboxSanitizer() );
 		$this->register( 'text', new TextSanitizer() );
 		$this->register( 'email', new EmailSanitizer() );
@@ -33,11 +68,25 @@ class SanitizationManager {
 		$this->register( 'select', new SelectSanitizer() );
 	}
 
+	/**
+	 * Registers a sanitizer.
+	 *
+	 * @param string             $type      The type of sanitizer.
+	 * @param SanitizerInterface $sanitizer The sanitizer instance.
+	 * @return $this
+	 */
 	public function register( $type, SanitizerInterface $sanitizer ) {
 		$this->sanitizers[ $type ] = $sanitizer;
 		return $this;
 	}
 
+	/**
+	 * Sanitizes a value.
+	 *
+	 * @param mixed  $value The value to sanitize.
+	 * @param string $type  The type of sanitization to use.
+	 * @return mixed
+	 */
 	public function sanitize( $value, $type = 'text' ) {
 		if ( ! isset( $this->sanitizers[ $type ] ) ) {
 			$type = 'text';
@@ -46,39 +95,89 @@ class SanitizationManager {
 		return $this->sanitizers[ $type ]->sanitize( $value );
 	}
 
-	public function getSanitizer( $type ) {
+	/**
+	 * Gets a sanitizer.
+	 *
+	 * @param string $type The type of sanitizer.
+	 * @return SanitizerInterface|null
+	 */
+	public function get_sanitizer( $type ) {
 		return isset( $this->sanitizers[ $type ] ) ? $this->sanitizers[ $type ] : null;
 	}
 
+	/**
+	 * Checks if a sanitizer exists.
+	 *
+	 * @param string $type The type of sanitizer.
+	 * @return bool
+	 */
 	public function has( $type ) {
 		return isset( $this->sanitizers[ $type ] );
 	}
 
-	public function sanitizeSelect( $value, $choices = array(), $default = '' ) {
+	/**
+	 * Sanitizes a select input.
+	 *
+	 * @param mixed $value   The value to sanitize.
+	 * @param array $choices The allowed choices.
+	 * @param mixed $default_value The default value.
+	 * @return mixed
+	 */
+	public function sanitize_select( $value, $choices = array(), $default_value = '' ) {
 		$sanitizer = $this->sanitizers['select'];
 		if ( $sanitizer instanceof SelectSanitizer ) {
-			$sanitizer->setChoices( $choices )->setDefault( $default );
+			$sanitizer->setChoices( $choices )->setDefault( $default_value );
 		}
 		return $sanitizer->sanitize( $value );
 	}
 
-	public function sanitizeCheckbox( $value ) {
+	/**
+	 * Sanitizes a checkbox input.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return mixed
+	 */
+	public function sanitize_checkbox( $value ) {
 		return $this->sanitize( $value, 'checkbox' );
 	}
 
-	public function sanitizeText( $value ) {
+	/**
+	 * Sanitizes a text input.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return mixed
+	 */
+	public function sanitize_text( $value ) {
 		return $this->sanitize( $value, 'text' );
 	}
 
-	public function sanitizeEmail( $value ) {
+	/**
+	 * Sanitizes an email input.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return mixed
+	 */
+	public function sanitize_email( $value ) {
 		return $this->sanitize( $value, 'email' );
 	}
 
-	public function sanitizeUrl( $value ) {
+	/**
+	 * Sanitizes a URL input.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return mixed
+	 */
+	public function sanitize_url( $value ) {
 		return $this->sanitize( $value, 'url' );
 	}
 
-	public function sanitizeTextarea( $value ) {
+	/**
+	 * Sanitizes a textarea input.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return mixed
+	 */
+	public function sanitize_textarea( $value ) {
 		return $this->sanitize( $value, 'textarea' );
 	}
 }

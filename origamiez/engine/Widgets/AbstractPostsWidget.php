@@ -24,14 +24,14 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	public function update( $new_instance, $old_instance ): array {
 		$instance = $old_instance;
 
-		$instance['title']               = strip_tags( $new_instance['title'] );
-		$instance['posts_per_page']      = (int) strip_tags( $new_instance['posts_per_page'] );
+		$instance['title']               = wp_strip_all_tags( $new_instance['title'] );
+		$instance['posts_per_page']      = (int) wp_strip_all_tags( $new_instance['posts_per_page'] );
 		$instance['orderby']             = isset( $new_instance['orderby'] ) && in_array( $new_instance['orderby'], array( 'date', 'popular', 'comment_count', 'rand' ), true ) ? $new_instance['orderby'] : 'date';
 		$instance['category']            = ( isset( $new_instance['category'] ) && is_array( $new_instance['category'] ) ) ? array_filter( $new_instance['category'] ) : array();
 		$instance['post_tag']            = ( isset( $new_instance['post_tag'] ) && is_array( $new_instance['post_tag'] ) ) ? array_filter( $new_instance['post_tag'] ) : array();
 		$instance['post_format']         = ( isset( $new_instance['post_format'] ) && is_array( $new_instance['post_format'] ) ) ? array_filter( $new_instance['post_format'] ) : array();
 		$instance['relation']            = isset( $new_instance['relation'] ) && in_array( $new_instance['relation'], array( 'AND', 'OR' ), true ) ? $new_instance['relation'] : 'OR';
-		$instance['in']                  = strip_tags( $new_instance['in'] );
+		$instance['in']                  = wp_strip_all_tags( $new_instance['in'] );
 		$instance['is_include_children'] = (int) isset( $new_instance['is_include_children'] ) ? 1 : 0;
 
 		return $instance;
@@ -43,12 +43,12 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 * @param array $instance Widget instance.
 	 */
 	public function form( $instance ): void {
-		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance, EXTR_SKIP );
+		$instance            = wp_parse_args( (array) $instance, $this->get_default() );
+		$is_include_children = $instance['is_include_children'];
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'origamiez' ); ?></label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( strip_tags( $instance['title'] ) ); ?>" />
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( wp_strip_all_tags( $instance['title'] ) ); ?>" />
 		</p>
 
 		<p>

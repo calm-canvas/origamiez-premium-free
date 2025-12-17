@@ -53,7 +53,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return $this
 	 */
-	public function setNonceField( $nonce_field ) {
+	public function set_nonce_field( $nonce_field ) {
 		$this->nonce_field = $nonce_field;
 		return $this;
 	}
@@ -65,7 +65,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return $this
 	 */
-	public function setNonceAction( $nonce_action ) {
+	public function set_nonce_action( $nonce_action ) {
 		$this->nonce_action = $nonce_action;
 		return $this;
 	}
@@ -77,7 +77,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return $this
 	 */
-	public function setRequestMethod( $request_method ) {
+	public function set_request_method( $request_method ) {
 		$this->request_method = $request_method;
 		return $this;
 	}
@@ -91,7 +91,7 @@ class NonceSecurity implements ValidatorInterface {
 	 */
 	public function validate( $nonce_value = null ) {
 		if ( null === $nonce_value ) {
-			$nonce_value = $this->getNonceValueFromRequest();
+			$nonce_value = $this->get_nonce_value_from_request();
 		}
 
 		if ( empty( $nonce_value ) || empty( $this->nonce_action ) ) {
@@ -108,7 +108,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return bool
 	 */
-	public function isValid( $nonce_value = null ) {
+	public function is_valid( $nonce_value = null ) {
 		return 1 === $this->validate( $nonce_value );
 	}
 
@@ -117,7 +117,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return string
 	 */
-	public function getNonceField() {
+	public function get_nonce_field() {
 		return wp_nonce_field( $this->nonce_action, $this->nonce_field, true, false );
 	}
 
@@ -128,7 +128,7 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return string
 	 */
-	public function getNonceUrl( $url ) {
+	public function get_nonce_url( $url ) {
 		return wp_nonce_url( $url, $this->nonce_action, $this->nonce_field );
 	}
 
@@ -137,13 +137,17 @@ class NonceSecurity implements ValidatorInterface {
 	 *
 	 * @return string|null
 	 */
-	private function getNonceValueFromRequest() {
-		// This method retrieves the nonce value from the request, it does not process any data.
-		// The actual nonce verification is done in the validate() method.
+	private function get_nonce_value_from_request() {
+		$nonce = null;
 		if ( 'POST' === strtoupper( $this->request_method ) ) {
-			return isset( $_POST[ $this->nonce_field ] ) ? sanitize_text_field( wp_unslash( $_POST[ $this->nonce_field ] ) ) : null;
+			if ( isset( $_POST[ $this->nonce_field ] ) && check_admin_referer( $this->nonce_action, $this->nonce_field ) ) {
+				$nonce = sanitize_text_field( wp_unslash( $_POST[ $this->nonce_field ] ) );
+			}
 		} else {
-			return isset( $_GET[ $this->nonce_field ] ) ? sanitize_text_field( wp_unslash( $_GET[ $this->nonce_field ] ) ) : null;
+			if ( isset( $_GET[ $this->nonce_field ] ) && check_admin_referer( $this->nonce_action, $this->nonce_field ) ) {
+				$nonce = sanitize_text_field( wp_unslash( $_GET[ $this->nonce_field ] ) );
+			}
 		}
+		return $nonce;
 	}
 }

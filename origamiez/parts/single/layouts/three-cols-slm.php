@@ -1,4 +1,11 @@
-<?php get_sidebar( 'middle' ); ?>
+<?php
+/**
+ * The template for displaying single post three columns slm layout.
+ *
+ * @package Origamiez
+ */
+
+get_sidebar( 'middle' ); ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">
 		<?php get_template_part( 'parts/breadcrumb' ); ?>
 		<?php if ( have_posts() ) : ?>

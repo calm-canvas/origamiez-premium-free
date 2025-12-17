@@ -1,17 +1,23 @@
 <?php
-global $post;
+/**
+ * The template for displaying related posts in a flat list.
+ *
+ * @package Origamiez
+ */
+
+$post                    = get_queried_object();
 $get_related_post_by     = get_theme_mod( 'get_related_post_by', 'post_tag' );
 $number_of_related_posts = (int) get_theme_mod( 'number_of_related_posts', 8 );
 $args                    = array(
 	'post__not_in'   => array( $post->ID ),
 	'posts_per_page' => $number_of_related_posts,
 );
-if ( 'post_tag' == $get_related_post_by ) {
+if ( 'post_tag' === $get_related_post_by ) {
 	$tags = get_the_tags( $post->ID );
 	if ( ! empty( $tags ) ) {
 		$tag_ids = array();
-		foreach ( $tags as $tag ) {
-			$tag_ids[] = $tag->term_id;
+		foreach ( $tags as $tag_item ) {
+			$tag_ids[] = $tag_item->term_id;
 		}
 		$args['tax_query'] = array(
 			array(
@@ -57,7 +63,7 @@ if ( $related_posts->have_posts() ) :
 		$post_title   = get_the_title();
 		$post_url     = get_permalink();
 		$post_classes = "origamiez-post-{$loop_index} clearfix";
-		if ( 0 == $loop_index ) :
+		if ( 0 === $loop_index ) :
 			?>
 						<article <?php post_class( $post_classes ); ?>>
 				<?php if ( has_post_thumbnail() ) : ?>
