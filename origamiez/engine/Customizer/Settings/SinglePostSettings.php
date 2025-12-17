@@ -1,14 +1,30 @@
 <?php
+/**
+ * Single Post Settings
+ *
+ * @package Origamiez
+ * @subpackage Origamiez/Engine/Customizer/Settings
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class SinglePostSettings
+ *
+ * @package Origamiez\Engine\Customizer\Settings
+ */
 class SinglePostSettings implements SettingsInterface {
 
+	/**
+	 * Register single post settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		// Single Post Section
-		$service->registerSection(
+		// Single Post Section.
+		$service->register_section(
 			'single_post',
 			array(
 				'panel' => 'origamiez_general',
@@ -16,7 +32,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'single-post-layout',
 			array(
 				'label'       => esc_attr__( 'Layout', 'origamiez' ),
@@ -33,7 +49,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_datetime',
 			array(
 				'label'       => esc_attr__( 'Show datetime', 'origamiez' ),
@@ -45,7 +61,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_comments',
 			array(
 				'label'       => esc_attr__( 'Show number of comments', 'origamiez' ),
@@ -57,7 +73,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_category',
 			array(
 				'label'       => esc_attr__( 'Show category', 'origamiez' ),
@@ -69,7 +85,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_category_below_title',
 			array(
 				'label'       => esc_attr__( 'Show category (below title)', 'origamiez' ),
@@ -81,7 +97,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_tag',
 			array(
 				'label'       => esc_attr__( 'Show tag', 'origamiez' ),
@@ -93,7 +109,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_author_info',
 			array(
 				'label'       => esc_attr__( 'Show author information', 'origamiez' ),
@@ -105,7 +121,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_border_for_images',
 			array(
 				'label'       => esc_attr__( 'Show border for image inside post-content', 'origamiez' ),
@@ -117,7 +133,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_use_gallery_popup',
 			array(
 				'label'       => esc_attr__( 'Use gallery popup', 'origamiez' ),
@@ -129,8 +145,8 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		// Single Post Adjacent Section
-		$service->registerSection(
+		// Single Post Adjacent Section.
+		$service->register_section(
 			'single_post_adjacent',
 			array(
 				'panel' => 'origamiez_general',
@@ -138,7 +154,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_adjacent',
 			array(
 				'label'       => esc_attr__( 'Show next & prev posts', 'origamiez' ),
@@ -150,7 +166,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_adjacent_title',
 			array(
 				'label'       => esc_attr__( 'Show title', 'origamiez' ),
@@ -162,7 +178,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'is_show_post_adjacent_datetime',
 			array(
 				'label'       => esc_attr__( 'Show datetime', 'origamiez' ),
@@ -174,7 +190,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'post_adjacent_arrow_left',
 			array(
 				'label'       => esc_attr__( 'Arrow left', 'origamiez' ),
@@ -186,7 +202,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'post_adjacent_arrow_right',
 			array(
 				'label'       => esc_attr__( 'Arrow right', 'origamiez' ),
@@ -198,8 +214,8 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		// Single Post Related Section
-		$service->registerSection(
+		// Single Post Related Section.
+		$service->register_section(
 			'single_post_related',
 			array(
 				'panel' => 'origamiez_general',
@@ -207,7 +223,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'single_post_related_layout',
 			array(
 				'label'       => esc_attr__( 'Layout', 'origamiez' ),
@@ -223,7 +239,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'post_related_layout',
 			array(
 				'label'       => esc_attr__( 'Show related posts', 'origamiez' ),
@@ -235,7 +251,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'get_related_post_by',
 			array(
 				'label'       => esc_attr__( 'Get by:', 'origamiez' ),
@@ -251,7 +267,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->registerSetting(
+		$service->register_setting(
 			'number_of_related_posts',
 			array(
 				'label'       => esc_attr__( 'Number of related posts.', 'origamiez' ),

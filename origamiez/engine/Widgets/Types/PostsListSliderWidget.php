@@ -48,7 +48,7 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		$before_title  = $args['before_title'];
 		$after_title   = $args['after_title'];
 
-		$instance                    = wp_parse_args( (array) $instance, $this->get_default() );
+		$instance                = wp_parse_args( (array) $instance, $this->get_default() );
 		$is_assign_last_to_small = $instance['is_assign_last_to_small'];
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
@@ -86,7 +86,7 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 	 */
 	public function form( $instance ): void {
 		parent::form( $instance );
-		$instance                    = wp_parse_args( (array) $instance, $this->get_default() );
+		$instance                = wp_parse_args( (array) $instance, $this->get_default() );
 		$is_assign_last_to_small = $instance['is_assign_last_to_small'];
 		?>
 		<p>

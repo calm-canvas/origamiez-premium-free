@@ -5,42 +5,22 @@
  * @package Origamiez
  */
 
-$post                    = get_queried_object();
+$current_post            = get_queried_object();
 $get_related_post_by     = get_theme_mod( 'get_related_post_by', 'post_tag' );
 $number_of_related_posts = (int) get_theme_mod( 'number_of_related_posts', 8 );
 $args                    = array(
-	'post__not_in'   => array( $post->ID ),
+	'post__not_in'   => array( $current_post->ID ),
 	'posts_per_page' => $number_of_related_posts,
 );
 if ( 'post_tag' === $get_related_post_by ) {
-	$tags = get_the_tags( $post->ID );
+	$tags = wp_get_post_terms( $current_post->ID, 'post_tag', array( 'fields' => 'ids' ) );
 	if ( ! empty( $tags ) ) {
-		$tag_ids = array();
-		foreach ( $tags as $tag_item ) {
-			$tag_ids[] = $tag_item->term_id;
-		}
-		$args['tax_query'] = array(
-			array(
-				'taxonomy' => 'post_tag',
-				'field'    => 'id',
-				'terms'    => $tag_ids,
-			),
-		);
+		$args['tag__in'] = $tags;
 	}
 } else {
-	$categories = get_the_category( $post->ID );
+	$categories = wp_get_post_terms( $current_post->ID, 'category', array( 'fields' => 'ids' ) );
 	if ( ! empty( $categories ) ) {
-		$category_id = array();
-		foreach ( $categories as $category ) {
-			$category_id[] = $category->term_id;
-		}
-		$args['tax_query'] = array(
-			array(
-				'taxonomy' => 'category',
-				'field'    => 'id',
-				'terms'    => $category_id,
-			),
-		);
+		$args['category__in'] = $categories;
 	}
 }
 $related_posts = new WP_Query( $args );

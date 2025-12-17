@@ -1,9 +1,15 @@
 <?php
-$sidebar = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
-if ( is_active_sidebar( $sidebar ) ) :
-	?>
-	<div id="sidebar-middle-clone" class="origamiez-size-02 pull-left hidden" role="complementary">
-		<?php dynamic_sidebar( $sidebar ); ?>
-	</div>
-	<?php
-endif;
+/**
+ * The sidebar containing the middle clone widget area.
+ *
+ * @package Origamiez
+ */
+
+if ( ! is_active_sidebar( 'middle-clone' ) ) {
+	return;
+}
+?>
+
+<div id="secondary" class="widget-area" role="complementary">
+	<?php dynamic_sidebar( 'middle-clone' ); ?>
+</div><!-- #secondary -->

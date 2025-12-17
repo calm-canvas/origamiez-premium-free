@@ -66,17 +66,21 @@ class ThemeHooks implements HookProviderInterface {
 	 * @return void
 	 */
 	public function save_unyson_options( string $option_name, mixed $old_value, mixed $new_value ): void {
-		if ( 'fw_theme_settings_options:origamiez' === $option_name ) {
-			if ( is_array( $old_value ) && is_array( $new_value ) ) {
-				foreach ( $new_value as $key => $value ) {
-					if ( $key === 'logo' ) {
-						if ( isset( $value['url'] ) && isset( $value['attachment_id'] ) ) {
-							$value = esc_url( $value['url'] );
-						}
-					}
-					set_theme_mod( $key, $value );
+		if ( 'fw_theme_settings_options:origamiez' !== $option_name ) {
+			return;
+		}
+
+		if ( ! is_array( $old_value ) || ! is_array( $new_value ) ) {
+			return;
+		}
+
+		foreach ( $new_value as $key => $value ) {
+			if ( 'logo' === $key ) {
+				if ( isset( $value['url'] ) && isset( $value['attachment_id'] ) ) {
+					$value = esc_url( $value['url'] );
 				}
 			}
+			set_theme_mod( $key, $value );
 		}
 	}
 }

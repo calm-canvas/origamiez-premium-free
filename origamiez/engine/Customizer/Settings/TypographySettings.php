@@ -1,20 +1,36 @@
 <?php
+/**
+ * Typography Settings
+ *
+ * @package Origamiez
+ * @subpackage Origamiez/Engine/Customizer/Settings
+ */
 
 namespace Origamiez\Engine\Customizer\Settings;
 
 use Origamiez\Engine\Customizer\CustomizerService;
 
+/**
+ * Class TypographySettings
+ *
+ * @package Origamiez\Engine\Customizer\Settings
+ */
 class TypographySettings implements SettingsInterface {
 
+	/**
+	 * Register typography settings.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
 	public function register( CustomizerService $service ): void {
-		$service->registerPanel(
+		$service->register_panel(
 			'origamiez_typography',
 			array(
 				'title' => esc_attr__( 'Typography', 'origamiez' ),
 			)
 		);
 
-		$service->registerPanel(
+		$service->register_panel(
 			'origamiez_google_fonts',
 			array(
 				'title' => esc_attr__( 'Google fonts', 'origamiez' ),
@@ -36,7 +52,7 @@ class TypographySettings implements SettingsInterface {
 		);
 
 		foreach ( $font_objects as $font_slug => $font_title ) {
-			$service->registerSection(
+			$service->register_section(
 				"custom_{$font_slug}",
 				array(
 					'panel' => 'origamiez_typography',
@@ -44,7 +60,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_is_enable",
 				array(
 					'label'       => esc_attr__( 'Check to enable', 'origamiez' ),
@@ -56,7 +72,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_family",
 				array(
 					'label'           => esc_attr__( 'Font Family', 'origamiez' ),
@@ -70,7 +86,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_size",
 				array(
 					'label'           => esc_attr__( 'Font Size', 'origamiez' ),
@@ -84,7 +100,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_style",
 				array(
 					'label'           => esc_attr__( 'Font Style', 'origamiez' ),
@@ -98,7 +114,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_weight",
 				array(
 					'label'           => esc_attr__( 'Font Weight', 'origamiez' ),
@@ -112,7 +128,7 @@ class TypographySettings implements SettingsInterface {
 				)
 			);
 
-			$service->registerSetting(
+			$service->register_setting(
 				"{$font_slug}_line_height",
 				array(
 					'label'           => esc_attr__( 'Line height', 'origamiez' ),
@@ -127,11 +143,11 @@ class TypographySettings implements SettingsInterface {
 			);
 		}
 
-		// Google Fonts
+		// Google Fonts.
 		$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 		if ( $number_of_google_fonts ) {
 			for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
-				$service->registerSection(
+				$service->register_section(
 					sprintf( 'google_font_%s', $i ),
 					array(
 						'panel' => 'origamiez_google_fonts',
@@ -139,7 +155,7 @@ class TypographySettings implements SettingsInterface {
 					)
 				);
 
-				$service->registerSetting(
+				$service->register_setting(
 					sprintf( 'google_font_%s_name', $i ),
 					array(
 						'label'       => esc_attr__( 'Font family (name)', 'origamiez' ),
@@ -151,7 +167,7 @@ class TypographySettings implements SettingsInterface {
 					)
 				);
 
-				$service->registerSetting(
+				$service->register_setting(
 					sprintf( 'google_font_%s_src', $i ),
 					array(
 						'label'       => esc_attr__( 'Path of this font', 'origamiez' ),

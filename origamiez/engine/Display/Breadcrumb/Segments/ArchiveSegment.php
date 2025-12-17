@@ -59,7 +59,11 @@ class ArchiveSegment implements SegmentInterface {
 			$author_id = get_queried_object_id();
 			$html      = $this->prefix . sprintf(
 				'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url"><span itemprop="title">%s</span></a></span>',
-				sprintf( esc_attr__( 'Posts created by %1$s', 'origamiez' ), get_the_author_meta( 'display_name', $author_id ) )
+				sprintf(
+					/* translators: %1$s: author name. */
+					esc_attr__( 'Posts created by %1$s', 'origamiez' ),
+					get_the_author_meta( 'display_name', $author_id )
+				)
 			);
 		}
 
@@ -110,13 +114,13 @@ class ArchiveSegment implements SegmentInterface {
 			if ( is_month() ) {
 				$html .= $this->prefix . sprintf(
 					'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url"><span itemprop="title">%s</span></a></span>',
-					date( 'F', mktime( 0, 0, 0, (int) $date['m'] ) )
+					gmdate( 'F', mktime( 0, 0, 0, (int) $date['m'] ) )
 				);
 			} else {
 				$html .= $this->prefix . sprintf(
 					'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%s" itemprop="url"><span itemprop="title">%s</span></a></span>',
 					get_month_link( (int) $date['y'], (int) $date['m'] ),
-					date( 'F', mktime( 0, 0, 0, (int) $date['m'] ) )
+					gmdate( 'F', mktime( 0, 0, 0, (int) $date['m'] ) )
 				);
 			}
 		}

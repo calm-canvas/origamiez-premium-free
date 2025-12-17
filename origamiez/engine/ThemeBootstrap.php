@@ -66,7 +66,7 @@ class ThemeBootstrap {
 	 * ThemeBootstrap constructor.
 	 */
 	public function __construct() {
-		$this->container = Container::getInstance();
+		$this->container = Container::get_instance();
 		$this->setup_container();
 		$this->config_manager = $this->container->get( 'config_manager' );
 		$this->hook_registry  = $this->container->get( 'hook_registry' );
@@ -79,7 +79,7 @@ class ThemeBootstrap {
 		$this->container->singleton(
 			'config_manager',
 			function () {
-				return ConfigManager::getInstance();
+				return ConfigManager::get_instance();
 			}
 		);
 
@@ -114,7 +114,7 @@ class ThemeBootstrap {
 		$this->container->singleton(
 			'hook_registry',
 			function () {
-				return HookRegistry::getInstance();
+				return HookRegistry::get_instance();
 			}
 		);
 
@@ -149,14 +149,14 @@ class ThemeBootstrap {
 		$this->container->singleton(
 			'widget_factory',
 			function () {
-				return WidgetFactory::getInstance();
+				return WidgetFactory::get_instance();
 			}
 		);
 
 		$this->container->singleton(
 			'sidebar_registry',
 			function () {
-				return SidebarRegistry::getInstance();
+				return SidebarRegistry::get_instance();
 			}
 		);
 
@@ -201,8 +201,8 @@ class ThemeBootstrap {
 	 * Register hooks.
 	 */
 	private function register_hooks(): void {
-		$this->hook_registry->registerHooks( new ThemeHooks() );
-		$this->hook_registry->registerHooks( new FrontendHooks( $this->container ) );
+		$this->hook_registry->register_hooks( new ThemeHooks() );
+		$this->hook_registry->register_hooks( new FrontendHooks( $this->container ) );
 	}
 
 	/**
@@ -236,14 +236,14 @@ class ThemeBootstrap {
 		$customizer_service = $this->container->get( 'customizer_service' );
 
 		// Register Settings Classes.
-		$customizer_service->addSettingsClass( new GeneralSettings() );
-		$customizer_service->addSettingsClass( new LayoutSettings() );
-		$customizer_service->addSettingsClass( new BlogSettings() );
-		$customizer_service->addSettingsClass( new SinglePostSettings() );
-		$customizer_service->addSettingsClass( new ColorSettings() );
-		$customizer_service->addSettingsClass( new CustomCssSettings() );
-		$customizer_service->addSettingsClass( new SocialSettings() );
-		$customizer_service->addSettingsClass( new TypographySettings() );
+		$customizer_service->add_settings_class( new GeneralSettings() );
+		$customizer_service->add_settings_class( new LayoutSettings() );
+		$customizer_service->add_settings_class( new BlogSettings() );
+		$customizer_service->add_settings_class( new SinglePostSettings() );
+		$customizer_service->add_settings_class( new ColorSettings() );
+		$customizer_service->add_settings_class( new CustomCssSettings() );
+		$customizer_service->add_settings_class( new SocialSettings() );
+		$customizer_service->add_settings_class( new TypographySettings() );
 
 		$customizer_service->register();
 	}
@@ -288,7 +288,7 @@ class ThemeBootstrap {
 	 */
 	private function register_sidebars(): void {
 		$sidebar_registry = $this->container->get( 'sidebar_registry' );
-		$sidebar_registry->registerDefaultSidebars();
+		$sidebar_registry->register_default_sidebars();
 		$sidebar_registry->register();
 	}
 

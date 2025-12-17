@@ -13,36 +13,14 @@ $args                    = array(
 	'posts_per_page' => $number_of_related_posts,
 );
 if ( 'post_tag' === $get_related_post_by ) {
-	$tags = get_the_tags( $post->ID );
+	$tags = wp_get_post_terms( $post->ID, 'post_tag', array( 'fields' => 'ids' ) );
 	if ( ! empty( $tags ) ) {
-		$tag_ids = array();
-		foreach ( $tags as $post_tag ) {
-			$tag_ids[] = $post_tag->term_id;
-		}
-		// Using tax_query can be slow.
-		$args['tax_query'] = array(
-			array(
-				'taxonomy' => 'post_tag',
-				'field'    => 'id',
-				'terms'    => $tag_ids,
-			),
-		);
+		$args['tag__in'] = $tags;
 	}
 } else {
-	$categories = get_the_category( $post->ID );
+	$categories = wp_get_post_terms( $post->ID, 'category', array( 'fields' => 'ids' ) );
 	if ( ! empty( $categories ) ) {
-		$category_id = array();
-		foreach ( $categories as $category ) {
-			$category_id[] = $category->term_id;
-		}
-		// Using tax_query can be slow.
-		$args['tax_query'] = array(
-			array(
-				'taxonomy' => 'category',
-				'field'    => 'id',
-				'terms'    => $category_id,
-			),
-		);
+		$args['category__in'] = $categories;
 	}
 }
 $related_posts = new WP_Query( $args );

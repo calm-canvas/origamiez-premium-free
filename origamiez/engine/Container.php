@@ -51,7 +51,7 @@ class Container implements ContainerInterface {
 	 *
 	 * @return self
 	 */
-	public static function getInstance(): self {
+	public static function get_instance(): self {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
@@ -78,7 +78,8 @@ class Container implements ContainerInterface {
 	 */
 	public function get( string $id ): mixed {
 		if ( ! $this->has( $id ) ) {
-			throw new class( sprintf( esc_html__( 'Service %s not found in container', 'origamiez' ), $id ) ) extends Exception implements NotFoundExceptionInterface {
+			// translators: %s is the service ID.
+			throw new class( sprintf( esc_html__( 'Service %s not found in container', 'origamiez' ), esc_html( $id ) ) ) extends Exception implements NotFoundExceptionInterface {
 			};
 		}
 

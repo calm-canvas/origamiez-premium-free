@@ -1,12 +1,27 @@
 <?php
+/**
+ * Widget to display a slider with three blocks.
+ *
+ * @package Origamiez
+ */
+
 add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Slider', 'register' ) );
 
+/**
+ * Class Origamiez_Widget_Posts_List_Slider
+ */
 class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
+	/**
+	 * Register the widget.
+	 */
 	public static function register() {
 		register_widget( 'Origamiez_Widget_Posts_List_Slider' );
 	}
 
-	function __construct() {
+	/**
+	 * Origamiez_Widget_Posts_List_Slider constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-slider',
 			'description' => esc_attr__( 'Display a slider with three block: two static blocks, one dynamic (carousel) block.', 'origamiez' ),
@@ -18,47 +33,70 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 		parent::__construct( 'origamiez-widget-posts-slider', esc_attr__( 'Origamiez Posts Slider', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
-		extract( $args );
+	/**
+	 * Display the widget.
+	 *
+	 * @param array $args     The arguments.
+	 * @param array $instance The instance.
+	 */
+	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
+		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
 		}
-		if ( 1 === (int) $is_assign_last_to_small ) {
+		if ( 1 === (int) $instance['is_assign_last_to_small'] ) {
 			$this->get_layout_last_to_small( $args, $instance );
 		} else {
 			$this->get_layout_default( $args, $instance );
 		}
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
 	}
 
-	function update( $new_instance, $old_instance ) {
+	/**
+	 * Update the widget.
+	 *
+	 * @param array $new_instance The new instance.
+	 * @param array $old_instance The old instance.
+	 *
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ) {
 		$instance                            = parent::update( $new_instance, $old_instance );
 		$instance['is_assign_last_to_small'] = isset( $new_instance['is_assign_last_to_small'] ) ? 1 : 0;
 
 		return $instance;
 	}
 
-	function form( $instance ) {
+	/**
+	 * Display the widget form.
+	 *
+	 * @param array $instance The instance.
+	 *
+	 * @return void
+	 */
+	public function form( $instance ) {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
 		?>
 		<p>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'is_assign_last_to_small' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'is_assign_last_to_small' ) ); ?>" type="checkbox"
-					value="1" <?php checked( 1, (int) $is_assign_last_to_small, true ); ?> />
+					value="1" <?php checked( 1, (int) $instance['is_assign_last_to_small'], true ); ?> />
 			<label for="<?php echo esc_attr( $this->get_field_id( 'is_assign_last_to_small' ) ); ?>"><?php esc_html_e( 'Is assign two last posts to small box ?', 'origamiez' ); ?></label>
 		</p>
 		<?php
 	}
 
+	/**
+	 * Get the default layout.
+	 *
+	 * @param array $args     The arguments.
+	 * @param array $instance The instance.
+	 */
 	protected function get_layout_default( $args, $instance ) {
-		extract( $args );
-		extract( $instance );
 		$query = $this->get_query( $instance );
 		echo '<div class="row clearfix">';
 		$posts = new WP_Query( array_merge( $query, array( 'posts_per_page' => 2 ) ) );
@@ -71,9 +109,8 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 					$loop_index = 1;
 					while ( $posts->have_posts() ) :
 						$posts->the_post();
-						$post_title  = get_the_title();
-						$post_url    = get_permalink();
-						$post_format = get_post_format();
+						$post_title = get_the_title();
+						$post_url   = get_permalink();
 						if ( has_post_thumbnail() ) :
 							$classes   = array( 'item' );
 							$classes[] = $is_first ? 'item-top' : 'item-bottom';
@@ -87,7 +124,16 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 												title="<?php echo esc_attr( $post_title ); ?>">
 												<?php echo esc_attr( $post_title ); ?>
 											</a>
-										</h4> <?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix hidden' ); ?>                                <?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix hidden' ); ?>
+										</h4>
+										<?php
+										parent::print_metadata(
+											$instance['is_show_date'],
+											$instance['is_show_comments'],
+											$instance['is_show_author'],
+											'metadata clearfix hidden'
+										);
+										parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix hidden' );
+										?>
 									</div>
 								</article>
 							</div>
@@ -118,9 +164,8 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 					<?php
 					while ( $posts->have_posts() ) :
 						$posts->the_post();
-						$post_title  = get_the_title();
-						$post_url    = get_permalink();
-						$post_format = get_post_format();
+						$post_title = get_the_title();
+						$post_url   = get_permalink();
 						if ( has_post_thumbnail() ) :
 							?>
 							<article <?php post_class( 'item' ); ?>>
@@ -131,13 +176,22 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 											title="<?php echo esc_attr( $post_title ); ?>">
 											<?php echo esc_attr( $post_title ); ?>
 										</a>
-									</h2> <?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix' ); ?>                                    <?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+									</h2>
+									<?php
+									parent::print_metadata(
+										$instance['is_show_date'],
+										$instance['is_show_comments'],
+										$instance['is_show_author'],
+										'metadata clearfix'
+									);
+									parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' );
+									?>
 								</div>
 							</article>
 							<?php
 						endif;
 						++$loop_index;
-endwhile;
+					endwhile;
 					?>
 				</div>
 			</div>
@@ -147,9 +201,13 @@ endwhile;
 		echo '</div>';
 	}
 
+	/**
+	 * Get the layout with the last two posts assigned to the small box.
+	 *
+	 * @param array $args     The arguments.
+	 * @param array $instance The instance.
+	 */
 	protected function get_layout_last_to_small( $args, $instance ) {
-		extract( $args );
-		extract( $instance );
 		$query = $this->get_query( $instance );
 		echo '<div class="row clearfix">';
 		$posts      = new WP_Query( $query );
@@ -175,9 +233,8 @@ endwhile;
 						$loop_index = 1;
 						while ( $posts->have_posts() ) :
 							$posts->the_post();
-							$post_title  = get_the_title();
-							$post_url    = get_permalink();
-							$post_format = get_post_format();
+							$post_title = get_the_title();
+							$post_url   = get_permalink();
 							if ( has_post_thumbnail() ) :
 								$classes   = array( 'item' );
 								$classes[] = $is_first ? 'item-top' : 'item-bottom';
@@ -191,7 +248,16 @@ endwhile;
 													title="<?php echo esc_attr( $post_title ); ?>">
 													<?php echo esc_attr( $post_title ); ?>
 												</a>
-											</h4> <?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix hidden' ); ?>                                    <?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix hidden' ); ?>
+											</h4>
+											<?php
+											parent::print_metadata(
+												$instance['is_show_date'],
+												$instance['is_show_comments'],
+												$instance['is_show_author'],
+												'metadata clearfix hidden'
+											);
+											parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix hidden' );
+											?>
 										</div>
 									</article>
 								</div>
@@ -214,9 +280,8 @@ endwhile;
 						<?php
 						while ( $posts->have_posts() ) :
 							$posts->the_post();
-							$post_title  = get_the_title();
-							$post_url    = get_permalink();
-							$post_format = get_post_format();
+							$post_title = get_the_title();
+							$post_url   = get_permalink();
 							if ( has_post_thumbnail() ) :
 								?>
 								<article <?php post_class( 'item' ); ?>>
@@ -227,23 +292,37 @@ endwhile;
 												title="<?php echo esc_attr( $post_title ); ?>">
 												<?php echo esc_attr( $post_title ); ?>
 											</a>
-										</h2> <?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix' ); ?>                                        <?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+										</h2>
+										<?php
+										parent::print_metadata(
+											$instance['is_show_date'],
+											$instance['is_show_comments'],
+											$instance['is_show_author'],
+											'metadata clearfix'
+										);
+										parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' );
+										?>
 									</div>
 								</article>
 								<?php
 							endif;
 							++$loop_index;
-endwhile;
+						endwhile;
 						?>
 					</div>
 				</div>
 				<?php
 			endif;
 			wp_reset_postdata();
-endif;
+		endif;
 		echo '</div>';
 	}
 
+	/**
+	 * Get the default values.
+	 *
+	 * @return array
+	 */
 	protected function get_default() {
 		$default                            = parent::get_default();
 		$default['is_assign_last_to_small'] = 0;

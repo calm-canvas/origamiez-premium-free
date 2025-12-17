@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Template Name: Page Three Column
  */
 get_header();
