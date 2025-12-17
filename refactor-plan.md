@@ -1,7 +1,7 @@
 # Origamiez Theme Refactor Execution Plan
 
-**Status:** In Progress - Phase 1, 2 Complete; Phase 3 & 4 Partial Complete
-**Version:** 1.2  
+**Status:** In Progress - Phase 1, 2, 3 Complete; Phase 4 Partial Complete
+**Version:** 1.3  
 **Last Updated:** 2025-12-17
 
 ---
@@ -141,14 +141,27 @@ $bootstrap->boot();
 3. Verify all provider classes are being instantiated
 
 **Verification:**
-- [ ] Body classes appear on `<body>` tag
-- [ ] Layout classes (fullwidth/boxer) are present
-- [ ] Sidebar detection classes are correct
-- [ ] Skin/header classes are applied
-- [ ] 404/search/archive classes are present
+- [x] Body classes appear on `<body>` tag
+- [x] Layout classes (fullwidth/boxer) are present
+- [x] Sidebar detection classes are correct
+- [x] Skin/header classes are applied
+- [x] 404/search/archive classes are present
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 168-253 (body class function)
+**Status:** ✅ COMPLETED
+
+**Implementation Details:**
+- `BodyClassManager` registered in `ThemeBootstrap::register_layout()` (line 225)
+- All providers instantiated in `BodyClassManager::register_default_providers()`:
+  - `SinglePostClassProvider` - Single post layout classes
+  - `PageClassProvider` - Page template classes
+  - `ArchiveClassProvider` - Archive/taxonomy classes
+  - `SearchClassProvider` - Search page classes
+  - `NotFoundClassProvider` - 404 page classes
+  - `GeneralClassProvider` - General/global classes (layout, skin, header, footer, sidebar)
+- Filter added via `BodyClassManager::register()` to 'body_class' hook
+
+**Files Deleted:**
+- ✅ `origamiez/inc/functions.php` lines 168-253 (body class function) - REMOVED
 
 ---
 
@@ -171,11 +184,20 @@ $bootstrap->boot();
    ```
 
 **Verification:**
-- [ ] First post in archive has `origamiez-first-post` class
-- [ ] Other post classes are present
+- [x] First post in archive has `origamiez-first-post` class
+- [x] Other post classes are present
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 269-277 (post class function)
+**Status:** ✅ COMPLETED
+
+**Implementation Details:**
+- `PostClassManager` registered in container via `ThemeBootstrap` (line 172-177)
+- Used in `FrontendHooks::archive_post_class()` callback (line 73-80)
+- Hooked to 'post_class' filter via `FrontendHooks::register()` (line 47)
+- Adds `origamiez-first-post` class to first post in archive
+- Also adds format-specific and thumbnail detection classes
+
+**Files Deleted:**
+- ✅ `origamiez/inc/functions.php` lines 269-277 (post class function) - REMOVED
 
 ---
 
