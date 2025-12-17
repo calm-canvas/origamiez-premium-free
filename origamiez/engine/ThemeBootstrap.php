@@ -8,6 +8,7 @@
 namespace Origamiez\Engine;
 
 use Origamiez\Engine\Assets\AssetManager;
+use Origamiez\Engine\ThemeSupportManager;
 use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Config\SkinConfig;
@@ -27,6 +28,7 @@ use Origamiez\Engine\Display\ReadMoreButton;
 use Origamiez\Engine\Hooks\HookRegistry;
 use Origamiez\Engine\Hooks\Hooks\ThemeHooks;
 use Origamiez\Engine\Hooks\Hooks\FrontendHooks;
+use Origamiez\Engine\Hooks\Hooks\SecurityHooks;
 use Origamiez\Engine\Layout\BodyClassManager;
 use Origamiez\Engine\Post\PostClassManager;
 use Origamiez\Engine\Widgets\WidgetClassManager;
@@ -186,6 +188,7 @@ class ThemeBootstrap {
 	 * Boot the theme.
 	 */
 	public function boot(): void {
+		ThemeSupportManager::register();
 		$this->register_hooks();
 		$this->register_assets();
 		$this->register_layout();
@@ -203,6 +206,7 @@ class ThemeBootstrap {
 	private function register_hooks(): void {
 		$this->hook_registry->register_hooks( new ThemeHooks() );
 		$this->hook_registry->register_hooks( new FrontendHooks( $this->container ) );
+		$this->hook_registry->register_hooks( new SecurityHooks( $this->container ) );
 	}
 
 	/**

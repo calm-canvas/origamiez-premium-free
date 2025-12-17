@@ -1,280 +1,5 @@
 <?php
-function origamiez_enqueue_scripts()
-{
-    global $is_IE;
-    $dir = get_template_directory_uri();
-    /**
-     * --------------------------------------------------
-     * STYLESHEETS
-     * --------------------------------------------------
-     */
-    // LIBS.
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'bootstrap', "$dir/css/bootstrap.css", array(), null);
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'font-awesome', "$dir/css/fontawesome.css", array(), null);
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-owl-carousel', "$dir/css/owl.carousel.css", array(), null);
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-owl-theme', "$dir/css/owl.theme.default.css", array(), null);
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-superfish', "$dir/css/superfish.css", array(), null);
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-navgoco', "$dir/css/jquery.navgoco.css", array(), null);    
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'jquery-poptrox', "$dir/css/jquery.poptrox.css", array(), null);
-    // STYLE.
-    wp_enqueue_style(ORIGAMIEZ_PREFIX . 'style', get_stylesheet_uri(), array(), null);
-    // CUSTOM COLOR WITH CSS VARIABLES.
-    $skin = get_theme_mod('skin', 'default');
-    if ('custom' === $skin) {
-        $css_variables = ':root {';
-        $css_variables .= '--body-color: ' . get_theme_mod('body_color', '#333333') . ';';
-        $css_variables .= '--heading-color: ' . get_theme_mod('heading_color', '#111111') . ';';
-        $css_variables .= '--link-color: ' . get_theme_mod('link_color', '#111111') . ';';
-        $css_variables .= '--link-hover-color: ' . get_theme_mod('link_hover_color', '#00589f') . ';';
-        $css_variables .= '--primary-color: ' . get_theme_mod('primary_color', '#111111') . ';';
-        $css_variables .= '--secondary-color: ' . get_theme_mod('secondary_color', '#f5f7fa') . ';';
-        $css_variables .= '--main-menu-color: ' . get_theme_mod('main_menu_color', '#111111') . ';';
-        $css_variables .= '--main-menu-bg-color: ' . get_theme_mod('main_menu_bg_color', '#ffffff') . ';';
-        $css_variables .= '--main-menu-hover-color: ' . get_theme_mod('main_menu_hover_color', '#00589f') . ';';
-        $css_variables .= '--main-menu-active-color: ' . get_theme_mod('main_menu_active_color', '#111111') . ';';
-        $css_variables .= '--line-1-bg-color: ' . get_theme_mod('line_1_bg_color', '#e8ecf1') . ';';
-        $css_variables .= '--line-2-bg-color: ' . get_theme_mod('line_2_bg_color', '#f0f2f5') . ';';
-        $css_variables .= '--line-3-bg-color: ' . get_theme_mod('line_3_bg_color', '#f8fafc') . ';';
-        $css_variables .= '--footer-sidebars-bg-color: ' . get_theme_mod('footer_sidebars_bg_color', '#222222') . ';';
-        $css_variables .= '--footer-sidebars-text-color: ' . get_theme_mod('footer_sidebars_text_color', '#a0a0a0') . ';';
-        $css_variables .= '--footer-sidebars-widget-heading-color: ' . get_theme_mod('footer_sidebars_widget_heading_color', '#ffffff') . ';';
-        $css_variables .= '--footer-end-bg-color: ' . get_theme_mod('footer_end_bg_color', '#111111') . ';';
-        $css_variables .= '--footer-end-text-color: ' . get_theme_mod('footer_end_text_color', '#a0a0a0') . ';';
-        $css_variables .= '--white: #ffffff;';
-        $css_variables .= '--black: #000000;';
-        $css_variables .= '--black_light: ' . get_theme_mod('black_light_color', '#f8fafc') . ';';
-        $css_variables .= '--overlay_white: rgba(255, 255, 255, 0.85);';
-        $css_variables .= '--overlay_black: rgba(0, 0, 0, 0.75);';
-        $css_variables .= '--metadata-color: ' . get_theme_mod('metadata_color', '#666666') . ';';
-        $css_variables .= '--color-success: ' . get_theme_mod('color_success', '#27ae60') . ';';
-        $css_variables .= '}';
-        wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $css_variables);
-    }
-    // GOOGLE FONT.
-    if ('off' !== _x('on', 'Google font: on or off', 'origamiez')) {
-        $google_fonts_url = add_query_arg('family', urlencode('Inter:wght@600;700&display=swap'), '//fonts.googleapis.com/css2');
-        wp_enqueue_style(ORIGAMIEZ_PREFIX . 'google-fonts', $google_fonts_url);
-    }
-    // DYNAMIC FONT.
-    $font_groups = array();
-    $number_of_google_fonts = (int)apply_filters('origamiez_get_number_of_google_fonts', 3);
-    if ($number_of_google_fonts) {
-        for ($i = 0; $i < $number_of_google_fonts; $i++) {
-            $font_family = get_theme_mod(sprintf('google_font_%s_name', $i), '');
-            $font_src = get_theme_mod(sprintf('google_font_%s_src', $i), '');
-            if ($font_family && $font_src) {
-                $font_family_slug = origamiez_get_str_uglify($font_family);
-                $font_groups['dynamic'][$font_family_slug] = $font_src;
-            }
-        }
-    }
-    foreach ($font_groups as $font_group) {
-        if ($font_group) {
-            foreach ($font_group as $font_slug => $font) {
-                wp_enqueue_style(ORIGAMIEZ_PREFIX . $font_slug, $font, array(), null);
-            }
-        }
-    }
 
-    /**
-     * --------------------------------------------------
-     * SCRIPTS.
-     * --------------------------------------------------
-     */
-    if (is_singular()) {
-        wp_enqueue_script('comment-reply');
-    }
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('hoverIntent');
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'modernizr', "$dir/js/modernizr.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'bootstrap', "$dir/js/bootstrap.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-easing', "$dir/js/jquery.easing.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-fitvids', "$dir/js/jquery.fitvids.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-navgoco', "$dir/js/jquery.navgoco.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-poptrox', "$dir/js/jquery.poptrox.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-transit', "$dir/js/jquery.transit.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-owl-carousel', "$dir/js/owl.carousel.js", array('jquery'), null, true);    
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'jquery-superfish', "$dir/js/superfish.js", array('jquery'), null, true);
-    wp_enqueue_script(ORIGAMIEZ_PREFIX . 'origamiez-init', "$dir/js/script.js", array('jquery'), null, true);
-    wp_localize_script(ORIGAMIEZ_PREFIX . 'origamiez-init', 'origamiez_vars', apply_filters('get_origamiez_vars', array(
-        'info' => array(
-            'home_url' => esc_url(home_url()),
-            'template_uri' => get_template_directory_uri(),
-            'affix' => '',
-        ),
-        'config' => array(
-            'is_enable_lightbox' => (int)get_theme_mod('is_enable_lightbox', 1),
-            'is_enable_convert_flat_menus' => (int)get_theme_mod('is_enable_convert_flat_menus', 1),
-            'is_use_gallery_popup' => (int)get_theme_mod('is_use_gallery_popup', 1),
-        ),
-    )));
-    /**
-     * --------------------------------------------------
-     * IE FIX.
-     * --------------------------------------------------
-     */
-    if ($is_IE) {
-        wp_enqueue_script(ORIGAMIEZ_PREFIX . 'html5', "$dir/js/html5shiv.js", array(), null, true);
-        wp_enqueue_script(ORIGAMIEZ_PREFIX . 'respond', "$dir/js/respond.js", array(), null, true);
-    }
-    /*
-    * --------------------------------------------------
-    * CUSTOM FONT.
-    * --------------------------------------------------
-    */
-    $rules = array(
-        'family' => 'font-family',
-        'size' => 'font-size',
-        'style' => 'font-style',
-        'weight' => 'font-weight',
-        'line_height' => 'line-height',
-    );
-    $font_objects = array(
-        'font_body' => 'body',
-        'font_menu' => '#main-menu a',
-        'font_site_title' => '#site-home-link #site-title',
-        'font_site_subtitle' => '#site-home-link #site-desc',
-        'font_widget_title' => 'h2.widget-title',
-        'font_h1' => 'h1',
-        'font_h2' => 'h2',
-        'font_h3' => 'h3',
-        'font_h4' => 'h4',
-        'font_h5' => 'h5',
-        'font_h6' => 'h6',
-    );
-    foreach ($font_objects as $font_object_slug => $font_object) {
-        $is_enable = (int)get_theme_mod("{$font_object_slug}_is_enable", 0);
-        if ($is_enable) {
-            foreach ($rules as $rule_slug => $rule) {
-                $font_data = get_theme_mod("{$font_object_slug}_{$rule_slug}");
-                if (!empty($font_data)) {
-                    $tmp = sprintf('%s {%s: %s;}', $font_object, $rule, $font_data);
-                    wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $tmp);
-                }
-            }
-        }
-    }
-    /*
-    * --------------------------------------------------
-    * CUSTOM CSS.
-    * --------------------------------------------------
-    */
-    $css = wp_kses(get_theme_mod('custom_css'), origamiez_get_allowed_tags());
-    if (!empty($css)) {
-        wp_add_inline_style(ORIGAMIEZ_PREFIX . 'style', $css);
-    }
-}
-
-function origamiez_body_class($classes)
-{
-    if (is_single()) {
-        array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-single');
-        if (1 === (int)get_theme_mod('is_show_border_for_images', 1)) {
-            $classes[] = 'origamiez-show-border-for-images';
-        }
-    } else if (is_page()) {
-        if (in_array(basename(get_page_template()), array(
-            'template-page-fullwidth-centered.php',
-            'template-page-fullwidth.php'
-        ), true)) {
-            array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-single', 'origamiez-layout-full-width');
-        } else if ('template-page-magazine.php' === basename(get_page_template())) {
-            array_push($classes, 'origamiez-page-magazine', 'origamiez-layout-right-sidebar', 'origamiez-layout-single', 'origamiez-layout-full-width');
-            $sidebar_right = apply_filters('origamiez_get_current_sidebar', 'right', 'right');
-            if (!is_active_sidebar($sidebar_right)) {
-                $classes[] = 'origamiez-missing-sidebar-right';
-            }
-        } else {
-            array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-single', 'origamiez-layout-static-page');
-        }
-    } else if (is_archive() || is_home()) {
-        array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-blog');
-        switch (get_theme_mod('taxonomy_thumbnail_style', 'thumbnail-left')) {
-            case 'thumbnail-right':
-                $classes[] = 'origamiez-layout-blog-thumbnail-right';
-                break;
-            case 'thumbnail-full-width':
-                $classes[] = 'origamiez-layout-blog-thumbnail-full-width';
-                break;
-            default:
-                $classes[] = 'origamiez-layout-blog-thumbnail-left';
-                break;
-        }
-        if (is_home() || is_tag() || is_category() || is_author() || is_day() || is_month() || is_year()) {
-            $taxonomy_layout = get_theme_mod('taxonomy_layout', 'two-cols');
-            if ($taxonomy_layout) {
-                $classes[] = "origamiez-taxonomy-{$taxonomy_layout}";
-            }
-        }
-    } elseif (is_search()) {
-        array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-blog');
-    } else if (is_404()) {
-        array_push($classes, 'origamiez-layout-right-sidebar', 'origamiez-layout-single', 'origamiez-layout-full-width');
-    }
-    $bg_image = get_background_image();
-    $bg_color = get_background_color();
-    if ($bg_image || $bg_color) {
-        $classes[] = 'origamiez_custom_bg';
-    } else {
-        $classes[] = 'without_bg_slides';
-    }
-    if (1 !== (int)get_theme_mod('use_layout_fullwidth', '0')) {
-        $classes[] = 'origamiez-boxer';
-    } else {
-        $classes[] = 'origamiez-fluid';
-    }
-    if (is_active_sidebar('footer-1') || is_active_sidebar('footer-2') || is_active_sidebar('footer-3') || is_active_sidebar('footer-4') || is_active_sidebar('footer-5')) {
-        $classes[] = 'origamiez-show-footer-area';
-    }
-    $skin = get_theme_mod('skin', 'default');
-    if ($skin) {
-        $classes[] = sprintf('origamiez-skin-%s', $skin);
-    }
-    $header_style = get_theme_mod('header_style', 'left-right');
-    if ($header_style) {
-        $classes[] = sprintf('origamiez-header-style-%s', $header_style);
-    }
-    if (is_single()) {
-        $single_post_layout = get_theme_mod('single-post-layout', 'two-cols');
-        $classes[] = "origamiez-single-post-{$single_post_layout}";
-    }
-    if (is_home() || is_archive() || is_single()) {
-        $sidebar_right = apply_filters('origamiez_get_current_sidebar', 'right', 'right');
-        if (!is_active_sidebar($sidebar_right)) {
-            $classes[] = 'origamiez-missing-sidebar-right';
-        }
-        $sidebar_left = apply_filters('origamiez_get_current_sidebar', 'left', 'left');
-        if (!is_active_sidebar($sidebar_left)) {
-            $classes[] = 'origamiez-missing-sidebar-left';
-        }
-    }
-
-    return $classes;
-}
-
-function origamiez_global_wapper_open()
-{
-    if (1 !== (int)get_theme_mod('use_layout_fullwidth', 0)) {
-        echo '<div class="container">';
-    }
-}
-
-function origamiez_global_wapper_close()
-{
-    if (1 !== (int)get_theme_mod('use_layout_fullwidth', 0)) {
-        echo '<div class="close">';
-    }
-}
-
-function origamiez_archive_post_class($classes)
-{
-    global $wp_query;
-    if (0 === $wp_query->current_post) {
-        $classes[] = 'origamiez-first-post';
-    }
-
-    return $classes;
-}
 
 function origamiez_get_format_icon($format)
 {
@@ -353,94 +78,7 @@ function origamiez_human_time_diff($from)
 
 function origamiez_get_breadcrumb()
 {
-    global $post, $wp_query;
-    $current_class = 'current-page';
-    $prefix = '&nbsp;&rsaquo;&nbsp;';
-    $breadcrumb_before = '<div class="breadcrumb">';
-    $breadcrumb_after = '</div>';
-    $breadcrumb_home = '<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="' . esc_url(home_url()) . '" itemprop="url"><span itemprop="title">' . esc_attr__('Home', 'origamiez') . '</span></a></span>';
-    $breadcrumb = $breadcrumb_home;
-    if (is_archive()) {
-        if (is_tag()) {
-            $term = get_term(get_queried_object_id(), 'post_tag');
-            $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, $term->name);
-        } else if (is_category()) {
-            $terms_link = explode($prefix, substr(get_category_parents(get_queried_object_id(), true, $prefix), 0, (strlen($prefix) * -1)));
-            $n = count($terms_link);
-            if ($n > 1) {
-                for ($i = 0; $i < ($n - 1); $i++) {
-                    $breadcrumb .= $prefix . $terms_link[$i];
-                }
-            }
-            $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, get_the_category_by_ID(get_queried_object_id()));
-        } else if (is_year() || is_month() || is_day()) {
-            $m = get_query_var('m');
-            $date = array('y' => null, 'm' => null, 'd' => null);
-            if (strlen($m) >= 4) {
-                $date['y'] = substr($m, 0, 4);
-            }
-            if (strlen($m) >= 6) {
-                $date['m'] = substr($m, 4, 2);
-            }
-            if (strlen($m) >= 8) {
-                $date['d'] = substr($m, 6, 2);
-            }
-            if ($date['y']) {
-                if (is_year()) {
-                    $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, $date['y']);
-                }
-            } else {
-                $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', get_year_link($date['y']), $date['y']);
-            }
-            if ($date['m']) {
-                if (is_month()) {
-                    $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, date('F', mktime(0, 0, 0, $date['m'])));
-                }
-            } else {
-                $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', get_month_link($date['y'], $date['m']), date('F', mktime(0, 0, 0, $date['m'])));
-            }
-            if ($date['d']) {
-                if (is_day()) {
-                    $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, $date['d']);
-                }
-            } else {
-                $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', get_day_link($date['y'], $date['m'], $date['d']), $date['d']);
-            }
-        } else if (is_author()) {
-            $author_id = get_queried_object_id();
-            $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, sprintf(esc_attr__('Posts created by %1$s', 'origamiez'), get_the_author_meta('display_name', $author_id)));
-        }
-    } else if (is_search()) {
-        $s = get_search_query();
-        $c = $wp_query->found_posts;
-        $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, sprintf(esc_attr__('Searched for "%s" return %s results', 'origamiez'), $s, $c));
-    } else if (is_singular()) {
-        if (is_page()) {
-            $post_ancestors = get_post_ancestors($post);
-            if ($post_ancestors) {
-                $post_ancestors = array_reverse($post_ancestors);
-                foreach ($post_ancestors as $crumb) {
-                    $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', get_permalink($crumb), esc_html(get_the_title($crumb)));
-                }
-            }
-            $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url" href="%2$s"><span itemprop="title">%3$s</span></a></span>', $current_class, get_permalink(get_queried_object_id()), esc_html(get_the_title(get_queried_object_id())));
-        } else if (is_single()) {
-            $categories = get_the_category(get_queried_object_id());
-            if ($categories) {
-                foreach ($categories as $category) {
-                    $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', get_category_link($category->term_id), $category->name);
-                }
-            }
-            $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url" href="%2$s"><span itemprop="title">%3$s</span></a></span>', $current_class, get_permalink(get_queried_object_id()), esc_html(get_the_title(get_queried_object_id())));
-        }
-    } else if (is_404()) {
-        $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, esc_attr__('Page not found', 'origamiez'));
-    } else {
-        $breadcrumb .= $prefix . sprintf('<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="%1$s" itemprop="url"><span itemprop="title">%2$s</span></a></span>', $current_class, esc_attr__('Latest News', 'origamiez'));
-    }
-    echo wp_kses($breadcrumb_before, origamiez_get_allowed_tags());
-    echo wp_kses(apply_filters('origamiez_get_breadcrumb', $breadcrumb, $current_class, $prefix), origamiez_get_allowed_tags());
-    echo wp_kses($breadcrumb_after, origamiez_get_allowed_tags());
+    do_action('origamiez_print_breadcrumb');
 }
 
 function origamiez_get_author_infor()
@@ -925,13 +563,7 @@ function origamiez_get_allowed_tags()
 
 function origamiez_get_button_readmore()
 {
-    ?>
-    <p class="origamiez-readmore-block">
-        <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="origamiez-readmore-button">
-            <?php esc_html_e('Read more &raquo;', 'origamiez'); ?>
-        </a>
-    </p>
-    <?php
+    do_action('origamiez_print_button_readmore');
 }
 
 function origamiez_save_unyson_options($option_key, $old_value, $new_value)
@@ -958,30 +590,13 @@ function origamiez_save_unyson_options($option_key, $old_value, $new_value)
  * Verify search form nonce
  */
 function origamiez_verify_search_nonce() {
-    if ( is_search() && isset( $_GET['search_nonce'] ) ) {
-        if ( ! wp_verify_nonce( $_GET['search_nonce'], 'origamiez_search_form_nonce' ) ) {
-            wp_die( esc_html__( 'Security check failed. Please try again.', 'origamiez' ) );
-        }
-    }
 }
-add_action( 'init', 'origamiez_verify_search_nonce' );
 
 /**
  * Sanitize and validate search query
  */
 function origamiez_sanitize_search_query( $query ) {
-    if ( is_search() && ! is_admin() && $query->is_main_query() ) {
-        $search_term = get_search_query();
-        if ( ! empty( $search_term ) ) {
-            // Sanitize the search term
-            $sanitized_term = sanitize_text_field( $search_term );
-            // Limit search term length
-            $sanitized_term = substr( $sanitized_term, 0, 100 );
-            $query->set( 's', $sanitized_term );
-        }
-    }
 }
-add_action( 'pre_get_posts', 'origamiez_sanitize_search_query' );
 
 
 
@@ -1006,47 +621,20 @@ function origamiez_sanitize_select( $input, $setting ) {
  * Add security headers
  */
 function origamiez_add_security_headers() {
-    if ( ! is_admin() ) {
-        header( 'X-Content-Type-Options: nosniff' );
-        header( 'X-Frame-Options: SAMEORIGIN' );
-        header( 'X-XSS-Protection: 1; mode=block' );
-        header( 'Referrer-Policy: strict-origin-when-cross-origin' );
-        
-        // Basic Content Security Policy
-        $csp = "default-src 'self'; ";
-        $csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com; ";
-        $csp .= "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com; ";
-        $csp .= "img-src 'self' data: *.gravatar.com *.wp.com; ";
-        $csp .= "font-src 'self' *.googleapis.com *.gstatic.com; ";
-        $csp .= "connect-src 'self'; ";
-        $csp .= "frame-src 'self' *.youtube.com *.vimeo.com; ";
-        $csp .= "object-src 'none'; ";
-        $csp .= "base-uri 'self';";
-        
-        header( 'Content-Security-Policy: ' . $csp );
-    }
 }
-add_action( 'send_headers', 'origamiez_add_security_headers' );
 
 
 /**
  * Track failed login attempts
  */
 function origamiez_track_failed_login( $username ) {
-    $username = sanitize_user( $username );
-    $attempts = get_transient( 'origamiez_login_attempts_' . $username );
-    $attempts = $attempts ? $attempts + 1 : 1;
-    set_transient( 'origamiez_login_attempts_' . $username, $attempts, 15 * MINUTE_IN_SECONDS );
 }
-add_action( 'wp_login_failed', 'origamiez_track_failed_login' );
 
 /**
  * Clear login attempts on successful login
  */
 function origamiez_clear_login_attempts( $user_login ) {
-    delete_transient( 'origamiez_login_attempts_' . sanitize_user( $user_login ) );
 }
-add_action( 'wp_login', 'origamiez_clear_login_attempts' );
 
 
 /**
