@@ -1,16 +1,46 @@
 <?php
+/**
+ * Manages security headers for the theme.
+ *
+ * @package Origamiez
+ * @subpackage Engine\Security
+ */
+
 namespace Origamiez\Engine\Security;
 
+/**
+ * Class SecurityHeaderManager
+ *
+ * @package Origamiez\Engine\Security
+ */
 class SecurityHeaderManager {
-	private $headers    = array();
+
+	/**
+	 * Holds the security headers.
+	 *
+	 * @var array
+	 */
+	private $headers = array();
+
+	/**
+	 * Holds the Content-Security-Policy configuration.
+	 *
+	 * @var array
+	 */
 	private $csp_config = array();
 
+	/**
+	 * SecurityHeaderManager constructor.
+	 */
 	public function __construct() {
-		$this->initializeDefaultHeaders();
-		$this->initializeDefaultCSP();
+		$this->initialize_default_headers();
+		$this->initialize_default_csp();
 	}
 
-	private function initializeDefaultHeaders() {
+	/**
+	 * Initializes the default security headers.
+	 */
+	private function initialize_default_headers() {
 		$this->headers = array(
 			'X-Content-Type-Options' => 'nosniff',
 			'X-Frame-Options'        => 'SAMEORIGIN',
@@ -19,7 +49,10 @@ class SecurityHeaderManager {
 		);
 	}
 
-	private function initializeDefaultCSP() {
+	/**
+	 * Initializes the default Content-Security-Policy.
+	 */
+	private function initialize_default_csp() {
 		$this->csp_config = array(
 			'default-src' => "'self'",
 			'script-src'  => "'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com",
@@ -33,40 +66,86 @@ class SecurityHeaderManager {
 		);
 	}
 
-	public function setHeader( $header, $value ) {
+	/**
+	 * Sets a security header.
+	 *
+	 * @param string $header The header name.
+	 * @param string $value  The header value.
+	 * @return $this
+	 */
+	public function set_header( $header, $value ) {
 		$this->headers[ $header ] = $value;
 		return $this;
 	}
 
-	public function removeHeader( $header ) {
+	/**
+	 * Removes a security header.
+	 *
+	 * @param string $header The header name.
+	 * @return $this
+	 */
+	public function remove_header( $header ) {
 		unset( $this->headers[ $header ] );
 		return $this;
 	}
 
-	public function getHeader( $header ) {
+	/**
+	 * Gets a security header.
+	 *
+	 * @param string $header The header name.
+	 * @return string|null
+	 */
+	public function get_header( $header ) {
 		return isset( $this->headers[ $header ] ) ? $this->headers[ $header ] : null;
 	}
 
-	public function setCSPDirective( $directive, $value ) {
+	/**
+	 * Sets a CSP directive.
+	 *
+	 * @param string $directive The CSP directive.
+	 * @param string $value     The directive value.
+	 * @return $this
+	 */
+	public function set_csp_directive( $directive, $value ) {
 		$this->csp_config[ $directive ] = $value;
 		return $this;
 	}
 
-	public function removeCSPDirective( $directive ) {
+	/**
+	 * Removes a CSP directive.
+	 *
+	 * @param string $directive The CSP directive.
+	 * @return $this
+	 */
+	public function remove_csp_directive( $directive ) {
 		unset( $this->csp_config[ $directive ] );
-		return $this;
+		return $this.
 	}
 
-	public function getCSPDirective( $directive ) {
+	/**
+	 * Gets a CSP directive.
+	 *
+	 * @param string $directive The CSP directive.
+	 * @return string|null
+	 */
+	public function get_csp_directive( $directive ) {
 		return isset( $this->csp_config[ $directive ] ) ? $this->csp_config[ $directive ] : null;
 	}
 
-	public function disableCSP() {
+	/**
+	 * Disables CSP.
+	 *
+	 * @return $this
+	 */
+	public function disable_csp() {
 		$this->csp_config = array();
 		return $this;
 	}
 
-	public function sendHeaders() {
+	/**
+	 * Sends the security headers.
+	 */
+	public function send_headers() {
 		if ( is_admin() ) {
 			return;
 		}
@@ -76,14 +155,19 @@ class SecurityHeaderManager {
 		}
 
 		if ( ! empty( $this->csp_config ) ) {
-			$csp = $this->buildCSP();
+			$csp = $this->build_csp();
 			if ( ! empty( $csp ) ) {
 				header( 'Content-Security-Policy: ' . $csp );
 			}
 		}
 	}
 
-	private function buildCSP() {
+	/**
+	 * Builds the CSP header value.
+	 *
+	 * @return string
+	 */
+	private function build_csp() {
 		$csp_parts = array();
 
 		foreach ( $this->csp_config as $directive => $value ) {
@@ -93,20 +177,40 @@ class SecurityHeaderManager {
 		return implode( '; ', $csp_parts ) . ';';
 	}
 
-	public function getCSP() {
-		return $this->buildCSP();
+	/**
+	 * Gets the CSP header value.
+	 *
+	 * @return string
+	 */
+	public function get_csp() {
+		return $this->build_csp();
 	}
 
-	public function getAllHeaders() {
+	/**
+	 * Gets all security headers.
+	 *
+	 * @return array
+	 */
+	public function get_all_headers() {
 		return $this->headers;
 	}
 
-	public function getCSPConfig() {
+	/**
+	 * Gets the CSP configuration.
+	 *
+	 * @return array
+	 */
+	public function get_csp_config() {
 		return $this->csp_config;
 	}
 
+	/**
+	 * Registers the send_headers action.
+	 *
+	 * @return $this
+	 */
 	public function register() {
-		add_action( 'send_headers', array( $this, 'sendHeaders' ) );
+		add_action( 'send_headers', array( $this, 'send_headers' ) );
 		return $this;
 	}
 }

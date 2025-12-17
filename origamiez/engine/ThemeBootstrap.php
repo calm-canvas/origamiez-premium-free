@@ -53,29 +53,29 @@ class ThemeBootstrap {
 	 *
 	 * @var ConfigManager
 	 */
-	private ConfigManager $configManager;
+	private ConfigManager $config_manager;
 
 	/**
 	 * The hook registry instance.
 	 *
 	 * @var HookRegistry
 	 */
-	private HookRegistry $hookRegistry;
+	private HookRegistry $hook_registry;
 
 	/**
 	 * ThemeBootstrap constructor.
 	 */
 	public function __construct() {
 		$this->container = Container::getInstance();
-		$this->setupContainer();
-		$this->configManager = $this->container->get( 'config_manager' );
-		$this->hookRegistry  = $this->container->get( 'hook_registry' );
+		$this->setup_container();
+		$this->config_manager = $this->container->get( 'config_manager' );
+		$this->hook_registry  = $this->container->get( 'hook_registry' );
 	}
 
 	/**
 	 * Setup the container.
 	 */
-	private function setupContainer(): void {
+	private function setup_container(): void {
 		$this->container->singleton(
 			'config_manager',
 			function () {
@@ -186,13 +186,13 @@ class ThemeBootstrap {
 	 * Boot the theme.
 	 */
 	public function boot(): void {
-		$this->registerHooks();
-		$this->registerAssets();
-		$this->registerLayout();
-		$this->registerDisplay();
-		$this->registerCustomizer();
-		$this->registerWidgets();
-		$this->registerSidebars();
+		$this->register_hooks();
+		$this->register_assets();
+		$this->register_layout();
+		$this->register_display();
+		$this->register_customizer();
+		$this->register_widgets();
+		$this->register_sidebars();
 
 		do_action( 'origamiez_engine_booted' );
 	}
@@ -200,52 +200,52 @@ class ThemeBootstrap {
 	/**
 	 * Register hooks.
 	 */
-	private function registerHooks(): void {
-		$this->hookRegistry->registerHooks( new ThemeHooks() );
-		$this->hookRegistry->registerHooks( new FrontendHooks( $this->container ) );
+	private function register_hooks(): void {
+		$this->hook_registry->registerHooks( new ThemeHooks() );
+		$this->hook_registry->registerHooks( new FrontendHooks( $this->container ) );
 	}
 
 	/**
 	 * Register assets.
 	 */
-	private function registerAssets(): void {
-		$assetManager = $this->container->get( 'asset_manager' );
-		$assetManager->register();
+	private function register_assets(): void {
+		$asset_manager = $this->container->get( 'asset_manager' );
+		$asset_manager->register();
 	}
 
 	/**
 	 * Register layout.
 	 */
-	private function registerLayout(): void {
-		$bodyClassManager = $this->container->get( 'body_class_manager' );
-		$bodyClassManager->register();
+	private function register_layout(): void {
+		$body_class_manager = $this->container->get( 'body_class_manager' );
+		$body_class_manager->register();
 	}
 
 	/**
 	 * Register display.
 	 */
-	private function registerDisplay(): void {
-		$breadcrumbGenerator = $this->container->get( 'breadcrumb_generator' );
-		$breadcrumbGenerator->register();
+	private function register_display(): void {
+		$breadcrumb_generator = $this->container->get( 'breadcrumb_generator' );
+		$breadcrumb_generator->register();
 	}
 
 	/**
 	 * Register customizer.
 	 */
-	private function registerCustomizer(): void {
-		$customizerService = $this->container->get( 'customizer_service' );
+	private function register_customizer(): void {
+		$customizer_service = $this->container->get( 'customizer_service' );
 
-		// Register Settings Classes
-		$customizerService->addSettingsClass( new GeneralSettings() );
-		$customizerService->addSettingsClass( new LayoutSettings() );
-		$customizerService->addSettingsClass( new BlogSettings() );
-		$customizerService->addSettingsClass( new SinglePostSettings() );
-		$customizerService->addSettingsClass( new ColorSettings() );
-		$customizerService->addSettingsClass( new CustomCssSettings() );
-		$customizerService->addSettingsClass( new SocialSettings() );
-		$customizerService->addSettingsClass( new TypographySettings() );
+		// Register Settings Classes.
+		$customizer_service->addSettingsClass( new GeneralSettings() );
+		$customizer_service->addSettingsClass( new LayoutSettings() );
+		$customizer_service->addSettingsClass( new BlogSettings() );
+		$customizer_service->addSettingsClass( new SinglePostSettings() );
+		$customizer_service->addSettingsClass( new ColorSettings() );
+		$customizer_service->addSettingsClass( new CustomCssSettings() );
+		$customizer_service->addSettingsClass( new SocialSettings() );
+		$customizer_service->addSettingsClass( new TypographySettings() );
 
-		$customizerService->register();
+		$customizer_service->register();
 	}
 
 	/**
@@ -253,7 +253,7 @@ class ThemeBootstrap {
 	 *
 	 * @return Container
 	 */
-	public function getContainer(): Container {
+	public function get_container(): Container {
 		return $this->container;
 	}
 
@@ -262,8 +262,8 @@ class ThemeBootstrap {
 	 *
 	 * @return ConfigManager
 	 */
-	public function getConfigManager(): ConfigManager {
-		return $this->configManager;
+	public function get_config_manager(): ConfigManager {
+		return $this->config_manager;
 	}
 
 	/**
@@ -271,34 +271,34 @@ class ThemeBootstrap {
 	 *
 	 * @return HookRegistry
 	 */
-	public function getHookRegistry(): HookRegistry {
-		return $this->hookRegistry;
+	public function get_hook_registry(): HookRegistry {
+		return $this->hook_registry;
 	}
 
 	/**
 	 * Register widgets.
 	 */
-	private function registerWidgets(): void {
-		$widgetFactory = $this->container->get( 'widget_factory' );
-		$widgetFactory->boot();
+	private function register_widgets(): void {
+		$widget_factory = $this->container->get( 'widget_factory' );
+		$widget_factory->boot();
 	}
 
 	/**
 	 * Register sidebars.
 	 */
-	private function registerSidebars(): void {
-		$sidebarRegistry = $this->container->get( 'sidebar_registry' );
-		$sidebarRegistry->registerDefaultSidebars();
-		$sidebarRegistry->register();
+	private function register_sidebars(): void {
+		$sidebar_registry = $this->container->get( 'sidebar_registry' );
+		$sidebar_registry->registerDefaultSidebars();
+		$sidebar_registry->register();
 	}
 
 	/**
 	 * Get the widget factory instance.
 	 *
 	 * @return WidgetFactory
-	 * @throws NotFoundExceptionInterface
+	 * @throws NotFoundExceptionInterface If the service is not found.
 	 */
-	public function getWidgetFactory(): WidgetFactory {
+	public function get_widget_factory(): WidgetFactory {
 		return $this->container->get( 'widget_factory' );
 	}
 
@@ -306,9 +306,9 @@ class ThemeBootstrap {
 	 * Get the sidebar registry instance.
 	 *
 	 * @return SidebarRegistry
-	 * @throws NotFoundExceptionInterface
+	 * @throws NotFoundExceptionInterface If the service is not found.
 	 */
-	public function getSidebarRegistry(): SidebarRegistry {
+	public function get_sidebar_registry(): SidebarRegistry {
 		return $this->container->get( 'sidebar_registry' );
 	}
 }

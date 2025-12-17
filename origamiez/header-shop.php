@@ -6,6 +6,7 @@
  *
  * @package Origamiez
  */
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 7]>

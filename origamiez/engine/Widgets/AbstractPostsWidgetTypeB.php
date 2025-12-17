@@ -42,8 +42,10 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @param array $instance Widget instance.
 	 */
 	public function form( $instance ): void {
-		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance, EXTR_SKIP );
+		$instance         = wp_parse_args( (array) $instance, $this->get_default() );
+		$is_show_author   = $instance['is_show_author'];
+		$is_show_date     = $instance['is_show_date'];
+		$is_show_comments = $instance['is_show_comments'];
 		parent::form( $instance );
 		?>
 		<p>

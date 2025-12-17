@@ -54,23 +54,21 @@ class CommentDisplay {
 	 * @return string
 	 */
 	public function render(): string {
-		$GLOBALS['comment'] = $this->comment;
-
 		ob_start();
 		?>
-		<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-			<article class="comment-body clearfix" id="div-comment-23">
+		<li <?php comment_class( '', $this->comment ); ?> id="comment-<?php echo esc_attr( $this->comment->comment_ID ); ?>">
+			<article class="comment-body clearfix" id="div-comment-<?php echo esc_attr( $this->comment->comment_ID ); ?>">
 				<span class="comment-avatar pull-left">
 					<?php echo wp_kses_post( get_avatar( $this->comment->comment_author_email, $this->args['avatar_size'] ?? 50 ) ); ?>
 				</span>
 				<footer class="comment-meta">
 					<div class="comment-author vcard">
-						<span class="fn"><?php comment_author_link(); ?></span>
+						<span class="fn"><?php comment_author_link( $this->comment ); ?></span>
 					</div>
 					<div class="comment-metadata">
 						<span class="metadata-divider"><?php origamiez_get_metadata_prefix(); ?></span>
 						<a href="#">
-							<?php comment_time( get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ); ?>
+							<?php comment_time( get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ), $this->comment ); ?>
 						</a>
 						<?php
 						comment_reply_link(
@@ -81,14 +79,15 @@ class CommentDisplay {
 									'depth'     => $this->depth,
 									'max_depth' => $this->args['max_depth'] ?? 10,
 								)
-							)
+							),
+							$this->comment
 						);
 						?>
-						<?php edit_comment_link( esc_attr__( 'Edit', 'origamiez' ), '<span class="metadata-divider"><?php origamiez_get_metadata_prefix(); ?></span>&nbsp;', '' ); ?>
+						<?php edit_comment_link( esc_attr__( 'Edit', 'origamiez' ), '<span class="metadata-divider"><?php origamiez_get_metadata_prefix(); ?></span>&nbsp;', '', $this->comment ); ?>
 					</div>
 				</footer>
 				<div class="comment-content">
-					<?php comment_text(); ?>
+					<?php comment_text( $this->comment ); ?>
 				</div>
 			</article>
 		</li>

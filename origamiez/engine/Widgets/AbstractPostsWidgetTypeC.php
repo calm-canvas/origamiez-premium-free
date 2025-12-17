@@ -32,7 +32,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 */
 	public function form( $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance, EXTR_SKIP );
+		$offset   = $instance['offset'];
 		parent::form( $instance );
 		?>
 		<p>
@@ -62,7 +62,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 */
 	public function get_query( $instance, $args_extra = array() ): array {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance, EXTR_SKIP );
+		$offset   = $instance['offset'];
 
 		$args = parent::get_query( $instance, $args_extra );
 

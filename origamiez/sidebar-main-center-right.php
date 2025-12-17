@@ -1,4 +1,10 @@
 <?php
+/**
+ * The template for displaying the main center right sidebar.
+ *
+ * @package Origamiez
+ */
+
 $sidebar = apply_filters( 'origamiez_get_current_sidebar', 'main-center-right', 'main-center-right' );
 if ( is_active_sidebar( $sidebar ) ) :
 	?>

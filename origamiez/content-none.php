@@ -4,6 +4,7 @@
  *
  * @package Origamiez
  */
+
 ?>
 <li class="clearfix origamiez-first-post">
 	<article class="entry-item row clearfix">

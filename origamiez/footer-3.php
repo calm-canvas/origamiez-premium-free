@@ -1,3 +1,11 @@
+<?php
+/**
+ * The template for displaying the footer 3.
+ *
+ * @package Origamiez
+ */
+
+?>
 </div> <!-- end #origamiez-body > container > #origamiez-boby-inner -->
 </div> <!-- end #origamiez-body-->
 <footer id="origamiez-footer" class="clearfix">

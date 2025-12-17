@@ -45,7 +45,7 @@ class SocialLinksWidget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ): array {
 		$instance          = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = wp_strip_all_tags( $new_instance['title'] );
 
 		return $instance;
 	}
@@ -57,7 +57,11 @@ class SocialLinksWidget extends WP_Widget {
 	 * @param array $instance Widget instance.
 	 */
 	public function widget( $args, $instance ): void {
-		extract( $args, EXTR_SKIP );
+		$before_widget = $args['before_widget'];
+		$after_widget  = $args['after_widget'];
+		$before_title  = $args['before_title'];
+		$after_title   = $args['after_title'];
+
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
@@ -112,7 +116,7 @@ class SocialLinksWidget extends WP_Widget {
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'origamiez' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
-					value="<?php echo esc_attr( strip_tags( $instance['title'] ) ); ?>"/>
+					value="<?php echo esc_attr( wp_strip_all_tags( $instance['title'] ) ); ?>"/>
 		</p>
 		<?php
 	}
