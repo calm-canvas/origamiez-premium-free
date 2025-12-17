@@ -87,16 +87,16 @@ class ConfigManager {
 	 * Get config value.
 	 *
 	 * @param string $key Config key.
-	 * @param mixed  $default Default value.
+	 * @param mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public function get( string $key, mixed $default = null ): mixed {
+	public function get( string $key, mixed $default_value = null ): mixed {
 		$keys  = explode( '.', $key );
 		$value = $this->config;
 
 		foreach ( $keys as $k ) {
 			if ( ! isset( $value[ $k ] ) ) {
-				return $default;
+				return $default_value;
 			}
 			$value = $value[ $k ];
 		}
@@ -166,11 +166,11 @@ class ConfigManager {
 	 * Get theme option.
 	 *
 	 * @param string $option Option name.
-	 * @param mixed  $default Default value.
+	 * @param mixed  $default_value Default value.
 	 * @return mixed
 	 */
-	public function get_theme_option( string $option, mixed $default = null ): mixed {
-		return get_theme_mod( $option, $default );
+	public function get_theme_option( string $option, mixed $default_value = null ): mixed {
+		return get_theme_mod( $option, $default_value );
 	}
 
 	/**

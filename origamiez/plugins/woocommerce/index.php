@@ -1,9 +1,18 @@
 <?php
+/**
+ * Woocommerce compatibility.
+ *
+ * @package    Origamiez
+ * @subpackage Origamiez/Plugins
+ */
 
 if ( class_exists( 'WooCommerce' ) ) {
 
 	add_action( 'after_setup_theme', 'origamiez_woocommerce_setup', 20 );
 
+	/**
+	 * Woocommerce setup.
+	 */
 	function origamiez_woocommerce_setup() {
 		add_theme_support( 'woocommerce' );
 
@@ -17,22 +26,42 @@ if ( class_exists( 'WooCommerce' ) ) {
 		}
 	}
 
+	/**
+	 * Change the cart item quantity input type to text.
+	 *
+	 * @param string $product_quantity The product quantity input.
+	 *
+	 * @return string
+	 */
 	function origamiez_woocommerce_cart_item_quantity( $product_quantity ) {
 		$product_quantity = str_replace( 'number', 'text', $product_quantity );
 		return $product_quantity;
 	}
 
+	/**
+	 * Enqueue scripts for woocommerce.
+	 */
 	function origamiez_woocommerce_enqueue_scripts() {
 		global $wp_styles, $is_IE;
 		$dir = get_template_directory_uri();
 
-		wp_enqueue_script( ORIGAMIEZ_PREFIX . 'touchspin', "{$dir}/plugins/woocommerce/js/touchspin.js", array( 'jquery' ), null, true );
+		wp_enqueue_script( ORIGAMIEZ_PREFIX . 'touchspin', "{$dir}/plugins/woocommerce/js/touchspin.js", array( 'jquery' ), '1.0.0', true );
 	}
 
+	/**
+	 * Set the number of columns for the shop loop.
+	 *
+	 * @return int
+	 */
 	function origamiez_woocommerce_loop_shop_columns() {
 		return 3;
 	}
 
+	/**
+	 * Set the number of products per page for the shop loop.
+	 *
+	 * @return int
+	 */
 	function origamiez_woocommerce_loop_shop_per_page() {
 		return 12;
 	}

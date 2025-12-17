@@ -1,29 +1,83 @@
 <?php
+/**
+ * Login attempt tracker.
+ *
+ * @package    Origamiez
+ * @subpackage Origamiez/Engine/Security/Validators
+ */
+
 namespace Origamiez\Engine\Security\Validators;
 
+/**
+ * Class LoginAttemptTracker
+ *
+ * @package Origamiez\Engine\Security\Validators
+ */
 class LoginAttemptTracker {
-	private $max_attempts     = 5;
+	/**
+	 * Max login attempts.
+	 *
+	 * @var int
+	 */
+	private $max_attempts = 5;
+	/**
+	 * Lockout duration in minutes.
+	 *
+	 * @var int
+	 */
 	private $lockout_duration = 15;
+	/**
+	 * Transient prefix.
+	 *
+	 * @var string
+	 */
 	private $transient_prefix = 'origamiez_login_attempts_';
 
+	/**
+	 * LoginAttemptTracker constructor.
+	 *
+	 * @param int $max_attempts     Max login attempts.
+	 * @param int $lockout_duration Lockout duration in minutes.
+	 */
 	public function __construct( $max_attempts = 5, $lockout_duration = 15 ) {
 		$this->max_attempts     = $max_attempts;
 		$this->lockout_duration = $lockout_duration;
 	}
 
-	public function setMaxAttempts( $max_attempts ) {
+	/**
+	 * Set max attempts.
+	 *
+	 * @param int $max_attempts Max attempts.
+	 *
+	 * @return $this
+	 */
+	public function set_max_attempts( $max_attempts ) {
 		$this->max_attempts = $max_attempts;
 		return $this;
 	}
 
-	public function setLockoutDuration( $lockout_duration ) {
+	/**
+	 * Set lockout duration.
+	 *
+	 * @param int $lockout_duration Lockout duration in minutes.
+	 *
+	 * @return $this
+	 */
+	public function set_lockout_duration( $lockout_duration ) {
 		$this->lockout_duration = $lockout_duration;
 		return $this;
 	}
 
-	public function trackFailedAttempt( $username ) {
+	/**
+	 * Track failed login attempt.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return int
+	 */
+	public function track_failed_attempt( $username ) {
 		$username = sanitize_user( $username );
-		$attempts = $this->getAttempts( $username );
+		$attempts = $this->get_attempts( $username );
 		++$attempts;
 
 		set_transient(
@@ -35,38 +89,74 @@ class LoginAttemptTracker {
 		return $attempts;
 	}
 
-	public function getAttempts( $username ) {
+	/**
+	 * Get login attempts.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return int
+	 */
+	public function get_attempts( $username ) {
 		$username = sanitize_user( $username );
 		$attempts = get_transient( $this->transient_prefix . $username );
-		return $attempts ? $attempts : 0;
+		return $attempts ? (int) $attempts : 0;
 	}
 
-	public function isLocked( $username ) {
-		$attempts = $this->getAttempts( $username );
+	/**
+	 * Check if the user is locked out.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return bool
+	 */
+	public function is_locked( $username ) {
+		$attempts = $this->get_attempts( $username );
 		return $attempts >= $this->max_attempts;
 	}
 
-	public function clearAttempts( $username ) {
+	/**
+	 * Clear login attempts.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return $this
+	 */
+	public function clear_attempts( $username ) {
 		$username = sanitize_user( $username );
 		delete_transient( $this->transient_prefix . $username );
 		return $this;
 	}
 
-	public function getRemainingAttempts( $username ) {
-		$attempts  = $this->getAttempts( $username );
+	/**
+	 * Get remaining login attempts.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return int
+	 */
+	public function get_remaining_attempts( $username ) {
+		$attempts  = $this->get_attempts( $username );
 		$remaining = $this->max_attempts - $attempts;
 		return max( 0, $remaining );
 	}
 
-	public function getRemainingLockoutTime( $username ) {
+	/**
+	 * Get remaining lockout time.
+	 *
+	 * @param string $username The username.
+	 *
+	 * @return int
+	 */
+	public function get_remaining_lockout_time( $username ) {
 		$username       = sanitize_user( $username );
 		$transient_name = $this->transient_prefix . $username;
 
-		$expiration = get_transient( $transient_name );
-		if ( ! $expiration ) {
+		$expiration = get_option( '_transient_timeout_' . $transient_name );
+		if ( false === $expiration ) {
 			return 0;
 		}
 
-		return $this->lockout_duration;
+		$remaining = $expiration - time();
+		return max( 0, $remaining );
 	}
 }
