@@ -31,7 +31,6 @@ const copyFilesPlugin = () => {
     async generateBundle() {
       const filesToCopy = [
         { src: 'node_modules/bootstrap/dist/css/bootstrap.css', dest: 'origamiez/css/bootstrap.css' },
-        { src: 'node_modules/bootstrap/dist/js/bootstrap.js', dest: 'origamiez/js/bootstrap.js' },
         { src: 'node_modules/@fortawesome/fontawesome-free/css/all.css', dest: 'origamiez/css/fontawesome.css' },
         { src: 'node_modules/owl.carousel/dist/assets/owl.carousel.css', dest: 'origamiez/css/owl.carousel.css' },
         { src: 'node_modules/owl.carousel/dist/assets/owl.theme.default.css', dest: 'origamiez/css/owl.theme.default.css' },
