@@ -8,6 +8,10 @@ function origamiez_get_breadcrumb() {
 	do_action( 'origamiez_print_breadcrumb' );
 }
 
+function origamiez_top_bar_enable_callback() {
+	return get_theme_mod( 'is_display_top_bar', 1 );
+}
+
 function origamiez_list_comments( $comment, $args, $depth ) {
 	$display = new \Origamiez\Engine\Display\CommentDisplay( $comment, $args, $depth );
 	$display->display();
