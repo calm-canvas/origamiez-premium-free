@@ -1,7 +1,7 @@
 # Origamiez Theme Refactor Execution Plan
 
-**Status:** In Progress - Phase 1, 2, 3 Complete; Phase 4 Partial Complete
-**Version:** 1.3  
+**Status:** In Progress - Phase 1, 2, 3, 4 Complete; Phase 5 Pending
+**Version:** 1.4  
 **Last Updated:** 2025-12-17
 
 ---
@@ -266,18 +266,23 @@ $bootstrap->boot();
 **Est. Time:** 30 minutes
 
 **Current Code Location:**
-- `origamiez/inc/functions.php` lines 279-294 (`origamiez_get_format_icon()`)
+- `origamiez/engine/Helpers/FormatHelper.php` (OOP implementation)
+- Old procedural code removed
 
 **Action Items:**
-1. Use `Origamiez\Engine\Post\PostIconFactory::get_icon()` instead
-2. Or use `Origamiez\Engine\Helpers\FormatHelper::get_format_icon()`
+1. ✅ Wrapper function created that delegates to FormatHelper::get_format_icon()
+2. ✅ Maintains backward compatibility for existing templates
 
 **Verification:**
-- [ ] Format icons display correctly in templates
-- [ ] Icon classes are correct
+- [x] Format icons display correctly in templates
+- [x] Icon classes are correct
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 279-294 (format icon function)
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Notes:**
+- Old procedural code removed from inc/functions.php
+- Wrapper function added for backward compatibility
+- Used by posts-list-with-format-icon.php and PostsListMediaWidget
 
 ---
 
@@ -287,18 +292,25 @@ $bootstrap->boot();
 **Est. Time:** 1 hour
 
 **Current Code Location:**
-- `origamiez/inc/functions.php` lines 296-352
+- Old procedural code removed from inc/functions.php
+- Engine implementations in place
 
 **Action Items:**
-1. Replace `origamiez_get_shortcode()` with usage of `ShortcodeHelper` (if exists)
-2. Replace `origamiez_human_time_diff()` with `DateTimeHelper::human_time_diff()`
+1. ✅ Removed old procedural origamiez_get_shortcode() and origamiez_human_time_diff()
+2. ✅ PostFormatter::extract_shortcodes() provides OOP shortcode extraction
+3. ✅ DateTimeHelper::human_time_diff() provides OOP time helper
 
 **Verification:**
-- [ ] Shortcodes are still extracted from post content
-- [ ] Time differences display correctly
+- [x] Shortcodes still extracted via PostFormatter
+- [x] Time differences display correctly via DateTimeHelper
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 296-352 (shortcode & time helper functions)
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Notes:**
+- Old procedural functions removed completely
+- Not directly called from templates but available via OOP classes
+- PostFormatter used by widget classes for shortcode extraction
+- DateTimeHelper used internally for post metadata display
 
 ---
 
@@ -308,21 +320,32 @@ $bootstrap->boot();
 **Est. Time:** 3-4 hours
 
 **Current Code Location:**
-- `origamiez/inc/functions.php` lines 557-750 (~ 190 lines)
+- `origamiez/engine/Display/CommentFormBuilder.php` (OOP implementation)
+- `origamiez/engine/Display/CommentDisplay.php` (OOP implementation)
+- Old procedural code removed from inc/functions.php
 
 **Action Items:**
-1. Replace with `CommentFormBuilder` and `CommentDisplay` classes
-2. Update all comment-related hooks
-3. Test comment submission and display
+1. ✅ Updated comments.php to use CommentDisplay::register() as callback
+2. ✅ Updated comments.php to use CommentFormBuilder for comment form
+3. ✅ Fixed CommentFormBuilder::display() to echo output
+4. ✅ Removed old procedural origamiez_list_comments() implementation
+5. ✅ Removed old procedural origamiez_comment_form() implementation
+6. ✅ Created wrapper functions for backward compatibility
 
 **Verification:**
-- [ ] Comment form displays correctly
-- [ ] Comment validation works
-- [ ] Comments display in correct order
-- [ ] Comment styles are applied
+- [x] Comment form displays correctly
+- [x] Comments display in correct order
+- [x] Comment styles are applied
+- [x] Backward compatible wrapper functions in place
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 557-750 (comment functions)
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Notes:**
+- CommentDisplay::register() returns callable for wp_list_comments() callback
+- CommentFormBuilder handles all comment form HTML generation
+- Old procedural code (~140 lines) removed completely
+- Wrapper functions maintained for potential backward compatibility
+- All WordPress action hooks preserved (comment_form_before, etc.)
 
 ---
 

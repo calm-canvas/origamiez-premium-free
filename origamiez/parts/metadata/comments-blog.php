@@ -6,4 +6,4 @@ comments_popup_link(
 	esc_attr__( '% Comments', 'origamiez' ),
 	'metadata-comment',
 	esc_attr__( 'Comment Closed', 'origamiez' )
-); 
+);

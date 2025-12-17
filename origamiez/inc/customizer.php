@@ -3,15 +3,15 @@ add_action( 'customize_register', 'origamiez_customize_register' );
 function origamiez_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport        = 'refresh';
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'refresh';
-	$options                                                   = origamiez_get_custom_options();
-	//Add Panels
+	$options = origamiez_get_custom_options();
+	// Add Panels
 	if ( isset( $options['panels'] ) && ! empty( $options['panels'] ) ) {
 		$panels = $options['panels'];
 		foreach ( $panels as $panel ) {
 			$wp_customize->add_panel( $panel['id'], $panel );
 		}
 	}
-	//Add Sections
+	// Add Sections
 	if ( isset( $options['sections'] ) && ! empty( $options['sections'] ) ) {
 		$sections = $options['sections'];
 		foreach ( $sections as $section ) {
@@ -22,7 +22,7 @@ function origamiez_customize_register( $wp_customize ) {
 	if ( isset( $options['settings'] ) && ! empty( $options['settings'] ) ) {
 		$settings = $options['settings'];
 		foreach ( $settings as $setting ) {
-			#Select  a sanitize callback for each setting
+			// Select  a sanitize callback for each setting
 			switch ( $setting['type'] ) {
 				case 'upload':
 					$sanitize_callback = 'esc_url_raw';
@@ -44,14 +44,17 @@ function origamiez_customize_register( $wp_customize ) {
 					$sanitize_callback = 'sanitize_text_field';
 					break;
 			}
-			# add setting
-			$wp_customize->add_setting( $setting['id'], array(
-				"default"           => $setting['default'],
-				'sanitize_callback' => $sanitize_callback,
-				'capability'        => 'edit_theme_options',
-				"transport"         => $setting['transport'] ?? "postMessage",
-			) );
-			# add control for this setting
+			// add setting
+			$wp_customize->add_setting(
+				$setting['id'],
+				array(
+					'default'           => $setting['default'],
+					'sanitize_callback' => $sanitize_callback,
+					'capability'        => 'edit_theme_options',
+					'transport'         => $setting['transport'] ?? 'postMessage',
+				)
+			);
+			// add control for this setting
 			switch ( $setting['type'] ) {
 				case 'upload':
 					unset( $setting['type'] );
@@ -59,7 +62,9 @@ function origamiez_customize_register( $wp_customize ) {
 						new WP_Customize_Image_Control(
 							$wp_customize,
 							$setting['id'],
-							$setting ) );
+							$setting
+						)
+					);
 					break;
 				case 'color':
 					unset( $setting['type'] );
@@ -67,7 +72,9 @@ function origamiez_customize_register( $wp_customize ) {
 						new WP_Customize_Color_Control(
 							$wp_customize,
 							$setting['id'],
-							$setting ) );
+							$setting
+						)
+					);
 					break;
 				case 'text':
 				case 'textarea':
@@ -78,7 +85,9 @@ function origamiez_customize_register( $wp_customize ) {
 						new WP_Customize_Control(
 							$wp_customize,
 							$setting['id'],
-							$setting ) );
+							$setting
+						)
+					);
 					break;
 			}
 		}
@@ -198,11 +207,11 @@ function origamiez_top_bar_enable_callback( $control ) {
 }
 
 function origamiez_get_custom_options() {
-	$custom_settings               = array(
+	$custom_settings = array(
 		'panels'   => array(
 			array(
 				'id'    => 'origamiez_general',
-				'title' => esc_attr__( 'General Setting', 'origamiez' )
+				'title' => esc_attr__( 'General Setting', 'origamiez' ),
 			),
 			array(
 				'id'    => 'origamiez_typography',
@@ -221,12 +230,12 @@ function origamiez_get_custom_options() {
 			array(
 				'id'    => 'header',
 				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Header', 'origamiez' )
+				'title' => esc_attr__( 'Header', 'origamiez' ),
 			),
 			array(
 				'id'    => 'footer',
 				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Footer', 'origamiez' )
+				'title' => esc_attr__( 'Footer', 'origamiez' ),
 			),
 			array(
 				'id'    => 'layout',
@@ -271,7 +280,7 @@ function origamiez_get_custom_options() {
 				'default'     => '',
 				'type'        => 'upload',
 				'section'     => 'header',
-				'transport'   => 'refresh'
+				'transport'   => 'refresh',
 			),
 			array(
 				'id'          => 'header_style',
@@ -298,7 +307,7 @@ function origamiez_get_custom_options() {
 				'default'     => esc_attr__( '&copy; 2025 The Calm Canvas Team. All rights reserved.', 'origamiez' ),
 				'type'        => 'textarea',
 				'section'     => 'footer',
-				'transport'   => 'refresh'
+				'transport'   => 'refresh',
 			),
 			array(
 				'id'          => 'footer_number_of_cols',
@@ -418,7 +427,7 @@ function origamiez_get_custom_options() {
 					9  => 9,
 					10 => 10,
 					11 => 11,
-					12 => 12
+					12 => 12,
 				),
 				'section'     => 'blog_posts',
 				'transport'   => 'refresh',
@@ -616,7 +625,7 @@ function origamiez_get_custom_options() {
 				'default'     => '',
 				'type'        => 'upload',
 				'section'     => 'single_post_adjacent',
-				'transport'   => 'refresh'
+				'transport'   => 'refresh',
 			),
 			array(
 				'id'          => 'post_adjacent_arrow_right',
@@ -625,7 +634,7 @@ function origamiez_get_custom_options() {
 				'default'     => '',
 				'type'        => 'upload',
 				'section'     => 'single_post_adjacent',
-				'transport'   => 'refresh'
+				'transport'   => 'refresh',
 			),
 			/*
 			 * ----------------------------------------
@@ -692,7 +701,7 @@ function origamiez_get_custom_options() {
 				'choices'     => array(
 					'default' => esc_attr__( 'Default', 'origamiez' ),
 					'custom'  => esc_attr__( 'Custom', 'origamiez' ),
-				)
+				),
 			),
 			array(
 				'id'              => 'primary_color',
@@ -904,7 +913,7 @@ function origamiez_get_custom_options() {
 				'active_callback' => 'origamiez_skin_custom_callback',
 				'transport'       => 'refresh',
 			),
-		)
+		),
 	);
 	$custom_settings['settings'][] = array(
 		'id'          => 'custom_css',
@@ -920,7 +929,7 @@ function origamiez_get_custom_options() {
 		$custom_settings['sections'][] = array(
 			'id'    => "social_{$social_slug}",
 			'panel' => 'origamiez_social_links',
-			'title' => esc_attr( $social['label'] )
+			'title' => esc_attr( $social['label'] ),
 		);
 		$custom_settings['settings'][] = array(
 			'id'          => "{$social_slug}_url",
@@ -929,7 +938,7 @@ function origamiez_get_custom_options() {
 			'default'     => '',
 			'type'        => 'text',
 			'section'     => "social_{$social_slug}",
-			'transport'   => 'refresh'
+			'transport'   => 'refresh',
 		);
 		$custom_settings['settings'][] = array(
 			'id'          => "{$social_slug}_color",
@@ -938,7 +947,7 @@ function origamiez_get_custom_options() {
 			'default'     => esc_attr( $social['color'] ),
 			'type'        => 'color',
 			'section'     => "social_{$social_slug}",
-			'transport'   => 'refresh'
+			'transport'   => 'refresh',
 		);
 	}
 	$font_objects = array(
@@ -952,13 +961,13 @@ function origamiez_get_custom_options() {
 		'font_h3'            => esc_attr__( 'Heading 3', 'origamiez' ),
 		'font_h4'            => esc_attr__( 'Heading 4', 'origamiez' ),
 		'font_h5'            => esc_attr__( 'Heading 5', 'origamiez' ),
-		'font_h6'            => esc_attr__( 'Heading 6', 'origamiez' )
+		'font_h6'            => esc_attr__( 'Heading 6', 'origamiez' ),
 	);
 	foreach ( $font_objects as $font_slug => $font_title ) {
 		$custom_settings['sections'][] = array(
 			'id'    => "custom_{$font_slug}",
 			'panel' => 'origamiez_typography',
-			'title' => $font_title
+			'title' => $font_title,
 		);
 		$custom_settings['settings'][] = array(
 			'id'          => "{$font_slug}_is_enable",
@@ -1030,22 +1039,22 @@ function origamiez_get_custom_options() {
 		 * ----------------------------------------
 		 */
 		$custom_settings['settings'][] = array(
-			'id'          => "top_banner_url",
+			'id'          => 'top_banner_url',
 			'label'       => esc_attr__( 'Link to', 'origamiez' ),
 			'description' => '',
 			'default'     => '',
 			'type'        => 'text',
 			'section'     => 'header_image',
-			'transport'   => 'refresh'
+			'transport'   => 'refresh',
 		);
 		$custom_settings['settings'][] = array(
-			'id'          => "top_banner_title",
+			'id'          => 'top_banner_title',
 			'label'       => esc_attr__( 'Title of banner', 'origamiez' ),
 			'description' => '',
 			'default'     => '',
 			'type'        => 'text',
 			'section'     => 'header_image',
-			'transport'   => 'refresh'
+			'transport'   => 'refresh',
 		);
 		$custom_settings['settings'][] = array(
 			'id'          => 'top_banner_target',
@@ -1057,13 +1066,13 @@ function origamiez_get_custom_options() {
 			'transport'   => 'refresh',
 		);
 		$custom_settings['settings'][] = array(
-			'id'          => "top_banner_custom",
+			'id'          => 'top_banner_custom',
 			'label'       => esc_attr__( 'Custom HTML', 'origamiez' ),
 			'description' => '',
 			'default'     => '',
 			'type'        => 'textarea',
 			'section'     => 'header_image',
-			'transport'   => 'refresh'
+			'transport'   => 'refresh',
 		);
 	}
 	/*
@@ -1073,11 +1082,11 @@ function origamiez_get_custom_options() {
 	 */
 	$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 	if ( $number_of_google_fonts ) {
-		for ( $i = 0; $i < $number_of_google_fonts; $i ++ ) {
+		for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
 			$custom_settings['sections'][] = array(
 				'id'    => sprintf( 'google_font_%s', $i ),
 				'panel' => 'origamiez_google_fonts',
-				'title' => esc_attr__( 'Font #:', 'origamiez' ) . ( $i + 1 )
+				'title' => esc_attr__( 'Font #:', 'origamiez' ) . ( $i + 1 ),
 			);
 			$custom_settings['settings'][] = array(
 				'id'          => sprintf( 'google_font_%s_name', $i ),
@@ -1113,11 +1122,11 @@ function origamiez_get_font_families() {
 		'Tahoma'                      => 'Tahoma',
 		'Times New Roman, sans-serif' => 'Times New Roman, sans-serif',
 		'Trebuchet'                   => 'Trebuchet',
-		'Verdana'                     => 'Verdana'
+		'Verdana'                     => 'Verdana',
 	);
 	$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
 	if ( $number_of_google_fonts ) {
-		for ( $i = 0; $i < $number_of_google_fonts; $i ++ ) {
+		for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
 			$font_family = get_theme_mod( sprintf( 'google_font_%s_name', $i ), false );
 			$font_src    = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
 			if ( $font_family && $font_src ) {
@@ -1130,8 +1139,8 @@ function origamiez_get_font_families() {
 }
 
 function origamiez_get_font_line_heighs() {
-	$line_heights = array( "" => esc_attr__( '-- Default --', 'origamiez' ) );
-	for ( $i = 0; $i <= 150; $i ++ ) {
+	$line_heights = array( '' => esc_attr__( '-- Default --', 'origamiez' ) );
+	for ( $i = 0; $i <= 150; $i++ ) {
 		$tmp                  = "{$i}px";
 		$line_heights[ $tmp ] = $tmp;
 	}
@@ -1140,8 +1149,8 @@ function origamiez_get_font_line_heighs() {
 }
 
 function origamiez_get_font_sizes() {
-	$font_sizes = array( "" => esc_attr__( '-- Default --', 'origamiez' ) );
-	for ( $i = 0; $i <= 150; $i ++ ) {
+	$font_sizes = array( '' => esc_attr__( '-- Default --', 'origamiez' ) );
+	for ( $i = 0; $i <= 150; $i++ ) {
 		$tmp                = "{$i}px";
 		$font_sizes[ $tmp ] = $tmp;
 	}
@@ -1151,11 +1160,11 @@ function origamiez_get_font_sizes() {
 
 function origamiez_get_font_styles() {
 	$font_styles = array(
-		""        => esc_attr__( '-- Default --', 'origamiez' ),
-		"normal"  => "Normal",
-		"italic"  => "Italic",
-		"oblique" => "Oblique",
-		"inherit" => "Inherit"
+		''        => esc_attr__( '-- Default --', 'origamiez' ),
+		'normal'  => 'Normal',
+		'italic'  => 'Italic',
+		'oblique' => 'Oblique',
+		'inherit' => 'Inherit',
 	);
 
 	return apply_filters( 'origamiez_get_font_families', $font_styles );
@@ -1163,11 +1172,11 @@ function origamiez_get_font_styles() {
 
 function origamiez_get_font_weights() {
 	$font_weights = array(
-		""        => esc_attr__( '-- Default --', 'origamiez' ),
-		"normal"  => esc_attr__( 'Normal', 'origamiez' ),
-		"bold"    => esc_attr__( 'Bold', 'origamiez' ),
-		"bolder"  => esc_attr__( 'Bolder', 'origamiez' ),
-		"lighter" => esc_attr__( 'Lighter', 'origamiez' ),
+		''        => esc_attr__( '-- Default --', 'origamiez' ),
+		'normal'  => esc_attr__( 'Normal', 'origamiez' ),
+		'bold'    => esc_attr__( 'Bold', 'origamiez' ),
+		'bolder'  => esc_attr__( 'Bolder', 'origamiez' ),
+		'lighter' => esc_attr__( 'Lighter', 'origamiez' ),
 		100       => 100,
 		200       => 200,
 		300       => 300,
@@ -1177,7 +1186,7 @@ function origamiez_get_font_weights() {
 		700       => 700,
 		800       => 800,
 		900       => 900,
-		"inherit" => esc_attr__( 'Inherit', 'origamiez' ),
+		'inherit' => esc_attr__( 'Inherit', 'origamiez' ),
 	);
 
 	return apply_filters( 'origamiez_get_font_weights', $font_weights );

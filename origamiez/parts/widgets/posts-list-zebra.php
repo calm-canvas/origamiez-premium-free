@@ -9,9 +9,12 @@ class Origamiez_Widget_Posts_List_Zebra extends Origamiez_Posts_Widget_Type_C {
 	function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-zebra',
-			'description' => esc_attr__( 'Display posts list like a zebra.', 'origamiez' )
+			'description' => esc_attr__( 'Display posts list like a zebra.', 'origamiez' ),
 		);
-		$control_ops = array( 'width' => 'auto', 'height' => 'auto' );
+		$control_ops = array(
+			'width'  => 'auto',
+			'height' => 'auto',
+		);
 		parent::__construct( 'origamiez-widget-post-list-zebra', esc_attr__( 'Origamiez Posts List Zebra', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
@@ -26,11 +29,11 @@ class Origamiez_Widget_Posts_List_Zebra extends Origamiez_Posts_Widget_Type_C {
 		}
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
-		if ( $posts->have_posts() ):
+		if ( $posts->have_posts() ) :
 			?>
 			<?php
 			$loop_index = 1;
-			while ( $posts->have_posts() ):
+			while ( $posts->have_posts() ) :
 				$posts->the_post();
 				$post_title   = get_the_title();
 				$post_url     = get_permalink();
@@ -40,21 +43,21 @@ class Origamiez_Widget_Posts_List_Zebra extends Origamiez_Posts_Widget_Type_C {
 				}
 				$post_classes[] = ( 0 === $loop_index % 2 ) ? 'even' : 'odd';
 				?>
-                <article <?php post_class( $post_classes ); ?>>
-                    <div class="origamiez-wp-mt-post-detail">
-                        <h4>
-                            <a href="<?php echo esc_url( $post_url ); ?>"
-                               title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
-                        </h4>
+				<article <?php post_class( $post_classes ); ?>>
+					<div class="origamiez-wp-mt-post-detail">
+						<h4>
+							<a href="<?php echo esc_url( $post_url ); ?>"
+								title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
+						</h4>
 						<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata' ); ?>
 						<?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
-                    </div>
-                </article>
+					</div>
+				</article>
 				<?php
-				$loop_index ++;
+				++$loop_index;
 			endwhile;
 			?>
-		<?php
+			<?php
 		endif;
 		wp_reset_postdata();
 		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );

@@ -93,7 +93,7 @@ class SecurityHooks implements HookProviderInterface {
 			header( 'X-XSS-Protection: 1; mode=block' );
 			header( 'Referrer-Policy: strict-origin-when-cross-origin' );
 
-			$csp = "default-src 'self'; ";
+			$csp  = "default-src 'self'; ";
 			$csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com; ";
 			$csp .= "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com; ";
 			$csp .= "img-src 'self' data: *.gravatar.com *.wp.com; ";

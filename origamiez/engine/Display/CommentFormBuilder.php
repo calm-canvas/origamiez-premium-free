@@ -233,6 +233,6 @@ class CommentFormBuilder {
 	 * @return void
 	 */
 	public function display(): void {
-		wp_kses_post( $this->render() );
+		echo wp_kses_post( $this->render() );
 	}
 }
