@@ -20,13 +20,6 @@ All callback functions for action hooks & filter hooks.
 */
 require $dir . 'inc/functions.php';
 /*
-CUSTOMIZATION
---------------------
-Apply customization API to build control-panel.
---------------------
-*/
-require $dir . 'inc/customizer.php';
-/*
 API
 --------------------
 All classes (abstract & utility).
