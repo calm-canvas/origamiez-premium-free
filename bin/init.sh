@@ -7,8 +7,3 @@ docker compose exec --user root wordpress chown -R www-data:www-data /var/www/ht
 docker compose exec cli wp plugin install theme-check &&
 docker compose exec cli wp plugin install wordpress-importer &&
 docker compose exec cli wp plugin install regenerate-thumbnails
-
-
-
-
-
