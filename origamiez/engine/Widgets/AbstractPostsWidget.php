@@ -21,7 +21,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance = $old_instance;
 
 		$instance['title']               = strip_tags( $new_instance['title'] );
@@ -42,7 +42,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance, EXTR_SKIP );
 		?>
@@ -195,7 +195,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 * @param array $args_extra Extra arguments.
 	 * @return array
 	 */
-	public function get_query( $instance, $args_extra = array() ) {
+	public function get_query( $instance, $args_extra = array() ): array {
 		global $wp_version;
 
 		$args = array(
@@ -281,7 +281,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		return array(
 			'title'               => '',
 			'posts_per_page'      => 5,

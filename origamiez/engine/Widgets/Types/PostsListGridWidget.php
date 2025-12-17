@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Grid Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListGridWidget
+ */
 class PostsListGridWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListGridWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-grid',
 			'description' => esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 		parent::__construct( 'origamiez-widget-post-grid', esc_attr__( 'Origamiez Posts Grid', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $args );
 		extract( $instance );
@@ -91,14 +111,26 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
 	}
 
-	function update( $new_instance, $old_instance ) {
+	/**
+	 * Update widget.
+	 *
+	 * @param array $new_instance New instance.
+	 * @param array $old_instance Old instance.
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ): array {
 		$instance                 = parent::update( $new_instance, $old_instance );
 		$instance['cols_per_row'] = (int) esc_attr( $new_instance['cols_per_row'] );
 
 		return $instance;
 	}
 
-	function form( $instance ) {
+	/**
+	 * Render form.
+	 *
+	 * @param array $instance Widget instance.
+	 */
+	public function form( $instance ): void {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -120,7 +152,12 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 		<?php
 	}
 
-	protected function get_default() {
+	/**
+	 * Get default values.
+	 *
+	 * @return array
+	 */
+	protected function get_default(): array {
 		$default                 = parent::get_default();
 		$default['cols_per_row'] = 3;
 

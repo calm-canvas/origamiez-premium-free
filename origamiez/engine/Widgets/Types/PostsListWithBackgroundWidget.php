@@ -1,15 +1,30 @@
 <?php
+/**
+ * Posts List With Background Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListWithBackgroundWidget
+ */
 class PostsListWithBackgroundWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
-	function __construct() {
+
+	/**
+	 * PostsListWithBackgroundWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-with-background',
 			'description' => esc_attr__( 'Display posts list with background color.', 'origamiez' ),
@@ -20,7 +35,14 @@ class PostsListWithBackgroundWidget extends AbstractPostsWidgetTypeC {
 		);
 		parent::__construct( 'origamiez-widget-posts-with-background', esc_attr__( 'Origamiez Posts List With Background Color', 'origamiez' ), $widget_ops, $control_ops );
 	}
-	function widget( $args, $instance ) {
+
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -39,7 +61,7 @@ class PostsListWithBackgroundWidget extends AbstractPostsWidgetTypeC {
 				$post_title   = get_the_title();
 				$post_url     = get_permalink();
 				$post_classes = array( 'origamiez-wp-post', 'clearfix' );
-				if ( 1 == $loop_index ) {
+				if ( 1 === $loop_index ) {
 					$post_classes[] = 'origamiez-wp-post-first';
 				}
 				?>

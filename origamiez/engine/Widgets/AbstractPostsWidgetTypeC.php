@@ -19,7 +19,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance           = parent::update( $new_instance, $old_instance );
 		$instance['offset'] = isset( $new_instance['offset'] ) ? (int) $new_instance['offset'] : 0;
 		return $instance;
@@ -30,7 +30,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance, EXTR_SKIP );
 		parent::form( $instance );
@@ -47,7 +47,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		$default           = parent::get_default();
 		$default['offset'] = 0;
 		return $default;
@@ -60,7 +60,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 	 * @param array $args_extra Extra arguments.
 	 * @return array
 	 */
-	public function get_query( $instance, $args_extra = array() ) {
+	public function get_query( $instance, $args_extra = array() ): array {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance, EXTR_SKIP );
 

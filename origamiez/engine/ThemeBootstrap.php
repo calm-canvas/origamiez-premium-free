@@ -32,6 +32,7 @@ use Origamiez\Engine\Post\PostClassManager;
 use Origamiez\Engine\Widgets\WidgetClassManager;
 use Origamiez\Engine\Widgets\WidgetFactory;
 use Origamiez\Engine\Widgets\SidebarRegistry;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Class ThemeBootstrap
@@ -295,6 +296,7 @@ class ThemeBootstrap {
 	 * Get the widget factory instance.
 	 *
 	 * @return WidgetFactory
+	 * @throws NotFoundExceptionInterface
 	 */
 	public function getWidgetFactory(): WidgetFactory {
 		return $this->container->get( 'widget_factory' );
@@ -304,6 +306,7 @@ class ThemeBootstrap {
 	 * Get the sidebar registry instance.
 	 *
 	 * @return SidebarRegistry
+	 * @throws NotFoundExceptionInterface
 	 */
 	public function getSidebarRegistry(): SidebarRegistry {
 		return $this->container->get( 'sidebar_registry' );

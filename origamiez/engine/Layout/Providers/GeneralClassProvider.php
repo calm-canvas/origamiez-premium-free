@@ -1,4 +1,9 @@
 <?php
+/**
+ * General Class Provider
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Layout\Providers;
 
@@ -6,83 +11,153 @@ use Origamiez\Engine\Config\BodyClassConfig;
 use Origamiez\Engine\Config\ConfigManager;
 use Origamiez\Engine\Layout\BodyClassProviderInterface;
 
+/**
+ * Class GeneralClassProvider
+ *
+ * @package Origamiez\Engine\Layout\Providers
+ */
 class GeneralClassProvider implements BodyClassProviderInterface {
 
-	private ConfigManager $configManager;
-	private BodyClassConfig $bodyClassConfig;
+	/**
+	 * Config manager.
+	 *
+	 * @var ConfigManager
+	 */
+	private ConfigManager $config_manager;
+	/**
+	 * Body class config.
+	 *
+	 * @var BodyClassConfig
+	 */
+	private BodyClassConfig $body_class_config;
 
-	public function __construct( ConfigManager $configManager, BodyClassConfig $bodyClassConfig ) {
-		$this->configManager   = $configManager;
-		$this->bodyClassConfig = $bodyClassConfig;
+	/**
+	 * GeneralClassProvider constructor.
+	 *
+	 * @param ConfigManager   $config_manager The config manager.
+	 * @param BodyClassConfig $body_class_config The body class config.
+	 */
+	public function __construct( ConfigManager $config_manager, BodyClassConfig $body_class_config ) {
+		$this->config_manager    = $config_manager;
+		$this->body_class_config = $body_class_config;
 	}
 
+	/**
+	 * Provide.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return array
+	 */
 	public function provide( array $classes ): array {
-		$this->addBackgroundClasses( $classes );
-		$this->addLayoutClasses( $classes );
-		$this->addFooterClasses( $classes );
-		$this->addSkinClasses( $classes );
-		$this->addHeaderClasses( $classes );
-		$this->addSidebarClasses( $classes );
+		$this->add_background_classes( $classes );
+		$this->add_layout_classes( $classes );
+		$this->add_footer_classes( $classes );
+		$this->add_skin_classes( $classes );
+		$this->add_header_classes( $classes );
+		$this->add_sidebar_classes( $classes );
 
 		return $classes;
 	}
 
-	private function addBackgroundClasses( array &$classes ): void {
-		$bgImage = get_background_image();
-		$bgColor = get_background_color();
+	/**
+	 * Add background classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_background_classes( array &$classes ): void {
+		$bg_image = get_background_image();
+		$bg_color = get_background_color();
 
-		if ( $bgImage || $bgColor ) {
-			$classes[] = $this->bodyClassConfig::CUSTOM_BG;
+		if ( $bg_image || $bg_color ) {
+			$classes[] = $this->body_class_config::CUSTOM_BG;
 		} else {
-			$classes[] = $this->bodyClassConfig::WITHOUT_BG_SLIDES;
+			$classes[] = $this->body_class_config::WITHOUT_BG_SLIDES;
 		}
 	}
 
-	private function addLayoutClasses( array &$classes ): void {
+	/**
+	 * Add layout classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_layout_classes( array &$classes ): void {
 		if ( 1 !== (int) get_theme_mod( 'use_layout_fullwidth', 0 ) ) {
-			$classes[] = $this->bodyClassConfig::LAYOUT_BOXER;
+			$classes[] = $this->body_class_config::LAYOUT_BOXER;
 		} else {
-			$classes[] = $this->bodyClassConfig::LAYOUT_FLUID;
+			$classes[] = $this->body_class_config::LAYOUT_FLUID;
 		}
 	}
 
-	private function addFooterClasses( array &$classes ): void {
-		$hasFooter = is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' )
+	/**
+	 * Add footer classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_footer_classes( array &$classes ): void {
+		$has_footer = is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' )
 			|| is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' )
 			|| is_active_sidebar( 'footer-5' );
 
-		if ( $hasFooter ) {
-			$classes[] = $this->bodyClassConfig::SHOW_FOOTER_AREA;
+		if ( $has_footer ) {
+			$classes[] = $this->body_class_config::SHOW_FOOTER_AREA;
 		}
 	}
 
-	private function addSkinClasses( array &$classes ): void {
+	/**
+	 * Add skin classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_skin_classes( array &$classes ): void {
 		$skin = get_theme_mod( 'skin', 'default' );
 		if ( $skin ) {
-			$classes[] = $this->bodyClassConfig::SKIN_PREFIX . $skin;
+			$classes[] = $this->body_class_config::SKIN_PREFIX . $skin;
 		}
 	}
 
-	private function addHeaderClasses( array &$classes ): void {
-		$headerStyle = get_theme_mod( 'header_style', 'left-right' );
-		if ( $headerStyle ) {
-			$classes[] = $this->bodyClassConfig::HEADER_STYLE_PREFIX . $headerStyle;
+	/**
+	 * Add header classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_header_classes( array &$classes ): void {
+		$header_style = get_theme_mod( 'header_style', 'left-right' );
+		if ( $header_style ) {
+			$classes[] = $this->body_class_config::HEADER_STYLE_PREFIX . $header_style;
 		}
 	}
 
-	private function addSidebarClasses( array &$classes ): void {
+	/**
+	 * Add sidebar classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return void
+	 */
+	private function add_sidebar_classes( array &$classes ): void {
 		if ( ! ( is_home() || is_archive() || is_single() ) ) {
 			return;
 		}
 
-		$sidebarRight = apply_filters( 'origamiez_get_current_sidebar', 'right', 'right' );
-		if ( ! is_active_sidebar( $sidebarRight ) ) {
-			$classes[] = $this->bodyClassConfig::MISSING_SIDEBAR_RIGHT;
+		$sidebar_right = apply_filters( 'origamiez_get_current_sidebar', 'right', 'right' );
+		if ( ! is_active_sidebar( $sidebar_right ) ) {
+			$classes[] = $this->body_class_config::MISSING_SIDEBAR_RIGHT;
 		}
 
-		$sidebarLeft = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
-		if ( ! is_active_sidebar( $sidebarLeft ) ) {
-			$classes[] = $this->bodyClassConfig::MISSING_SIDEBAR_LEFT;
+		$sidebar_left = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
+		if ( ! is_active_sidebar( $sidebar_left ) ) {
+			$classes[] = $this->body_class_config::MISSING_SIDEBAR_LEFT;
 		}
 	}
 }

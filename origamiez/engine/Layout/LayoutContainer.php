@@ -1,47 +1,100 @@
 <?php
+/**
+ * Layout Container
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Layout;
 
+/**
+ * Class LayoutContainer
+ *
+ * @package Origamiez\Engine\Layout
+ */
 class LayoutContainer {
 
-	private bool $useFullwidth = false;
+	/**
+	 * Use fullwidth.
+	 *
+	 * @var boolean
+	 */
+	private bool $use_fullwidth = false;
 
+	/**
+	 * LayoutContainer constructor.
+	 */
 	public function __construct() {
-		$this->useFullwidth = 1 === (int) get_theme_mod( 'use_layout_fullwidth', 0 );
+		$this->use_fullwidth = 1 === (int) get_theme_mod( 'use_layout_fullwidth', 0 );
 	}
 
-	public function openContainer(): void {
-		echo $this->getOpenContainerHtml();
+	/**
+	 * Open container.
+	 *
+	 * @return void
+	 */
+	public function open_container(): void {
+		echo $this->get_open_container_html();
 	}
 
-	public function closeContainer(): void {
-		echo $this->getCloseContainerHtml();
+	/**
+	 * Close container.
+	 *
+	 * @return void
+	 */
+	public function close_container(): void {
+		echo $this->get_close_container_html();
 	}
 
-	public function getOpenContainerHtml(): string {
-		if ( $this->useFullwidth ) {
+	/**
+	 * Get open container html.
+	 *
+	 * @return string
+	 */
+	public function get_open_container_html(): string {
+		if ( $this->use_fullwidth ) {
 			return '';
 		}
 		return '<div class="container">';
 	}
 
-	public function getCloseContainerHtml(): string {
-		if ( $this->useFullwidth ) {
+	/**
+	 * Get close container html.
+	 *
+	 * @return string
+	 */
+	public function get_close_container_html(): string {
+		if ( $this->use_fullwidth ) {
 			return '';
 		}
 		return '</div>';
 	}
 
-	public function isFullwidth(): bool {
-		return $this->useFullwidth;
+	/**
+	 * Is fullwidth.
+	 *
+	 * @return boolean
+	 */
+	public function is_fullwidth(): bool {
+		return $this->use_fullwidth;
 	}
 
-	public function getLayoutClass(): string {
-		return $this->useFullwidth ? 'origamiez-fluid' : 'origamiez-boxer';
+	/**
+	 * Get layout class.
+	 *
+	 * @return string
+	 */
+	public function get_layout_class(): string {
+		return $this->use_fullwidth ? 'origamiez-fluid' : 'origamiez-boxer';
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @return void
+	 */
 	public function register(): void {
-		add_action( 'origamiez_after_body_open', array( $this, 'openContainer' ) );
-		add_action( 'origamiez_before_body_close', array( $this, 'closeContainer' ) );
+		add_action( 'origamiez_after_body_open', array( $this, 'open_container' ) );
+		add_action( 'origamiez_before_body_close', array( $this, 'close_container' ) );
 	}
 }

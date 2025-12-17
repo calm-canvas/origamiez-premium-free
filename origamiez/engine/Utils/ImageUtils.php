@@ -1,38 +1,91 @@
 <?php
+/**
+ * Image Utils
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Utils;
 
+/**
+ * Class ImageUtils
+ *
+ * @package Origamiez\Engine\Utils
+ */
 class ImageUtils {
 
-	public static function getImageSrc( $imageId, string $size = 'medium' ): ?string {
-		$src = wp_get_attachment_image_src( $imageId, $size );
+	/**
+	 * Get image src.
+	 *
+	 * @param int    $image_id The image id.
+	 * @param string $size The size.
+	 *
+	 * @return string|null
+	 */
+	public static function get_image_src( $image_id, string $size = 'medium' ): ?string {
+		$src = wp_get_attachment_image_src( $image_id, $size );
 		return $src ? $src[0] : null;
 	}
 
-	public static function getPostThumbnail( $postId = 0, string $size = 'post-thumbnail', $default = null ) {
-		if ( ! has_post_thumbnail( $postId ) ) {
+	/**
+	 * Get post thumbnail.
+	 *
+	 * @param int    $post_id The post id.
+	 * @param string $size The size.
+	 * @param mixed  $default The default.
+	 *
+	 * @return mixed
+	 */
+	public static function get_post_thumbnail( $post_id = 0, string $size = 'post-thumbnail', $default = null ) {
+		if ( ! has_post_thumbnail( $post_id ) ) {
 			return $default;
 		}
 
-		return get_the_post_thumbnail( $postId, $size );
+		return get_the_post_thumbnail( $post_id, $size );
 	}
 
-	public static function getPostThumbnailId( $postId = 0 ): int {
-		return (int) get_post_thumbnail_id( $postId );
+	/**
+	 * Get post thumbnail id.
+	 *
+	 * @param int $post_id The post id.
+	 *
+	 * @return integer
+	 */
+	public static function get_post_thumbnail_id( $post_id = 0 ): int {
+		return (int) get_post_thumbnail_id( $post_id );
 	}
 
-	public static function removeHardcodedImageSize( string $html ): string {
+	/**
+	 * Remove hardcoded image size.
+	 *
+	 * @param string $html The html.
+	 *
+	 * @return string
+	 */
+	public static function remove_hardcoded_image_size( string $html ): string {
 		return preg_replace( '/\s*height="\d+"\s*/', ' ', preg_replace( '/\s*width="\d+"\s*/', ' ', $html ) );
 	}
 
-	public static function getAttachmentUrl( $attachmentId ): ?string {
-		$url = wp_get_attachment_url( $attachmentId );
-		return $url ? $url : null;
+	/**
+	 * Get attachment url.
+	 *
+	 * @param int $attachment_id The attachment id.
+	 *
+	 * @return string|null
+	 */
+	public static function get_attachment_url( $attachment_id ): ?string {
+		$url = wp_get_attachment_url( $attachment_id );
+		return $url ?: null;
 	}
 
-	public static function getImageDimensions( string $url ): ?array {
-		$filesize = filesize( get_template_directory() . $url );
-
+	/**
+	 * Get image dimensions.
+	 *
+	 * @param string $url The url.
+	 *
+	 * @return array|null
+	 */
+	public static function get_image_dimensions( string $url ): ?array {
 		if ( function_exists( 'getimagesize' ) ) {
 			return getimagesize( $url );
 		}
@@ -40,11 +93,26 @@ class ImageUtils {
 		return null;
 	}
 
-	public static function registerImageSize( string $name, int $width, int $height, bool $crop = false ): void {
+	/**
+	 * Register image size.
+	 *
+	 * @param string  $name The name.
+	 * @param integer $width The width.
+	 * @param integer $height The height.
+	 * @param boolean $crop The crop.
+	 *
+	 * @return void
+	 */
+	public static function register_image_size( string $name, int $width, int $height, bool $crop = false ): void {
 		add_image_size( $name, $width, $height, $crop );
 	}
 
-	public static function getImageSizes(): array {
+	/**
+	 * Get image sizes.
+	 *
+	 * @return array
+	 */
+	public static function get_image_sizes(): array {
 		global $_wp_additional_image_sizes;
 
 		$builtin = array(
@@ -70,7 +138,14 @@ class ImageUtils {
 		return array_merge( $builtin, $_wp_additional_image_sizes ?? array() );
 	}
 
-	public static function hasImageSize( string $name ): bool {
+	/**
+	 * Has image size.
+	 *
+	 * @param string $name The name.
+	 *
+	 * @return boolean
+	 */
+	public static function has_image_size( string $name ): bool {
 		return isset( wp_get_registered_image_subsizes()[ $name ] );
 	}
 }

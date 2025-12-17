@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Zebra Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListZebraWidget
+ */
 class PostsListZebraWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListZebraWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-zebra',
 			'description' => esc_attr__( 'Display posts list like a zebra.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListZebraWidget extends AbstractPostsWidgetTypeC {
 		parent::__construct( 'origamiez-widget-post-list-zebra', esc_attr__( 'Origamiez Posts List Zebra', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -42,7 +62,7 @@ class PostsListZebraWidget extends AbstractPostsWidgetTypeC {
 				$post_title   = get_the_title();
 				$post_url     = get_permalink();
 				$post_classes = array( 'origamiez-wp-zebra-post', 'clearfix' );
-				if ( 1 == $loop_index ) {
+				if ( 1 === $loop_index ) {
 					$post_classes[] = 'origamiez-wp-zebra-post-first';
 				}
 				$post_classes[] = ( 0 === $loop_index % 2 ) ? 'even' : 'odd';

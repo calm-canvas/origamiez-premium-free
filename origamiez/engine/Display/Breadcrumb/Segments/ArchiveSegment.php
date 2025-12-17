@@ -1,15 +1,40 @@
 <?php
+/**
+ * Archive Segment
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display\Breadcrumb\Segments;
 
+/**
+ * Class ArchiveSegment
+ *
+ * @package Origamiez\Engine\Display\Breadcrumb\Segments
+ */
 class ArchiveSegment implements SegmentInterface {
 
+	/**
+	 * Prefix.
+	 *
+	 * @var string
+	 */
 	private string $prefix;
 
+	/**
+	 * ArchiveSegment constructor.
+	 *
+	 * @param string $prefix The prefix.
+	 */
 	public function __construct( string $prefix = '&nbsp;&rsaquo;&nbsp;' ) {
 		$this->prefix = $prefix;
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
 		if ( ! is_archive() && ! is_home() ) {
 			return '';
@@ -24,24 +49,29 @@ class ArchiveSegment implements SegmentInterface {
 				esc_html( $term->name )
 			);
 		} elseif ( is_category() ) {
-			$categoryId  = get_queried_object_id();
-			$parentsHtml = get_category_parents( $categoryId, true, $this->prefix );
-			$parentsHtml = substr( $parentsHtml, 0, -strlen( $this->prefix ) );
-			$html        = $this->prefix . $parentsHtml;
+			$category_id  = get_queried_object_id();
+			$parents_html = get_category_parents( $category_id, true, $this->prefix );
+			$parents_html = substr( $parents_html, 0, -strlen( $this->prefix ) );
+			$html         = $this->prefix . $parents_html;
 		} elseif ( is_year() || is_month() || is_day() ) {
-			$html = $this->renderDateArchive();
+			$html = $this->render_date_archive();
 		} elseif ( is_author() ) {
-			$authorId = get_queried_object_id();
-			$html     = $this->prefix . sprintf(
+			$author_id = get_queried_object_id();
+			$html      = $this->prefix . sprintf(
 				'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url"><span itemprop="title">%s</span></a></span>',
-				sprintf( esc_attr__( 'Posts created by %1$s', 'origamiez' ), get_the_author_meta( 'display_name', $authorId ) )
+				sprintf( esc_attr__( 'Posts created by %1$s', 'origamiez' ), get_the_author_meta( 'display_name', $author_id ) )
 			);
 		}
 
 		return $html;
 	}
 
-	private function renderDateArchive(): string {
+	/**
+	 * Render date archive.
+	 *
+	 * @return string
+	 */
+	private function render_date_archive(): string {
 		$m    = get_query_var( 'm' );
 		$date = array(
 			'y' => null,

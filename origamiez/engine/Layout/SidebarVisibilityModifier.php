@@ -1,33 +1,75 @@
 <?php
+/**
+ * Sidebar Visibility Modifier
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Layout;
 
+/**
+ * Class SidebarVisibilityModifier
+ *
+ * @package Origamiez\Engine\Layout
+ */
 class SidebarVisibilityModifier {
 
-	private SidebarManager $sidebarManager;
+	/**
+	 * Sidebar manager.
+	 *
+	 * @var SidebarManager
+	 */
+	private SidebarManager $sidebar_manager;
 
-	public function __construct( SidebarManager $sidebarManager = null ) {
-		$this->sidebarManager = $sidebarManager ?? new SidebarManager();
+	/**
+	 * SidebarVisibilityModifier constructor.
+	 *
+	 * @param SidebarManager|null $sidebar_manager The sidebar manager.
+	 */
+	public function __construct( SidebarManager $sidebar_manager = null ) {
+		$this->sidebar_manager = $sidebar_manager ?? new SidebarManager();
 	}
 
-	public function isSidebarActive( string $sidebarId ): bool {
-		return is_active_sidebar( $sidebarId );
+	/**
+	 * Is sidebar active.
+	 *
+	 * @param string $sidebar_id The sidebar id.
+	 *
+	 * @return boolean
+	 */
+	public function is_sidebar_active( string $sidebar_id ): bool {
+		return is_active_sidebar( $sidebar_id );
 	}
 
-	public function addMissingSidebarClass( string $sidebarId, string $className ): bool {
-		return ! $this->isSidebarActive( $sidebarId );
+	/**
+	 * Add missing sidebar class.
+	 *
+	 * @param string $sidebar_id The sidebar id.
+	 * @param string $class_name The class name.
+	 *
+	 * @return boolean
+	 */
+	public function add_missing_sidebar_class( string $sidebar_id, string $class_name ): bool {
+		return ! $this->is_sidebar_active( $sidebar_id );
 	}
 
-	public function modifyBodyClassesForMissingSidebars( array $classes ): array {
-		$sidebarToClass = array(
+	/**
+	 * Modify body classes for missing sidebars.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return array
+	 */
+	public function modify_body_classes_for_missing_sidebars( array $classes ): array {
+		$sidebar_to_class = array(
 			'sidebar-right' => 'origamiez-missing-sidebar-right',
 			'sidebar-left'  => 'origamiez-missing-sidebar-left',
 		);
 
-		foreach ( $sidebarToClass as $sidebarId => $className ) {
-			if ( ! $this->isSidebarActive( $sidebarId ) ) {
-				if ( ! in_array( $className, $classes, true ) ) {
-					$classes[] = $className;
+		foreach ( $sidebar_to_class as $sidebar_id => $class_name ) {
+			if ( ! $this->is_sidebar_active( $sidebar_id ) ) {
+				if ( ! in_array( $class_name, $classes, true ) ) {
+					$classes[] = $class_name;
 				}
 			}
 		}
@@ -35,46 +77,81 @@ class SidebarVisibilityModifier {
 		return $classes;
 	}
 
-	public function shouldDisplaySidebar( string $sidebarId ): bool {
-		return $this->isSidebarActive( $sidebarId );
+	/**
+	 * Should display sidebar.
+	 *
+	 * @param string $sidebar_id The sidebar id.
+	 *
+	 * @return boolean
+	 */
+	public function should_display_sidebar( string $sidebar_id ): bool {
+		return $this->is_sidebar_active( $sidebar_id );
 	}
 
-	public function displaySidebarIfActive( string $sidebarId ): bool {
-		if ( $this->shouldDisplaySidebar( $sidebarId ) ) {
-			dynamic_sidebar( $sidebarId );
+	/**
+	 * Display sidebar if active.
+	 *
+	 * @param string $sidebar_id The sidebar id.
+	 *
+	 * @return boolean
+	 */
+	public function display_sidebar_if_active( string $sidebar_id ): bool {
+		if ( $this->should_display_sidebar( $sidebar_id ) ) {
+			dynamic_sidebar( $sidebar_id );
 			return true;
 		}
 
 		return false;
 	}
 
-	public function getActiveSidebars( array $sidebarIds ): array {
-		$activeSidebars = array();
+	/**
+	 * Get active sidebars.
+	 *
+	 * @param array $sidebar_ids The sidebar ids.
+	 *
+	 * @return array
+	 */
+	public function get_active_sidebars( array $sidebar_ids ): array {
+		$active_sidebars = array();
 
-		foreach ( $sidebarIds as $sidebarId ) {
-			if ( $this->isSidebarActive( $sidebarId ) ) {
-				$activeSidebars[] = $sidebarId;
+		foreach ( $sidebar_ids as $sidebar_id ) {
+			if ( $this->is_sidebar_active( $sidebar_id ) ) {
+				$active_sidebars[] = $sidebar_id;
 			}
 		}
 
-		return $activeSidebars;
+		return $active_sidebars;
 	}
 
-	public function getInactiveSidebars( array $sidebarIds ): array {
-		$inactiveSidebars = array();
+	/**
+	 * Get inactive sidebars.
+	 *
+	 * @param array $sidebar_ids The sidebar ids.
+	 *
+	 * @return array
+	 */
+	public function get_inactive_sidebars( array $sidebar_ids ): array {
+		$inactive_sidebars = array();
 
-		foreach ( $sidebarIds as $sidebarId ) {
-			if ( ! $this->isSidebarActive( $sidebarId ) ) {
-				$inactiveSidebars[] = $sidebarId;
+		foreach ( $sidebar_ids as $sidebar_id ) {
+			if ( ! $this->is_sidebar_active( $sidebar_id ) ) {
+				$inactive_sidebars[] = $sidebar_id;
 			}
 		}
 
-		return $inactiveSidebars;
+		return $inactive_sidebars;
 	}
 
-	public function hasAnySidebarActive( array $sidebarIds ): bool {
-		foreach ( $sidebarIds as $sidebarId ) {
-			if ( $this->isSidebarActive( $sidebarId ) ) {
+	/**
+	 * Has any sidebar active.
+	 *
+	 * @param array $sidebar_ids The sidebar ids.
+	 *
+	 * @return boolean
+	 */
+	public function has_any_sidebar_active( array $sidebar_ids ): bool {
+		foreach ( $sidebar_ids as $sidebar_id ) {
+			if ( $this->is_sidebar_active( $sidebar_id ) ) {
 				return true;
 			}
 		}
@@ -82,9 +159,16 @@ class SidebarVisibilityModifier {
 		return false;
 	}
 
-	public function hasAllSidebarsActive( array $sidebarIds ): bool {
-		foreach ( $sidebarIds as $sidebarId ) {
-			if ( ! $this->isSidebarActive( $sidebarId ) ) {
+	/**
+	 * Has all sidebars active.
+	 *
+	 * @param array $sidebar_ids The sidebar ids.
+	 *
+	 * @return boolean
+	 */
+	public function has_all_sidebars_active( array $sidebar_ids ): bool {
+		foreach ( $sidebar_ids as $sidebar_id ) {
+			if ( ! $this->is_sidebar_active( $sidebar_id ) ) {
 				return false;
 			}
 		}
@@ -92,7 +176,14 @@ class SidebarVisibilityModifier {
 		return true;
 	}
 
-	public function getActiveSidebarCount( array $sidebarIds ): int {
-		return count( $this->getActiveSidebars( $sidebarIds ) );
+	/**
+	 * Get active sidebar count.
+	 *
+	 * @param array $sidebar_ids The sidebar ids.
+	 *
+	 * @return integer
+	 */
+	public function get_active_sidebar_count( array $sidebar_ids ): int {
+		return count( $this->get_active_sidebars( $sidebar_ids ) );
 	}
 }

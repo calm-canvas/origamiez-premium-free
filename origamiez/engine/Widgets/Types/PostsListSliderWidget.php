@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Slider Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeB;
 use WP_Query;
 
+/**
+ * Class PostsListSliderWidget
+ */
 class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListSliderWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-slider',
 			'description' => esc_attr__( 'Display a slider with three block: two static blocks, one dynamic (carousel) block.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		parent::__construct( 'origamiez-widget-posts-slider', esc_attr__( 'Origamiez Posts Slider', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -39,14 +59,26 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
 	}
 
-	function update( $new_instance, $old_instance ) {
+	/**
+	 * Update widget.
+	 *
+	 * @param array $new_instance New instance.
+	 * @param array $old_instance Old instance.
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ): array {
 		$instance                            = parent::update( $new_instance, $old_instance );
 		$instance['is_assign_last_to_small'] = isset( $new_instance['is_assign_last_to_small'] ) ? 1 : 0;
 
 		return $instance;
 	}
 
-	function form( $instance ) {
+	/**
+	 * Render form.
+	 *
+	 * @param array $instance Widget instance.
+	 */
+	public function form( $instance ): void {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -60,7 +92,13 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		<?php
 	}
 
-	protected function get_layout_default( $args, $instance ) {
+	/**
+	 * Get layout default.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	protected function get_layout_default( $args, $instance ): void {
 		extract( $args );
 		extract( $instance );
 		$query = $this->get_query( $instance );
@@ -151,7 +189,13 @@ endwhile;
 		echo '</div>';
 	}
 
-	protected function get_layout_last_to_small( $args, $instance ) {
+	/**
+	 * Get layout last to small.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	protected function get_layout_last_to_small( $args, $instance ): void {
 		extract( $args );
 		extract( $instance );
 		$query = $this->get_query( $instance );
@@ -248,7 +292,12 @@ endif;
 		echo '</div>';
 	}
 
-	protected function get_default() {
+	/**
+	 * Get default values.
+	 *
+	 * @return array
+	 */
+	protected function get_default(): array {
 		$default                            = parent::get_default();
 		$default['is_assign_last_to_small'] = 0;
 

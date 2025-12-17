@@ -26,7 +26,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance                        = parent::update( $new_instance, $old_instance );
 		$instance['excerpt_words_limit'] = isset( $new_instance['excerpt_words_limit'] ) ? (int) $new_instance['excerpt_words_limit'] : 0;
 		$instance['is_show_author']      = isset( $new_instance['is_show_author'] ) ? 1 : 0;
@@ -41,7 +41,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance, EXTR_SKIP );
 		parent::form( $instance );
@@ -79,7 +79,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		$default                        = parent::get_default();
 		$default['excerpt_words_limit'] = 0;
 		$default['is_show_author']      = 0;
@@ -97,7 +97,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @param bool   $is_show_author Show author.
 	 * @param string $classes Additional classes.
 	 */
-	protected function print_metadata( $is_show_date = false, $is_show_comments = false, $is_show_author = false, $classes = '' ) {
+	protected function print_metadata( bool $is_show_date = false, bool $is_show_comments = false, bool $is_show_author = false, string $classes = '' ): void {
 		if ( $is_show_date || $is_show_comments || $is_show_author ) :
 			?>
 
@@ -135,7 +135,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @param int $length Excerpt length.
 	 * @return int
 	 */
-	public function get_excerpt_length( $length ): int {
+	public function get_excerpt_length( int $length ): int {
 		return $this->excerpt_length;
 	}
 
@@ -145,7 +145,7 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @param int    $excerpt_words_limit Excerpt words limit.
 	 * @param string $classes Additional classes.
 	 */
-	protected function print_excerpt( $excerpt_words_limit, $classes = '' ) {
+	protected function print_excerpt( int $excerpt_words_limit, string $classes = '' ): void {
 		if ( $excerpt_words_limit ) {
 			$this->excerpt_length = $excerpt_words_limit;
 			add_filter( 'excerpt_length', array( $this, 'get_excerpt_length' ) );
