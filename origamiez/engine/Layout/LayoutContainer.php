@@ -34,7 +34,7 @@ class LayoutContainer {
 	 * @return void
 	 */
 	public function open_container(): void {
-		echo $this->get_open_container_html();
+		wp_kses_post( $this->get_open_container_html() );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class LayoutContainer {
 	 * @return void
 	 */
 	public function close_container(): void {
-		echo $this->get_close_container_html();
+		wp_kses_post( $this->get_close_container_html() );
 	}
 
 	/**

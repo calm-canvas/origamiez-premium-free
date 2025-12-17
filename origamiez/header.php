@@ -1,54 +1,62 @@
-<!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8) ]><!-->
+<?php
+/**
+ * The header for our theme.
+ *
+ * This is the template that displays all of the <head> section and everything up until <div id="content">
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package Origamiez
+ */
+
+?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<!--<![endif]-->
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<?php wp_head(); ?>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<?php wp_head(); ?>
 </head>
+
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<?php do_action( 'origamiez_after_body_open' ); ?>
-<?php get_template_part( 'parts/menu', 'mobile' ); ?>
-<div id="sb-site">
-	<header id="origamiez-header">
-		<?php get_template_part( 'parts/top-bar' ); ?>
-		<?php
-		$header_style = get_theme_mod( 'header_style', 'left-right' );
-		get_template_part( 'parts/header/header', $header_style );
-		?>
-		<?php if ( has_nav_menu( 'main-nav' ) ) : ?>
-			<div id="origamiez-header-bottom" class="clearfix">
-				<nav id="main-nav">
-					<div id="origamiez-mobile-wrap" class="clearfix">
-						<span id="origamiez-mobile-menu-icon" class="origamiez-mobile-icon sb-toggle-left"><span
-									class="fa fa-bars"></span><span><?php esc_html_e( 'Menu', 'origamiez' ); ?></span></span>
-					</div>
-					<div id="main-nav-inner" class="<?php echo esc_attr( origamiez_get_wrap_classes() ); ?>">
-						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'main-nav',
-								'container'      => false,
-								'menu_id'        => 'main-menu',
-								'menu_class'     => 'clearfix',
-							)
-						);
-						?>
-					</div>
-				</nav><!-- end: main-nav-->
-			</div> <!-- end: header-bottom -->
-		<?php endif; ?>
-	</header>
-	<div id="origamiez-body" class="<?php echo esc_attr( origamiez_get_wrap_classes() ); ?> clearfix">
-		<div id="origamiez-body-inner" class="clearfix">
-<?php do_action( 'origamiez_after_body_inner_open' ); ?>
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'origamiez' ); ?></a>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<?php
+			the_custom_logo();
+			if ( is_front_page() && is_home() ) :
+				?>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<?php
+			else :
+				?>
+				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<?php
+			endif;
+
+			$description = get_bloginfo( 'description', 'display' );
+			if ( $description || is_customize_preview() ) :
+				?>
+				<p class="site-description"><?php echo esc_html( $description ); ?></p>
+				<?php
+			endif;
+			?>
+		</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'origamiez' ); ?></button>
+			<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'menu_id'        => 'primary-menu',
+					)
+				);
+				?>
+		</nav><!-- #site-navigation -->
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">

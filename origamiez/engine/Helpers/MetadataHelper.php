@@ -19,7 +19,7 @@ class MetadataHelper {
 	 * @return string
 	 */
 	public static function get_metadata_prefix( bool $display = true ): string {
-		$prefix = apply_filters( 'origamiez_get_metadata_prefix', '&horbar;' );
+		$prefix = apply_filters( 'origamiez_get_metadata_prefix', '–' );
 		if ( $display ) {
 			echo wp_kses_post( $prefix );
 		}

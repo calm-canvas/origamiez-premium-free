@@ -40,7 +40,7 @@ class HookRegistry {
 	 * @return self
 	 */
 	public static function get_instance(): self {
-		if ( self::$instance === null ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;

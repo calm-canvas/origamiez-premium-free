@@ -62,12 +62,6 @@ class SettingBuilder {
 		// Ensure the setting ID is passed to the control.
 		$args['settings'] = $id;
 
-		// If section is not set in args, it might be handled by the caller or default.
-		if ( ! isset( $args['section'] ) ) {
-			// Warning or default? WP requires section for control.
-			// We assume it's in $args.
-		}
-
 		$control = $this->control_factory->create( $this->wp_customize, $id, $args );
 		$this->wp_customize->add_control( $control );
 	}

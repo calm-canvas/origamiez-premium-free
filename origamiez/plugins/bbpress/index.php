@@ -52,7 +52,8 @@ if ( class_exists( 'bbPress' ) ) {
 	function origamiez_bbpress_shortcodes( $content, $reply_id ) {
 		$reply_author = bbp_get_reply_author_id( $reply_id );
 
-		// 'publish_forums' is a custom capability.
+		// translators: "publish_forums" is a custom capability.
+		// phpcs:ignore WordPress.WP.Capabilities.Unknown
 		if ( user_can( $reply_author, 'publish_forums' ) ) {
 			$content = do_shortcode( $content );
 		}

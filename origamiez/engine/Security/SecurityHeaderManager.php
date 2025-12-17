@@ -119,7 +119,7 @@ class SecurityHeaderManager {
 	 */
 	public function remove_csp_directive( $directive ) {
 		unset( $this->csp_config[ $directive ] );
-		return $this.
+		return $this;
 	}
 
 	/**
@@ -176,6 +176,7 @@ class SecurityHeaderManager {
 
 		return implode( '; ', $csp_parts ) . ';';
 	}
+
 
 	/**
 	 * Gets the CSP header value.

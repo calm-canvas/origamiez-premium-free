@@ -1,13 +1,16 @@
 <?php
+/**
+ * Origamiez functions and definitions
+ *
+ * @package Origamiez
+ */
+
 const ORIGAMIEZ_PREFIX = 'origamiez_';
 $dir                   = trailingslashit( get_template_directory() );
 
-/*
-INIT
---------------------
-Register Theme Features
---------------------
-*/
+/**
+ * Register Theme Features
+ */
 function origamiez_theme_setup() {
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'responsive-embeds' );
@@ -81,16 +84,47 @@ asset management, hooks, and layout management.
 require_once $dir . '/vendor/autoload.php';
 require_once $dir . 'engine/index.php';
 
+/*
+HELPER FUNCTIONS
+--------------------
+Load helper functions organized by functionality.
+--------------------
+*/
+require_once $dir . 'inc/template-tags.php';
+require_once $dir . 'inc/customizer.php';
+require_once $dir . 'inc/extras.php';
+
 add_filter( 'use_widgets_block_editor', '__return_false' );
 
+/**
+ * Set classes for footer one cols.
+ *
+ * @param array $classes The classes.
+ * @return array
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 function origamiez_set_classes_for_footer_one_cols( $classes ) {
 	return array( 'col-xs-12', 'col-sm-12', 'col-md-12' );
 }
 
+/**
+ * Set classes for footer two cols.
+ *
+ * @param array $classes The classes.
+ * @return array
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 function origamiez_set_classes_for_footer_two_cols( $classes ) {
 	return array( 'col-xs-12', 'col-sm-6', 'col-md-6' );
 }
 
+/**
+ * Set classes for footer three cols.
+ *
+ * @param array $classes The classes.
+ * @return array
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
 function origamiez_set_classes_for_footer_three_cols( $classes ) {
 	return array( 'col-xs-12', 'col-sm-4', 'col-md-4' );
 }

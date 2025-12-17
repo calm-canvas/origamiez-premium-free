@@ -1,7 +1,26 @@
 <?php
+/**
+ * TextArea Sanitizer
+ *
+ * @package Origamiez
+ * @subpackage Origamiez/Engine/Security/Sanitizers
+ */
+
 namespace Origamiez\Engine\Security\Sanitizers;
 
+/**
+ * Class TextAreaSanitizer
+ *
+ * @package Origamiez\Engine\Security\Sanitizers
+ */
 class TextAreaSanitizer implements SanitizerInterface {
+	/**
+	 * Sanitize a textarea value.
+	 *
+	 * @param string $value The value to sanitize.
+	 *
+	 * @return string
+	 */
 	public function sanitize( $value ) {
 		if ( ! $value ) {
 			return '';
@@ -11,6 +30,11 @@ class TextAreaSanitizer implements SanitizerInterface {
 		return wp_kses( $value, $allowed_tags );
 	}
 
+	/**
+	 * Get the allowed tags.
+	 *
+	 * @return array
+	 */
 	private function getAllowedTags() {
 		if ( function_exists( 'origamiez_get_allowed_tags' ) ) {
 			return origamiez_get_allowed_tags();

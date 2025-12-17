@@ -108,18 +108,18 @@ class PostFormatter {
 	 * @param string $content The content.
 	 * @param string $shortcode The shortcode.
 	 * @param string $attribute The attribute.
-	 * @param mixed  $default The default.
+	 * @param mixed  $default_value The default value.
 	 *
 	 * @return mixed
 	 */
-	public function get_shortcode_attribute( string $content, string $shortcode, string $attribute, $default = null ) {
+	public function get_shortcode_attribute( string $content, string $shortcode, string $attribute, $default_value = null ) {
 		$result = $this->extract_first_shortcode( $content, array( $shortcode ) );
 
 		if ( null === $result ) {
-			return $default;
+			return $default_value;
 		}
 
-		return $result['atts'][ $attribute ] ?? $default;
+		return $result['atts'][ $attribute ] ?? $default_value;
 	}
 
 	/**

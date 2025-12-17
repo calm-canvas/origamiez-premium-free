@@ -1,7 +1,10 @@
 <?php
 /**
  * Template Name: Page Fullwidth Centered
+ *
+ * @package Origamiez
  */
+
 get_header();
 ?>
 <?php get_template_part( 'parts/breadcrumb' ); ?>

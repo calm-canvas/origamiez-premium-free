@@ -15,6 +15,6 @@ class CustomizerListener {
 	 * Listen for customizer events.
 	 */
 	public function listen(): void {
-		// add_action( '...', ... );
+		// Add actions here.
 	}
 }

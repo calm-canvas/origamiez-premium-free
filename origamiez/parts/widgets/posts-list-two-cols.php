@@ -1,12 +1,27 @@
 <?php
+/**
+ * Widget to display posts in two columns.
+ *
+ * @package Origamiez
+ */
+
 add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Two_Cols', 'register' ) );
 
+/**
+ * Class Origamiez_Widget_Posts_List_Two_Cols
+ */
 class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C {
+	/**
+	 * Register the widget.
+	 */
 	public static function register() {
 		register_widget( 'Origamiez_Widget_Posts_List_Two_Cols' );
 	}
 
-	function __construct() {
+	/**
+	 * Origamiez_Widget_Posts_List_Two_Cols constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-two-cols',
 			'description' => esc_attr__( 'Display posts list with layout two cols.', 'origamiez' ),
@@ -18,16 +33,20 @@ class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C
 		parent::__construct( 'origamiez-widget-posts-two-cols', esc_attr__( 'Origamiez Posts List Two Cols', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
-		extract( $args );
+	/**
+	 * Display the widget.
+	 *
+	 * @param array $args     The arguments.
+	 * @param array $instance The instance.
+	 */
+	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
+		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
 		}
-		extract( $instance );
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
 		if ( $posts->have_posts() ) :
@@ -41,7 +60,7 @@ class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C
 						$post_title   = get_the_title();
 						$post_url     = get_permalink();
 						$post_classes = "origamiez-post-{$loop_index} clearfix";
-						if ( 0 == $loop_index ) :
+						if ( 0 === $loop_index ) :
 							?>
 							<article <?php post_class( $post_classes ); ?>>
 								<?php if ( has_post_thumbnail() ) : ?>
@@ -49,14 +68,21 @@ class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C
 										<?php the_post_thumbnail( 'origamiez-square-m', array( 'class' => 'image-effect img-responsive' ) ); ?>
 									</a>
 								<?php endif; ?>
-								<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix' ); ?>
+								<?php
+								parent::print_metadata(
+									$instance['is_show_date'],
+									$instance['is_show_comments'],
+									$instance['is_show_author'],
+									'metadata clearfix'
+								);
+								?>
 								<h3>
 									<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
 										title="<?php echo esc_attr( $post_title ); ?>">
 										<?php echo esc_attr( $post_title ); ?>
 									</a>
 								</h3>
-								<?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+								<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
 							</article>
 							<?php
 							echo '</div>';
@@ -64,7 +90,14 @@ class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C
 						else :
 							?>
 							<article <?php post_class( $post_classes ); ?>>
-								<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata clearfix' ); ?>
+								<?php
+								parent::print_metadata(
+									$instance['is_show_date'],
+									$instance['is_show_comments'],
+									$instance['is_show_author'],
+									'metadata clearfix'
+								);
+								?>
 								<h4>
 									<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
 										title="<?php echo esc_attr( $post_title ); ?>">
@@ -82,6 +115,6 @@ class Origamiez_Widget_Posts_List_Two_Cols extends Origamiez_Posts_Widget_Type_C
 			<?php
 		endif;
 		wp_reset_postdata();
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
 	}
 }

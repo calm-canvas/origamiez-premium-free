@@ -35,8 +35,14 @@ class ReadMoreButton {
 	 * @param string  $button_text The button text.
 	 */
 	public function __construct( int $post_id = 0, string $button_text = '' ) {
-		$this->post_id     = $post_id ?: get_the_ID();
-		$this->button_text = $button_text ?: esc_html__( 'Read more &raquo;', 'origamiez' );
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		if ( ! $button_text ) {
+			$button_text = esc_html__( 'Read more &raquo;', 'origamiez' );
+		}
+		$this->post_id     = $post_id;
+		$this->button_text = $button_text;
 	}
 
 	/**

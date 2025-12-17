@@ -1,4 +1,10 @@
 <?php
+/**
+ * The template for displaying the top bar.
+ *
+ * @package Origamiez
+ */
+
 $is_display_top_bar          = (int) get_theme_mod( 'is_display_top_bar', 1 );
 $is_display_top_social_links = (int) get_theme_mod( 'is_display_top_social_links', 1 );
 ob_start();
@@ -13,7 +19,7 @@ if ( $is_display_top_social_links ) :
 				if ( $color ) {
 					$style = "color: {$color};";
 				}
-				if ( 'fa fa-rss' == $social['icon'] && empty( $url ) ) {
+				if ( 'fa fa-rss' === $social['icon'] && empty( $url ) ) {
 					$url = get_bloginfo( 'rss2_url' );
 				}
 				?>

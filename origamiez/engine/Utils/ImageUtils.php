@@ -24,7 +24,10 @@ class ImageUtils {
 	 */
 	public static function get_image_src( $image_id, string $size = 'medium' ): ?string {
 		$src = wp_get_attachment_image_src( $image_id, $size );
-		return $src ? $src[0] : null;
+		if ( ! $src ) {
+			return null;
+		}
+		return $src[0];
 	}
 
 	/**
@@ -32,13 +35,13 @@ class ImageUtils {
 	 *
 	 * @param int    $post_id The post id.
 	 * @param string $size The size.
-	 * @param mixed  $default The default.
+	 * @param mixed  $default_value The default value.
 	 *
 	 * @return mixed
 	 */
-	public static function get_post_thumbnail( $post_id = 0, string $size = 'post-thumbnail', $default = null ) {
+	public static function get_post_thumbnail( $post_id = 0, string $size = 'post-thumbnail', $default_value = null ) {
 		if ( ! has_post_thumbnail( $post_id ) ) {
-			return $default;
+			return $default_value;
 		}
 
 		return get_the_post_thumbnail( $post_id, $size );
@@ -75,7 +78,10 @@ class ImageUtils {
 	 */
 	public static function get_attachment_url( $attachment_id ): ?string {
 		$url = wp_get_attachment_url( $attachment_id );
-		return $url ?: null;
+		if ( ! $url ) {
+			return null;
+		}
+		return $url;
 	}
 
 	/**

@@ -37,7 +37,10 @@ class CommentFormBuilder {
 	 * @param array   $custom_args The custom args.
 	 */
 	public function __construct( int $post_id = 0, array $custom_args = array() ) {
-		$this->post_id     = $post_id ?: get_the_ID();
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		$this->post_id     = $post_id;
 		$this->custom_args = $custom_args;
 	}
 
@@ -97,13 +100,16 @@ class CommentFormBuilder {
 		return array(
 			'fields'               => $this->get_comment_form_fields(),
 			'comment_field'        => $this->get_comment_field(),
+			// translators: %s is the login URL.
 			'must_log_in'          => '<p class="must-log-in">' . sprintf( esc_html__( 'You must be <a href="%s">logged in</a> to post a comment.', 'origamiez' ), wp_login_url( $permalink ) ) . '</p>',
+			// translators: %1$s is the user profile link, %2$s is the user display name, %3$s is the logout URL.
 			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( esc_html__( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'origamiez' ), get_edit_user_link(), $user_identity, wp_logout_url( $permalink ) ) . '</p>',
 			'comment_notes_before' => '',
 			'comment_notes_after'  => '',
 			'id_form'              => 'commentform',
 			'id_submit'            => 'submit',
 			'title_reply'          => esc_attr__( 'Leave a Reply', 'origamiez' ),
+			// translators: %s is the author name.
 			'title_reply_to'       => esc_attr__( 'Leave a Reply to %s', 'origamiez' ),
 			'cancel_reply_link'    => esc_attr__( 'Cancel reply', 'origamiez' ),
 			'label_submit'         => esc_attr__( 'Post Comment', 'origamiez' ),
@@ -181,7 +187,7 @@ class CommentFormBuilder {
 					$this->render_comment_form_fields( $args );
 				}
 				echo wp_kses( $args['comment_field'], AllowedTagsConfig::get_allowed_tags() );
-				echo wp_kses( $args['comment_notes_after'], AllowedTagsConfig::get_allowed_tags() );
+				echo wp_kses( $args['comment_notes_after'], AllowedTags_config::get_allowed_tags() );
 				?>
 				<p class="form-submit">
 					<input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>"/>
@@ -227,6 +233,6 @@ class CommentFormBuilder {
 	 * @return void
 	 */
 	public function display(): void {
-		echo $this->render();
+		wp_kses_post( $this->render() );
 	}
 }

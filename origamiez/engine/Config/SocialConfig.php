@@ -161,13 +161,9 @@ class SocialConfig {
 	 * @return array
 	 */
 	public static function get_socials(): array {
-		$socials = array();
-		foreach ( self::$socials as $key => $data ) {
-			$socials[ $key ] = array(
-				'icon'  => $data['icon'],
-				'label' => esc_attr__( $data['label'], 'origamiez' ),
-				'color' => $data['color'],
-			);
+		$socials = self::$socials;
+		foreach ( $socials as $key => &$data ) {
+			$data['label'] = esc_attr( $data['label'] );
 		}
 		return apply_filters( 'origamiez_social_networks', $socials );
 	}

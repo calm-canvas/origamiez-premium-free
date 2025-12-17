@@ -48,13 +48,15 @@ class FontManager {
 
 		$google_fonts_url = add_query_arg(
 			'family',
-			urlencode( 'Inter:wght@600;700&display=swap' ),
+			rawurlencode( 'Inter:wght@600;700&display=swap' ),
 			'//fonts.googleapis.com/css2'
 		);
 
 		wp_enqueue_style(
 			self::PREFIX . 'google-fonts',
-			$google_fonts_url
+			$google_fonts_url,
+			array(),
+			null
 		);
 	}
 
