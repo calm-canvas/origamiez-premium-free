@@ -17,7 +17,7 @@ class SocialLinksWidget extends WP_Widget {
 	/**
 	 * Register widget.
 	 */
-	public static function register() {
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
@@ -43,7 +43,7 @@ class SocialLinksWidget extends WP_Widget {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance          = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 
@@ -56,7 +56,7 @@ class SocialLinksWidget extends WP_Widget {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Widget instance.
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		extract( $args, EXTR_SKIP );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
@@ -105,7 +105,7 @@ class SocialLinksWidget extends WP_Widget {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		?>
 		<p>
@@ -122,7 +122,7 @@ class SocialLinksWidget extends WP_Widget {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		return array(
 			'title' => esc_attr__( 'Social Links', 'origamiez' ),
 		);

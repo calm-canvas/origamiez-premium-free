@@ -1,48 +1,108 @@
 <?php
+/**
+ * Read More Button
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display;
 
+/**
+ * Class ReadMoreButton
+ *
+ * @package Origamiez\Engine\Display
+ */
 class ReadMoreButton {
 
-	private int $postId;
+	/**
+	 * Post id.
+	 *
+	 * @var int
+	 */
+	private int $post_id;
 
-	private string $buttonText;
+	/**
+	 * Button text.
+	 *
+	 * @var string
+	 */
+	private string $button_text;
 
-	public function __construct( int $postId = 0, string $buttonText = '' ) {
-		$this->postId     = $postId ?: get_the_ID();
-		$this->buttonText = $buttonText ?: esc_html__( 'Read more &raquo;', 'origamiez' );
+	/**
+	 * ReadMoreButton constructor.
+	 *
+	 * @param integer $post_id The post id.
+	 * @param string  $button_text The button text.
+	 */
+	public function __construct( int $post_id = 0, string $button_text = '' ) {
+		$this->post_id     = $post_id ?: get_the_ID();
+		$this->button_text = $button_text ?: esc_html__( 'Read more &raquo;', 'origamiez' );
 	}
 
-	public function setPostId( int $postId ): self {
-		$this->postId = $postId;
+	/**
+	 * Set post id.
+	 *
+	 * @param int $post_id The post id.
+	 *
+	 * @return self
+	 */
+	public function set_post_id( int $post_id ): self {
+		$this->post_id = $post_id;
 		return $this;
 	}
 
-	public function setButtonText( string $text ): self {
-		$this->buttonText = $text;
+	/**
+	 * Set button text.
+	 *
+	 * @param string $text The text.
+	 *
+	 * @return self
+	 */
+	public function set_button_text( string $text ): self {
+		$this->button_text = $text;
 		return $this;
 	}
 
-	public function getPostPermalink(): string {
-		return get_permalink( $this->postId );
+	/**
+	 * Get post permalink.
+	 *
+	 * @return string
+	 */
+	public function get_post_permalink(): string {
+		return get_permalink( $this->post_id );
 	}
 
-	public function getPostTitle(): string {
-		return get_the_title( $this->postId );
+	/**
+	 * Get post title.
+	 *
+	 * @return string
+	 */
+	public function get_post_title(): string {
+		return get_the_title( $this->post_id );
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
 		ob_start();
 		?>
 		<p class="origamiez-readmore-block">
-			<a href="<?php echo esc_url( $this->getPostPermalink() ); ?>" title="<?php echo esc_attr( $this->getPostTitle() ); ?>" class="origamiez-readmore-button">
-				<?php echo esc_html( $this->buttonText ); ?>
+			<a href="<?php echo esc_url( $this->get_post_permalink() ); ?>" title="<?php echo esc_attr( $this->get_post_title() ); ?>" class="origamiez-readmore-button">
+				<?php echo esc_html( $this->button_text ); ?>
 			</a>
 		</p>
 		<?php
 		return ob_get_clean();
 	}
 
+	/**
+	 * Display.
+	 *
+	 * @return void
+	 */
 	public function display(): void {
 		echo wp_kses_post( $this->render() );
 	}

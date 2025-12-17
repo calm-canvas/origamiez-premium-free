@@ -1,4 +1,9 @@
 <?php
+/**
+ * Breadcrumb Builder
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display\Breadcrumb;
 
@@ -10,18 +15,51 @@ use Origamiez\Engine\Display\Breadcrumb\Segments\PageSegment;
 use Origamiez\Engine\Display\Breadcrumb\Segments\SingleSegment;
 use Origamiez\Engine\Display\Breadcrumb\Segments\NotFoundSegment;
 
+/**
+ * Class BreadcrumbBuilder
+ *
+ * @package Origamiez\Engine\Display\Breadcrumb
+ */
 class BreadcrumbBuilder {
 
-	private string $prefix     = '&nbsp;&rsaquo;&nbsp;';
-	private string $beforeHtml = '<div class="breadcrumb">';
-	private string $afterHtml  = '</div>';
-	private array $segments    = array();
+	/**
+	 * Prefix.
+	 *
+	 * @var string
+	 */
+	private string $prefix = '&nbsp;&rsaquo;&nbsp;';
+	/**
+	 * Before html.
+	 *
+	 * @var string
+	 */
+	private string $before_html = '<div class="breadcrumb">';
+	/**
+	 * After html.
+	 *
+	 * @var string
+	 */
+	private string $after_html = '</div>';
+	/**
+	 * Segments.
+	 *
+	 * @var array
+	 */
+	private array $segments = array();
 
+	/**
+	 * BreadcrumbBuilder constructor.
+	 */
 	public function __construct() {
-		$this->registerDefaultSegments();
+		$this->register_default_segments();
 	}
 
-	private function registerDefaultSegments(): void {
+	/**
+	 * Register default segments.
+	 *
+	 * @return void
+	 */
+	private function register_default_segments(): void {
 		$this->segments = array(
 			new HomeSegment( $this->prefix ),
 			new ArchiveSegment( $this->prefix ),
@@ -32,35 +70,68 @@ class BreadcrumbBuilder {
 		);
 	}
 
-	public function registerSegment( SegmentInterface $segment ): self {
+	/**
+	 * Register segment.
+	 *
+	 * @param SegmentInterface $segment The segment.
+	 *
+	 * @return self
+	 */
+	public function register_segment( SegmentInterface $segment ): self {
 		$this->segments[] = $segment;
 		return $this;
 	}
 
+	/**
+	 * Build.
+	 *
+	 * @return string
+	 */
 	public function build(): string {
-		$html = $this->beforeHtml;
+		$html = $this->before_html;
 
 		foreach ( $this->segments as $segment ) {
 			$html .= $segment->render();
 		}
 
-		$html .= $this->afterHtml;
+		$html .= $this->after_html;
 
 		return $html;
 	}
 
-	public function setPrefix( string $prefix ): self {
+	/**
+	 * Set prefix.
+	 *
+	 * @param string $prefix The prefix.
+	 *
+	 * @return self
+	 */
+	public function set_prefix( string $prefix ): self {
 		$this->prefix = $prefix;
 		return $this;
 	}
 
-	public function setBeforeHtml( string $html ): self {
-		$this->beforeHtml = $html;
+	/**
+	 * Set before html.
+	 *
+	 * @param string $html The html.
+	 *
+	 * @return self
+	 */
+	public function set_before_html( string $html ): self {
+		$this->before_html = $html;
 		return $this;
 	}
 
-	public function setAfterHtml( string $html ): self {
-		$this->afterHtml = $html;
+	/**
+	 * Set after html.
+	 *
+	 * @param string $html The html.
+	 *
+	 * @return self
+	 */
+	public function set_after_html( string $html ): self {
+		$this->after_html = $html;
 		return $this;
 	}
 }

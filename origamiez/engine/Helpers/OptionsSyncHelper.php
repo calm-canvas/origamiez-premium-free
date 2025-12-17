@@ -1,11 +1,24 @@
 <?php
+/**
+ * Options Sync Helper
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Helpers;
 
+/**
+ * Class OptionsSyncHelper
+ */
 class OptionsSyncHelper {
 
-	public static function syncUnysonOptions( array $newValues ): void {
-		foreach ( $newValues as $key => $value ) {
+	/**
+	 * Sync Unyson options
+	 *
+	 * @param array $new_values The new values.
+	 */
+	public static function sync_unyson_options( array $new_values ): void {
+		foreach ( $new_values as $key => $value ) {
 			if ( 'logo' === $key ) {
 				if ( isset( $value['url'] ) && isset( $value['attachment_id'] ) ) {
 					$value = esc_url( $value['url'] );
@@ -15,23 +28,55 @@ class OptionsSyncHelper {
 		}
 	}
 
-	public static function getOption( string $key, mixed $default = false ): mixed {
+	/**
+	 * Get option
+	 *
+	 * @param string $key The key.
+	 * @param mixed  $default The default value.
+	 * @return mixed
+	 */
+	public static function get_option( string $key, mixed $default = false ): mixed {
 		return get_option( $key, $default );
 	}
 
-	public static function setOption( string $key, mixed $value ): bool {
+	/**
+	 * Set option
+	 *
+	 * @param string $key The key.
+	 * @param mixed  $value The value.
+	 * @return bool
+	 */
+	public static function set_option( string $key, mixed $value ): bool {
 		return update_option( $key, $value );
 	}
 
-	public static function getThemeMod( string $key, mixed $default = false ): mixed {
+	/**
+	 * Get theme mod
+	 *
+	 * @param string $key The key.
+	 * @param mixed  $default The default value.
+	 * @return mixed
+	 */
+	public static function get_theme_mod( string $key, mixed $default = false ): mixed {
 		return get_theme_mod( $key, $default );
 	}
 
-	public static function setThemeMod( string $key, mixed $value ): void {
+	/**
+	 * Set theme mod
+	 *
+	 * @param string $key The key.
+	 * @param mixed  $value The value.
+	 */
+	public static function set_theme_mod( string $key, mixed $value ): void {
 		set_theme_mod( $key, $value );
 	}
 
-	public static function deleteThemeMod( string $key ): void {
+	/**
+	 * Delete theme mod
+	 *
+	 * @param string $key The key.
+	 */
+	public static function delete_theme_mod( string $key ): void {
 		remove_theme_mod( $key );
 	}
 }

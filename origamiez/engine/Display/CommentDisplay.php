@@ -1,21 +1,58 @@
 <?php
+/**
+ * Comment Display
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display;
 
+/**
+ * Class CommentDisplay
+ *
+ * @package Origamiez\Engine\Display
+ */
 class CommentDisplay {
 
+	/**
+	 * Comment.
+	 *
+	 * @var \WP_Comment
+	 */
 	private $comment;
 
+	/**
+	 * Args.
+	 *
+	 * @var array
+	 */
 	private array $args;
 
+	/**
+	 * Depth.
+	 *
+	 * @var int
+	 */
 	private int $depth;
 
+	/**
+	 * CommentDisplay constructor.
+	 *
+	 * @param \WP_Comment $comment The comment.
+	 * @param array       $args The args.
+	 * @param integer     $depth The depth.
+	 */
 	public function __construct( $comment, array $args = array(), int $depth = 1 ) {
 		$this->comment = $comment;
 		$this->args    = $args;
 		$this->depth   = $depth;
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
 		$GLOBALS['comment'] = $this->comment;
 
@@ -59,10 +96,20 @@ class CommentDisplay {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Display.
+	 *
+	 * @return void
+	 */
 	public function display(): void {
 		echo wp_kses_post( $this->render() );
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @return callable
+	 */
 	public static function register(): callable {
 		return static function ( $comment, $args, $depth ) {
 			$display = new self( $comment, $args, $depth );

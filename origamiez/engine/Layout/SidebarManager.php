@@ -1,16 +1,39 @@
 <?php
+/**
+ * Sidebar Manager
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Layout;
 
+/**
+ * Class SidebarManager
+ *
+ * @package Origamiez\Engine\Layout
+ */
 class SidebarManager {
 
+	/**
+	 * Sidebars.
+	 *
+	 * @var array
+	 */
 	private array $sidebars = array();
 
+	/**
+	 * SidebarManager constructor.
+	 */
 	public function __construct() {
-		$this->initializeDefaultSidebars();
+		$this->initialize_default_sidebars();
 	}
 
-	private function initializeDefaultSidebars(): void {
+	/**
+	 * Initialize default sidebars.
+	 *
+	 * @return void
+	 */
+	private function initialize_default_sidebars(): void {
 		$this->sidebars = array(
 			'sidebar-main-top'           => __( 'Main Top', 'origamiez' ),
 			'sidebar-main-bottom'        => __( 'Main Bottom', 'origamiez' ),
@@ -31,8 +54,17 @@ class SidebarManager {
 		);
 	}
 
-	public function registerSidebar( string $id, string $name, array $args = array() ): self {
-		$defaultArgs = array(
+	/**
+	 * Register sidebar.
+	 *
+	 * @param string $id The id.
+	 * @param string $name The name.
+	 * @param array  $args The args.
+	 *
+	 * @return self
+	 */
+	public function register_sidebar( string $id, string $name, array $args = array() ): self {
+		$default_args = array(
 			'name'          => $name,
 			'id'            => $id,
 			'description'   => '',
@@ -43,38 +75,74 @@ class SidebarManager {
 			'after_title'   => '</h4>',
 		);
 
-		$args = array_merge( $defaultArgs, $args );
+		$args = array_merge( $default_args, $args );
 		register_sidebar( $args );
 		$this->sidebars[ $id ] = $name;
 
 		return $this;
 	}
 
-	public function getSidebar( string $id ): ?string {
+	/**
+	 * Get sidebar.
+	 *
+	 * @param string $id The id.
+	 *
+	 * @return string|null
+	 */
+	public function get_sidebar( string $id ): ?string {
 		return $this->sidebars[ $id ] ?? null;
 	}
 
-	public function getAllSidebars(): array {
+	/**
+	 * Get all sidebars.
+	 *
+	 * @return array
+	 */
+	public function get_all_sidebars(): array {
 		return $this->sidebars;
 	}
 
-	public function isSidebarActive( string $id ): bool {
+	/**
+	 * Is sidebar active.
+	 *
+	 * @param string $id The id.
+	 *
+	 * @return boolean
+	 */
+	public function is_sidebar_active( string $id ): bool {
 		return is_active_sidebar( $id );
 	}
 
-	public function displaySidebar( string $id ): void {
-		if ( $this->isSidebarActive( $id ) ) {
+	/**
+	 * Display sidebar.
+	 *
+	 * @param string $id The id.
+	 *
+	 * @return void
+	 */
+	public function display_sidebar( string $id ): void {
+		if ( $this->is_sidebar_active( $id ) ) {
 			dynamic_sidebar( $id );
 		}
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @return void
+	 */
 	public function register(): void {
-		add_action( 'widgets_init', array( $this, 'registerAllSidebars' ) );
+		add_action( 'widgets_init', array( $this, 'register_all_sidebars' ) );
 	}
 
-	public function registerAllSidebars(): void {
+	/**
+	 * Register all sidebars.
+	 *
+	 * @return void
+	 */
+	public function register_all_sidebars(): void {
 		foreach ( $this->sidebars as $id => $name ) {
-			$this->registerSidebar( $id, $name );
+			$this->register_sidebar( $id, $name );
 		}
 	}
 }

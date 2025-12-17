@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Media Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListMediaWidget
+ */
 class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListMediaWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-with-format-icon',
 			'description' => esc_attr__( 'Display posts list with icon of post-format.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
 		parent::__construct( 'origamiez-widget-post-list-media', esc_attr__( 'Origamiez Posts List With Format Icon', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );

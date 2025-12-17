@@ -71,7 +71,7 @@ class FontManager {
 				$font_src    = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
 
 				if ( $font_family && $font_src ) {
-					$font_family_slug                            = $this->slugify_string( $font_family );
+					$font_family_slug                            = $this->slugify( $font_family );
 					$font_groups['dynamic'][ $font_family_slug ] = $font_src;
 				}
 			}
@@ -97,7 +97,7 @@ class FontManager {
 	 * @param string $str The string to slugify.
 	 * @return string The slugified string.
 	 */
-	private function slugify_string( string $str ): string {
+	private function slugify( string $str ): string {
 		return strtolower( preg_replace( '/[^a-zA-Z0-9-]/', '-', $str ) );
 	}
 }

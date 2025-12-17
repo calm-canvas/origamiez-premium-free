@@ -1,42 +1,104 @@
 <?php
+/**
+ * Metadata Manager
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Post;
 
+/**
+ * Class MetadataManager
+ *
+ * @package Origamiez\Engine\Post
+ */
 class MetadataManager {
 
+	/**
+	 * Meta prefix
+	 *
+	 * @var string
+	 */
 	private const META_PREFIX = 'origamiez_';
 
-	public function getMetaPrefix(): string {
+	/**
+	 * Get meta prefix.
+	 *
+	 * @return string
+	 */
+	public function get_meta_prefix(): string {
 		return self::META_PREFIX;
 	}
 
-	public function getMeta( $postId, string $key, bool $single = true ) {
-		return get_post_meta( $postId, self::META_PREFIX . $key, $single );
+	/**
+	 * Get meta.
+	 *
+	 * @param int    $post_id The post id.
+	 * @param string $key The key.
+	 * @param bool   $single The single.
+	 *
+	 * @return mixed
+	 */
+	public function get_meta( $post_id, string $key, bool $single = true ) {
+		return get_post_meta( $post_id, self::META_PREFIX . $key, $single );
 	}
 
-	public function setMeta( $postId, string $key, $value ): int {
-		return update_post_meta( $postId, self::META_PREFIX . $key, $value );
+	/**
+	 * Set meta.
+	 *
+	 * @param int    $post_id The post id.
+	 * @param string $key The key.
+	 * @param mixed  $value The value.
+	 *
+	 * @return integer
+	 */
+	public function set_meta( $post_id, string $key, $value ): int {
+		return update_post_meta( $post_id, self::META_PREFIX . $key, $value );
 	}
 
-	public function deleteMeta( $postId, string $key, $value = '' ): bool {
-		return delete_post_meta( $postId, self::META_PREFIX . $key, $value );
+	/**
+	 * Delete meta.
+	 *
+	 * @param int    $post_id The post id.
+	 * @param string $key The key.
+	 * @param mixed  $value The value.
+	 *
+	 * @return boolean
+	 */
+	public function delete_meta( $post_id, string $key, $value = '' ): bool {
+		return delete_post_meta( $post_id, self::META_PREFIX . $key, $value );
 	}
 
-	public function getAllMeta( $postId ): array {
-		$allMeta      = get_post_meta( $postId );
-		$prefixedMeta = array();
+	/**
+	 * Get all meta.
+	 *
+	 * @param int $post_id The post id.
+	 *
+	 * @return array
+	 */
+	public function get_all_meta( $post_id ): array {
+		$all_meta      = get_post_meta( $post_id );
+		$prefixed_meta = array();
 
-		foreach ( $allMeta as $key => $value ) {
+		foreach ( $all_meta as $key => $value ) {
 			if ( strpos( $key, self::META_PREFIX ) === 0 ) {
-				$cleanKey                  = substr( $key, strlen( self::META_PREFIX ) );
-				$prefixedMeta[ $cleanKey ] = $value[0] ?? $value;
+				$clean_key                   = substr( $key, strlen( self::META_PREFIX ) );
+				$prefixed_meta[ $clean_key ] = $value[0] ?? $value;
 			}
 		}
 
-		return $prefixedMeta;
+		return $prefixed_meta;
 	}
 
-	public function postHasMeta( $postId, string $key ): bool {
-		return metadata_exists( 'post', $postId, self::META_PREFIX . $key );
+	/**
+	 * Post has meta.
+	 *
+	 * @param int    $post_id The post id.
+	 * @param string $key The key.
+	 *
+	 * @return boolean
+	 */
+	public function post_has_meta( $post_id, string $key ): bool {
+		return metadata_exists( 'post', $post_id, self::META_PREFIX . $key );
 	}
 }

@@ -1,10 +1,27 @@
 <?php
+/**
+ * Format Helper
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Helpers;
 
+/**
+ * Class FormatHelper
+ *
+ * @package Origamiez\Engine\Helpers
+ */
 class FormatHelper {
 
-	public static function getFormatIcon( string $format ): string {
+	/**
+	 * Get format icon.
+	 *
+	 * @param string $format The format.
+	 *
+	 * @return string
+	 */
+	public static function get_format_icon( string $format ): string {
 		$icon = 'fa fa-pencil';
 		switch ( $format ) {
 			case 'video':

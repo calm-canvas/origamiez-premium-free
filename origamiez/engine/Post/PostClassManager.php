@@ -1,10 +1,27 @@
 <?php
+/**
+ * Post Class Manager
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Post;
 
+/**
+ * Class PostClassManager
+ *
+ * @package Origamiez\Engine\Post
+ */
 class PostClassManager {
 
-	public function getPostClasses( array $classes = array() ): array {
+	/**
+	 * Get post classes.
+	 *
+	 * @param array $classes The classes.
+	 *
+	 * @return array
+	 */
+	public function get_post_classes( array $classes = array() ): array {
 		if ( ! in_the_loop() ) {
 			return $classes;
 		}
@@ -19,9 +36,9 @@ class PostClassManager {
 		$classes[] = 'origamiez-post-' . $post->post_type;
 		$classes[] = 'origamiez-post-' . $post->ID;
 
-		$postFormat = get_post_format( $post->ID );
-		if ( $postFormat && 'standard' !== $postFormat ) {
-			$classes[] = 'origamiez-post-format-' . $postFormat;
+		$post_format = get_post_format( $post->ID );
+		if ( $post_format && 'standard' !== $post_format ) {
+			$classes[] = 'origamiez-post-format-' . $post_format;
 		}
 
 		if ( has_post_thumbnail( $post->ID ) ) {
@@ -31,7 +48,12 @@ class PostClassManager {
 		return $classes;
 	}
 
+	/**
+	 * Register.
+	 *
+	 * @return void
+	 */
 	public function register(): void {
-		add_filter( 'post_class', array( $this, 'getPostClasses' ) );
+		add_filter( 'post_class', array( $this, 'get_post_classes' ) );
 	}
 }

@@ -1,64 +1,102 @@
 <?php
+/**
+ * Comment Form Builder
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display;
 
 use Origamiez\Engine\Config\AllowedTagsConfig;
 
+/**
+ * Class CommentFormBuilder
+ *
+ * @package Origamiez\Engine\Display
+ */
 class CommentFormBuilder {
 
-	private int $postId;
+	/**
+	 * Post id.
+	 *
+	 * @var int
+	 */
+	private int $post_id;
 
-	private array $customArgs;
+	/**
+	 * Custom args.
+	 *
+	 * @var array
+	 */
+	private array $custom_args;
 
-	public function __construct( int $postId = 0, array $customArgs = array() ) {
-		$this->postId     = $postId ?: get_the_ID();
-		$this->customArgs = $customArgs;
+	/**
+	 * CommentFormBuilder constructor.
+	 *
+	 * @param integer $post_id The post id.
+	 * @param array   $custom_args The custom args.
+	 */
+	public function __construct( int $post_id = 0, array $custom_args = array() ) {
+		$this->post_id     = $post_id ?: get_the_ID();
+		$this->custom_args = $custom_args;
 	}
 
-	private function getCommentFormFields(): array {
+	/**
+	 * Get comment form fields.
+	 *
+	 * @return array
+	 */
+	private function get_comment_form_fields(): array {
 		$commenter = wp_get_current_commenter();
 		$req       = get_option( 'require_name_email' );
 		$aria_req  = ( $req ? " aria-required='true'" : '' );
-		$html5     = $this->isHtml5Format();
+		$html5     = $this->is_html5_format();
 
-		$fields = array();
-
-		$fields['author']  = '<div class="comment-form-info row clearfix">';
-		$fields['author'] .= '<div class="comment-form-field col-sm-4">';
-		$fields['author'] .= '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' />';
-		$fields['author'] .= '<span class="comment-icon fa fa-user"></span>';
-		$fields['author'] .= '</div>';
-
-		$fields['email']  = '<div class="comment-form-field col-sm-4">';
-		$fields['email'] .= '<input id="email" name="email" ' . ( $html5 ? 'type="email"' : 'type="text"' ) . ' value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' />';
-		$fields['email'] .= '<span class="comment-icon fa fa-envelope"></span>';
-		$fields['email'] .= '</div>';
-
-		$fields['url']  = '<div class="comment-form-field col-sm-4">';
-		$fields['url'] .= '<input id="url" name="url" ' . ( $html5 ? 'type="url"' : 'type="text"' ) . ' value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" />';
-		$fields['url'] .= '<span class="comment-icon fa fa-link"></span>';
-		$fields['url'] .= '</div>';
-		$fields['url'] .= '</div>';
+		$fields = array(
+			'author' => '<div class="comment-form-info row clearfix">' .
+						'<div class="comment-form-field col-sm-4">' .
+						'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' />' .
+						'<span class="comment-icon fa fa-user"></span>' .
+						'</div>',
+			'email'  => '<div class="comment-form-field col-sm-4">' .
+						'<input id="email" name="email" ' . ( $html5 ? 'type="email"' : 'type="text"' ) . ' value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' />' .
+						'<span class="comment-icon fa fa-envelope"></span>' .
+						'</div>',
+			'url'    => '<div class="comment-form-field col-sm-4">' .
+						'<input id="url" name="url" ' . ( $html5 ? 'type="url"' : 'type="text"' ) . ' value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" />' .
+						'<span class="comment-icon fa fa-link"></span>' .
+						'</div>' .
+						'</div>',
+		);
 
 		return apply_filters( 'comment_form_default_fields', $fields );
 	}
 
-	private function getCommentField(): string {
-		$comment_field  = '<p class="comment-form-comment">';
-		$comment_field .= '<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>';
-		$comment_field .= '</p>';
+	/**
+	 * Get comment field.
+	 *
+	 * @return string
+	 */
+	private function get_comment_field(): string {
+		$comment_field = '<p class="comment-form-comment">' .
+						 '<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>' .
+						 '</p>';
 		return apply_filters( 'comment_form_field_comment', $comment_field );
 	}
 
-	private function getDefaults(): array {
+	/**
+	 * Get defaults.
+	 *
+	 * @return array
+	 */
+	private function get_defaults(): array {
 		$user          = wp_get_current_user();
 		$user_identity = $user->exists() ? $user->display_name : '';
-		$commenter     = wp_get_current_commenter();
-		$permalink     = apply_filters( 'the_permalink', get_permalink( $this->postId ) );
+		$permalink     = apply_filters( 'the_permalink', get_permalink( $this->post_id ) );
 
 		return array(
-			'fields'               => $this->getCommentFormFields(),
-			'comment_field'        => $this->getCommentField(),
+			'fields'               => $this->get_comment_form_fields(),
+			'comment_field'        => $this->get_comment_field(),
 			'must_log_in'          => '<p class="must-log-in">' . sprintf( esc_html__( 'You must be <a href="%s">logged in</a> to post a comment.', 'origamiez' ), wp_login_url( $permalink ) ) . '</p>',
 			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( esc_html__( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'origamiez' ), get_edit_user_link(), $user_identity, wp_logout_url( $permalink ) ) . '</p>',
 			'comment_notes_before' => '',
@@ -73,69 +111,121 @@ class CommentFormBuilder {
 		);
 	}
 
-	private function isHtml5Format(): bool {
-		$args = wp_parse_args( $this->customArgs );
+	/**
+	 * Is html5 format.
+	 *
+	 * @return boolean
+	 */
+	private function is_html5_format(): bool {
+		$args = wp_parse_args( $this->custom_args );
 		return ! isset( $args['format'] ) || 'html5' === $args['format'];
 	}
 
+	/**
+	 * Build.
+	 *
+	 * @return array
+	 */
 	public function build(): array {
-		$defaults = $this->getDefaults();
-		return wp_parse_args( $this->customArgs, apply_filters( 'comment_form_defaults', $defaults ) );
+		$defaults = $this->get_defaults();
+		return wp_parse_args( $this->custom_args, apply_filters( 'comment_form_defaults', $defaults ) );
 	}
 
+	/**
+	 * Render the comment form title.
+	 *
+	 * @param array $args The comment form arguments.
+	 */
+	private function render_comment_form_title( array $args ): void {
+		?>
+		<h2 id="reply-title" class="comment-reply-title widget-title clearfix">
+			<?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?>
+			<small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small>
+		</h2>
+		<?php
+	}
+
+	/**
+	 * Render the comment form fields.
+	 *
+	 * @param array $args The comment form arguments.
+	 */
+	private function render_comment_form_fields( array $args ): void {
+		do_action( 'comment_form_before_fields' );
+		foreach ( (array) $args['fields'] as $name => $field ) {
+			echo wp_kses( apply_filters( "comment_form_field_{$name}", $field ), AllowedTagsConfig::get_allowed_tags() );
+		}
+		do_action( 'comment_form_after_fields' );
+	}
+
+	/**
+	 * Render the comment form body.
+	 *
+	 * @param array $args The comment form arguments.
+	 */
+	private function render_comment_form_body( array $args ): void {
+		if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+			echo wp_kses( $args['must_log_in'], AllowedTagsConfig::get_allowed_tags() );
+			do_action( 'comment_form_must_log_in_after' );
+		} else {
+			?>
+			<form action="<?php echo esc_url( home_url( '/wp-comments-post.php' ) ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>" class="comment-form origamiez-widget-content clearfix" <?php echo $this->is_html5_format() ? ' novalidate' : ''; ?>>
+				<?php
+				do_action( 'comment_form_top' );
+				if ( is_user_logged_in() ) {
+					$logged_in = wp_get_current_user();
+					echo wp_kses( apply_filters( 'comment_form_logged_in', $args['logged_in_as'], wp_get_current_commenter(), $logged_in->display_name ), AllowedTagsConfig::get_allowed_tags() );
+					do_action( 'comment_form_logged_in_after', wp_get_current_commenter(), $logged_in->display_name );
+				} else {
+					echo wp_kses( $args['comment_notes_before'], AllowedTagsConfig::get_allowed_tags() );
+					$this->render_comment_form_fields( $args );
+				}
+				echo wp_kses( $args['comment_field'], AllowedTagsConfig::get_allowed_tags() );
+				echo wp_kses( $args['comment_notes_after'], AllowedTagsConfig::get_allowed_tags() );
+				?>
+				<p class="form-submit">
+					<input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>"/>
+					<?php comment_id_fields( $this->post_id ); ?>
+				</p>
+				<?php do_action( 'comment_form', $this->post_id ); ?>
+			</form>
+			<?php
+		}
+	}
+
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
 		$args = $this->build();
 
 		ob_start();
 
-		if ( comments_open( $this->postId ) ) : ?>
-			<?php do_action( 'comment_form_before' ); ?>
+		if ( comments_open( $this->post_id ) ) {
+			do_action( 'comment_form_before' );
+			?>
 			<div class="comment-respond" id="respond">
-				<h2 id="reply-title" class="comment-reply-title widget-title clearfix">
-					<?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?>
-					<small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small>
-				</h2>
-				<?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) : ?>
-					<?php echo wp_kses( htmlspecialchars_decode( $args['must_log_in'] ), origamiez_get_allowed_tags() ); ?>
-					<?php do_action( 'comment_form_must_log_in_after' ); ?>
-				<?php else : ?>
-					<form action="<?php echo esc_url( home_url( '/wp-comments-post.php' ) ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>" class="comment-form origamiez-widget-content clearfix" <?php echo $this->isHtml5Format() ? ' novalidate' : ''; ?>>
-						<?php do_action( 'comment_form_top' ); ?>
-						<?php if ( is_user_logged_in() ) : ?>
-							<?php
-							$logged_in = wp_get_current_user();
-							echo wp_kses( htmlspecialchars_decode( apply_filters( 'comment_form_logged_in', $args['logged_in_as'], wp_get_current_commenter(), $logged_in->display_name ) ), origamiez_get_allowed_tags() );
-							do_action( 'comment_form_logged_in_after', wp_get_current_commenter(), $logged_in->display_name );
-							?>
-						<?php else : ?>
-							<?php echo wp_kses( $args['comment_notes_before'], origamiez_get_allowed_tags() ); ?>
-							<?php
-							do_action( 'comment_form_before_fields' );
-							foreach ( (array) $args['fields'] as $name => $field ) {
-								echo wp_kses( apply_filters( "comment_form_field_{$name}", $field ), origamiez_get_allowed_tags() );
-							}
-							do_action( 'comment_form_after_fields' );
-							?>
-						<?php endif; ?>
-						<?php echo wp_kses( $args['comment_field'], origamiez_get_allowed_tags() ); ?>
-						<?php echo wp_kses( $args['comment_notes_after'], origamiez_get_allowed_tags() ); ?>
-						<p class="form-submit">
-							<input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>"/>
-							<?php comment_id_fields( $this->postId ); ?>
-						</p>
-						<?php do_action( 'comment_form', $this->postId ); ?>
-					</form>
-				<?php endif; ?>
+				<?php
+				$this->render_comment_form_title( $args );
+				$this->render_comment_form_body( $args );
+				?>
 			</div>
 			<?php
 			do_action( 'comment_form_after' );
-		else :
+		} else {
 			do_action( 'comment_form_comments_closed' );
-		endif;
+		}
 
 		return ob_get_clean();
 	}
 
+	/**
+	 * Display.
+	 *
+	 * @return void
+	 */
 	public function display(): void {
 		echo $this->render();
 	}

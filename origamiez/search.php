@@ -12,7 +12,10 @@ get_header(); ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<?php ( new \Origamiez\Engine\Display\Breadcrumb\BreadcrumbGenerator() )->displayBreadcrumb(); ?>
+					<?php
+					$breadcrumb_generator = new \Origamiez\Engine\Display\Breadcrumb\BreadcrumbGenerator();
+					$breadcrumb_generator->displayBreadcrumb();
+					?>
 				</div>
 			</div>
 		</div>

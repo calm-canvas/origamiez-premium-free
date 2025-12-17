@@ -1,34 +1,53 @@
 <?php
+/**
+ * Post Formatter
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Post;
 
+/**
+ * Class PostFormatter
+ *
+ * @package Origamiez\Engine\Post
+ */
 class PostFormatter {
 
-	public function extractShortcodes( string $content, array $shortcodes = array(), bool $enableMulti = false ): array {
+	/**
+	 * Extract shortcodes from content.
+	 *
+	 * @param string $content The content.
+	 * @param array  $shortcodes The shortcodes.
+	 * @param bool   $enable_multi The enable multi.
+	 *
+	 * @return array
+	 */
+	public function extract_shortcodes( string $content, array $shortcodes = array(), bool $enable_multi = false ): array {
 		$data = array();
 
 		if ( empty( $shortcodes ) ) {
 			return $data;
 		}
 
-		$regexMatches = '';
-		$regexPattern = get_shortcode_regex();
+		$regex_matches = '';
+		$regex_pattern = get_shortcode_regex();
 
-		preg_match_all( '/' . $regexPattern . '/s', $content, $regexMatches );
+		preg_match_all( '/' . $regex_pattern . '/s', $content, $regex_matches );
 
-		foreach ( $regexMatches[0] as $shortcode ) {
-			$regexMatchesNew = '';
-			preg_match( '/' . $regexPattern . '/s', $shortcode, $regexMatchesNew );
+		foreach ( $regex_matches[0] as $shortcode ) {
+			$regex_matches_new = '';
+			preg_match( '/' . $regex_pattern . '/s', $shortcode, $regex_matches_new );
 
-			if ( in_array( $regexMatchesNew[2], $shortcodes, true ) ) {
+			if ( in_array( $regex_matches_new[2], $shortcodes, true ) ) {
 				$data[] = array(
-					'shortcode' => $regexMatchesNew[0],
-					'type'      => $regexMatchesNew[2],
-					'content'   => $regexMatchesNew[5],
-					'atts'      => shortcode_parse_atts( $regexMatchesNew[3] ),
+					'shortcode' => $regex_matches_new[0],
+					'type'      => $regex_matches_new[2],
+					'content'   => $regex_matches_new[5],
+					'atts'      => shortcode_parse_atts( $regex_matches_new[3] ),
 				);
 
-				if ( false === $enableMulti ) {
+				if ( false === $enable_multi ) {
 					break;
 				}
 			}
@@ -37,30 +56,64 @@ class PostFormatter {
 		return apply_filters( 'origamiez_get_shortcode', $data, $content, $shortcodes );
 	}
 
-	public function extractFirstShortcode( string $content, array $shortcodes = array() ): ?array {
-		$results = $this->extractShortcodes( $content, $shortcodes, false );
+	/**
+	 * Extract first shortcode from content.
+	 *
+	 * @param string $content The content.
+	 * @param array  $shortcodes The shortcodes.
+	 *
+	 * @return array|null
+	 */
+	public function extract_first_shortcode( string $content, array $shortcodes = array() ): ?array {
+		$results = $this->extract_shortcodes( $content, $shortcodes, false );
 
 		return ! empty( $results ) ? $results[0] : null;
 	}
 
-	public function hasShortcode( string $content, string $shortcode ): bool {
-		$results = $this->extractShortcodes( $content, array( $shortcode ) );
+	/**
+	 * Has shortcode.
+	 *
+	 * @param string $content The content.
+	 * @param string $shortcode The shortcode.
+	 *
+	 * @return boolean
+	 */
+	public function has_shortcode( string $content, string $shortcode ): bool {
+		$results = $this->extract_shortcodes( $content, array( $shortcode ) );
 
 		return ! empty( $results );
 	}
 
-	public function hasAnyShortcode( string $content, array $shortcodes = array() ): bool {
+	/**
+	 * Has any shortcode.
+	 *
+	 * @param string $content The content.
+	 * @param array  $shortcodes The shortcodes.
+	 *
+	 * @return boolean
+	 */
+	public function has_any_shortcode( string $content, array $shortcodes = array() ): bool {
 		if ( empty( $shortcodes ) ) {
 			return false;
 		}
 
-		$results = $this->extractShortcodes( $content, $shortcodes );
+		$results = $this->extract_shortcodes( $content, $shortcodes );
 
 		return ! empty( $results );
 	}
 
-	public function getShortcodeAttribute( string $content, string $shortcode, string $attribute, $default = null ) {
-		$result = $this->extractFirstShortcode( $content, array( $shortcode ) );
+	/**
+	 * Get shortcode attribute.
+	 *
+	 * @param string $content The content.
+	 * @param string $shortcode The shortcode.
+	 * @param string $attribute The attribute.
+	 * @param mixed  $default The default.
+	 *
+	 * @return mixed
+	 */
+	public function get_shortcode_attribute( string $content, string $shortcode, string $attribute, $default = null ) {
+		$result = $this->extract_first_shortcode( $content, array( $shortcode ) );
 
 		if ( null === $result ) {
 			return $default;
@@ -69,13 +122,30 @@ class PostFormatter {
 		return $result['atts'][ $attribute ] ?? $default;
 	}
 
-	public function removeShortcode( string $content, string $shortcode ): string {
+	/**
+	 * Remove shortcode.
+	 *
+	 * @param string $content The content.
+	 * @param string $shortcode The shortcode.
+	 *
+	 * @return string
+	 */
+	public function remove_shortcode( string $content, string $shortcode ): string {
 		return do_shortcode(
 			str_replace( '[' . $shortcode, '[removed_' . $shortcode, $content )
 		);
 	}
 
-	public function truncateContent( string $content, int $length = 150, string $suffix = '...' ): string {
+	/**
+	 * Truncate content.
+	 *
+	 * @param string  $content The content.
+	 * @param integer $length The length.
+	 * @param string  $suffix The suffix.
+	 *
+	 * @return string
+	 */
+	public function truncate_content( string $content, int $length = 150, string $suffix = '...' ): string {
 		if ( strlen( $content ) <= $length ) {
 			return $content;
 		}
@@ -83,19 +153,42 @@ class PostFormatter {
 		return substr( $content, 0, $length ) . $suffix;
 	}
 
-	public function stripShortcodes( string $content ): string {
+	/**
+	 * Strip shortcodes.
+	 *
+	 * @param string $content The content.
+	 *
+	 * @return string
+	 */
+	public function strip_shortcodes( string $content ): string {
 		return strip_shortcodes( $content );
 	}
 
-	public function getPlainText( string $content ): string {
+	/**
+	 * Get plain text.
+	 *
+	 * @param string $content The content.
+	 *
+	 * @return string
+	 */
+	public function get_plain_text( string $content ): string {
 		$content = wp_strip_all_tags( $content );
 
 		return trim( $content );
 	}
 
-	public function excerpt( string $content, int $length = 55, string $moreText = '[...]' ): string {
-		$excerpt = wp_trim_words( wp_strip_all_tags( $content ), $length, $moreText );
+	/**
+	 * Excerpt.
+	 *
+	 * @param string  $content The content.
+	 * @param integer $length The length.
+	 * @param string  $more_text The more text.
+	 *
+	 * @return string
+	 */
+	public function excerpt( string $content, int $length = 55, string $more_text = '[...]' ): string {
+		$excerpt = wp_trim_words( wp_strip_all_tags( $content ), $length, $more_text );
 
-		return apply_filters( 'origamiez_post_excerpt', $excerpt, $content, $length, $moreText );
+		return apply_filters( 'origamiez_post_excerpt', $excerpt, $content, $length, $more_text );
 	}
 }

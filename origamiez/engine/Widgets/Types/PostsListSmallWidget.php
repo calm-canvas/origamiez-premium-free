@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Small Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListSmallWidget
+ */
 class PostsListSmallWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListSmallWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-small-thumbnail',
 			'description' => esc_attr__( 'Display posts list with small thumbnail.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListSmallWidget extends AbstractPostsWidgetTypeC {
 		parent::__construct( 'origamiez-widget-post-list-small', esc_attr__( 'Origamiez Posts List Small', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -40,7 +60,7 @@ class PostsListSmallWidget extends AbstractPostsWidgetTypeC {
 				$post_title   = get_the_title();
 				$post_url     = get_permalink();
 				$post_classes = array( 'origamiez-wp-mt-post', 'clearfix' );
-				if ( 0 == $loop_index ) {
+				if ( 0 === $loop_index ) {
 					$post_classes[] = 'origamiez-wp-mt-post-first';
 				}
 				?>

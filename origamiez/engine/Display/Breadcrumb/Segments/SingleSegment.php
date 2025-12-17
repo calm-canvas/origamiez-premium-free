@@ -1,23 +1,48 @@
 <?php
+/**
+ * Single Segment
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display\Breadcrumb\Segments;
 
+/**
+ * Class SingleSegment
+ *
+ * @package Origamiez\Engine\Display\Breadcrumb\Segments
+ */
 class SingleSegment implements SegmentInterface {
 
+	/**
+	 * Prefix.
+	 *
+	 * @var string
+	 */
 	private string $prefix;
 
+	/**
+	 * SingleSegment constructor.
+	 *
+	 * @param string $prefix The prefix.
+	 */
 	public function __construct( string $prefix = '&nbsp;&rsaquo;&nbsp;' ) {
 		$this->prefix = $prefix;
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
 		if ( ! is_single() ) {
 			return '';
 		}
 
 		$html       = '';
-		$postId     = get_queried_object_id();
-		$categories = get_the_category( $postId );
+		$post_id    = get_queried_object_id();
+		$categories = get_the_category( $post_id );
 
 		if ( $categories ) {
 			foreach ( $categories as $category ) {
@@ -31,8 +56,8 @@ class SingleSegment implements SegmentInterface {
 
 		$html .= $this->prefix . sprintf(
 			'<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="current-page" itemprop="url" href="%s"><span itemprop="title">%s</span></a></span>',
-			get_permalink( $postId ),
-			esc_html( get_the_title( $postId ) )
+			get_permalink( $post_id ),
+			esc_html( get_the_title( $post_id ) )
 		);
 
 		return $html;

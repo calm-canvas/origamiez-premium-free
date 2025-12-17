@@ -1,16 +1,30 @@
 <?php
+/**
+ * Posts List Two Cols Widget
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Widgets\Types;
 
 use Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC;
 use WP_Query;
 
+/**
+ * Class PostsListTwoColsWidget
+ */
 class PostsListTwoColsWidget extends AbstractPostsWidgetTypeC {
-	public static function register() {
+	/**
+	 * Register widget.
+	 */
+	public static function register(): void {
 		register_widget( __CLASS__ );
 	}
 
-	function __construct() {
+	/**
+	 * PostsListTwoColsWidget constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-two-cols',
 			'description' => esc_attr__( 'Display posts list with layout two cols.', 'origamiez' ),
@@ -22,7 +36,13 @@ class PostsListTwoColsWidget extends AbstractPostsWidgetTypeC {
 		parent::__construct( 'origamiez-widget-posts-two-cols', esc_attr__( 'Origamiez Posts List Two Cols', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Render widget.
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ): void {
 		extract( $args );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		extract( $instance );
@@ -45,7 +65,7 @@ class PostsListTwoColsWidget extends AbstractPostsWidgetTypeC {
 						$post_title   = get_the_title();
 						$post_url     = get_permalink();
 						$post_classes = "origamiez-post-{$loop_index} clearfix";
-						if ( 0 == $loop_index ) :
+						if ( 0 === $loop_index ) :
 							?>
 							<article <?php post_class( $post_classes ); ?>>
 								<?php if ( has_post_thumbnail() ) : ?>

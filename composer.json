@@ -4,12 +4,12 @@
         "wp-coding-standards/wpcs": "*"
     },
     "scripts": {
-        "format": "phpcs --standard=.phpcs.xml.dist --no-cache",
-        "fix": "phpcbf --standard=.phpcs.xml.dist --no-cache"
+        "format": "phpcs --standard=.phpcs.xml.dist --no-cache --extensions=php --parallel=8",
+        "fix": "phpcbf --standard=.phpcs.xml.dist --no-cache --extensions=php --parallel=8"
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }

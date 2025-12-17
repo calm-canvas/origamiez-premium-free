@@ -1,62 +1,126 @@
 <?php
+/**
+ * Author Display
+ *
+ * @package Origamiez
+ */
 
 namespace Origamiez\Engine\Display;
 
+/**
+ * Class AuthorDisplay
+ *
+ * @package Origamiez\Engine\Display
+ */
 class AuthorDisplay {
 
-	private ?int $userId = null;
+	/**
+	 * User id.
+	 *
+	 * @var ?int
+	 */
+	private ?int $user_id = null;
 
-	public function __construct( ?int $userId = null ) {
-		$this->userId = $userId;
+	/**
+	 * AuthorDisplay constructor.
+	 *
+	 * @param ?int $user_id The user id.
+	 */
+	public function __construct( ?int $user_id = null ) {
+		$this->user_id = $user_id;
 	}
 
-	private function ensureUserId(): void {
-		if ( $this->userId === null ) {
+	/**
+	 * Ensure user id.
+	 *
+	 * @return void
+	 */
+	private function ensure_user_id(): void {
+		if ( null === $this->user_id ) {
 			global $post;
 			if ( $post ) {
-				$this->userId = (int) $post->post_author;
+				$this->user_id = (int) $post->post_author;
 			} else {
-				$this->userId = 0;
+				$this->user_id = 0;
 			}
 		}
 	}
 
-	public function setUserId( int $userId ): self {
-		$this->userId = $userId;
+	/**
+	 * Set user id.
+	 *
+	 * @param int $user_id The user id.
+	 *
+	 * @return self
+	 */
+	public function set_user_id( int $user_id ): self {
+		$this->user_id = $user_id;
 		return $this;
 	}
 
-	public function getAuthorDescription(): string {
-		$this->ensureUserId();
-		return get_the_author_meta( 'description', $this->userId );
+	/**
+	 * Get author description.
+	 *
+	 * @return string
+	 */
+	public function get_author_description(): string {
+		$this->ensure_user_id();
+		return get_the_author_meta( 'description', $this->user_id );
 	}
 
-	public function getAuthorEmail(): string {
-		$this->ensureUserId();
-		return get_the_author_meta( 'user_email', $this->userId );
+	/**
+	 * Get author email.
+	 *
+	 * @return string
+	 */
+	public function get_author_email(): string {
+		$this->ensure_user_id();
+		return get_the_author_meta( 'user_email', $this->user_id );
 	}
 
-	public function getAuthorName(): string {
-		$this->ensureUserId();
-		return get_the_author_meta( 'display_name', $this->userId );
+	/**
+	 * Get author name.
+	 *
+	 * @return string
+	 */
+	public function get_author_name(): string {
+		$this->ensure_user_id();
+		return get_the_author_meta( 'display_name', $this->user_id );
 	}
 
-	public function getAuthorUrl(): string {
-		$this->ensureUserId();
-		$url = trim( get_the_author_meta( 'user_url', $this->userId ) );
-		return ! $url ? get_author_posts_url( $this->userId ) : $url;
+	/**
+	 * Get author url.
+	 *
+	 * @return string
+	 */
+	public function get_author_url(): string {
+		$this->ensure_user_id();
+		$url = trim( get_the_author_meta( 'user_url', $this->user_id ) );
+		return ! $url ? get_author_posts_url( $this->user_id ) : $url;
 	}
 
-	public function getAuthorAvatar( int $size = 90 ): string {
-		$email = $this->getAuthorEmail();
+	/**
+	 * Get author avatar.
+	 *
+	 * @param integer $size The size.
+	 *
+	 * @return string
+	 */
+	public function get_author_avatar( int $size = 90 ): string {
+		$email = $this->get_author_email();
 		return get_avatar( $email, $size );
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @return string
+	 */
 	public function render(): string {
-		$description = $this->getAuthorDescription();
-		$name        = $this->getAuthorName();
-		$link        = $this->getAuthorUrl();
-		$avatar      = $this->getAuthorAvatar( 90 );
+		$description = $this->get_author_description();
+		$name        = $this->get_author_name();
+		$link        = $this->get_author_url();
+		$avatar      = $this->get_author_avatar( 90 );
 
 		ob_start();
 		?>
@@ -82,6 +146,11 @@ class AuthorDisplay {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Display.
+	 *
+	 * @return void
+	 */
 	public function display(): void {
 		echo wp_kses_post( $this->render() );
 	}
