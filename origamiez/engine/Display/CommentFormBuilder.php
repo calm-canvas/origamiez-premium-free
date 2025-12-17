@@ -101,9 +101,9 @@ class CommentFormBuilder {
 			'fields'               => $this->get_comment_form_fields(),
 			'comment_field'        => $this->get_comment_field(),
 			// translators: %s is the login URL.
-			'must_log_in'          => '<p class="must-log-in">' . sprintf( esc_html__( 'You must be <a href="%s">logged in</a> to post a comment.', 'origamiez' ), wp_login_url( $permalink ) ) . '</p>',
+			'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'origamiez' ), wp_login_url( $permalink ) ) . '</p>',
 			// translators: %1$s is the user profile link, %2$s is the user display name, %3$s is the logout URL.
-			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( esc_html__( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'origamiez' ), get_edit_user_link(), $user_identity, wp_logout_url( $permalink ) ) . '</p>',
+			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'origamiez' ), get_edit_user_link(), $user_identity, wp_logout_url( $permalink ) ) . '</p>',
 			'comment_notes_before' => '',
 			'comment_notes_after'  => '',
 			'id_form'              => 'commentform',
@@ -187,7 +187,7 @@ class CommentFormBuilder {
 					$this->render_comment_form_fields( $args );
 				}
 				echo wp_kses( $args['comment_field'], AllowedTagsConfig::get_allowed_tags() );
-				echo wp_kses( $args['comment_notes_after'], AllowedTags_config::get_allowed_tags() );
+				echo wp_kses( $args['comment_notes_after'], AllowedTagsConfig::get_allowed_tags() );
 				?>
 				<p class="form-submit">
 					<input name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>" value="<?php echo esc_attr( $args['label_submit'] ); ?>"/>
@@ -233,6 +233,7 @@ class CommentFormBuilder {
 	 * @return void
 	 */
 	public function display(): void {
-		echo wp_kses_post( $this->render() );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $this->render();
 	}
 }

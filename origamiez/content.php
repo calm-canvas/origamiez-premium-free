@@ -23,7 +23,7 @@
 					<?php
 					if ( $is_enable_lightbox ) :
 						$image_lightbox_size = apply_filters( 'origamiez_get_blog_featured_image_for_lightbox', 'origamiez-lightbox-full' );
-						$image_lightbox      = origamiez_get_image_src( get_the_ID(), $image_lightbox_size );
+						$image_lightbox      = \Origamiez\Engine\Helpers\ImageHelper::get_image_src( get_the_ID(), $image_lightbox_size );
 						?>
 					<a href="<?php echo esc_url( $image_lightbox ); ?>" title="<?php the_title(); ?>"
 						class="image-overlay origamiez-lighbox">

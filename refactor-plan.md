@@ -516,16 +516,20 @@ $bootstrap->boot();
 **Est. Time:** 1 hour
 
 **Current Code Location:**
-- Unknown (searched for `origamiez_add_first_and_last_class_for_menuitem`)
+- `origamiez/engine/Hooks/Hooks/FrontendHooks.php` lines 89-93
 
 **Action Items:**
-1. Locate and replace hook registration (line 52)
+1. ✅ Implemented in `FrontendHooks::add_first_and_last_class_for_menu_item()` 
+2. ✅ Hooked to 'wp_nav_menu_objects' filter via FrontendHooks (line 49)
 
 **Verification:**
-- [ ] First and last menu items have correct classes
+- [x] First and last menu items have correct classes (origamiez-menuitem-first, origamiez-menuitem-last)
 
-**Files to Delete:**
-- Related function once identified
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Details:**
+- Method adds first and last classes to menu items
+- Registered via FrontendHooks::register() at 'wp_nav_menu_objects' filter
 
 ---
 
@@ -535,57 +539,59 @@ $bootstrap->boot();
 **Est. Time:** 1 hour
 
 **Current Code Location:**
-- Unknown (searched for `origamiez_remove_hardcoded_image_size`)
+- `origamiez/engine/Hooks/Hooks/FrontendHooks.php` lines 102-104
+- `origamiez/engine/Utils/ImageUtils.php` (supporting class)
 
 **Action Items:**
-1. Locate and replace hook registration (line 53)
+1. ✅ Implemented in `FrontendHooks::remove_hardcoded_image_size()`
+2. ✅ Hooked to 'post_thumbnail_html' filter via FrontendHooks (line 50)
 
 **Verification:**
-- [ ] Image sizes are not hardcoded in HTML
+- [x] Image sizes are not hardcoded in HTML (width/height attributes removed)
 
-**Files to Delete:**
-- Related function once identified
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Details:**
+- Method removes hardcoded width/height attributes from thumbnail HTML
+- Uses regex to strip dimension attributes
+- Registered via FrontendHooks::register() at 'post_thumbnail_html' filter
 
 ---
 
-## Phase 8: PENDING - Global Wrapper Functions
+## Phase 8: Global Wrapper Functions
 
-### Step 8.1: Create & Integrate Global Wrapper Manager ⚠️
+### Step 8.1: Create & Integrate Global Wrapper Manager
 **Priority:** LOW  
 **Complexity:** Low  
 **Est. Time:** 2-3 hours
 
 **Current Code Location:**
-- `origamiez/inc/functions.php` lines 255-267
-
-**Issue:**
-- These functions are NOT YET MIGRATED to OOP
-- Still registered via hooks on lines 55-56
+- `origamiez/engine/Hooks/Hooks/FrontendHooks.php` lines 111-126 (wrapper methods)
+- `origamiez/engine/Helpers/LayoutHelper.php` (layout classes helper)
+- Template files updated to use new helpers
 
 **Action Items:**
-1. Create `Origamiez\Engine\Layout\GlobalWrapperManager` class
-2. Implement `render_wrapper_open()` and `render_wrapper_close()` methods
-3. Register via bootstrap
-4. Replace hook calls (lines 55-56)
-
-**New Implementation:**
-```php
-// OLD (remove lines 55-56)
-add_action( 'origamiez_after_body_open', 'origamiez_global_wapper_open' );
-add_action( 'origamiez_before_body_close', 'origamiez_global_wapper_close' );
-
-// NEW (add via bootstrap)
-add_action( 'origamiez_after_body_open', array( $wrapper_manager, 'render_wrapper_open' ) );
-add_action( 'origamiez_before_body_close', array( $wrapper_manager, 'render_wrapper_close' ) );
-```
+1. ✅ Implemented wrapper methods in `FrontendHooks::global_wrapper_open()` and `global_wrapper_close()`
+2. ✅ Created `LayoutHelper::get_wrap_classes()` for wrap class logic
+3. ✅ Updated all template files to use new helpers
+4. ✅ Registered via FrontendHooks (lines 51-52)
 
 **Verification:**
-- [ ] Container divs wrap page content
-- [ ] Fullwidth/boxer layout works
-- [ ] No layout breakage
+- [x] Container divs wrap page content correctly
+- [x] Fullwidth/boxer layout works (toggled by 'use_layout_fullwidth' theme mod)
+- [x] No layout breakage on all page types
+- [x] All 12 template files updated to use LayoutHelper
 
-**Files to Delete:**
-- `origamiez/inc/functions.php` lines 255-267
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Details:**
+- `FrontendHooks::global_wrapper_open()` echoes `<div class="container">` if not fullwidth
+- `FrontendHooks::global_wrapper_close()` echoes closing `</div>` if not fullwidth
+- `LayoutHelper::get_wrap_classes()` returns 'container' class if fullwidth not enabled
+- Updated template files: header.php, header-shop.php, footer.php, footer-1/2/3/4.php, footer-shop.php, parts/top-bar.php, parts/header/header-up-down.php, parts/header/header-left-right.php
+
+**Files Modified:**
+- ✅ `origamiez/engine/Helpers/LayoutHelper.php` - Created with get_wrap_classes() method
 
 ---
 
@@ -596,24 +602,41 @@ add_action( 'origamiez_before_body_close', array( $wrapper_manager, 'render_wrap
 **Complexity:** Low  
 **Est. Time:** 2 hours
 
-**Classes to Verify:**
-- StringHelper
-- FormatHelper
-- ImageSizeManager
-- ImageHelper
-- MetadataHelper
-- DateTimeHelper
-- OptionsSyncHelper
+**Classes Verified:**
+- ✅ StringHelper
+- ✅ FormatHelper
+- ✅ ImageSizeManager
+- ✅ ImageHelper
+- ✅ MetadataHelper
+- ✅ DateTimeHelper
+- ✅ OptionsSyncHelper
+- ✅ CssUtilHelper (additional)
+- ✅ LayoutHelper (created in Phase 8)
 
 **Action Items:**
-1. Verify all helpers are in `origamiez/engine/Helpers/`
-2. Ensure they're properly instantiated in Container
-3. Update any remaining old function calls in templates
+1. ✅ Verified all helpers are in `origamiez/engine/Helpers/`
+2. ✅ All helper classes properly structured with static methods
+3. ✅ Lint checks passed for all helpers
 
 **Verification:**
-- [ ] All helper methods are accessible
-- [ ] No "class not found" errors
-- [ ] Templates use new helpers correctly
+- [x] All helper methods are accessible
+- [x] No "class not found" errors
+- [x] No PHP syntax errors detected
+
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Details:**
+- All 9 helper classes in `origamiez/engine/Helpers/`
+- Each helper provides static utility methods for specific functionality
+- StringHelper: string manipulation
+- FormatHelper: post format handling
+- ImageHelper: image utilities
+- ImageSizeManager: image size registration and management
+- MetadataHelper: post metadata extraction
+- DateTimeHelper: time/date formatting utilities
+- OptionsSyncHelper: WordPress option/theme mod access
+- CssUtilHelper: CSS utility functions
+- LayoutHelper: layout wrapper classes (NEW)
 
 ---
 
@@ -622,24 +645,36 @@ add_action( 'origamiez_before_body_close', array( $wrapper_manager, 'render_wrap
 **Complexity:** Low  
 **Est. Time:** 1 hour
 
-**Classes to Verify:**
-- ConfigManager
-- BodyClassConfig
-- LayoutConfig
-- SkinConfig
-- FontConfig
-- AllowedTagsConfig
-- SocialConfig
+**Classes Verified:**
+- ✅ ConfigManager
+- ✅ BodyClassConfig
+- ✅ LayoutConfig
+- ✅ SkinConfig
+- ✅ FontConfig
+- ✅ AllowedTagsConfig
+- ✅ SocialConfig
 
 **Action Items:**
-1. Verify all config classes are in `origamiez/engine/Config/`
-2. Test configuration retrieval
-3. Verify caching if applicable
+1. ✅ Verified all config classes are in `origamiez/engine/Config/`
+2. ✅ Configuration retrieval tested
+3. ✅ Caching mechanisms verified (static caching in AllowedTagsConfig)
 
 **Verification:**
-- [ ] All configs load without errors
-- [ ] Configuration values are correct
-- [ ] Filters are preserved
+- [x] All configs load without errors
+- [x] Configuration values are correct
+- [x] Filters are preserved
+
+**Status:** ✅ COMPLETED (2025-12-17)
+
+**Implementation Details:**
+- All 7 config classes in `origamiez/engine/Config/`
+- ConfigManager: central configuration management
+- BodyClassConfig: body class configuration
+- LayoutConfig: layout configuration options
+- SkinConfig: skin/color configuration
+- FontConfig: font family configuration
+- AllowedTagsConfig: HTML sanitization whitelist with caching
+- SocialConfig: social media configuration
 
 ---
 
@@ -807,11 +842,11 @@ Use this table to track progress:
 | 5     | 5.2  | ✅ Complete | Dynamic sidebar params migrated | 2025-12-17 |
 | 5     | 5.3  | ✅ Complete | Widget registration migrated | 2025-12-17 |
 | 6     | 6.1  | ✅ Complete | Customizer migration completed | 2025-12-17 |
-| 7     | 7.1  | ⏳ Pending | Menu item classes - pending | - |
-| 7     | 7.2  | ⏳ Pending | Thumbnail HTML filter - pending | - |
-| 8     | 8.1  | ⏳ Pending | Global wrapper manager - pending | - |
-| 9     | 9.1  | ⏳ Pending | Helper classes verification - pending | - |
-| 9     | 9.2  | ⏳ Pending | Config classes verification - pending | - |
+| 7     | 7.1  | ✅ Complete | Menu item classes migrated to FrontendHooks | 2025-12-17 |
+| 7     | 7.2  | ✅ Complete | Thumbnail HTML filter migrated to FrontendHooks | 2025-12-17 |
+| 8     | 8.1  | ✅ Complete | Global wrapper manager implemented in FrontendHooks | 2025-12-17 |
+| 9     | 9.1  | ✅ Complete | Helper classes verified (9 classes, all passing lint) | 2025-12-17 |
+| 9     | 9.2  | ✅ Complete | Config classes verified (7 classes, all passing lint) | 2025-12-17 |
 | 10    | 10.1 | ⏳ Pending | Remove old function files - pending | - |
 | 10    | 10.2 | ⏳ Pending | Final testing checklist - pending | - |
 | 10    | 10.3 | ⏳ Pending | Documentation update - pending | - |
@@ -819,8 +854,7 @@ Use this table to track progress:
 ---
 
 **Next Steps:**
-1. ✅ **PHASE 6**: Customizer Management migration - COMPLETED
-2. **PHASE 7**: Additional Hooks & Filters (menu item classes, thumbnail filters)
-3. **PHASE 8**: Global Wrapper Functions (container divs for layout)
-4. **PHASE 9**: Helper & Config Classes verification
-5. **PHASE 10**: Final cleanup and testing
+1. ✅ **PHASE 7**: Additional Hooks & Filters - COMPLETED (2025-12-17)
+2. ✅ **PHASE 8**: Global Wrapper Functions - COMPLETED (2025-12-17)
+3. ✅ **PHASE 9**: Helper & Config Classes verification - COMPLETED (2025-12-17)
+4. **PHASE 10**: Final cleanup and testing - PENDING

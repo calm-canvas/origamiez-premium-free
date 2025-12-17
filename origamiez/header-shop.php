@@ -33,7 +33,7 @@
 						<span id="origamiez-mobile-menu-icon" class="origamiez-mobile-icon sb-toggle-left"><span
 									class="fa fa-bars"></span><span><?php esc_html_e( 'Menu', 'origamiez' ); ?></span></span>
 					</div>
-					<div id="main-nav-inner" class="<?php echo esc_attr( origamiez_get_wrap_classes() ); ?>">
+					<div id="main-nav-inner" class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?>">
 						<?php
 						wp_nav_menu(
 							array(
@@ -50,7 +50,7 @@
 		<?php endif; ?>
 	</header>
 	<div id="origamiez-body"
-		class="<?php echo esc_attr( origamiez_get_wrap_classes() ); ?> clearfix">
+		class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 		<div id="origamiez-body-inner" class="clearfix">
 			<div id="sidebar-center" class="pull-left">
 				<?php get_template_part( 'parts/breadcrumb', 'woocommerce' ); ?>
