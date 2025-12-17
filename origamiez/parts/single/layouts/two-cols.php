@@ -1,3 +1,10 @@
+<?php
+/**
+ * The template for displaying single post two columns layout.
+ *
+ * @package Origamiez
+ */
+?>
 <div id="sidebar-center" class="origamiez-size-01 pull-left">
 	<?php get_template_part( 'parts/breadcrumb' ); ?>
 	<?php if ( have_posts() ) : ?>

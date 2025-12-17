@@ -79,8 +79,8 @@ class CommentFormBuilder {
 	 */
 	private function get_comment_field(): string {
 		$comment_field = '<p class="comment-form-comment">' .
-						 '<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>' .
-						 '</p>';
+						'<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>' .
+						'</p>';
 		return apply_filters( 'comment_form_field_comment', $comment_field );
 	}
 

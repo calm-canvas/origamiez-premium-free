@@ -1,4 +1,10 @@
 <?php
+/**
+ * The sidebar containing the footer 5 widget area.
+ *
+ * @package Origamiez
+ */
+
 $sidebar = apply_filters( 'origamiez_get_current_sidebar', 'footer-5', 'footer-5' );
 if ( is_active_sidebar( $sidebar ) ) :
 	$classes = apply_filters(

@@ -1,7 +1,10 @@
 <?php
-/*
+/**
  * Template Name: Page Magazine
+ *
+ * @package Origamiez
  */
+
 get_header();
 ?>
 	<div class="d-flex">

@@ -1,4 +1,10 @@
 <?php
+/**
+ * The template for displaying related posts in a carousel.
+ *
+ * @package Origamiez
+ */
+
 global $post;
 $get_related_post_by     = get_theme_mod( 'get_related_post_by', 'post_tag' );
 $number_of_related_posts = (int) get_theme_mod( 'number_of_related_posts', 5 );
@@ -6,13 +12,14 @@ $args                    = array(
 	'post__not_in'   => array( $post->ID ),
 	'posts_per_page' => $number_of_related_posts,
 );
-if ( 'post_tag' == $get_related_post_by ) {
+if ( 'post_tag' === $get_related_post_by ) {
 	$tags = get_the_tags( $post->ID );
 	if ( ! empty( $tags ) ) {
 		$tag_ids = array();
-		foreach ( $tags as $tag ) {
-			$tag_ids[] = $tag->term_id;
+		foreach ( $tags as $post_tag ) {
+			$tag_ids[] = $post_tag->term_id;
 		}
+		// Using tax_query can be slow.
 		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'post_tag',
@@ -28,6 +35,7 @@ if ( 'post_tag' == $get_related_post_by ) {
 		foreach ( $categories as $category ) {
 			$category_id[] = $category->term_id;
 		}
+		// Using tax_query can be slow.
 		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'category',
