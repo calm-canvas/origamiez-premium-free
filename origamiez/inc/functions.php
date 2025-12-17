@@ -1,84 +1,11 @@
 <?php
 
-
-function origamiez_get_format_icon($format)
-{
-    if ($format == 'video') {
-        $icon = 'fa fa-play';
-    } elseif ($format == 'audio') {
-        $icon = 'fa fa-headphones';
-    } elseif ($format == 'image') {
-        $icon = 'fa fa-camera';
-    } elseif ($format == 'gallery') {
-        $icon = 'fa fa-picture-o';
-    } else {
-        $icon = 'fa fa-pencil';
-    }
-
-    return apply_filters('origamiez_get_format_icon', $icon, $format);
+function origamiez_get_format_icon( $format ) {
+	return \Origamiez\Engine\Helpers\FormatHelper::get_format_icon( $format );
 }
 
-function origamiez_get_shortcode($content, $shortcodes = array(), $enable_multi = false)
-{
-    $data = array();
-    $regex_matches = '';
-    $regex_pattern = get_shortcode_regex();
-    preg_match_all('/' . $regex_pattern . '/s', $content, $regex_matches);
-    foreach ($regex_matches[0] as $shortcode) {
-        $regex_matches_new = '';
-        preg_match('/' . $regex_pattern . '/s', $shortcode, $regex_matches_new);
-        if (in_array($regex_matches_new[2], $shortcodes, true)) :
-            $data[] = array(
-                'shortcode' => $regex_matches_new[0],
-                'type' => $regex_matches_new[2],
-                'content' => $regex_matches_new[5],
-                'atts' => shortcode_parse_atts($regex_matches_new[3]),
-            );
-            if (false === $enable_multi) {
-                break;
-            }
-        endif;
-    }
-
-    return $data;
-}
-
-function origamiez_human_time_diff($from)
-{
-    $periods = array(
-        esc_attr__('second', 'origamiez'),
-        esc_attr__('minute', 'origamiez'),
-        esc_attr__('hour', 'origamiez'),
-        esc_attr__('day', 'origamiez'),
-        esc_attr__('week', 'origamiez'),
-        esc_attr__('month', 'origamiez'),
-        esc_attr__('year', 'origamiez'),
-        esc_attr__('decade', 'origamiez'),
-    );
-    $lengths = array('60', '60', '24', '7', '4.35', '12', '10');
-    $now = current_time('timestamp');
-    // Determine tense of date.
-    if ($now > $from) {
-        $difference = $now - $from;
-        $tense = esc_attr__('ago', 'origamiez');
-    } else {
-        $difference = $from - $now;
-        $tense = esc_attr__('from now', 'origamiez');
-    }
-    for ($j = 0; ($difference >= $lengths[$j] && $j < count($lengths) - 1); $j++) {
-        $difference /= $lengths[$j];
-    }
-    $difference = round($difference);
-    if (1 !== $difference) {
-        $periods[$j] .= esc_attr__('s', 'origamiez');
-    }
-
-    return "$difference $periods[$j] {$tense}";
-}
-
-function origamiez_get_breadcrumb()
-{
-    do_action('origamiez_print_breadcrumb');
+function origamiez_get_breadcrumb() {
+	do_action( 'origamiez_print_breadcrumb' );
 }
 
 function origamiez_get_author_infor()
