@@ -38,7 +38,7 @@ if ( $is_display_top_bar && ( has_nav_menu( 'top-nav' ) || ! empty( $social_link
 	?>
 	<div id="origamiez-top-bar">
 		<div id="origamiez-top-bar-inner"
-			class="<?php echo esc_attr( origamiez_get_wrap_classes() ); ?> clearfix">
+			class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 			<div class="row">
 				<?php
 				if ( has_nav_menu( 'top-nav' ) ) {

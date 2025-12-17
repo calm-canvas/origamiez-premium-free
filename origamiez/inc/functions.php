@@ -195,12 +195,6 @@ function origamiez_get_socials() {
 	);
 }
 
-function origamiez_get_wrap_classes() {
-	if ( 1 === (int) get_theme_mod( 'use_layout_fullwidth', 0 ) ) {
-		echo 'container';
-	}
-}
-
 function origamiez_get_str_uglify( $string ) {
 	$string = preg_replace( '/\s+/', ' ', $string );
 	$string = preg_replace( '/[^a-zA-Z0-9\s]/', '', $string );
@@ -208,67 +202,15 @@ function origamiez_get_str_uglify( $string ) {
 	return strtolower( str_replace( ' ', '_', $string ) );
 }
 
-function origamiez_add_first_and_last_class_for_menuitem( $items ) {
-	$items[1]->classes[]                 = 'origamiez-menuitem-first';
-	$items[ count( $items ) ]->classes[] = 'origamiez-menuitem-last';
 
-	return $items;
-}
 
-function origamiez_widget_order_class() {
-	global $wp_registered_sidebars, $wp_registered_widgets;
-	// Grab the widgets.
-	$sidebars = wp_get_sidebars_widgets();
-	if ( empty( $sidebars ) ) {
-		return;
-	}
-	// Loop through each widget and change the class names.
-	foreach ( $sidebars as $sidebar_id => $widgets ) {
-		if ( empty( $widgets ) ) {
-			continue;
-		}
-		$number_of_widgets = count( $widgets );
-		foreach ( $widgets as $i => $widget_id ) {
-			if ( isset( $wp_registered_widgets[ $widget_id ]['classname'] ) ) {
-				$wp_registered_widgets[ $widget_id ]['classname'] .= ' origamiez-widget-order-' . $i;
-				// Add first widget class.
-				if ( 0 === $i ) {
-					$wp_registered_widgets[ $widget_id ]['classname'] .= ' origamiez-widget-first';
-				}
-				// Add last widget class.
-				if ( ( $i + 1 ) === $number_of_widgets ) {
-					$wp_registered_widgets[ $widget_id ]['classname'] .= ' origamiez-widget-last';
-				}
-			}
-		}
-	}
-}
 
-function origamiez_remove_hardcoded_image_size( $html ) {
-	return preg_replace( '/(width|height)="\d+"\s/', '', $html );
-}
 
-function origamiez_register_new_image_sizes() {
-	add_image_size( 'origamiez-square-xs', 55, 55, true );
-	add_image_size( 'origamiez-lightbox-full', 960, null );
-	add_image_size( 'origamiez-blog-full', 920, 500, true );
-	add_image_size( 'origamiez-square-m', 480, 480, true );
-	add_image_size( 'origamiez-square-md', 480, 320, true );
-	add_image_size( 'origamiez-posts-slide-metro', 620, 620, true );
-	add_image_size( 'origamiez-grid-l', 380, 255, true );
-}
 
-function origamiez_get_image_src( $post_id = 0, $size = 'thumbnail' ) {
-	$thumb = get_the_post_thumbnail( $post_id, $size );
-	if ( ! empty( $thumb ) ) {
-		$_thumb = array();
-		$regex  = '#<\s*img [^\>]*src\s*=\s*(["\'])(.*?)\1#im';
-		preg_match( $regex, $thumb, $_thumb );
-		$thumb = $_thumb[2];
-	}
 
-	return $thumb;
-}
+
+
+
 
 function origamiez_get_metadata_prefix( $echo = true ) {
 	$prefix = apply_filters( 'origamiez_get_metadata_prefix', '&horbar;' );
@@ -445,4 +387,80 @@ function origamiez_sanitize_db_input( $input, $type = 'text' ) {
 		default:
 			return sanitize_text_field( $input );
 	}
+}
+
+/**
+ * Get available font families for customizer
+ */
+function origamiez_get_font_families() {
+	return array(
+		'Arial, sans-serif'                                  => 'Arial',
+		'"Trebuchet MS", Helvetica, sans-serif'              => 'Trebuchet MS',
+		'"Times New Roman", Times, serif'                    => 'Times New Roman',
+		'Georgia, serif'                                     => 'Georgia',
+		'"Courier New", Courier, monospace'                  => 'Courier New',
+		'Verdana, Geneva, sans-serif'                        => 'Verdana',
+		'"Comic Sans MS", cursive, sans-serif'               => 'Comic Sans MS',
+		'Garamond, serif'                                    => 'Garamond',
+		'"Palatino Linotype", "Book Antiqua", Palatino, serif' => 'Palatino',
+		'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif' => 'System Default',
+	);
+}
+
+/**
+ * Get available font sizes for customizer
+ */
+function origamiez_get_font_sizes() {
+	return array(
+		'12px' => '12px',
+		'14px' => '14px',
+		'16px' => '16px',
+		'18px' => '18px',
+		'20px' => '20px',
+		'24px' => '24px',
+		'28px' => '28px',
+		'32px' => '32px',
+	);
+}
+
+/**
+ * Get available font styles for customizer
+ */
+function origamiez_get_font_styles() {
+	return array(
+		'normal' => esc_attr__( 'Normal', 'origamiez' ),
+		'italic' => esc_attr__( 'Italic', 'origamiez' ),
+		'oblique' => esc_attr__( 'Oblique', 'origamiez' ),
+	);
+}
+
+/**
+ * Get available font weights for customizer
+ */
+function origamiez_get_font_weights() {
+	return array(
+		'100' => '100 (Thin)',
+		'200' => '200 (Extra Light)',
+		'300' => '300 (Light)',
+		'400' => '400 (Normal)',
+		'500' => '500 (Medium)',
+		'600' => '600 (Semi Bold)',
+		'700' => '700 (Bold)',
+		'800' => '800 (Extra Bold)',
+		'900' => '900 (Black)',
+	);
+}
+
+/**
+ * Get available line heights for customizer
+ */
+function origamiez_get_font_line_heighs() {
+	return array(
+		'1' => '1',
+		'1.2' => '1.2',
+		'1.5' => '1.5',
+		'1.6' => '1.6',
+		'1.8' => '1.8',
+		'2' => '2',
+	);
 }

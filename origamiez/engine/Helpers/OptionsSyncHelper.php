@@ -32,11 +32,11 @@ class OptionsSyncHelper {
 	 * Get option
 	 *
 	 * @param string $key The key.
-	 * @param mixed  $default The default value.
+	 * @param mixed  $default_value The default value.
 	 * @return mixed
 	 */
-	public static function get_option( string $key, mixed $default = false ): mixed {
-		return get_option( $key, $default );
+	public static function get_option( string $key, mixed $default_value = false ): mixed {
+		return get_option( $key, $default_value );
 	}
 
 	/**
@@ -54,11 +54,11 @@ class OptionsSyncHelper {
 	 * Get theme mod
 	 *
 	 * @param string $key The key.
-	 * @param mixed  $default The default value.
+	 * @param mixed  $default_value The default value.
 	 * @return mixed
 	 */
-	public static function get_theme_mod( string $key, mixed $default = false ): mixed {
-		return get_theme_mod( $key, $default );
+	public static function get_theme_mod( string $key, mixed $default_value = false ): mixed {
+		return get_theme_mod( $key, $default_value );
 	}
 
 	/**
