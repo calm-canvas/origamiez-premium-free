@@ -4,17 +4,8 @@ use Origamiez\Engine\Config\AllowedTagsConfig;
 use Origamiez\Engine\Config\FontCustomizerConfig;
 use Origamiez\Engine\Config\SocialConfig;
 use Origamiez\Engine\Display\AuthorDisplay;
-use Origamiez\Engine\Display\CommentDisplay;
-use Origamiez\Engine\Display\CommentFormBuilder;
 use Origamiez\Engine\Helpers\FormatHelper;
 use Origamiez\Engine\Helpers\MetadataHelper;
-use Origamiez\Engine\Helpers\OptionsSyncHelper;
-use Origamiez\Engine\Helpers\StringHelper;
-use Origamiez\Engine\Security\SanitizationHelper;
-use Origamiez\Engine\Security\SecurityHeaderManager;
-use Origamiez\Engine\Security\Validators\LoginAttemptTracker;
-use Origamiez\Engine\Security\Validators\NonceSecurity;
-use Origamiez\Engine\Security\Validators\SearchQueryValidator;
 
 function origamiez_get_format_icon($format)
 {
@@ -97,21 +88,6 @@ function origamiez_font_h6_enable_callback($control)
     return _origamiez_font_enable_callback('h6');
 }
 
-function origamiez_list_comments($comment, $args, $depth)
-{
-    $display = new CommentDisplay($comment, $args, $depth);
-    $display->display();
-}
-
-function origamiez_comment_form($args = array(), $post_id = null)
-{
-    if (null === $post_id) {
-        $post_id = get_the_ID();
-    }
-    $form = new CommentFormBuilder($post_id, $args);
-    $form->display();
-}
-
 function origamiez_get_author_infor()
 {
     $author = new AuthorDisplay();
@@ -122,12 +98,6 @@ function origamiez_get_socials()
 {
     return SocialConfig::get_socials();
 }
-
-function origamiez_get_str_uglify($string)
-{
-    return StringHelper::uglify($string);
-}
-
 
 function origamiez_get_metadata_prefix($echo = true)
 {
@@ -177,93 +147,6 @@ function origamiez_set_classes_for_footer_one_cols($classes)
 function origamiez_get_allowed_tags()
 {
     return AllowedTagsConfig::get_allowed_tags();
-}
-
-function origamiez_get_button_readmore()
-{
-    do_action('origamiez_print_button_readmore');
-}
-
-function origamiez_save_unyson_options($option_key, $old_value, $new_value)
-{
-    if ('fw_theme_settings_options:origamiez' === $option_key) {
-        if (is_array($old_value) && is_array($new_value)) {
-            OptionsSyncHelper::sync_unyson_options($new_value);
-        }
-    }
-}
-
-/**
- * Security Functions
- */
-
-/**
- * Verify search form nonce
- */
-function origamiez_verify_search_nonce()
-{
-    return NonceSecurity::verify_nonce();
-}
-
-/**
- * Sanitize and validate search query
- */
-function origamiez_sanitize_search_query($query)
-{
-    return SearchQueryValidator::validate($query);
-}
-
-
-/**
- * Sanitize checkbox input
- */
-function origamiez_sanitize_checkbox($input)
-{
-    return SanitizationHelper::sanitize_checkbox($input);
-}
-
-/**
- * Sanitize select input
- */
-function origamiez_sanitize_select($input, $setting)
-{
-    $choices = $setting->manager->get_control($setting->id)->choices;
-    return SanitizationHelper::sanitize_select($input, $choices, $setting->default);
-}
-
-
-/**
- * Add security headers
- */
-function origamiez_add_security_headers()
-{
-    SecurityHeaderManager::add_headers();
-}
-
-
-/**
- * Track failed login attempts
- */
-function origamiez_track_failed_login($username)
-{
-    LoginAttemptTracker::track_failed_attempt($username);
-}
-
-/**
- * Clear login attempts on successful login
- */
-function origamiez_clear_login_attempts($user_login)
-{
-    LoginAttemptTracker::clear_attempts($user_login);
-}
-
-
-/**
- * Sanitize database inputs
- */
-function origamiez_sanitize_db_input($input, $type = 'text')
-{
-    return SanitizationHelper::sanitize_db_input($input, $type);
 }
 
 /**

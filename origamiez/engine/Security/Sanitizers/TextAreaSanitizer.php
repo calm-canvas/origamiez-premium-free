@@ -26,7 +26,7 @@ class TextAreaSanitizer implements SanitizerInterface {
 			return '';
 		}
 
-		$allowed_tags = $this->getAllowedTags();
+		$allowed_tags = $this->get_allowed_tags();
 		return wp_kses( $value, $allowed_tags );
 	}
 
@@ -35,7 +35,7 @@ class TextAreaSanitizer implements SanitizerInterface {
 	 *
 	 * @return array
 	 */
-	private function getAllowedTags() {
+	private function get_allowed_tags() {
 		if ( function_exists( 'origamiez_get_allowed_tags' ) ) {
 			return origamiez_get_allowed_tags();
 		}
