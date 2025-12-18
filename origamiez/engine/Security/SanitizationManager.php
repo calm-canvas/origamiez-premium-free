@@ -116,12 +116,12 @@ class SanitizationManager {
 	}
 
 	/**
-	 * Sanitizes a select input.
+	 * Sanitizes a select input with choices validation.
 	 *
-	 * @param mixed $value   The value to sanitize.
-	 * @param array $choices The allowed choices.
-	 * @param mixed $default_value The default value.
-	 * @return mixed
+	 * @param mixed $value        The value to sanitize.
+	 * @param array $choices      The allowed choices.
+	 * @param mixed $default_value The default value if invalid.
+	 * @return mixed The sanitized value.
 	 */
 	public function sanitize_select( $value, $choices = array(), $default_value = '' ) {
 		$sanitizer = $this->sanitizers['select'];
@@ -132,52 +132,22 @@ class SanitizationManager {
 	}
 
 	/**
-	 * Sanitizes a checkbox input.
+	 * Create a sanitization method dynamically via magic method.
 	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed
+	 * Allows calling sanitize_TYPE() methods that delegate to sanitize( $value, 'TYPE' ).
+	 * For example: $manager->sanitize_email( $email ) calls $manager->sanitize( $email, 'email' ).
+	 *
+	 * @param string $method The method name.
+	 * @param array  $args The method arguments.
+	 * @return mixed The sanitized value.
 	 */
-	public function sanitize_checkbox( $value ) {
-		return $this->sanitize( $value, 'checkbox' );
-	}
+	public function __call( $method, $args ) {
+		if ( strpos( $method, 'sanitize_' ) === 0 ) {
+			$type = substr( $method, 9 );
+			$value = $args[0] ?? '';
+			return $this->sanitize( $value, $type );
+		}
 
-	/**
-	 * Sanitizes a text input.
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed
-	 */
-	public function sanitize_text( $value ) {
-		return $this->sanitize( $value, 'text' );
-	}
-
-	/**
-	 * Sanitizes an email input.
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed
-	 */
-	public function sanitize_email( $value ) {
-		return $this->sanitize( $value, 'email' );
-	}
-
-	/**
-	 * Sanitizes a URL input.
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed
-	 */
-	public function sanitize_url( $value ) {
-		return $this->sanitize( $value, 'url' );
-	}
-
-	/**
-	 * Sanitizes a textarea input.
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed
-	 */
-	public function sanitize_textarea( $value ) {
-		return $this->sanitize( $value, 'textarea' );
+		throw new \BadMethodCallException( "Call to undefined method: $method" );
 	}
 }

@@ -158,10 +158,11 @@ class WidgetTypeB {
 			return;
 		}
 
-		add_filter( 'excerpt_length', "origamiez_return_{$limit}" );
+		$callback = origamiez_get_value_callback( $limit );
+		add_filter( 'excerpt_length', $callback );
 		?>
 		<p class="<?php echo esc_attr( $classes ); ?>"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
 		<?php
-		remove_filter( 'excerpt_length', "origamiez_return_{$limit}" );
+		remove_filter( 'excerpt_length', $callback );
 	}
 }

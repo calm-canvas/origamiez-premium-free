@@ -9,128 +9,102 @@ namespace Origamiez\Engine\Providers;
 
 /**
  * Class ReturnValueProvider
+ *
+ * Provides factory methods for generating callbacks that return static values.
+ * Consolidates multiple similar return_X() methods into a single, reusable pattern.
  */
 class ReturnValueProvider {
 
 	/**
-	 * Return 10
+	 * Cache for generic value callbacks.
 	 *
-	 * @return int
+	 * @var array
 	 */
-	public static function return_10(): int {
-		return 10;
+	private static array $value_cache = array();
+
+	/**
+	 * Cache for bootstrap column class callbacks.
+	 *
+	 * @var array
+	 */
+	private static array $column_class_cache = array();
+
+	/**
+	 * Create a callback that returns a specific value.
+	 *
+	 * @param mixed $value The value to return.
+	 * @return callable The callback function.
+	 */
+	public static function create_value_callback( $value ): callable {
+		return static function () use ( $value ) {
+			return $value;
+		};
 	}
 
 	/**
-	 * Return 0
+	 * Get a cached callback that returns a specific value.
 	 *
-	 * @return int
+	 * @param mixed $value The value to return.
+	 * @return callable The cached callback function.
 	 */
-	public static function return_0(): int {
-		return 0;
+	public static function get_value_callback( $value ): callable {
+		$key = is_scalar( $value ) ? $value : serialize( $value );
+
+		if ( ! isset( self::$value_cache[ $key ] ) ) {
+			self::$value_cache[ $key ] = self::create_value_callback( $value );
+		}
+
+		return self::$value_cache[ $key ];
 	}
 
 	/**
-	 * Return 1
+	 * Get bootstrap column class for given column count.
 	 *
-	 * @return int
+	 * Maps column counts to Bootstrap grid classes. For example:
+	 * - 1 column = 'col-lg-12'
+	 * - 3 columns = 'col-lg-4'
+	 * - 4 columns = 'col-lg-3'
+	 *
+	 * @param int $column_count The number of columns.
+	 * @return string The Bootstrap column class.
 	 */
-	public static function return_1(): int {
-		return 1;
+	public static function get_column_class( int $column_count ): string {
+		if ( ! isset( self::$column_class_cache[ $column_count ] ) ) {
+			self::$column_class_cache[ $column_count ] = self::calculate_column_class( $column_count );
+		}
+
+		return self::$column_class_cache[ $column_count ];
 	}
 
 	/**
-	 * Return true
+	 * Calculate bootstrap column class for footer.
 	 *
-	 * @return bool
+	 * @param int $column_count The number of columns.
+	 * @return string The Bootstrap column class.
 	 */
-	public static function return_true(): bool {
-		return true;
+	private static function calculate_column_class( int $column_count ): string {
+		$class_map = array(
+			1 => 'col-lg-12',
+			2 => 'col-lg-6',
+			3 => 'col-lg-4',
+			4 => 'col-lg-3',
+			5 => 'col-lg-2 col-lg-offset-1',
+		);
+
+		if ( isset( $class_map[ $column_count ] ) ) {
+			return $class_map[ $column_count ];
+		}
+
+		return 'col-lg-' . floor( 12 / $column_count );
 	}
 
 	/**
-	 * Return false
-	 *
-	 * @return bool
-	 */
-	public static function return_false(): bool {
-		return false;
-	}
-
-	/**
-	 * Return empty
-	 *
-	 * @return string
-	 */
-	public static function return_empty(): string {
-		return '';
-	}
-
-	/**
-	 * Return null
-	 *
-	 * @return null
-	 */
-	public static function return_null(): null {
-		return null;
-	}
-
-	/**
-	 * Return 3 columns class
-	 *
-	 * @return string
-	 */
-	public static function return_3_columns_class(): string {
-		return 'col-lg-3';
-	}
-
-	/**
-	 * Return 4 columns class
-	 *
-	 * @return string
-	 */
-	public static function return_4_columns_class(): string {
-		return 'col-lg-4';
-	}
-
-	/**
-	 * Return 6 columns class
-	 *
-	 * @return string
-	 */
-	public static function return_6_columns_class(): string {
-		return 'col-lg-6';
-	}
-
-	/**
-	 * Return 12 columns class
-	 *
-	 * @return string
-	 */
-	public static function return_12_columns_class(): string {
-		return 'col-lg-12';
-	}
-
-	/**
-	 * Get footer column classes
+	 * Get footer column classes (for backward compatibility).
 	 *
 	 * @param int $column_count The column count.
 	 * @return string
 	 */
 	public static function get_footer_column_classes( int $column_count = 4 ): string {
-		switch ( $column_count ) {
-			case 1:
-				return 'col-lg-12';
-			case 2:
-				return 'col-lg-6';
-			case 3:
-				return 'col-lg-4';
-			case 4:
-				return 'col-lg-3';
-			case 5:
-				return 'col-lg-2 col-lg-offset-1';
-			default:
-				return 'col-lg-' . floor( 12 / $column_count );
-		}
+		return self::get_column_class( $column_count );
 	}
 }
