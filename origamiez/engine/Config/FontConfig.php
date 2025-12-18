@@ -9,15 +9,11 @@ namespace Origamiez\Engine\Config;
 
 /**
  * Class FontConfig
+ *
+ * Manages typography fonts and sizes for the theme.
+ * Extends AbstractConfigRegistry to eliminate boilerplate code.
  */
-class FontConfig {
-
-	/**
-	 * Fonts.
-	 *
-	 * @var array
-	 */
-	private array $fonts = array();
+class FontConfig extends AbstractConfigRegistry {
 
 	/**
 	 * Font sizes.
@@ -27,25 +23,19 @@ class FontConfig {
 	private array $font_sizes = array();
 
 	/**
-	 * Default font.
+	 * Get the initializer method.
 	 *
-	 * @var string
+	 * @return string
 	 */
-	private string $default_font = 'default';
-
-	/**
-	 * FontConfig constructor.
-	 */
-	public function __construct() {
-		$this->initialize_fonts();
-		$this->initialize_sizes();
+	protected function get_initializer_method(): string {
+		return 'initialize_fonts';
 	}
 
 	/**
-	 * Initialize fonts.
+	 * Initialize default fonts.
 	 */
 	private function initialize_fonts(): void {
-		$this->fonts = array(
+		$this->items = array(
 			'default' => array(
 				'name'     => 'Default Font Stack',
 				'family'   => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -59,10 +49,11 @@ class FontConfig {
 				'weights'  => array( 400, 700 ),
 			),
 		);
+		$this->initialize_sizes();
 	}
 
 	/**
-	 * Initialize sizes.
+	 * Initialize font sizes.
 	 */
 	private function initialize_sizes(): void {
 		$this->font_sizes = array(
@@ -81,31 +72,32 @@ class FontConfig {
 	}
 
 	/**
-	 * Register font.
+	 * Register a font.
 	 *
 	 * @param string $id Font ID.
 	 * @param array  $config Font config.
 	 */
 	public function register_font( string $id, array $config ): void {
-		$this->fonts[ $id ] = array_merge(
+		$this->register_item(
+			$id,
+			$config,
 			array(
 				'name'     => $id,
 				'family'   => '',
 				'fallback' => 'sans-serif',
 				'weights'  => array(),
-			),
-			$config
+			)
 		);
 	}
 
 	/**
-	 * Get font.
+	 * Get a font by ID.
 	 *
 	 * @param string $id Font ID.
 	 * @return array|null
 	 */
 	public function get_font( string $id ): ?array {
-		return $this->fonts[ $id ] ?? null;
+		return $this->get_item( $id );
 	}
 
 	/**
@@ -114,52 +106,46 @@ class FontConfig {
 	 * @return array
 	 */
 	public function get_all_fonts(): array {
-		return $this->fonts;
+		return $this->get_all_items();
 	}
 
 	/**
-	 * Get default font.
+	 * Get the default font ID.
 	 *
 	 * @return string
 	 */
 	public function get_default_font(): string {
-		return $this->default_font;
+		return $this->get_default_id();
 	}
 
 	/**
-	 * Set default font.
+	 * Set the default font.
 	 *
 	 * @param string $id Font ID.
 	 * @return bool
 	 */
 	public function set_default_font( string $id ): bool {
-		if ( ! isset( $this->fonts[ $id ] ) ) {
-			return false;
-		}
-		$this->default_font = $id;
-		return true;
+		return $this->set_default_id( $id );
 	}
 
 	/**
-	 * Get font family.
+	 * Get the font family for a font.
 	 *
 	 * @param string $id Font ID.
 	 * @return string
 	 */
 	public function get_font_family( string $id ): string {
-		$font = $this->get_font( $id );
-		return $font['family'] ?? '';
+		return $this->get_item_property( $id, 'family', '' );
 	}
 
 	/**
-	 * Get font fallback.
+	 * Get the fallback font for a font.
 	 *
 	 * @param string $id Font ID.
 	 * @return string
 	 */
 	public function get_font_fallback( string $id ): string {
-		$font = $this->get_font( $id );
-		return $font['fallback'] ?? 'sans-serif';
+		return $this->get_item_property( $id, 'fallback', 'sans-serif' );
 	}
 
 	/**
