@@ -24,7 +24,6 @@
 @import "./assets/sass/plugins/bbpress/index";
 @import "./assets/sass/plugins/woocommerce/index";
 @import "./assets/sass/plugins/dw-question-and-answer/index";
-@import "./assets/sass/responsive";
 @import "./assets/sass/typography/default";
 
 * {
@@ -2831,3 +2830,7 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
     content-visibility: auto;
     contain-intrinsic-size: none !important;
 }
+
+
+@import "./assets/sass/responsive";
+
