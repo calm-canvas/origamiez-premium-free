@@ -493,14 +493,14 @@ function origamiez_sanitize_db_input( $input, $type = 'text' ) {
  */
 function origamiez_get_font_families() {
 	return array(
-		'Arial, sans-serif'                                  => 'Arial',
-		'"Trebuchet MS", Helvetica, sans-serif'              => 'Trebuchet MS',
-		'"Times New Roman", Times, serif'                    => 'Times New Roman',
-		'Georgia, serif'                                     => 'Georgia',
-		'"Courier New", Courier, monospace'                  => 'Courier New',
-		'Verdana, Geneva, sans-serif'                        => 'Verdana',
-		'"Comic Sans MS", cursive, sans-serif'               => 'Comic Sans MS',
-		'Garamond, serif'                                    => 'Garamond',
+		'Arial, sans-serif'                     => 'Arial',
+		'"Trebuchet MS", Helvetica, sans-serif' => 'Trebuchet MS',
+		'"Times New Roman", Times, serif'       => 'Times New Roman',
+		'Georgia, serif'                        => 'Georgia',
+		'"Courier New", Courier, monospace'     => 'Courier New',
+		'Verdana, Geneva, sans-serif'           => 'Verdana',
+		'"Comic Sans MS", cursive, sans-serif'  => 'Comic Sans MS',
+		'Garamond, serif'                       => 'Garamond',
 		'"Palatino Linotype", "Book Antiqua", Palatino, serif' => 'Palatino',
 		'-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif' => 'System Default',
 	);
@@ -527,8 +527,8 @@ function origamiez_get_font_sizes() {
  */
 function origamiez_get_font_styles() {
 	return array(
-		'normal' => esc_attr__( 'Normal', 'origamiez' ),
-		'italic' => esc_attr__( 'Italic', 'origamiez' ),
+		'normal'  => esc_attr__( 'Normal', 'origamiez' ),
+		'italic'  => esc_attr__( 'Italic', 'origamiez' ),
 		'oblique' => esc_attr__( 'Oblique', 'origamiez' ),
 	);
 }
@@ -555,11 +555,11 @@ function origamiez_get_font_weights() {
  */
 function origamiez_get_font_line_heighs() {
 	return array(
-		'1' => '1',
+		'1'   => '1',
 		'1.2' => '1.2',
 		'1.5' => '1.5',
 		'1.6' => '1.6',
 		'1.8' => '1.8',
-		'2' => '2',
+		'2'   => '2',
 	);
 }

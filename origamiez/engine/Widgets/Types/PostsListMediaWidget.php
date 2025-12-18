@@ -50,9 +50,9 @@ class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
 		$excerpt_words_limit = $instance['excerpt_words_limit'];
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $args['before_widget'], \origamiez_get_allowed_tags() );
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {
-			echo wp_kses( $args['before_title'] . $title . $args['after_title'], \origamiez_get_allowed_tags() );
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
 		}
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
@@ -83,16 +83,16 @@ class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
 							),
 							$post_id
 						);
-						echo wp_kses( $lightbox_markup['before'], \origamiez_get_allowed_tags() );
+						echo wp_kses( $lightbox_markup['before'], origamiez_get_allowed_tags() );
 						?>
 						<a href="<?php echo esc_url( $lightbox_markup['url'] ); ?>"
 							title="<?php echo esc_attr( $post_title ); ?>"
 							class="link-hover-effect origamiez-w-m-post-thumb clearfix" <?php echo esc_attr( implode( ' ', $lightbox_markup['atts'] ) ); ?>>
 							<?php the_post_thumbnail( 'origamiez-square-md', array( 'class' => 'image-effect img-responsive' ) ); ?>
 							<span><span class="metadata-post-format metadata-circle-icon"><span
-											class="<?php echo esc_attr( \origamiez_get_format_icon( $post_format ) ); ?>"></span></span></span>
+											class="<?php echo esc_attr( origamiez_get_format_icon( $post_format ) ); ?>"></span></span></span>
 						</a>
-						<?php echo wp_kses( $lightbox_markup['after'], \origamiez_get_allowed_tags() ); ?>
+						<?php echo wp_kses( $lightbox_markup['after'], origamiez_get_allowed_tags() ); ?>
 					<?php endif; ?>
 					<h4 class="entry-title"><a href="<?php echo esc_url( $post_url ); ?>"
 												title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
@@ -104,6 +104,6 @@ class PostsListMediaWidget extends AbstractPostsWidgetTypeC {
 			endwhile;
 		endif;
 		wp_reset_postdata();
-		echo wp_kses( $args['after_widget'], \origamiez_get_allowed_tags() );
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
 	}
 }
