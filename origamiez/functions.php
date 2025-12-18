@@ -29,14 +29,6 @@ require $dir . 'inc/classes/abstract-widget.php';
 require $dir . 'inc/classes/abstract-widget-type-b.php';
 require $dir . 'inc/classes/abstract-widget-type-c.php';
 /*
-MODULE
---------------------
-All sidebars & widgets.
---------------------
-*/
-require $dir . 'inc/sidebar.php';
-require $dir . 'inc/widget.php';
-/*
 PLUGINS
 --------------------
 Setup - config for compatible plugins.
