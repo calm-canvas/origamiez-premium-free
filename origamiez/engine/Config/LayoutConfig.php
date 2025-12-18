@@ -16,6 +16,36 @@ namespace Origamiez\Engine\Config;
 class LayoutConfig extends AbstractConfigRegistry {
 
 	/**
+	 * Default sidebar position.
+	 */
+	const DEFAULT_SIDEBAR = 'right';
+
+	/**
+	 * Default column count.
+	 */
+	const DEFAULT_COLUMNS = 2;
+
+	/**
+	 * Sidebar position: Right.
+	 */
+	const SIDEBAR_RIGHT = 'right';
+
+	/**
+	 * Sidebar position: Left.
+	 */
+	const SIDEBAR_LEFT = 'left';
+
+	/**
+	 * Sidebar position: None.
+	 */
+	const SIDEBAR_NONE = 'none';
+
+	/**
+	 * Sidebar position: Both.
+	 */
+	const SIDEBAR_BOTH = 'both';
+
+	/**
 	 * Get the initializer method.
 	 *
 	 * @return string
@@ -27,42 +57,49 @@ class LayoutConfig extends AbstractConfigRegistry {
 	/**
 	 * Initialize default layouts.
 	 */
-	private function initialize_layouts(): void {
-		$this->items = array(
+	protected function initialize_layouts(): void {
+		$layouts = array(
 			'default'            => array(
 				'name'    => 'Default Layout',
-				'sidebar' => 'right',
-				'columns' => 2,
+				'sidebar' => self::SIDEBAR_RIGHT,
+				'columns' => self::DEFAULT_COLUMNS,
 			),
 			'fullwidth'          => array(
 				'name'    => 'Full Width',
-				'sidebar' => 'none',
+				'sidebar' => self::SIDEBAR_NONE,
 				'columns' => 1,
 			),
 			'fullwidth-centered' => array(
 				'name'     => 'Full Width Centered',
-				'sidebar'  => 'none',
+				'sidebar'  => self::SIDEBAR_NONE,
 				'columns'  => 1,
 				'centered' => true,
 			),
 			'magazine'           => array(
 				'name'    => 'Magazine',
-				'sidebar' => 'right',
-				'columns' => 2,
+				'sidebar' => self::SIDEBAR_RIGHT,
+				'columns' => self::DEFAULT_COLUMNS,
 				'feature' => 'magazine',
 			),
 			'three-cols'         => array(
 				'name'    => 'Three Columns',
-				'sidebar' => 'both',
+				'sidebar' => self::SIDEBAR_BOTH,
 				'columns' => 3,
 			),
 			'three-cols-slm'     => array(
 				'name'    => 'Three Columns - Small Left/Middle',
-				'sidebar' => 'both',
+				'sidebar' => self::SIDEBAR_BOTH,
 				'columns' => 3,
 				'slim'    => true,
 			),
 		);
+
+		/**
+		 * Filter the default layouts.
+		 *
+		 * @param array $layouts Default layouts.
+		 */
+		$this->items = apply_filters( 'origamiez_default_layouts', $layouts );
 	}
 
 	/**
@@ -77,8 +114,8 @@ class LayoutConfig extends AbstractConfigRegistry {
 			$config,
 			array(
 				'name'    => $id,
-				'sidebar' => 'right',
-				'columns' => 2,
+				'sidebar' => self::DEFAULT_SIDEBAR,
+				'columns' => self::DEFAULT_COLUMNS,
 			)
 		);
 	}
@@ -128,7 +165,7 @@ class LayoutConfig extends AbstractConfigRegistry {
 	 * @return string
 	 */
 	public function get_layout_sidebar( string $layout_id ): string {
-		return $this->get_item_property( $layout_id, 'sidebar', 'right' );
+		return $this->get_item_property( $layout_id, 'sidebar', self::DEFAULT_SIDEBAR );
 	}
 
 	/**
@@ -138,7 +175,7 @@ class LayoutConfig extends AbstractConfigRegistry {
 	 * @return int
 	 */
 	public function get_layout_columns( string $layout_id ): int {
-		return (int) $this->get_item_property( $layout_id, 'columns', 2 );
+		return (int) $this->get_item_property( $layout_id, 'columns', self::DEFAULT_COLUMNS );
 	}
 
 	/**
@@ -148,6 +185,6 @@ class LayoutConfig extends AbstractConfigRegistry {
 	 * @return bool
 	 */
 	public function is_fullwidth( string $layout_id ): bool {
-		return 'none' === $this->get_layout_sidebar( $layout_id );
+		return self::SIDEBAR_NONE === $this->get_layout_sidebar( $layout_id );
 	}
 }
