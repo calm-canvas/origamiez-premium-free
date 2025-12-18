@@ -9,35 +9,26 @@ namespace Origamiez\Engine\Config;
 
 /**
  * Class SkinConfig
+ *
+ * Manages theme skins with support for colors and fonts.
+ * Extends AbstractConfigRegistry to eliminate boilerplate code.
  */
-class SkinConfig {
+class SkinConfig extends AbstractConfigRegistry {
 
 	/**
-	 * Skins.
+	 * Get the initializer method.
 	 *
-	 * @var array
+	 * @return string
 	 */
-	private array $skins = array();
-
-	/**
-	 * Active skin.
-	 *
-	 * @var string
-	 */
-	private string $active_skin = 'default';
-
-	/**
-	 * SkinConfig constructor.
-	 */
-	public function __construct() {
-		$this->initialize_skins();
+	protected function get_initializer_method(): string {
+		return 'initialize_skins';
 	}
 
 	/**
-	 * Initialize skins.
+	 * Initialize default skins.
 	 */
 	private function initialize_skins(): void {
-		$this->skins = array(
+		$this->items = array(
 			'default' => array(
 				'name'   => 'Default',
 				'colors' => array(
@@ -51,30 +42,31 @@ class SkinConfig {
 	}
 
 	/**
-	 * Register skin.
+	 * Register a skin.
 	 *
 	 * @param string $id Skin ID.
 	 * @param array  $config Skin config.
 	 */
 	public function register_skin( string $id, array $config ): void {
-		$this->skins[ $id ] = array_merge(
+		$this->register_item(
+			$id,
+			$config,
 			array(
 				'name'   => $id,
 				'colors' => array(),
 				'fonts'  => array(),
-			),
-			$config
+			)
 		);
 	}
 
 	/**
-	 * Get skin.
+	 * Get a skin by ID.
 	 *
 	 * @param string $id Skin ID.
 	 * @return array|null
 	 */
 	public function get_skin( string $id ): ?array {
-		return $this->skins[ $id ] ?? null;
+		return $this->get_item( $id );
 	}
 
 	/**
@@ -83,59 +75,51 @@ class SkinConfig {
 	 * @return array
 	 */
 	public function get_all_skins(): array {
-		return $this->skins;
+		return $this->get_all_items();
 	}
 
 	/**
-	 * Get active skin.
+	 * Get the active skin ID.
 	 *
 	 * @return string
 	 */
 	public function get_active_skin(): string {
-		return $this->active_skin;
+		return $this->get_default_id();
 	}
 
 	/**
-	 * Set active skin.
+	 * Set the active skin.
 	 *
 	 * @param string $id Skin ID.
 	 * @return bool
 	 */
 	public function set_active_skin( string $id ): bool {
-		if ( ! isset( $this->skins[ $id ] ) ) {
-			return false;
-		}
-		$this->active_skin = $id;
-		return true;
+		return $this->set_default_id( $id );
 	}
 
 	/**
-	 * Get skin color.
+	 * Get a color from a skin.
 	 *
 	 * @param string      $color_key Color key.
-	 * @param string|null $skin_id Skin ID.
+	 * @param string|null $skin_id Skin ID (defaults to active skin).
 	 * @return string|null
 	 */
 	public function get_skin_color( string $color_key, string $skin_id = null ): ?string {
-		$skin = $this->get_skin( $skin_id ?? $this->active_skin );
-		if ( null === $skin ) {
-			return null;
-		}
-		return $skin['colors'][ $color_key ] ?? null;
+		$skin_id = $skin_id ?? $this->default_id;
+		return $this->get_item_property( $skin_id, "colors.{$color_key}" ) ??
+			$this->get_item_property( $skin_id, 'colors' )[ $color_key ] ?? null;
 	}
 
 	/**
-	 * Get skin font.
+	 * Get a font from a skin.
 	 *
 	 * @param string      $font_key Font key.
-	 * @param string|null $skin_id Skin ID.
+	 * @param string|null $skin_id Skin ID (defaults to active skin).
 	 * @return array|null
 	 */
 	public function get_skin_font( string $font_key, string $skin_id = null ): ?array {
-		$skin = $this->get_skin( $skin_id ?? $this->active_skin );
-		if ( null === $skin ) {
-			return null;
-		}
-		return $skin['fonts'][ $font_key ] ?? null;
+		$skin_id = $skin_id ?? $this->default_id;
+		$fonts = $this->get_item_property( $skin_id, 'fonts' ) ?? array();
+		return $fonts[ $font_key ] ?? null;
 	}
 }
