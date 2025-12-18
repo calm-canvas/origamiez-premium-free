@@ -12,7 +12,7 @@ namespace Origamiez\Engine\Display;
  *
  * @package Origamiez\Engine\Display
  */
-class CommentDisplay {
+class CommentDisplay extends DisplayRenderer {
 
 	/**
 	 * Comment.
@@ -93,15 +93,6 @@ class CommentDisplay {
 		</li>
 		<?php
 		return ob_get_clean();
-	}
-
-	/**
-	 * Display.
-	 *
-	 * @return void
-	 */
-	public function display(): void {
-		echo wp_kses_post( $this->render() );
 	}
 
 	/**

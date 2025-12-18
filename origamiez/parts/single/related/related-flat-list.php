@@ -81,9 +81,12 @@ if ( $related_posts->have_posts() ) :
 									<?php echo esc_html( $post_title ); ?>
 								</a>
 							</h3>
-							<?php add_filter( 'excerpt_length', 'origamiez_return_20' ); ?>
+							<?php
+							$excerpt_callback = origamiez_get_value_callback( 20 );
+							add_filter( 'excerpt_length', $excerpt_callback );
+							?>
 							<p class="entry-excerpt clearfix"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
-							<?php remove_filter( 'excerpt_length', 'origamiez_return_20' ); ?>
+							<?php remove_filter( 'excerpt_length', $excerpt_callback ); ?>
 						</article>
 						<?php
 						echo '</div>';

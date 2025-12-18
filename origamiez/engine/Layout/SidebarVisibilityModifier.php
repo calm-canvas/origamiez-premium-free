@@ -105,6 +105,23 @@ class SidebarVisibilityModifier {
 	}
 
 	/**
+	 * Filter sidebars by active status.
+	 *
+	 * @param array $sidebar_ids The sidebar IDs to filter.
+	 * @param bool  $active Whether to return active (true) or inactive (false) sidebars.
+	 * @return array Filtered sidebar IDs.
+	 */
+	private function filter_sidebars_by_status( array $sidebar_ids, bool $active ): array {
+		return array_filter(
+			$sidebar_ids,
+			function ( $sidebar_id ) use ( $active ) {
+				$is_active = $this->is_sidebar_active( $sidebar_id );
+				return $active ? $is_active : ! $is_active;
+			}
+		);
+	}
+
+	/**
 	 * Get active sidebars.
 	 *
 	 * @param array $sidebar_ids The sidebar ids.
@@ -112,15 +129,7 @@ class SidebarVisibilityModifier {
 	 * @return array
 	 */
 	public function get_active_sidebars( array $sidebar_ids ): array {
-		$active_sidebars = array();
-
-		foreach ( $sidebar_ids as $sidebar_id ) {
-			if ( $this->is_sidebar_active( $sidebar_id ) ) {
-				$active_sidebars[] = $sidebar_id;
-			}
-		}
-
-		return $active_sidebars;
+		return $this->filter_sidebars_by_status( $sidebar_ids, true );
 	}
 
 	/**
@@ -131,15 +140,7 @@ class SidebarVisibilityModifier {
 	 * @return array
 	 */
 	public function get_inactive_sidebars( array $sidebar_ids ): array {
-		$inactive_sidebars = array();
-
-		foreach ( $sidebar_ids as $sidebar_id ) {
-			if ( ! $this->is_sidebar_active( $sidebar_id ) ) {
-				$inactive_sidebars[] = $sidebar_id;
-			}
-		}
-
-		return $inactive_sidebars;
+		return $this->filter_sidebars_by_status( $sidebar_ids, false );
 	}
 
 	/**
@@ -167,13 +168,7 @@ class SidebarVisibilityModifier {
 	 * @return boolean
 	 */
 	public function has_all_sidebars_active( array $sidebar_ids ): bool {
-		foreach ( $sidebar_ids as $sidebar_id ) {
-			if ( ! $this->is_sidebar_active( $sidebar_id ) ) {
-				return false;
-			}
-		}
-
-		return true;
+		return count( $this->get_active_sidebars( $sidebar_ids ) ) === count( $sidebar_ids );
 	}
 
 	/**

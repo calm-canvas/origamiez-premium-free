@@ -9,6 +9,11 @@ namespace Origamiez\Engine\Config;
 
 /**
  * Class BodyClassConfig
+ *
+ * Configuration class that defines all CSS body class constants used throughout
+ * the theme for layout, styling, and feature toggling.
+ *
+ * These constants should be used directly instead of storing in arrays.
  */
 class BodyClassConfig {
 
@@ -36,35 +41,4 @@ class BodyClassConfig {
 	public const LAYOUT_BLOG_THUMBNAIL_FULL_WIDTH = 'origamiez-layout-blog-thumbnail-full-width';
 	public const LAYOUT_BLOG_THUMBNAIL_LEFT       = 'origamiez-layout-blog-thumbnail-left';
 	public const TAXONOMY_PREFIX                  = 'origamiez-taxonomy-';
-
-	/**
-	 * Get all classes.
-	 *
-	 * @return array
-	 */
-	public function get_classes(): array {
-		return array(
-			'custom_bg'                        => self::CUSTOM_BG,
-			'without_bg_slides'                => self::WITHOUT_BG_SLIDES,
-			'layout_boxer'                     => self::LAYOUT_BOXER,
-			'layout_fluid'                     => self::LAYOUT_FLUID,
-			'show_footer_area'                 => self::SHOW_FOOTER_AREA,
-			'skin_prefix'                      => self::SKIN_PREFIX,
-			'header_style_prefix'              => self::HEADER_STYLE_PREFIX,
-			'missing_sidebar_right'            => self::MISSING_SIDEBAR_RIGHT,
-			'missing_sidebar_left'             => self::MISSING_SIDEBAR_LEFT,
-			'layout_right_sidebar'             => self::LAYOUT_RIGHT_SIDEBAR,
-			'layout_single'                    => self::LAYOUT_SINGLE,
-			'show_border_for_images'           => self::SHOW_BORDER_FOR_IMAGES,
-			'single_post_layout_prefix'        => self::SINGLE_POST_LAYOUT_PREFIX,
-			'layout_full_width'                => self::LAYOUT_FULL_WIDTH,
-			'page_magazine'                    => self::PAGE_MAGAZINE,
-			'layout_static_page'               => self::LAYOUT_STATIC_PAGE,
-			'layout_blog'                      => self::LAYOUT_BLOG,
-			'layout_blog_thumbnail_right'      => self::LAYOUT_BLOG_THUMBNAIL_RIGHT,
-			'layout_blog_thumbnail_full_width' => self::LAYOUT_BLOG_THUMBNAIL_FULL_WIDTH,
-			'layout_blog_thumbnail_left'       => self::LAYOUT_BLOG_THUMBNAIL_LEFT,
-			'taxonomy_prefix'                  => self::TAXONOMY_PREFIX,
-		);
-	}
 }

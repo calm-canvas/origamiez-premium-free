@@ -12,7 +12,7 @@ namespace Origamiez\Engine\Display;
  *
  * @package Origamiez\Engine\Display
  */
-class AuthorDisplay {
+class AuthorDisplay extends DisplayRenderer {
 
 	/**
 	 * User id.
@@ -146,12 +146,4 @@ class AuthorDisplay {
 		return ob_get_clean();
 	}
 
-	/**
-	 * Display.
-	 *
-	 * @return void
-	 */
-	public function display(): void {
-		echo wp_kses_post( $this->render() );
-	}
 }
