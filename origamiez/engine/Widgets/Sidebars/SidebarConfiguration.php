@@ -38,28 +38,28 @@ class SidebarConfiguration {
 	 *
 	 * @var string
 	 */
-	private string $before_widget = '<div id="%1$s" class="widget %2$s">';
+	private string $before_widget = ORIGAMIEZ_CONFIG['sidebars']['before_widget'];
 
 	/**
 	 * The after widget.
 	 *
 	 * @var string
 	 */
-	private string $after_widget = '</div></div>';
+	private string $after_widget = ORIGAMIEZ_CONFIG['sidebars']['after_widget'];
 
 	/**
 	 * The before title.
 	 *
 	 * @var string
 	 */
-	private string $before_title = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
+	private string $before_title = ORIGAMIEZ_CONFIG['sidebars']['before_title'];
 
 	/**
 	 * The after title.
 	 *
 	 * @var string
 	 */
-	private string $after_title = '</span></h2><div class="origamiez-widget-content clearfix">';
+	private string $after_title = ORIGAMIEZ_CONFIG['sidebars']['after_title'];
 
 	/**
 	 * SidebarConfiguration constructor.

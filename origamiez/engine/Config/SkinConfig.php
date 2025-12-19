@@ -119,7 +119,7 @@ class SkinConfig extends AbstractConfigRegistry {
 	 */
 	public function get_skin_font( string $font_key, string $skin_id = null ): ?array {
 		$skin_id = $skin_id ?? $this->default_id;
-		$fonts = $this->get_item_property( $skin_id, 'fonts' ) ?? array();
+		$fonts   = $this->get_item_property( $skin_id, 'fonts' ) ?? array();
 		return $fonts[ $font_key ] ?? null;
 	}
 }

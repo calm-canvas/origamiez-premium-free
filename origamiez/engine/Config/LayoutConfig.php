@@ -58,41 +58,7 @@ class LayoutConfig extends AbstractConfigRegistry {
 	 * Initialize default layouts.
 	 */
 	protected function initialize_layouts(): void {
-		$layouts = array(
-			'default'            => array(
-				'name'    => 'Default Layout',
-				'sidebar' => self::SIDEBAR_RIGHT,
-				'columns' => self::DEFAULT_COLUMNS,
-			),
-			'fullwidth'          => array(
-				'name'    => 'Full Width',
-				'sidebar' => self::SIDEBAR_NONE,
-				'columns' => 1,
-			),
-			'fullwidth-centered' => array(
-				'name'     => 'Full Width Centered',
-				'sidebar'  => self::SIDEBAR_NONE,
-				'columns'  => 1,
-				'centered' => true,
-			),
-			'magazine'           => array(
-				'name'    => 'Magazine',
-				'sidebar' => self::SIDEBAR_RIGHT,
-				'columns' => self::DEFAULT_COLUMNS,
-				'feature' => 'magazine',
-			),
-			'three-cols'         => array(
-				'name'    => 'Three Columns',
-				'sidebar' => self::SIDEBAR_BOTH,
-				'columns' => 3,
-			),
-			'three-cols-slm'     => array(
-				'name'    => 'Three Columns - Small Left/Middle',
-				'sidebar' => self::SIDEBAR_BOTH,
-				'columns' => 3,
-				'slim'    => true,
-			),
-		);
+		$layouts = ORIGAMIEZ_CONFIG['layouts'];
 
 		/**
 		 * Filter the default layouts.

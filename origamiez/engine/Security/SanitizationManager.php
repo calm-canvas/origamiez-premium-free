@@ -139,15 +139,16 @@ class SanitizationManager {
 	 *
 	 * @param string $method The method name.
 	 * @param array  $args The method arguments.
+	 * @throws \BadMethodCallException If the method is undefined.
 	 * @return mixed The sanitized value.
 	 */
 	public function __call( $method, $args ) {
 		if ( strpos( $method, 'sanitize_' ) === 0 ) {
-			$type = substr( $method, 9 );
+			$type  = substr( $method, 9 );
 			$value = $args[0] ?? '';
 			return $this->sanitize( $value, $type );
 		}
 
-		throw new \BadMethodCallException( "Call to undefined method: $method" );
+		throw new \BadMethodCallException( sprintf( esc_html__( 'Call to undefined method: %s', 'origamiez' ), esc_html( $method ) ) );
 	}
 }

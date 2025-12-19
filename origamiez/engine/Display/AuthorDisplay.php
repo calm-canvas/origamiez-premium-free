@@ -145,5 +145,4 @@ class AuthorDisplay extends DisplayRenderer {
 		<?php
 		return ob_get_clean();
 	}
-
 }

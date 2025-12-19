@@ -38,21 +38,12 @@ class ThemeSupportManager {
 
 		add_theme_support(
 			'custom-background',
-			array(
-				'default-color'      => '',
-				'default-attachment' => 'fixed',
-			)
+			ORIGAMIEZ_CONFIG['theme_support']['custom_background']
 		);
 
 		$custom_header_args = apply_filters(
 			'origamiez_custom_header_args',
-			array(
-				'header-text' => false,
-				'width'       => 468,
-				'height'      => 60,
-				'flex-height' => true,
-				'flex-width'  => true,
-			)
+			ORIGAMIEZ_CONFIG['theme_support']['custom_header']
 		);
 
 		add_theme_support( 'custom-header', $custom_header_args );
@@ -73,7 +64,7 @@ class ThemeSupportManager {
 
 		add_theme_support( 'loop-pagination' );
 		add_theme_support( 'automatic-feed-links' );
-		add_theme_support( 'post-formats', array( 'gallery', 'video', 'audio' ) );
+		add_theme_support( 'post-formats', ORIGAMIEZ_CONFIG['theme_support']['post_formats'] );
 		add_theme_support( 'editor_style' );
 	}
 
@@ -97,7 +88,7 @@ class ThemeSupportManager {
 	private static function set_content_width(): void {
 		global $content_width;
 		if ( ! isset( $content_width ) ) {
-			$content_width = 817;
+			$content_width = ORIGAMIEZ_CONFIG['theme_support']['content_width'];
 		}
 	}
 }
