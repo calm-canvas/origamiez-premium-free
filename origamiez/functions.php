@@ -31,5 +31,5 @@ Setup - config for compatible plugins.
 --------------------
 */
 require $dir . 'plugins/bbpress/index.php';
-require $dir . 'plugins/dw-question-and-answer/index.php';
+
 require $dir . 'plugins/woocommerce/index.php';
