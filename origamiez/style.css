@@ -4,7 +4,7 @@
  * Theme URI: https://github.com/calm-canvas/origamiez-premium-free
  * Author: tranthethang
  * Author URI: https://github.com/calm-canvas
- * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
+ * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
  * Version: 3.0.1766052671
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -2278,55 +2278,7 @@ The styling for dedault woocommerce's widgets.
   font-size: 9px;
   font-weight: normal;
 }
-#dwqa-submit-question-form #wp-dwqa-question-content-editor-editor-tools {
-  margin-bottom: 15px;
-}
-body.single-dwqa-question #origamiez-post-wrap .dwqa-question .dwqa-author .avatar,
-body.single-dwqa-question #origamiez-post-wrap .dwqa-list-answers .dwqa-author .avatar {
-  width: 64px !important;
-  height: 64px !important;
-}
-body.single-dwqa-question #origamiez-post-wrap .dwqa-comments .dwqa-comment-list .comment .avatar {
-  width: 32px !important;
-  height: 32px !important;
-}
-body.single-dwqa-question #origamiez-post-wrap #dwqa-respond {
-  margin-top: 15px;
-}
-body.single-dwqa-question #origamiez-post-wrap #dwqa-respond .avatar {
-  width: 32px !important;
-  height: 32px !important;
-}
-body.single-dwqa-question #origamiez-post-wrap #dwqa-answers {
-  margin-top: 30px;
-}
-body.single-dwqa-question #origamiez-post-wrap #dwqa-answers .dwqa-list-answers .dwqa-answer {
-  margin-bottom: 30px;
-}
-body.single-dwqa-question #origamiez-post-wrap #dwqa-answers #dwqa-add-answers {
-  margin-top: 30px;
-}
-body.single-dwqa-question .dwqa-btn {
-  padding: 0 15px;
-  line-height: 40px;
-  height: 40px;
-}
-body.single-dwqa-question .login-box {
-  margin-top: 15px;
-  border: none !important;
-}
-body.single-dwqa-question .login-box label {
-  display: block;
-  margin-bottom: 5px;
-}
-body.single-dwqa-question .login-box #wp-submit,
-body.single-dwqa-question .login-box input[type=text],
-body.single-dwqa-question .login-box input[type=password] {
-  width: 100%;
-  padding: 0 15px;
-  height: 40px;
-  line-height: 40px;
-}
+
 body {
   font-weight: var(--font-body-weight);
   font-family: var(--font-body);
