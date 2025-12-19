@@ -268,8 +268,8 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 * @param array $instance Widget instance.
 	 */
 	private function set_orderby( array &$args, array $instance ): void {
-		$valid_orderbys = array( 'comment_count', 'rand', 'date' );
-		$orderby = $instance['orderby'] ?? 'date';
+		$valid_orderbys  = array( 'comment_count', 'rand', 'date' );
+		$orderby         = $instance['orderby'] ?? 'date';
 		$args['orderby'] = in_array( $orderby, $valid_orderbys, true ) ? $orderby : 'date';
 	}
 
@@ -285,7 +285,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 			return;
 		}
 
-		$in = $instance['in'];
+		$in                 = $instance['in'];
 		$args['date_query'] = array(
 			array(
 				'after' => array(
