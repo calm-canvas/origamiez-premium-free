@@ -35,7 +35,9 @@ def process_directory(directory):
                 to_unix_line_endings(file_path)
 
 if __name__ == "__main__":
-    target_dir = "origamiez"
+    # The script is in /bin/python, so project_root is two levels up.
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    target_dir = os.path.join(project_root, "medmag")
     if os.path.exists(target_dir):
         print(f"Scanning directory: {target_dir}...")
         process_directory(target_dir)
