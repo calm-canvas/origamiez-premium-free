@@ -2,11 +2,6 @@ node_modules/
 .idea/
 .vscode/
 .zencoder/
-plugins/*
-!plugins/wp-bomb
-!plugins/theme-check
-!plugins/wordpress-importer
-!plugins/regenerate-thumbnails
 origamiez/vendor/
 /.env
 /.env.local
