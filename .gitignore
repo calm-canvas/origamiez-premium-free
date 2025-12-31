@@ -6,3 +6,4 @@ origamiez/vendor/
 /.env
 /.env.local
 vendor/
+debug/
