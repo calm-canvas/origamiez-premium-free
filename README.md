@@ -42,6 +42,13 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 
 ## Version History
 
+### 3.1.0 (2026-02-25)
+
+- **Improve:** Refactor Docker configuration using YAML extensions (`x-common` and `x-environment`) to reduce duplication and improve maintainability
+- **New:** Add `scheduler` service using Ofelia for automated WP-Cron task execution
+- **Update:** Enhance `cli` and `wordpress` services with shared environment and volume configurations
+- **Update:** Docker image updated to `php8.3-apache` (tested with PHP 8.4 compatibility)
+
 ### 3.0.0 (2025-12-03)
 
 - **New:** Migrate build system from Laravel Mix to Vite for faster development and better performance
