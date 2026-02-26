@@ -1,4 +1,4 @@
-FROM wordpress:6.9.0-php8.3-apache
+FROM wordpress:6.9.1-php8.3-apache
 
 # Giữ nguyên logic ARG và RUN để map UID/GID của bạn [cite: 1-9]
 ARG WWWUSER=1000
@@ -19,18 +19,11 @@ RUN apt-get update && apt-get install -y \
     curl nano git \
     $PHPIZE_DEPS \
     && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable xdebug opcache \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Composer [cite: 1]
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Cấu hình Xdebug mặc định cho môi trường Dev
-RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 

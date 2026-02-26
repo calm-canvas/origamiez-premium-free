@@ -14,3 +14,4 @@ vendor/
 ehthumbs.db
 Thumbs.db
 *.po~
+docker/config/override.ini
