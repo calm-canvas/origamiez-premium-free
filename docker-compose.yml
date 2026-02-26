@@ -4,6 +4,7 @@ x-common:
         - wordpress_data:/var/www/html
         - ./docker/snapshot:/tmp/snapshot
         - ./origamiez:/var/www/html/wp-content/themes/origamiez
+        - ./plugins/craftsman-suite:/var/www/html/wp-content/plugins/craftsman-suite
         - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini
     networks:
         - dev_tools
