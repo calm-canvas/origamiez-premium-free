@@ -1,5 +1,4 @@
-x-common:
-    &common
+x-common: &common
     volumes:
         - wordpress_data:/var/www/html
         - ./docker/snapshot:/tmp/snapshot
@@ -14,8 +13,7 @@ x-common:
             max-size: '10m'
             max-file: '3'
 
-x-environment:
-    &common-env
+x-environment: &common-env
     WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
     WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
     WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
@@ -43,11 +41,11 @@ services:
         ports:
             - '${WP_PORT}:80'
         labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.origamiez.rule=Host(`origamiez.localhost`)"
-            - "traefik.http.routers.origamiez.entrypoints=web,websecure"
-            - "traefik.http.routers.origamiez.tls=true"
-            - "traefik.http.services.origamiez.loadbalancer.server.port=80"
+            - 'traefik.enable=true'
+            - 'traefik.http.routers.origamiez.rule=Host(`origamiez.localhost`)'
+            - 'traefik.http.routers.origamiez.entrypoints=web,websecure'
+            - 'traefik.http.routers.origamiez.tls=true'
+            - 'traefik.http.services.origamiez.loadbalancer.server.port=80'
 
     cli:
         <<: *common
