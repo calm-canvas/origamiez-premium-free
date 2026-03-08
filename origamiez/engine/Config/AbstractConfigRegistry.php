@@ -111,12 +111,12 @@ abstract class AbstractConfigRegistry {
 	 * Get a nested property from the default item.
 	 *
 	 * @param string $key Property key.
-	 * @param mixed  $default Default value if key not found.
+	 * @param mixed  $default_value Default value if key not found.
 	 * @return mixed The property value or default.
 	 */
-	protected function get_default_item_property( string $key, $default = null ) {
+	protected function get_default_item_property( string $key, $default_value = null ) {
 		$item = $this->get_item( $this->default_id );
-		return $item[ $key ] ?? $default;
+		return $item[ $key ] ?? $default_value;
 	}
 
 	/**
@@ -124,11 +124,11 @@ abstract class AbstractConfigRegistry {
 	 *
 	 * @param string $item_id Item ID.
 	 * @param string $key Property key.
-	 * @param mixed  $default Default value if key not found.
+	 * @param mixed  $default_value Default value if key not found.
 	 * @return mixed The property value or default.
 	 */
-	protected function get_item_property( string $item_id, string $key, $default = null ) {
+	protected function get_item_property( string $item_id, string $key, $default_value = null ) {
 		$item = $this->get_item( $item_id );
-		return $item[ $key ] ?? $default;
+		return $item[ $key ] ?? $default_value;
 	}
 }

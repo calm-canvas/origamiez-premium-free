@@ -1,4 +1,10 @@
 <?php
+/**
+ * Page
+ *
+ * @package Origamiez
+ */
+
 get_header();
 ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">

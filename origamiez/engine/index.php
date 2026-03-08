@@ -1,4 +1,9 @@
 <?php
+/**
+ * Index
+ *
+ * @package Origamiez
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

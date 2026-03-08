@@ -1,4 +1,10 @@
 <?php
+/**
+ * Sidebar Footer 3
+ *
+ * @package Origamiez
+ */
+
 $sidebar = apply_filters( 'origamiez_get_current_sidebar', 'footer-3', 'footer-3' );
 if ( is_active_sidebar( $sidebar ) ) :
 	$classes = apply_filters(

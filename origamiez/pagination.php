@@ -1,4 +1,10 @@
 <?php
+/**
+ * Pagination
+ *
+ * @package Origamiez
+ */
+
 if ( ! is_singular() && current_theme_supports( 'loop-pagination' ) ) {
 	global $wp_query, $wp_rewrite;
 	$total = $wp_query->max_num_pages;

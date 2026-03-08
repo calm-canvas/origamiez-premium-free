@@ -1,4 +1,9 @@
 <?php
+/**
+ * Origamiez functions and definitions
+ *
+ * @package Origamiez
+ */
 
 require_once __DIR__ . '/customizer-callbacks.php';
 require_once __DIR__ . '/format-helpers.php';

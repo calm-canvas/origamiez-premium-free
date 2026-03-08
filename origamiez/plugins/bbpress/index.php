@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Index
+ *
+ * @package Origamiez
+ */
 
 if ( class_exists( 'bbPress' ) ) {
 

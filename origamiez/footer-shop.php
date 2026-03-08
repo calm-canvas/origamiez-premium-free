@@ -1,3 +1,11 @@
+<?php
+/**
+ * Footer Shop
+ *
+ * @package Origamiez
+ */
+
+?>
 </div>
 </div>
 <?php get_sidebar( 'right' ); ?>

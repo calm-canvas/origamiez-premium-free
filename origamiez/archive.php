@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Archive
+ *
+ * @package Origamiez
+ */
+
+get_header(); ?>
 <?php
 $taxonomy_layout = get_theme_mod( 'taxonomy_layout', 'two-cols' );
 get_template_part( 'parts/archive/archive', $taxonomy_layout );
