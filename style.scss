@@ -2517,8 +2517,15 @@ body.origamiez_custom_bg {
 #origamiez-blogposts {
 	& > li {
 		.entry-thumb {
+			a {
+				display: block;
+				position: relative;
+				width: 100% !important;
+				height: 100% !important;
+			}
 			img {
 				width: 100% !important;
+				height: 100% !important;
 			}
 		}
 
