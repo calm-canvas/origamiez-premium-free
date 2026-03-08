@@ -1,3 +1,11 @@
+<?php
+/**
+ * Header Left Right
+ *
+ * @package Origamiez
+ */
+
+?>
 <div id="origamiez-header-top" class="origamiez-header-left-right">
 	<div class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 		<?php $logo = get_theme_mod( 'logo', false ); ?>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Related Flat List
+ *
+ * @package Origamiez
+ */
+
 global $post;
 $get_related_post_by     = get_theme_mod( 'get_related_post_by', 'post_tag' );
 $number_of_related_posts = (int) get_theme_mod( 'number_of_related_posts', 8 );

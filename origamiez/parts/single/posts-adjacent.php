@@ -1,4 +1,10 @@
 <?php
+/**
+ * Posts Adjacent
+ *
+ * @package Origamiez
+ */
+
 if ( 1 === (int) get_theme_mod( 'is_show_post_adjacent', 1 ) ) :
 	$prev_post = get_previous_post();
 	$next_post = get_next_post();

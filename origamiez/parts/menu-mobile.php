@@ -1,4 +1,9 @@
 <?php
+/**
+ * Menu Mobile
+ *
+ * @package Origamiez
+ */
 
 $menu_slug = has_nav_menu( 'mobile-nav' ) ? 'mobile-nav' : ( has_nav_menu( 'main-nav' ) ? 'main-nav' : false );
 if ( $menu_slug ) :

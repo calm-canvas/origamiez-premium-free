@@ -1,3 +1,11 @@
+<?php
+/**
+ * Content None
+ *
+ * @package Origamiez
+ */
+
+?>
 <li class="clearfix origamiez-first-post">
 	<article class="entry-item row clearfix">
 		<div class="entry-summary col-sm-12">

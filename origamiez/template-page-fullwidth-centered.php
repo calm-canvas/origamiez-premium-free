@@ -1,5 +1,11 @@
 <?php
 /**
+ * Template Page Fullwidth Centered
+ *
+ * @package Origamiez
+ */
+
+/**
  * Template Name: Page Fullwidth Centered
  */
 get_header();

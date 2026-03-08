@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template Page Three Cols Slm
+ *
+ * @package Origamiez
+ */
+
 /*
  * Template Name: Page Three Column - SLM
  */

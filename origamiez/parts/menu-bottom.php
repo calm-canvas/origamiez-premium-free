@@ -1,4 +1,10 @@
 <?php
+/**
+ * Menu Bottom
+ *
+ * @package Origamiez
+ */
+
 // FOOTER MENU
 if ( has_nav_menu( 'footer-nav' ) ) {
 	$is_enable_convert_flat_menus = (int) get_theme_mod( 'is_enable_convert_flat_menus', 1 );

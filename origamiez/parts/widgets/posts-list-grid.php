@@ -1,12 +1,27 @@
 <?php
+/**
+ * Origamiez Posts List Grid Widget
+ *
+ * @package Origamiez
+ */
+
 add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Grid', 'register' ) );
 
+/**
+ * Class Origamiez_Widget_Posts_List_Grid
+ */
 class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
+	/**
+	 * Register widget
+	 */
 	public static function register() {
 		register_widget( 'Origamiez_Widget_Posts_List_Grid' );
 	}
 
-	function __construct() {
+	/**
+	 * Origamiez_Widget_Posts_List_Grid constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-grid',
 			'description' => esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' ),
@@ -18,14 +33,18 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 		parent::__construct( 'origamiez-widget-post-grid', esc_attr__( 'Origamiez Posts Grid', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
+	/**
+	 * Widget output
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $args );
-		extract( $instance );
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
+		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
 		}
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
@@ -72,8 +91,8 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 								<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
 									title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
 							</h4>
-							<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata' ); ?>
-							<?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+							<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata' ); ?>
+							<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
 						</div>
 					</article>
 					<?php
@@ -84,20 +103,31 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 			<?php
 		endif;
 		wp_reset_postdata();
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
 	}
 
-	function update( $new_instance, $old_instance ) {
+	/**
+	 * Update widget
+	 *
+	 * @param array $new_instance New instance.
+	 * @param array $old_instance Old instance.
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ) {
 		$instance                 = parent::update( $new_instance, $old_instance );
 		$instance['cols_per_row'] = (int) esc_attr( $new_instance['cols_per_row'] );
 
 		return $instance;
 	}
 
-	function form( $instance ) {
+	/**
+	 * Widget form
+	 *
+	 * @param array $instance Widget instance.
+	 */
+	public function form( $instance ) {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'cols_per_row' ) ); ?>"><?php esc_html_e( 'Cols per row:', 'origamiez' ); ?></label>
@@ -116,6 +146,11 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 		<?php
 	}
 
+	/**
+	 * Get default settings
+	 *
+	 * @return array
+	 */
 	protected function get_default() {
 		$default                 = parent::get_default();
 		$default['cols_per_row'] = 3;

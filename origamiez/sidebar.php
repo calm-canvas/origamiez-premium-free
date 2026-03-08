@@ -1,1 +1,7 @@
 <?php
+/**
+ * Sidebar
+ *
+ * @package Origamiez
+ */
+

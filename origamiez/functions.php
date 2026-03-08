@@ -1,4 +1,9 @@
 <?php
+/**
+ * Origamiez functions and definitions
+ *
+ * @package Origamiez
+ */
 
 use Origamiez\Engine\ThemeBootstrap;
 

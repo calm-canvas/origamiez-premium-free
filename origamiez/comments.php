@@ -1,4 +1,10 @@
 <?php
+/**
+ * Comments
+ *
+ * @package Origamiez
+ */
+
 if ( post_password_required() ) {
 	return;
 }

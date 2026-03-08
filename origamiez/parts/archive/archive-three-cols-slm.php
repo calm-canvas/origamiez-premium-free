@@ -1,3 +1,11 @@
+<?php
+/**
+ * Archive Three Cols Slm
+ *
+ * @package Origamiez
+ */
+
+?>
 <div class="d-flex">
 	<?php get_sidebar( 'middle' ); ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">

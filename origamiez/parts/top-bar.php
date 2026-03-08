@@ -1,4 +1,10 @@
 <?php
+/**
+ * Top Bar
+ *
+ * @package Origamiez
+ */
+
 $is_display_top_bar          = (int) get_theme_mod( 'is_display_top_bar', 1 );
 $is_display_top_social_links = (int) get_theme_mod( 'is_display_top_social_links', 1 );
 ob_start();

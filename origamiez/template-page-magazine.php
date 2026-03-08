@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template Page Magazine
+ *
+ * @package Origamiez
+ */
+
 /*
  * Template Name: Page Magazine
  */

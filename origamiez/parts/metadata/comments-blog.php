@@ -1,3 +1,11 @@
+<?php
+/**
+ * Comments Blog
+ *
+ * @package Origamiez
+ */
+
+?>
 <i class="fa fa-comments-o"></i>
 <?php
 comments_popup_link(

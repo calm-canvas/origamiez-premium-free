@@ -1,4 +1,9 @@
 <?php
+/**
+ * Misc Helpers
+ *
+ * @package Origamiez
+ */
 
 use Origamiez\Engine\Config\AllowedTagsConfig;
 use Origamiez\Engine\Helpers\MetadataHelper;
