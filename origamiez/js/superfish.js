@@ -7,8 +7,8 @@
  *	http://www.gnu.org/licenses/gpl.html
  */
 
-;(function ($, w) {
-	"use strict";
+(function ($, w) {
+	'use strict';
 
 	var methods = (function () {
 		// private properties and methods go here
@@ -16,10 +16,13 @@
 				bcClass: 'sf-breadcrumb',
 				menuClass: 'sf-js-enabled',
 				anchorClass: 'sf-with-ul',
-				menuArrowClass: 'sf-arrows'
+				menuArrowClass: 'sf-arrows',
 			},
 			ios = (function () {
-				var ios = /^(?![\w\W]*Windows Phone)[\w\W]*(iPhone|iPad|iPod)/i.test(navigator.userAgent);
+				var ios =
+					/^(?![\w\W]*Windows Phone)[\w\W]*(iPhone|iPad|iPod)/i.test(
+						navigator.userAgent
+					);
 				if (ios) {
 					// tap anywhere on iOS to unfocus a submenu
 					$('html').css('cursor', 'pointer').on('click', $.noop);
@@ -28,10 +31,14 @@
 			})(),
 			wp7 = (function () {
 				var style = document.documentElement.style;
-				return ('behavior' in style && 'fill' in style && /iemobile/i.test(navigator.userAgent));
+				return (
+					'behavior' in style &&
+					'fill' in style &&
+					/iemobile/i.test(navigator.userAgent)
+				);
 			})(),
 			unprefixedPointerEvents = (function () {
-				return (!!w.PointerEvent);
+				return !!w.PointerEvent;
 			})(),
 			toggleMenuClasses = function ($menu, o, add) {
 				var classes = c.menuClass,
@@ -39,28 +46,32 @@
 				if (o.cssArrows) {
 					classes += ' ' + c.menuArrowClass;
 				}
-				method = (add) ? 'addClass' : 'removeClass';
+				method = add ? 'addClass' : 'removeClass';
 				$menu[method](classes);
 			},
 			setPathToCurrent = function ($menu, o) {
-				return $menu.find('li.' + o.pathClass).slice(0, o.pathLevels)
+				return $menu
+					.find('li.' + o.pathClass)
+					.slice(0, o.pathLevels)
 					.addClass(o.hoverClass + ' ' + c.bcClass)
-						.filter(function () {
-							return ($(this).children(o.popUpSelector).hide().show().length);
-						}).removeClass(o.pathClass);
+					.filter(function () {
+						return $(this).children(o.popUpSelector).hide().show()
+							.length;
+					})
+					.removeClass(o.pathClass);
 			},
 			toggleAnchorClass = function ($li, add) {
-				var method = (add) ? 'addClass' : 'removeClass';
+				var method = add ? 'addClass' : 'removeClass';
 				$li.children('a')[method](c.anchorClass);
 			},
 			toggleTouchAction = function ($menu) {
 				var msTouchAction = $menu.css('ms-touch-action');
 				var touchAction = $menu.css('touch-action');
 				touchAction = touchAction || msTouchAction;
-				touchAction = (touchAction === 'pan-y') ? 'auto' : 'pan-y';
+				touchAction = touchAction === 'pan-y' ? 'auto' : 'pan-y';
 				$menu.css({
 					'ms-touch-action': touchAction,
-					'touch-action': touchAction
+					'touch-action': touchAction,
 				});
 			},
 			getMenu = function ($el) {
@@ -76,7 +87,7 @@
 				$this.siblings().superfish('hide').end().superfish('show');
 			},
 			close = function (o) {
-				o.retainPath = ($.inArray(this[0], o.$path) > -1);
+				o.retainPath = $.inArray(this[0], o.$path) > -1;
 				this.superfish('hide');
 
 				if (!this.parents('.' + o.hoverClass).length) {
@@ -91,8 +102,7 @@
 					o = getOptions($this);
 				if (ios) {
 					$.proxy(close, $this, o)();
-				}
-				else {
+				} else {
 					clearTimeout(o.sfTimer);
 					o.sfTimer = setTimeout($.proxy(close, $this, o), o.delay);
 				}
@@ -108,7 +118,10 @@
 
 				if ($ul.length > 0 && $ul.is(':hidden')) {
 					$this.one('click.superfish', false);
-					if (e.type === 'MSPointerDown' || e.type === 'pointerdown') {
+					if (
+						e.type === 'MSPointerDown' ||
+						e.type === 'pointerdown'
+					) {
 						$this.trigger('focus');
 					} else {
 						$.proxy(over, $this.parent('li'))();
@@ -119,8 +132,7 @@
 				var targets = 'li:has(' + o.popUpSelector + ')';
 				if ($.fn.hoverIntent && !o.disableHI) {
 					$menu.hoverIntent(over, out, targets);
-				}
-				else {
+				} else {
 					$menu
 						.on('mouseenter.superfish', targets, over)
 						.on('mouseleave.superfish', targets, out);
@@ -150,8 +162,13 @@
 					if (!o) {
 						return this;
 					}
-					var not = (o.retainPath === true) ? o.$path : '',
-						$ul = $this.find('li.' + o.hoverClass).add(this).not(not).removeClass(o.hoverClass).children(o.popUpSelector),
+					var not = o.retainPath === true ? o.$path : '',
+						$ul = $this
+							.find('li.' + o.hoverClass)
+							.add(this)
+							.not(not)
+							.removeClass(o.hoverClass)
+							.children(o.popUpSelector),
 						speed = o.speedOut;
 
 					if (instant) {
@@ -164,10 +181,14 @@
 						return this;
 					}
 
-					$ul.stop(true, true).animate(o.animationOut, speed, function () {
-						var $this = $(this);
-						o.onHide.call($this);
-					});
+					$ul.stop(true, true).animate(
+						o.animationOut,
+						speed,
+						function () {
+							var $this = $(this);
+							o.onHide.call($this);
+						}
+					);
 				}
 				return this;
 			},
@@ -204,13 +225,17 @@
 					// remove event handlers
 					$this.off('.superfish').off('.hoverIntent');
 					// clear animation's inline display style
-					$hasPopUp.children(o.popUpSelector).attr('style', function (i, style) {
-						if (typeof style !== 'undefined') {
-							return style.replace(/display[^;]+;?/g, '');
-						}
-					});
+					$hasPopUp
+						.children(o.popUpSelector)
+						.attr('style', function (i, style) {
+							if (typeof style !== 'undefined') {
+								return style.replace(/display[^;]+;?/g, '');
+							}
+						});
 					// reset 'current' path classes
-					o.$path.removeClass(o.hoverClass + ' ' + c.bcClass).addClass(o.pathClass);
+					o.$path
+						.removeClass(o.hoverClass + ' ' + c.bcClass)
+						.addClass(o.pathClass);
 					$this.find('.' + o.hoverClass).removeClass(o.hoverClass);
 					o.onDestroy.call($this);
 					$this.removeData('sfOptions');
@@ -237,19 +262,22 @@
 
 					o.onInit.call(this);
 				});
-			}
+			},
 		};
 	})();
 
 	$.fn.superfish = function (method, args) {
 		if (methods[method]) {
-			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		}
-		else if (typeof method === 'object' || ! method) {
+			return methods[method].apply(
+				this,
+				Array.prototype.slice.call(arguments, 1)
+			);
+		} else if (typeof method === 'object' || !method) {
 			return methods.init.apply(this, arguments);
-		}
-		else {
-			return $.error('Method ' +  method + ' does not exist on jQuery.fn.superfish');
+		} else {
+			return $.error(
+				'Method ' + method + ' does not exist on jQuery.fn.superfish'
+			);
 		}
 	};
 
@@ -259,8 +287,8 @@
 		pathClass: 'overrideThisToUse',
 		pathLevels: 1,
 		delay: 800,
-		animation: {opacity: 'show'},
-		animationOut: {opacity: 'hide'},
+		animation: { opacity: 'show' },
+		animationOut: { opacity: 'hide' },
 		speed: 'normal',
 		speedOut: 'fast',
 		cssArrows: true,
@@ -272,7 +300,6 @@
 		onHide: $.noop,
 		onIdle: $.noop,
 		onDestroy: $.noop,
-		onHandleTouch: $.noop
+		onHandleTouch: $.noop,
 	};
-
 })(jQuery, window);

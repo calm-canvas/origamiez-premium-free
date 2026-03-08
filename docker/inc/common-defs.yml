@@ -1,5 +1,4 @@
-x-common:
-    &common
+x-common: &common
     volumes:
         - wordpress_data:/var/www/html
         - ../snapshot:/tmp/snapshot
@@ -13,8 +12,7 @@ x-common:
             max-size: '10m'
             max-file: '3'
 
-x-environment:
-    &common-env
+x-environment: &common-env
     XDEBUG_CONFIG: 'client_host=host.docker.internal'
     PHP_IDE_CONFIG: 'serverName=WordPress-Docker'
     WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}

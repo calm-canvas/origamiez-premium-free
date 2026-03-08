@@ -1,6 +1,6 @@
 include:
-  - path: docker/inc/wordpress.yml
-  - path: docker/inc/cli-scheduler.yml
+    - path: docker/inc/wordpress.yml
+    - path: docker/inc/cli-scheduler.yml
 
 services:
     wordpress:
