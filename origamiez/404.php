@@ -1,4 +1,10 @@
 <?php
+/**
+ * 404
+ *
+ * @package Origamiez
+ */
+
 get_header();
 ?>
 <?php get_template_part( 'parts/breadcrumb' ); ?>

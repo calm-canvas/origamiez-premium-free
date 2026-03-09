@@ -1,29 +1,38 @@
 {
-  "name": "origamiez",
-  "version": "1.0.0",
-  "description": "Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "watch": "vite build --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.0",
-    "@popperjs/core": "^2.11.7",
-    "Navgoco": "tefra/navgoco",
-    "bootstrap": "5.3.8",
-    "fitvids": "^2.1.1",
-    "jquery-match-height": "^0.7.2",
-    "jquery-poptrox": "tranthethang/jquery-poptrox",
-    "jquery.easing": "^1.4.1",
-    "owl.carousel": "^2.3.4",
-    "postcss": "^8.3.11",
-    "sass": "^1.63.6",
-    "superfish": "^1.7.10",
-    "vite": "^5.0.0"
-  }
+	"name": "origamiez",
+	"version": "1.0.0",
+	"description": "Origamiez theme is designed for magazine, newspaper, and forum with flexible layout.",
+	"main": "index.js",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"watch": "vite build --watch",
+		"lint": "eslint . --ext .js,.ts,.tsx",
+		"lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+		"format": "prettier --write ."
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@wordpress/eslint-plugin": "^23.0.0",
+		"@wordpress/prettier-config": "^4.37.0",
+		"@fortawesome/fontawesome-free": "^6.4.0",
+		"@popperjs/core": "^2.11.7",
+		"Navgoco": "tefra/navgoco",
+		"bootstrap": "5.3.8",
+		"fitvids": "^2.1.1",
+		"jquery-match-height": "^0.7.2",
+		"jquery-poptrox": "tranthethang/jquery-poptrox",
+		"jquery.easing": "^1.4.1",
+		"owl.carousel": "^2.3.4",
+		"postcss": "^8.3.11",
+		"sass": "^1.63.6",
+		"superfish": "^1.7.10",
+		"vite": "^5.0.0",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^10.1.8",
+		"prettier": "^3.8.0",
+		"typescript": "5.3.3"
+	}
 }

@@ -1,0 +1,28 @@
+services:
+    wordpress:
+        extends:
+            file: common-defs.yml
+            service: common-base
+        build:
+            context: ../../
+            dockerfile: docker/wordpress/Dockerfile
+            args:
+                WWWUSER: ${WWWUSER:-1000}
+                WWWGROUP: ${WWWGROUP:-1000}
+        image: tranthethang/calm-canvas-wordpress-php8.3-apache:latest
+        restart: ${RESTART_POLICY:-unless-stopped}
+        environment:
+            WORDPRESS_DEBUG: ${WORDPRESS_DEBUG}
+            WORDPRESS_DB_CHARSET: ${WORDPRESS_DB_CHARSET}
+            WORDPRESS_DB_COLLATE: ${WORDPRESS_DB_COLLATE:-utf8mb4_unicode_ci}
+            WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+        ports:
+            - '${WP_PORT}:80'
+        labels:
+            - 'traefik.enable=true'
+            - 'traefik.http.routers.origamiez.rule=Host(`origamiez.localhost`)'
+            - 'traefik.http.routers.origamiez.entrypoints=websecure'
+            - 'traefik.http.routers.origamiez.tls=true'
+            - 'traefik.http.routers.origamiez-http.rule=Host(`origamiez.localhost`)'
+            - 'traefik.http.routers.origamiez-http.entrypoints=web'
+            - 'traefik.http.services.origamiez.loadbalancer.server.port=80'

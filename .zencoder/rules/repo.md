@@ -17,9 +17,9 @@ Origamiez is a flexible WordPress theme designed for magazine, newspaper, and fo
 
 ## Language & Runtime
 **Language**: PHP, JavaScript, SASS
-**PHP Version**: 7.4+ (Tested up to 8.4)
-**WordPress Version**: 5.5+ (Tested up to 6.8.3)
-**Build System**: Laravel Mix (webpack wrapper)
+**PHP Version**: 7.4+ (Tested up to 8.3)
+**WordPress Version**: 5.5+ (Tested up to 6.9.0)
+**Build System**: Vite
 **Package Managers**: Composer (PHP), npm (JavaScript)
 
 ## Dependencies
@@ -46,29 +46,30 @@ Origamiez is a flexible WordPress theme designed for magazine, newspaper, and fo
 docker compose up -d
 
 # Run installation script
-./bin/install.sh
+./bin/init.sh
 
 # Install npm dependencies
 npm install
 
+# Run development server
+npm run dev
+
 # Compile assets
-npx mix
+npm run build
 
 # Watch for changes during development
-npx mix watch
-
-# Compile for production
-npx mix --production
+npm run watch
 ```
 
 ## Docker
-**Docker Image**: wordpress:php8.4-fpm
+**Docker Image**: wordpress:php8.3-apache
 **Configuration**: 
-- Custom PHP configuration in docker/config/php.ini
+- Custom PHP configuration in docker/config/override.ini
 - Database and media restoration scripts in docker/snapshot/
-- WordPress runs on port 8001 by default (configurable in .env)
-- Uses Nginx as web server with PHP-FPM
+- WordPress runs on port configured in .env (WP_PORT)
+- Uses Apache as web server
 - Includes wp-cli for WordPress management
+- Includes scheduler service (Ofelia) for WP-Cron
 
 ## Main Files & Resources
 **Entry Points**:

@@ -1,9 +1,18 @@
+<?php
+/**
+ * Content None
+ *
+ * @package Origamiez
+ */
+
+?>
 <li class="clearfix origamiez-first-post">
 	<article class="entry-item row clearfix">
 		<div class="entry-summary col-sm-12">
 			<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
 				<p>
 					<?php
+					// translators: %1$s is the post-new.php URL.
 					$message = sprintf( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'origamiez' ), admin_url( 'post-new.php' ) );
 					echo wp_kses( $message, origamiez_get_allowed_tags() );
 					?>

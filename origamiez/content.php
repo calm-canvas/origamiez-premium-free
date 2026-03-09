@@ -1,3 +1,11 @@
+<?php
+/**
+ * Content
+ *
+ * @package Origamiez
+ */
+
+?>
 <li <?php post_class( array( 'clearfix' ) ); ?>>
 	<article class="entry-item clearfix">
 

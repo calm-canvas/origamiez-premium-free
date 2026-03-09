@@ -1,3 +1,11 @@
+<?php
+/**
+ * Header
+ *
+ * @package Origamiez
+ */
+
+?>
 <!DOCTYPE html>
 <!--[if IE 7]>
 <html class="ie ie7" <?php language_attributes(); ?>>

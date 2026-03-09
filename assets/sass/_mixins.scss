@@ -1,42 +1,42 @@
 @mixin opacity($opacity) {
-  opacity: $opacity;
+	opacity: $opacity;
 }
 
 @mixin transition($time) {
-  transition: all $time;
+	transition: all $time;
 }
 
 @mixin transition-prop($prop, $time) {
-  transition: $prop $time;
+	transition: $prop $time;
 }
 
 @mixin transform($transform-value) {
-  transform: $transform-value;
+	transform: $transform-value;
 }
 
 @mixin clearfix {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 }
 
 @mixin box-sizing($box-model) {
-  box-sizing: $box-model;
+	box-sizing: $box-model;
 }
 
 @mixin border-radius($radius) {
-  border-radius: $radius;
+	border-radius: $radius;
 }
 
 @mixin box-shadow($width, $color) {
-  box-shadow: 0 0 0 $width $color;
+	box-shadow: 0 0 0 $width $color;
 }
 
 @mixin inline-block {
-  display: inline-block;
+	display: inline-block;
 }

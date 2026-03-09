@@ -1,4 +1,10 @@
 <?php
+/**
+ * Template Page Fullwidth
+ *
+ * @package Origamiez
+ */
+
 /*
  * Template Name: Page Fullwidth
  */

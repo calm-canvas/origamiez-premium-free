@@ -1,4 +1,10 @@
 <?php
+/**
+ * Single
+ *
+ * @package Origamiez
+ */
+
 get_header();
 ?>
 <?php

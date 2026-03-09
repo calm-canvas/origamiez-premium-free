@@ -1,12 +1,27 @@
 <?php
+/**
+ * Origamiez Posts List Small Widget
+ *
+ * @package Origamiez
+ */
+
 add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Small', 'register' ) );
 
+/**
+ * Class Origamiez_Widget_Posts_List_Small
+ */
 class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
+	/**
+	 * Register widget
+	 */
 	public static function register() {
 		register_widget( 'Origamiez_Widget_Posts_List_Small' );
 	}
 
-	function __construct() {
+	/**
+	 * Origamiez_Widget_Posts_List_Small constructor.
+	 */
+	public function __construct() {
 		$widget_ops  = array(
 			'classname'   => 'origamiez-widget-posts-small-thumbnail',
 			'description' => esc_attr__( 'Display posts list with small thumbnail.', 'origamiez' ),
@@ -18,14 +33,18 @@ class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
 		parent::__construct( 'origamiez-widget-post-list-small', esc_attr__( 'Origamiez Posts List Small', 'origamiez' ), $widget_ops, $control_ops );
 	}
 
-	function widget( $args, $instance ) {
-		extract( $args );
+	/**
+	 * Widget output
+	 *
+	 * @param array $args Widget arguments.
+	 * @param array $instance Widget instance.
+	 */
+	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
-		extract( $instance );
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
+		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
 		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
 		}
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
@@ -36,7 +55,7 @@ class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
 				$post_title   = get_the_title();
 				$post_url     = get_permalink();
 				$post_classes = array( 'origamiez-wp-mt-post', 'clearfix' );
-				if ( 0 == $loop_index ) {
+				if ( 0 === $loop_index ) {
 					$post_classes[] = 'origamiez-wp-mt-post-first';
 				}
 				?>
@@ -52,8 +71,8 @@ class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
 							<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
 								title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
 						</h4>
-						<?php parent::print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata' ); ?>
-						<?php parent::print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+						<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata' ); ?>
+						<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
 					</div>
 				</div>
 				<?php
@@ -61,6 +80,6 @@ class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
 			endwhile;
 		endif;
 		wp_reset_postdata();
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
 	}
 }

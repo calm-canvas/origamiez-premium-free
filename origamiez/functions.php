@@ -1,9 +1,15 @@
 <?php
+/**
+ * Origamiez functions and definitions
+ *
+ * @package Origamiez
+ */
 
 use Origamiez\Engine\ThemeBootstrap;
 
-const ORIGAMIEZ_PREFIX = 'origamiez_';
-$dir                   = trailingslashit( get_template_directory() );
+const ORIGAMIEZ_PREFIX  = 'origamiez_';
+const ORIGAMIEZ_VERSION = '4.0.0';
+$dir                    = trailingslashit( get_template_directory() );
 
 require_once $dir . '/vendor/autoload.php';
 

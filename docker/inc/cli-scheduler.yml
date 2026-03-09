@@ -1,0 +1,35 @@
+services:
+    cli:
+        extends:
+            file: common-defs.yml
+            service: common-base
+        build:
+            context: ../../
+            dockerfile: docker/cli/Dockerfile
+            args:
+                WWWUSER: ${WWWUSER:-1000}
+                WWWGROUP: ${WWWGROUP:-1000}
+        image: tranthethang/calm-canvas-wordpress-php8.3-cli:latest
+        user: www-data
+        command: tail -f /dev/null
+        restart: ${RESTART_POLICY:-unless-stopped}
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        labels:
+            ofelia.enabled: 'true'
+            ofelia.job-exec.wp-cron-task.schedule: '@every 1m'
+            ofelia.job-exec.wp-cron-task.command: 'wp cron event run --due-now'
+            ofelia.job-exec.wp-cron-task.user: 'www-data'
+        depends_on:
+            - wordpress
+
+    scheduler:
+        image: mcuadros/ofelia:latest
+        restart: ${RESTART_POLICY:-unless-stopped}
+        profiles:
+            - scheduler
+        depends_on:
+            - cli
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        command: daemon --docker

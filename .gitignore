@@ -6,4 +6,12 @@ origamiez/vendor/
 /.env
 /.env.local
 vendor/
-debug/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.po~
+docker/config/override.ini

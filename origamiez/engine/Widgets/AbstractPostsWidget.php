@@ -254,7 +254,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 		}
 
 		if ( ! empty( $tax_queries ) ) {
-			$args['tax_query'] = $tax_queries;
+			$args['tax_query'] = $tax_queries; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			if ( count( $tax_queries ) >= 2 ) {
 				$args['tax_query']['relation'] = $instance['relation'];
 			}

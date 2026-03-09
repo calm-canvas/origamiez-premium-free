@@ -5,9 +5,8 @@
  * Copyright (c) 2014 Chris T (@tefra)
  * BSD - https://github.com/tefra/navgoco/blob/master/LICENSE-BSD
  */
-(function($) {
-
-	"use strict";
+(function ($) {
+	'use strict';
 
 	/**
 	 * Plugin Constructor. Every menu must have a unique id which will either
@@ -18,7 +17,7 @@
 	 * @param {Integer} idx
 	 * @returns {Object} Plugin Instance
 	 */
-	var Plugin = function(el, options, idx) {
+	var Plugin = function (el, options, idx) {
 		this.el = el;
 		this.$el = $(el);
 		this.options = options;
@@ -39,10 +38,10 @@
 		 * links add the carent if it's on and attach the event click
 		 * to them.
 		 */
-		init: function() {
+		init: function () {
 			var self = this;
 			self._load();
-			self.$el.find('ul').each(function(idx) {
+			self.$el.find('ul').each(function (idx) {
 				var sub = $(this);
 				sub.attr('data-index', idx);
 				if (self.options.save && self.state.hasOwnProperty(idx)) {
@@ -57,43 +56,47 @@
 			});
 
 			var caret = $('<span></span>').prepend(self.options.caretHtml);
-			var links = self.$el.find("li > a");
+			var links = self.$el.find('li > a');
 			self._trigger(caret, false);
 			self._trigger(links, true);
-			self.$el.find("li:has(ul) > a").prepend(caret);
+			self.$el.find('li:has(ul) > a').prepend(caret);
 		},
 		/**
 		 * Add the main event trigger to toggle menu items to the given sources
 		 * @param {Element} sources
 		 * @param {Boolean} isLink
 		 */
-		_trigger: function(sources, isLink) {
+		_trigger: function (sources, isLink) {
 			var self = this;
-			sources.on('click', function(event) {
+			sources.on('click', function (event) {
 				event.stopPropagation();
 				var sub = isLink ? $(this).next() : $(this).parent().next();
 				var isAnchor = false;
 				if (isLink) {
 					var href = $(this).attr('href');
-					isAnchor = href === undefined || href === '' || href === '#';
+					isAnchor =
+						href === undefined || href === '' || href === '#';
 				}
 				sub = sub.length > 0 ? sub : false;
 				self.options.onClickBefore.call(this, event, sub);
 
-				if (!isLink || sub && isAnchor) {
+				if (!isLink || (sub && isAnchor)) {
 					event.preventDefault();
-					self._toggle(sub, sub.is(":hidden"));
+					self._toggle(sub, sub.is(':hidden'));
 					self._save();
 				} else if (self.options.accordion) {
-					var allowed = self.state = self._parents($(this));
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
+					var allowed = (self.state = self._parents($(this)));
+					self.$el
+						.find('ul')
+						.filter(':visible')
+						.each(function () {
+							var sub = $(this),
+								idx = sub.attr('data-index');
 
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
-						}
-					});
+							if (!allowed.hasOwnProperty(idx)) {
+								self._toggle(sub, false);
+							}
+						});
 					self._save();
 				}
 				self.options.onClickAfter.call(this, event, sub);
@@ -109,7 +112,7 @@
 		 * @param {Element} sub
 		 * @param {Boolean} open
 		 */
-		_toggle: function(sub, open) {
+		_toggle: function (sub, open) {
 			var self = this,
 				idx = sub.attr('data-index'),
 				parent = sub.parent();
@@ -121,17 +124,20 @@
 				self.state[idx] = 1;
 
 				if (self.options.accordion) {
-					var allowed = self.state = self._parents(sub);
+					var allowed = (self.state = self._parents(sub));
 					allowed[idx] = self.state[idx] = 1;
 
-					self.$el.find('ul').filter(':visible').each(function() {
-						var sub = $(this),
-							idx = sub.attr('data-index');
+					self.$el
+						.find('ul')
+						.filter(':visible')
+						.each(function () {
+							var sub = $(this),
+								idx = sub.attr('data-index');
 
-						if (!allowed.hasOwnProperty(idx)) {
-							self._toggle(sub, false);
-						}
-					});
+							if (!allowed.hasOwnProperty(idx)) {
+								self._toggle(sub, false);
+							}
+						});
 				}
 			} else {
 				parent.removeClass(self.options.openClass);
@@ -149,12 +155,12 @@
 		 * @param {Boolean} obj
 		 * @returns {Object}
 		 */
-		_parents: function(sub, obj) {
+		_parents: function (sub, obj) {
 			var result = {},
 				parent = sub.parent(),
 				parents = parent.parents('ul');
 
-			parents.each(function() {
+			parents.each(function () {
 				var par = $(this),
 					idx = par.attr('data-index');
 
@@ -169,7 +175,7 @@
 		 * If `save` option is on the internal object that keeps track of the sub-menus states is
 		 * saved with a cookie. For size reasons only the open sub-menus indexes are stored.		 *
 		 */
-		_save: function() {
+		_save: function () {
 			if (this.options.save) {
 				var save = {};
 				for (var key in this.state) {
@@ -178,20 +184,26 @@
 					}
 				}
 				cookie[this.uuid] = this.state = save;
-				$.cookie(this.options.cookie.name, JSON.stringify(cookie), this.options.cookie);
+				$.cookie(
+					this.options.cookie.name,
+					JSON.stringify(cookie),
+					this.options.cookie
+				);
 			}
 		},
 		/**
 		 * If `save` option is on it reads the cookie data. The cookie contains data for all
 		 * navgoco menus so the read happens only once and stored in the global `cookie` var.
 		 */
-		_load: function() {
+		_load: function () {
 			if (this.options.save) {
 				if (cookie === null) {
 					var data = $.cookie(this.options.cookie.name);
-					cookie = (data) ? JSON.parse(data) : {};
+					cookie = data ? JSON.parse(data) : {};
 				}
-				this.state = cookie.hasOwnProperty(this.uuid) ? cookie[this.uuid] : {};
+				this.state = cookie.hasOwnProperty(this.uuid)
+					? cookie[this.uuid]
+					: {};
 			}
 		},
 		/**
@@ -203,12 +215,12 @@
 		 *
 		 * @param {Boolean} open
 		 */
-		toggle: function(open) {
+		toggle: function (open) {
 			var self = this,
 				length = arguments.length;
 
 			if (length <= 1) {
-				self.$el.find('ul').each(function() {
+				self.$el.find('ul').each(function () {
 					var sub = $(this);
 					self._toggle(sub, open);
 				});
@@ -220,7 +232,9 @@
 
 				for (var i = 0; i < length; i++) {
 					idx = args[i];
-					var sub = self.$el.find('ul[data-index="' + idx + '"]').first();
+					var sub = self.$el
+						.find('ul[data-index="' + idx + '"]')
+						.first();
 					if (sub) {
 						list[idx] = sub;
 						if (open) {
@@ -243,11 +257,11 @@
 		/**
 		 * Removes instance from JQuery data cache and unbinds events.
 		 */
-		destroy: function() {
+		destroy: function () {
 			$.removeData(this.$el);
-			this.$el.find("li:has(ul) > a").unbind('click');
-			this.$el.find("li:has(ul) > a > span").unbind('click');
-		}
+			this.$el.find('li:has(ul) > a').unbind('click');
+			this.$el.find('li:has(ul) > a > span').unbind('click');
+		},
 	};
 
 	/**
@@ -257,8 +271,12 @@
 	 *
 	 * @param {Object|String} options
 	 */
-	$.fn.navgoco = function(options) {
-		if (typeof options === 'string' && options.charAt(0) !== '_' && options !== 'init') {
+	$.fn.navgoco = function (options) {
+		if (
+			typeof options === 'string' &&
+			options.charAt(0) !== '_' &&
+			options !== 'init'
+		) {
 			var callback = true,
 				args = Array.prototype.slice.call(arguments, 1);
 		} else {
@@ -267,12 +285,16 @@
 				options.save = false;
 			}
 		}
-		return this.each(function(idx) {
+		return this.each(function (idx) {
 			var $this = $(this),
 				obj = $this.data('navgoco');
 
 			if (!obj) {
-				obj = new Plugin(this, callback ? $.fn.navgoco.defaults : options, idx);
+				obj = new Plugin(
+					this,
+					callback ? $.fn.navgoco.defaults : options,
+					idx
+				);
 				$this.data('navgoco', obj);
 			}
 			if (callback) {
@@ -300,15 +322,15 @@
 		cookie: {
 			name: 'navgoco',
 			expires: false,
-			path: '/'
+			path: '/',
 		},
 		slide: {
 			duration: 400,
-			easing: 'swing'
+			easing: 'swing',
 		},
 		onClickBefore: $.noop,
 		onClickAfter: $.noop,
 		onToggleBefore: $.noop,
-		onToggleAfter: $.noop
+		onToggleAfter: $.noop,
 	};
 })(jQuery);

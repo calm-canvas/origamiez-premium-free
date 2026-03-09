@@ -54,7 +54,7 @@ class StylesheetManager {
 				self::PREFIX . $handle,
 				trailingslashit( $template_uri ) . $path,
 				array(),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : null
+				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 			);
 		}
 	}
@@ -68,7 +68,7 @@ class StylesheetManager {
 			$this->style_handle,
 			get_stylesheet_uri(),
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : null
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 		);
 	}
 
@@ -90,7 +90,7 @@ class StylesheetManager {
 			self::PREFIX . 'google-fonts',
 			$google_fonts_url,
 			array(),
-			null
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 		);
 	}
 
@@ -120,7 +120,7 @@ class StylesheetManager {
 						self::PREFIX . $font_slug,
 						$font,
 						array(),
-						null
+						defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 					);
 				}
 			}

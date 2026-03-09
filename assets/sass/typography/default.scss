@@ -1,132 +1,130 @@
 body {
-  font-weight: var(--font-body-weight);
-  font-family: var(--font-body);
-  font-size: var(--font-body-size);
-  line-height: var(--font-body-line-height);
-  font-style: var(--font-body-style);
+	font-weight: var(--font-body-weight);
+	font-family: var(--font-body);
+	font-size: var(--font-body-size);
+	line-height: var(--font-body-line-height);
+	font-style: var(--font-body-style);
 }
 
 h1 {
-  font-weight: var(--font-heading-h1-weight);
-  font-family: var(--font-heading-h1);
-  font-size: var(--font-heading-h1-size);
-  line-height: var(--font-heading-h1-line-height);
-  font-style: var(--font-heading-h1-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h1-weight);
+	font-family: var(--font-heading-h1);
+	font-size: var(--font-heading-h1-size);
+	line-height: var(--font-heading-h1-line-height);
+	font-style: var(--font-heading-h1-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h2 {
-  font-weight: var(--font-heading-h2-weight);
-  font-family: var(--font-heading-h2);
-  font-size: var(--font-heading-h2-size);
-  line-height: var(--font-heading-h2-line-height);
-  font-style: var(--font-heading-h2-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h2-weight);
+	font-family: var(--font-heading-h2);
+	font-size: var(--font-heading-h2-size);
+	line-height: var(--font-heading-h2-line-height);
+	font-style: var(--font-heading-h2-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h3 {
-  font-weight: var(--font-heading-h3-weight);
-  font-family: var(--font-heading-h3);
-  font-size: var(--font-heading-h3-size);
-  line-height: var(--font-heading-h3-line-height);
-  font-style: var(--font-heading-h3-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h3-weight);
+	font-family: var(--font-heading-h3);
+	font-size: var(--font-heading-h3-size);
+	line-height: var(--font-heading-h3-line-height);
+	font-style: var(--font-heading-h3-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h4 {
-  font-weight: var(--font-heading-h4-weight);
-  font-family: var(--font-heading-h4);
-  font-size: var(--font-heading-h4-size);
-  line-height: var(--font-heading-h4-line-height);
-  font-style: var(--font-heading-h4-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h4-weight);
+	font-family: var(--font-heading-h4);
+	font-size: var(--font-heading-h4-size);
+	line-height: var(--font-heading-h4-line-height);
+	font-style: var(--font-heading-h4-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h5 {
-  font-weight: var(--font-heading-h5-weight);
-  font-family: var(--font-heading-h5);
-  font-size: var(--font-heading-h5-size);
-  line-height: var(--font-heading-h5-line-height);
-  font-style: var(--font-heading-h5-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h5-weight);
+	font-family: var(--font-heading-h5);
+	font-size: var(--font-heading-h5-size);
+	line-height: var(--font-heading-h5-line-height);
+	font-style: var(--font-heading-h5-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
 
 h6 {
-  font-weight: var(--font-heading-h6-weight);
-  font-family: var(--font-heading-h6);
-  font-size: var(--font-heading-h6-size);
-  line-height: var(--font-heading-h6-line-height);
-  font-style: var(--font-heading-h6-style);
-  letter-spacing: var(--font-heading-letter-spacing);
+	font-weight: var(--font-heading-h6-weight);
+	font-family: var(--font-heading-h6);
+	font-size: var(--font-heading-h6-size);
+	line-height: var(--font-heading-h6-line-height);
+	font-style: var(--font-heading-h6-style);
+	letter-spacing: var(--font-heading-letter-spacing);
 }
-
 
 #site-home-link {
-  text-decoration: none;
-  color: var(--heading-color);
+	text-decoration: none;
+	color: var(--heading-color);
 
-  #site-title {
-    font-family: var(--font-heading-h1), serif;
-    font-size: 40px;
-    line-height: 40px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
+	#site-title {
+		font-family: var(--font-heading-h1), serif;
+		font-size: 40px;
+		line-height: 40px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
 
-  #site-desc {
-    font-family: var(--font-body);
-  }
+	#site-desc {
+		font-family: var(--font-body);
+	}
 }
 
-
 #main-menu {
-  a {
-    font-family: var(--font-menu);
-    font-style: var(--font-menu-style);
-    letter-spacing: 0.5px;
+	a {
+		font-family: var(--font-menu);
+		font-style: var(--font-menu-style);
+		letter-spacing: 0.5px;
 
-    span.fa {
-      font-size: 20px;
-    }
-  }
+		span.fa {
+			font-size: 20px;
+		}
+	}
 
-  & > li > a {
-    font-size: var(--font-menu-size);
-    font-weight: var(--font-menu-weight);
-    line-height: var(--font-menu-line-height);
-  }
+	& > li > a {
+		font-size: var(--font-menu-size);
+		font-weight: var(--font-menu-weight);
+		line-height: var(--font-menu-line-height);
+	}
 
-  > li {
-    &.menu-item-has-children {
-      > a:after {
-        font-family: 'FontAwesome' !important;
-        content: "\f0d7";
-        font-weight: 400;
-      }
-    }
-  }
+	> li {
+		&.menu-item-has-children {
+			> a:after {
+				font-family: "FontAwesome" !important;
+				content: "\f0d7";
+				font-weight: 400;
+			}
+		}
+	}
 
-  li {
-    ul {
-      li {
-        &.menu-item-has-children {
-          > a:after {
-            font-family: 'FontAwesome' !important;
-            content: "\f0da";
-            line-height: 40px;
-          }
-        }
-      }
-    }
-  }
+	li {
+		ul {
+			li {
+				&.menu-item-has-children {
+					> a:after {
+						font-family: "FontAwesome" !important;
+						content: "\f0da";
+						line-height: 40px;
+					}
+				}
+			}
+		}
+	}
 }
 
 h2.widget-title {
-  font-family: var(--font-widget-title);
-  font-size: var(--font-widget-title-size);
-  line-height: var(--font-widget-title-line-height);
-  font-weight: var(--font-widget-title-weight);
-  font-style: var(--font-widget-title-style);
+	font-family: var(--font-widget-title);
+	font-size: var(--font-widget-title-size);
+	line-height: var(--font-widget-title-line-height);
+	font-weight: var(--font-widget-title-weight);
+	font-style: var(--font-widget-title-style);
 }
 
 /*
@@ -135,16 +133,15 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .panel-default {
-  .panel-heading {
-    .panel-title {
-      a {
-        font-family: var(--font-body);
-        font-size: var(--font-body-size);
-        text-decoration: none;
-      }
-    }
-
-  }
+	.panel-heading {
+		.panel-title {
+			a {
+				font-family: var(--font-body);
+				font-size: var(--font-body-size);
+				text-decoration: none;
+			}
+		}
+	}
 }
 
 /*
@@ -154,9 +151,8 @@ h2.widget-title {
  */
 
 .origamiez-mobile-icon {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
-
 
 /*
  * --------------------------------------------------
@@ -164,21 +160,20 @@ h2.widget-title {
  * --------------------------------------------------
  */
 #origamiez-headline-ticker {
-  .origamiez-headline-caption {
-    line-height: 35px;
-    text-transform: uppercase;
-  }
+	.origamiez-headline-caption {
+		line-height: 35px;
+		text-transform: uppercase;
+	}
 
-  #origamiez-ticker {
-    a {
-      time {
-        font-style: italic;
-        font-size: 12px;
-      }
-    }
-  }
+	#origamiez-ticker {
+		a {
+			time {
+				font-style: italic;
+				font-size: 12px;
+			}
+		}
+	}
 }
-
 
 /*
  * --------------------------------------------------
@@ -186,17 +181,17 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-minimalist {
-  .origamiez-widget-content {
-    .origamiez-wp-m-post {
-      a {
-        text-decoration: none;
-      }
+	.origamiez-widget-content {
+		.origamiez-wp-m-post {
+			a {
+				text-decoration: none;
+			}
 
-      h5 {
-        margin: 0 0 15px 0;
-      }
-    }
-  }
+			h5 {
+				margin: 0 0 15px 0;
+			}
+		}
+	}
 }
 
 /*
@@ -205,13 +200,13 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-tweets {
-  .origamiez-widget-content {
-    .origamiez-wp-m-tweet {
-      a {
-        text-decoration: none;
-      }
-    }
-  }
+	.origamiez-widget-content {
+		.origamiez-wp-m-tweet {
+			a {
+				text-decoration: none;
+			}
+		}
+	}
 }
 
 /*
@@ -220,14 +215,11 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-newsletter {
-  p.newsletter-form {
-    input[type=email] {
-      line-height: 20px;
-    }
-  }
-
-  .newsletter-description {
-  }
+	p.newsletter-form {
+		input[type="email"] {
+			line-height: 20px;
+		}
+	}
 }
 
 /*
@@ -236,13 +228,13 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-small-thumbnail {
-  .origamiez-widget-content {
-    h5 {
-      a {
-        line-height: 18px;
-      }
-    }
-  }
+	.origamiez-widget-content {
+		h5 {
+			a {
+				line-height: 18px;
+			}
+		}
+	}
 }
 
 /*
@@ -251,9 +243,9 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-two-cols {
-  a {
-    text-decoration: none;
-  }
+	a {
+		text-decoration: none;
+	}
 }
 
 /*
@@ -263,19 +255,20 @@ h2.widget-title {
  */
 
 .origamiez-widget-posts-slider {
-  .origamiez-widget-content {
-    a {
-      text-decoration: none;
-    }
+	.origamiez-widget-content {
+		a {
+			text-decoration: none;
+		}
 
-    .caption {
-      h2, h5 {
-        a {
-          text-transform: uppercase;
-        }
-      }
-    }
-  }
+		.caption {
+			h2,
+			h5 {
+				a {
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -284,17 +277,17 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-with-background {
-  .origamiez-widget-content {
-    a {
-      text-decoration: none;
-    }
+	.origamiez-widget-content {
+		a {
+			text-decoration: none;
+		}
 
-    .origamiez-wp-post {
-      .origamiez-wp-post-index {
-        font-size: 130%;
-      }
-    }
-  }
+		.origamiez-wp-post {
+			.origamiez-wp-post-index {
+				font-size: 130%;
+			}
+		}
+	}
 }
 
 /*
@@ -303,9 +296,9 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-zebra {
-  a {
-    text-decoration: none;
-  }
+	a {
+		text-decoration: none;
+	}
 }
 
 /*
@@ -314,9 +307,9 @@ h2.widget-title {
  * --------------------------------------------------
  */
 .origamiez-widget-posts-grid {
-  a {
-    text-decoration: none;
-  }
+	a {
+		text-decoration: none;
+	}
 }
 
 /*
@@ -324,31 +317,14 @@ h2.widget-title {
  * WIDGET CATEGORIES | ARCHIVES (WP DEFAULT)
  * --------------------------------------------------
  */
-.widget_nav_menu,
-.widget_rss,
-.widget_recent_entries,
-.widget_recent_comments,
-.widget_meta,
-.widget_pages,
-.widget_archive,
-.widget_categories {
-  ul {
-    li {
-      &:before {
-
-      }
-    }
-  }
-}
-
 .widget_rss {
-  ul {
-    li {
-      &:before {
-        content: "\f143";
-      }
-    }
-  }
+	ul {
+		li {
+			&:before {
+				content: "\f143";
+			}
+		}
+	}
 }
 
 /*
@@ -357,59 +333,35 @@ h2.widget-title {
  * --------------------------------------------------
  */
 div.comment-metadata {
-  .metadata-divider,
-  a {
-    font-size: 12px;
-    font-style: italic;
-  }
+	.metadata-divider,
+	a {
+		font-size: 12px;
+		font-style: italic;
+	}
 }
 
 p.metadata {
-  .metadata-post-format {
-    font-size: 10px;
-  }
+	.metadata-post-format {
+		font-size: 10px;
+	}
 
-  .metadata-author,
-  .metadata-categories,
-  .metadata-comment,
-  .metadata-date,
-  .metadata-views,
-  .metadata-divider {
-    font-size: 12px;
-    font-style: italic;
-  }
+	.metadata-author,
+	.metadata-categories,
+	.metadata-comment,
+	.metadata-date,
+	.metadata-views,
+	.metadata-divider {
+		font-size: 12px;
+		font-style: italic;
+	}
 }
 
 p.metadata-readmore {
-  a {
-    font-size: 12px;
-    font-style: italic;
-    text-decoration: none;
-  }
-}
-
-div.origamiez-article-metadata {
-  p {
-    text-align: right;
-    font-size: 13px;
-    font-style: italic;
-
-    .metadata-date,
-    .metadata-comment,
-    .metadata-views {
-    }
-  }
-}
-
-body.origamiez-layout-blog.origamiez-layout-blog-metadata-right {
-  p {
-    text-align: left;
-
-    .metadata-date,
-    .metadata-comment,
-    .metadata-views {
-    }
-  }
+	a {
+		font-size: 12px;
+		font-style: italic;
+		text-decoration: none;
+	}
 }
 
 /*
@@ -418,7 +370,7 @@ body.origamiez-layout-blog.origamiez-layout-blog-metadata-right {
  * --------------------------------------------------
  */
 .breadcrumb {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 /*
@@ -427,22 +379,22 @@ body.origamiez-layout-blog.origamiez-layout-blog-metadata-right {
  * --------------------------------------------------
  */
 body.origamiez-layout-blog {
-  article {
-    .metadata {
-      line-height: 15px;
-    }
-  }
+	article {
+		.metadata {
+			line-height: 15px;
+		}
+	}
 }
 
 body.origamiez-layout-blog.origamiez-layout-blog-masonry {
-  #origamiez-blogposts-loadmore {
-    text-align: center;
-    text-transform: uppercase;
+	#origamiez-blogposts-loadmore {
+		text-align: center;
+		text-transform: uppercase;
 
-    a {
-      text-decoration: none;
-    }
-  }
+		a {
+			text-decoration: none;
+		}
+	}
 }
 
 /*
@@ -451,59 +403,59 @@ body.origamiez-layout-blog.origamiez-layout-blog-masonry {
  * --------------------------------------------------
  */
 body.origamiez-layout-single {
-  #origamiez-post-category,
-  #origamiez-post-tag {
-    a {
-      text-decoration: none;
-    }
-  }
+	#origamiez-post-category,
+	#origamiez-post-tag {
+		a {
+			text-decoration: none;
+		}
+	}
 
-  #origamiez-post-adjacent {
-    p.direction {
-      text-transform: uppercase;
-    }
+	#origamiez-post-adjacent {
+		p.direction {
+			text-transform: uppercase;
+		}
 
-    a {
-      text-decoration: none;
-    }
+		a {
+			text-decoration: none;
+		}
 
-    .origamiez-post-adjacent-prev {
-      text-align: left;
-    }
+		.origamiez-post-adjacent-prev {
+			text-align: left;
+		}
 
-    .origamiez-post-adjacent-next {
-      text-align: right;
-    }
-  }
+		.origamiez-post-adjacent-next {
+			text-align: right;
+		}
+	}
 
-  #origamiez-post-author {
-    .origamiez-author-name {
-      text-transform: uppercase;
+	#origamiez-post-author {
+		.origamiez-author-name {
+			text-transform: uppercase;
 
-      a {
-        text-decoration: none;
-      }
-    }
+			a {
+				text-decoration: none;
+			}
+		}
 
-    .origamiez-author-socials {
-      a {
-        line-height: 35px;
-        text-align: center;
-      }
-    }
-  }
+		.origamiez-author-socials {
+			a {
+				line-height: 35px;
+				text-align: center;
+			}
+		}
+	}
 
-  #origamiez-post-related {
-    .origamiez-widget-content {
-      figure.post {
-        figcaption {
-          a {
-            text-decoration: none;
-          }
-        }
-      }
-    }
-  }
+	#origamiez-post-related {
+		.origamiez-widget-content {
+			figure.post {
+				figcaption {
+					a {
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -512,11 +464,11 @@ body.origamiez-layout-single {
  * --------------------------------------------------
  */
 #origamiez-post-wrap.error-404 {
-  .col-left {
-    text-align: right;
-    font-size: 120px;
-    line-height: 120px;
-  }
+	.col-left {
+		text-align: right;
+		font-size: 120px;
+		line-height: 120px;
+	}
 }
 
 /*
@@ -526,18 +478,17 @@ body.origamiez-layout-single {
  */
 
 #comments {
-  .comment {
-    .comment-meta {
-      .comment-author {
-        .fn {
-          a {
-            text-transform: uppercase;
-
-          }
-        }
-      }
-    }
-  }
+	.comment {
+		.comment-meta {
+			.comment-author {
+				.fn {
+					a {
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -546,7 +497,7 @@ body.origamiez-layout-single {
  * --------------------------------------------------
  */
 #origamiez_singular_pagination {
-  font-style: italic;
+	font-style: italic;
 }
 
 /*
@@ -555,16 +506,16 @@ body.origamiez-layout-single {
  * --------------------------------------------------
  */
 label {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 .origamiez-contact-information {
-  .origamiez-contact-block {
-    .fa {
-      font-size: 16px;
-      line-height: 16px;
-    }
-  }
+	.origamiez-contact-block {
+		.fa {
+			font-size: 16px;
+			line-height: 16px;
+		}
+	}
 }
 
 /*
@@ -574,18 +525,17 @@ label {
  */
 
 body.origamiez-layout-single {
-  #origamiez-post-wrap {
-    .entry-content {
-      .wp-caption {
-        .wp-caption-text,
-        &.aligncenter {
-          text-align: center;
-        }
-      }
-    }
-  }
+	#origamiez-post-wrap {
+		.entry-content {
+			.wp-caption {
+				.wp-caption-text,
+				&.aligncenter {
+					text-align: center;
+				}
+			}
+		}
+	}
 }
-
 
 /*
  * --------------------------------------------------
@@ -593,46 +543,45 @@ body.origamiez-layout-single {
  * --------------------------------------------------
  */
 p.origamiez-readmore-block {
-  text-align: right;
+	text-align: right;
 }
 
 p.origamiez-readmore-block > a,
 #origamiez-footer-copyright > a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .entry-content {
+	table {
+		border-collapse: collapse;
+		text-align: left;
 
-  table {
-    border-collapse: collapse;
-    text-align: left;
+		tfoot,
+		thead {
+			letter-spacing: 0.5px;
+		}
+	}
 
-    tfoot,
-    thead {
-      letter-spacing: 0.5px;
-    }
-  }
+	q,
+	blockquote {
+		font-style: italic;
+		letter-spacing: 0.25px;
+		font-family: var(--font-block-quote);
+		font-size: var(--font-block-quote-size);
+		line-height: var(--font-block-quote-line-height);
+	}
 
-  q,
-  blockquote {
-    font-style: italic;
-    letter-spacing: 0.25px;
-    font-family: var(--font-block-quote);
-    font-size: var(--font-block-quote-size);
-    line-height: var(--font-block-quote-line-height);
-  }
+	dl {
+		dt {
+			letter-spacing: 0.5px;
+		}
+	}
 
-  dl {
-    dt {
-      letter-spacing: 0.5px;
-    }
-  }
-
-  cite,
-  address {
-    font-style: italic;
-    letter-spacing: 0.5px;
-  }
+	cite,
+	address {
+		font-style: italic;
+		letter-spacing: 0.5px;
+	}
 }
 
 /*
@@ -641,11 +590,11 @@ p.origamiez-readmore-block > a,
  * --------------------------------------------------
  */
 #origamiez_singular_pagination {
-  text-align: right;
+	text-align: right;
 
-  a {
-    line-height: 25px;
-  }
+	a {
+		line-height: 25px;
+	}
 }
 
 /*
@@ -653,10 +602,11 @@ p.origamiez-readmore-block > a,
  * UNIFY POST TITLE FONT
  * --------------------------------------------------
  */
-.entry-title, .entry-title a {
-  font-family: var(--font-heading-h1) !important;
+.entry-title,
+.entry-title a {
+	font-family: var(--font-heading-h1) !important;
 }
 
 #origamiez-footer-end {
-  font-family: var(--font-menu);
+	font-family: var(--font-menu);
 }

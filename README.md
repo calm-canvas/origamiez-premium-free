@@ -19,10 +19,10 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - **8 custom widgets** for extended functionality
 - **Multi-language support** with Polylang plugin
 - **Plugin compatibility:**
-  - bbPress for forum functionality
-  - WooCommerce for e-commerce
-  - DW Question & Answer for helpdesk features
-  - Contact Form 7 for contact forms
+    - bbPress for forum functionality
+    - WooCommerce for e-commerce
+    - DW Question & Answer for helpdesk features
+    - Contact Form 7 for contact forms
 - **SEO-optimized** with proper semantic HTML structure
 - **Ready for translations** with .mo/.po files included
 - **Dark mode support**
@@ -41,6 +41,13 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 [Get support with free tickets on GitHub](https://github.com/calm-canvas/origamiez-premium-free)
 
 ## Version History
+
+### 3.1.0 (2026-02-25)
+
+- **Improve:** Refactor Docker configuration using YAML extensions (`x-common` and `x-environment`) to reduce duplication and improve maintainability
+- **New:** Add `scheduler` service using Ofelia for automated WP-Cron task execution
+- **Update:** Enhance `cli` and `wordpress` services with shared environment and volume configurations
+- **Update:** Docker image updated to `php8.3-apache` (tested with PHP 8.4 compatibility)
 
 ### 3.0.0 (2025-12-03)
 
@@ -101,37 +108,46 @@ Demo images are sourced from [Gratisography](https://gratisography.com/), a free
 Built with modern development tools and open-source libraries:
 
 #### **Bootstrap: v5.3.8**
+
 - http://getbootstrap.com
 - Licensed under MIT
 
 #### **Font Awesome: v6.4.0**
+
 - https://fontawesome.com
 - Licensed under MIT
 
 #### **Owl Carousel: v2.3.4**
+
 - Licensed under MIT
 
 #### **Superfish: v1.7.10**
+
 - jQuery plugin for dropdown menus
 - Licensed under MIT
 
 #### **jQuery Poptrox**
+
 - Lightweight media viewer
 - Licensed under MIT
 
 #### **FitVids: v2.1.1**
+
 - Responsive video embeds
 - Licensed under WTFPL
 
 #### **jQuery Match Height: v0.7.2**
+
 - Equal height matching for elements
 - Licensed under MIT
 
 #### **Popper.js: v2.11.7**
+
 - Positioning engine
 - Licensed under MIT
 
 #### **Vite: v5.0.0**
+
 - Modern build tool and development server
 - Licensed under MIT
 
