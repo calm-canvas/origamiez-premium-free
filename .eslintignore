@@ -1,3 +1,6 @@
+origamiez/js/
+origamiez/plugins/
+origamiez/css/
 node_modules
 vendor
 dist

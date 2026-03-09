@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
 import fs from 'fs';
-import path from 'path';
 
 const STYLE_VERSION = `3.0.${Math.floor(Date.now() / 1000)}`;
 
@@ -83,15 +82,17 @@ const copyFilesPlugin = () => {
 				try {
 					const srcPath = resolve(file.src);
 					const destPath = resolve(file.dest);
-					const destDir = path.dirname(destPath);
+					const destDir = dirname(destPath);
 
 					if (!fs.existsSync(destDir)) {
 						fs.mkdirSync(destDir, { recursive: true });
 					}
 
 					fs.copyFileSync(srcPath, destPath);
+					// eslint-disable-next-line no-console
 					console.log(`Copied ${file.src}`);
 				} catch (error) {
+					// eslint-disable-next-line no-console
 					console.warn(
 						`Warning: Could not copy ${file.src}:`,
 						error.message
