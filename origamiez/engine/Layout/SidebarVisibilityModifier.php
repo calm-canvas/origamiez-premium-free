@@ -50,6 +50,7 @@ class SidebarVisibilityModifier {
 	 * @return boolean
 	 */
 	public function add_missing_sidebar_class( string $sidebar_id, string $class_name ): bool {
+		unset( $class_name );
 		return ! $this->is_sidebar_active( $sidebar_id );
 	}
 

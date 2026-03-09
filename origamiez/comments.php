@@ -15,7 +15,10 @@ if ( ! comments_open() ) {
 <div class="comments-area widget" id="comments">
 	<?php if ( have_comments() ) : ?>
 		<h2 class="widget-title comments-title clearfix">
-			<?php echo wp_kses( sprintf( _n( '%1$s Comment', '%1$s Comments', get_comments_number(), 'origamiez' ), get_comments_number() ), origamiez_get_allowed_tags() ); ?>
+			<?php
+			// translators: %1$s is the number of comments.
+			echo wp_kses( sprintf( _n( '%1$s Comment', '%1$s Comments', get_comments_number(), 'origamiez' ), get_comments_number() ), origamiez_get_allowed_tags() );
+			?>
 		</h2>
 		<div class="origamiez-widget-content clearfix">
 			<ol class="comment-list">

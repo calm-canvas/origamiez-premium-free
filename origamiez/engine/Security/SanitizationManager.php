@@ -149,6 +149,7 @@ class SanitizationManager {
 			return $this->sanitize( $value, $type );
 		}
 
+		// translators: %s is the method name.
 		throw new \BadMethodCallException( sprintf( esc_html__( 'Call to undefined method: %s', 'origamiez' ), esc_html( $method ) ) );
 	}
 }

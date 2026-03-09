@@ -12,14 +12,14 @@ $args                    = array(
 	'post__not_in'   => array( $post->ID ),
 	'posts_per_page' => $number_of_related_posts,
 );
-if ( 'post_tag' == $get_related_post_by ) {
+if ( 'post_tag' === $get_related_post_by ) {
 	$tags = get_the_tags( $post->ID );
 	if ( ! empty( $tags ) ) {
 		$tag_ids = array();
-		foreach ( $tags as $tag ) {
-			$tag_ids[] = $tag->term_id;
+		foreach ( $tags as $t ) {
+			$tag_ids[] = $t->term_id;
 		}
-		$args['tax_query'] = array(
+		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			array(
 				'taxonomy' => 'post_tag',
 				'field'    => 'id',
@@ -34,7 +34,7 @@ if ( 'post_tag' == $get_related_post_by ) {
 		foreach ( $categories as $category ) {
 			$category_id[] = $category->term_id;
 		}
-		$args['tax_query'] = array(
+		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			array(
 				'taxonomy' => 'category',
 				'field'    => 'id',

@@ -48,7 +48,7 @@ class ReturnValueProvider {
 	 * @return callable The cached callback function.
 	 */
 	public static function get_value_callback( $value ): callable {
-		$key = is_scalar( $value ) ? $value : serialize( $value );
+		$key = is_scalar( $value ) ? $value : wp_json_encode( $value );
 
 		if ( ! isset( self::$value_cache[ $key ] ) ) {
 			self::$value_cache[ $key ] = self::create_value_callback( $value );

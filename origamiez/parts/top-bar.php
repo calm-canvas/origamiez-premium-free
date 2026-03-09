@@ -19,7 +19,7 @@ if ( $is_display_top_social_links ) :
 				if ( $color ) {
 					$style = "color: {$color};";
 				}
-				if ( 'fa fa-rss' == $social['icon'] && empty( $url ) ) {
+				if ( 'fa fa-rss' === $social['icon'] && empty( $url ) ) {
 					$url = get_bloginfo( 'rss2_url' );
 				}
 				?>

@@ -74,13 +74,15 @@ class Container implements ContainerInterface {
 	 *
 	 * @param string $id The service ID.
 	 * @return mixed
-	 * @throws NotFoundExceptionInterface If the service is not found.
+	 * @throws Exception If the service is not found.
 	 */
 	public function get( string $id ): mixed {
 		if ( ! $this->has( $id ) ) {
 			// translators: %s is the service ID.
-			throw new class( sprintf( esc_html__( 'Service %s not found in container', 'origamiez' ), esc_html( $id ) ) ) extends Exception implements NotFoundExceptionInterface {
+			$message = sprintf( esc_html__( 'Service %s not found in container', 'origamiez' ), esc_html( $id ) );
+			$e       = new class( $message ) extends Exception implements NotFoundExceptionInterface {
 			};
+			throw $e;
 		}
 
 		if ( isset( $this->singletons[ $id ] ) && true !== $this->singletons[ $id ] ) {
