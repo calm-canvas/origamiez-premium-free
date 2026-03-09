@@ -4,7 +4,7 @@ Origamiez is a modern WordPress theme designed for professional blogs, magazines
 
 Developed and maintained by @tranthethang with a commitment to continuous updates.
 
-Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, DW Question & Answer, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
+Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
 
 
 ## 1. Theme Features
@@ -20,7 +20,6 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - Plugin compatibility:
   - bbPress for forum functionality
   - WooCommerce for e-commerce
-  - DW Question & Answer for helpdesk features
   - Contact Form 7 for contact forms
 - SEO-optimized with proper semantic HTML structure
 - Ready for translations with .mo/.po files included
@@ -32,7 +31,6 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - Forum: bbPress (https://wordpress.org/plugins/bbpress/)
 - Contact Form: Contact Form 7 (https://wordpress.org/plugins/contact-form-7/)
 - Multi-language: Polylang (https://wordpress.org/plugins/polylang/)
-- Question & Answer: DW Question & Answer (https://wordpress.org/plugins/dw-question-answer/)
 - E-commerce: WooCommerce (https://wordpress.org/plugins/woocommerce/)
 
 ## 3. Support
@@ -51,7 +49,7 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 - Improve: Modernize menu styles and interactions
 - Improve: Refactor code structure for better readability and maintainability
 - Improve: Update Docker configuration to WordPress 6.8 with PHP 8.4
-- Improve: Consolidate plugin styles for bbPress, WooCommerce, and DW Question & Answer
+- Improve: Consolidate plugin styles for bbPress and WooCommerce
 - Update: All dependencies to latest stable versions
 
 ### 2.2.0 (2023-08-20)

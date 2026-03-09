@@ -6,7 +6,7 @@ alwaysApply: true
 # Origamiez WordPress Theme Information
 
 ## Summary
-Origamiez is a flexible WordPress theme designed for magazine, newspaper, and forum websites. It features a responsive layout with extensive customization options including multiple layouts, color schemes, and widget areas. The theme supports various post formats and integrates with popular plugins like WooCommerce, bbPress, and DW Question & Answer.
+Origamiez is a flexible WordPress theme designed for magazine, newspaper, and forum websites. It features a responsive layout with extensive customization options including multiple layouts, color schemes, and widget areas. The theme supports various post formats and integrates with popular plugins like WooCommerce and bbPress.
 
 ## Structure
 - **origamiez/**: Main theme directory with PHP templates, assets, and functionality
