@@ -61,7 +61,7 @@ class ScriptManager {
 				self::PREFIX . $handle,
 				trailingslashit( $template_uri ) . $path,
 				array( 'jquery' ),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '3.0.1',
+				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0',
 				true
 			);
 		}
@@ -77,7 +77,7 @@ class ScriptManager {
 			self::PREFIX . self::INIT_HANDLE,
 			trailingslashit( $template_uri ) . 'js/script.js',
 			array( 'jquery' ),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '3.0.1',
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0',
 			true
 		);
 	}
