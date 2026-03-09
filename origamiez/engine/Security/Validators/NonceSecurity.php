@@ -141,15 +141,10 @@ class NonceSecurity implements ValidatorInterface {
 		$nonce  = null;
 		$method = strtoupper( $this->request_method );
 
-		// The nonce is verified in the validate() method.
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		if ( 'POST' === $method && isset( $_POST[ $this->nonce_field ] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$nonce = sanitize_text_field( wp_unslash( $_POST[ $this->nonce_field ] ) );
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		} elseif ( 'GET' === $method && isset( $_GET[ $this->nonce_field ] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$nonce = sanitize_text_field( wp_unslash( $_GET[ $this->nonce_field ] ) );
+		if ( 'POST' === $method && isset( $_POST[ $this->nonce_field ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			$nonce = sanitize_text_field( wp_unslash( $_POST[ $this->nonce_field ] ) ); // phpcs:ignore WordPress.Security.NonceVerification
+		} elseif ( 'GET' === $method && isset( $_GET[ $this->nonce_field ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			$nonce = sanitize_text_field( wp_unslash( $_GET[ $this->nonce_field ] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 		}
 
 		return $nonce;

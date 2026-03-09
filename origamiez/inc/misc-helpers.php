@@ -11,11 +11,11 @@ use Origamiez\Engine\Helpers\MetadataHelper;
 /**
  * Get the metadata prefix.
  *
- * @param bool $echo Whether to echo the prefix.
+ * @param bool $display Whether to echo the prefix.
  * @return string The metadata prefix.
  */
-function origamiez_get_metadata_prefix( $echo = true ) {
-	return MetadataHelper::get_metadata_prefix( $echo );
+function origamiez_get_metadata_prefix( $display = true ) {
+	return MetadataHelper::get_metadata_prefix( $display );
 }
 
 /**

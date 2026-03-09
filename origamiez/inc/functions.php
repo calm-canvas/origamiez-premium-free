@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Commenting.FileComment.Missing
 /**
  * Origamiez functions and definitions
  *
