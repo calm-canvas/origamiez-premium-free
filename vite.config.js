@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve, dirname } from 'path';
 import fs from 'fs';
 
-const STYLE_VERSION = `3.0.${Math.floor(Date.now() / 1000)}`;
+const STYLE_VERSION = `4.0.0`;
 
 const stringReplacePlugin = () => {
 	return {

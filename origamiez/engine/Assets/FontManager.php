@@ -56,7 +56,7 @@ class FontManager {
 			self::PREFIX . 'google-fonts',
 			$google_fonts_url,
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '3.0.1'
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 		);
 	}
 
@@ -86,7 +86,7 @@ class FontManager {
 						self::PREFIX . $font_slug,
 						$font,
 						array(),
-						defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '3.0.1'
+						defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
 					);
 				}
 			}

@@ -1,4 +1,4 @@
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function (_$) {
 	Origamier.initMainMenu();
 	Origamier.initCarouselPostRelated();
 	Origamier.initResponsive();
@@ -6,13 +6,13 @@ jQuery(document).ready(function ($) {
 	Origamier.convertFlatMenuToDropdown();
 	Origamier.fixGalleryPopupMissingTitle();
 });
-jQuery(window).load(function ($) {
+jQuery(window).load(function (_$) {
 	Origamier.initImageEffect();
 	Origamier.initMobileMenu();
 	Origamier.initLightboxEffect();
 });
-let Origamier = {
-	fixGalleryPopupMissingTitle: function () {
+const Origamier = {
+	fixGalleryPopupMissingTitle() {
 		const items = jQuery('.gallery-item');
 		if (items.length) {
 			jQuery.each(items, function () {
@@ -25,11 +25,13 @@ let Origamier = {
 			});
 		}
 	},
-	initCarouselPostsSlider: function () {
-		let carousels = jQuery('.origamiez-widget-posts-slider .owl-carousel');
+	initCarouselPostsSlider() {
+		const carousels = jQuery(
+			'.origamiez-widget-posts-slider .owl-carousel'
+		);
 		if (0 < carousels.length) {
 			jQuery.each(carousels, function () {
-				let owl = jQuery(this);
+				const owl = jQuery(this);
 				owl.owlCarousel({
 					items: 1,
 					nav: false,
@@ -61,7 +63,7 @@ let Origamier = {
 			});
 		}
 	},
-	initMainMenu: function () {
+	initMainMenu() {
 		const mainMenu = jQuery('#main-menu');
 		if (mainMenu.length) {
 			mainMenu.superfish({
@@ -76,15 +78,15 @@ let Origamier = {
 		}
 		jQuery('#origamiez-mobile-menu-icon');
 	},
-	initResponsive: function () {
+	initResponsive() {
 		jQuery(
 			'#origamiez-post-wrap, .post, .origamiez-widget-content'
 		).fitVids();
 	},
-	initCarouselPostRelated: function () {
-		let post_related = jQuery('#origamiez-post-related .owl-carousel');
+	initCarouselPostRelated() {
+		const post_related = jQuery('#origamiez-post-related .owl-carousel');
 		if (0 < post_related.length) {
-			let args = {
+			const args = {
 				items: 3,
 				navigation: false,
 				pagination: false,
@@ -102,25 +104,25 @@ let Origamier = {
 				args.itemsTabletSmall = [640, 2];
 			}
 			post_related.owlCarousel(args);
-			let widget = post_related.parents('.widget');
+			const widget = post_related.parents('.widget');
 			widget.find('.fa-angle-left').click(function () {
 				post_related.trigger('owl.prev');
 			});
 			widget.find('.fa-angle-right').click(function () {
 				post_related.trigger('owl.next');
 			});
-			let figure = post_related.find('figure');
+			const figure = post_related.find('figure');
 			figure.hover(function () {
-				let figcaption = jQuery(this).find('figcaption');
+				const figcaption = jQuery(this).find('figcaption');
 				figcaption.stop().transition({ bottom: 15 });
 			});
 			figure.mouseleave(function () {
-				let figcaption = jQuery(this).find('figcaption');
+				const figcaption = jQuery(this).find('figcaption');
 				figcaption.stop().transition({ bottom: 0 });
 			});
 		}
 	},
-	initMobileMenu: function () {
+	initMobileMenu() {
 		jQuery('#mobile-menu').navgoco({
 			caretHtml:
 				'<span class="origamiez-mobile-caret fa fa-chevron-circle-down"></span>',
@@ -139,8 +141,8 @@ let Origamier = {
 			jQuery('nav#origamiez-mobile-nav').removeClass('is-active');
 		});
 	},
-	initImageEffect: function () {
-		let images = jQuery('.image-effect, .image-overlay');
+	initImageEffect() {
+		const images = jQuery('.image-effect, .image-overlay');
 		if (0 < images.length) {
 			jQuery('.image-effect')
 				.hover(function () {
@@ -192,24 +194,24 @@ let Origamier = {
 				});
 		}
 	},
-	initLightboxEffect: function () {
+	initLightboxEffect() {
 		if (1 === parseInt(origamiez_vars.config.is_enable_lightbox)) {
-			let blogposts = jQuery('#origamiez-blogposts .entry-thumb');
+			const blogposts = jQuery('#origamiez-blogposts .entry-thumb');
 			let gallery = {};
 			if (1 === parseInt(origamiez_vars.config.is_use_gallery_popup)) {
 				gallery = jQuery('#origamiez-post-wrap .gallery');
 			}
-			let photos = jQuery(
+			const photos = jQuery(
 				'.origamiez-widget-posts-by-photos .origamiez-photos-wrap'
 			);
-			let media = jQuery('.origamiez-lighbox');
+			const media = jQuery('.origamiez-lighbox');
 			if (
 				0 < blogposts.length ||
 				0 < gallery.length ||
 				0 < photos.length ||
 				0 < media.length
 			) {
-				let args = {
+				const args = {
 					baseZIndex: 10001,
 					useBodyOverflow: false,
 					usePopupEasyClose: false,
@@ -221,7 +223,7 @@ let Origamier = {
 					usePopupNav: false,
 					popupBlankCaptionText: false,
 				};
-				let args_hidePopupNav = args;
+				const args_hidePopupNav = args;
 				args_hidePopupNav.usePopupNav = false;
 				if (0 < blogposts.length) {
 					blogposts.poptrox(args_hidePopupNav);
@@ -229,7 +231,7 @@ let Origamier = {
 				if (0 < media.length) {
 					media.poptrox(args_hidePopupNav);
 				}
-				let args_usePopupNav = args;
+				const args_usePopupNav = args;
 				args_usePopupNav.usePopupNav = true;
 				if (0 < gallery.length) {
 					gallery.poptrox(args_usePopupNav);
@@ -240,7 +242,7 @@ let Origamier = {
 			}
 		}
 	},
-	convertFlatMenuToDropdown: function () {
+	convertFlatMenuToDropdown() {
 		if (
 			1 === parseInt(origamiez_vars.config.is_enable_convert_flat_menus)
 		) {
@@ -262,7 +264,7 @@ let Origamier = {
 			}
 		}
 	},
-	createMobileMenu: function (menu_id, mobile_menu_id, mobile_menu_class) {
+	createMobileMenu(menu_id, mobile_menu_id, mobile_menu_class) {
 		jQuery('<select />').appendTo(menu_id);
 		jQuery(menu_id)
 			.find('select')
@@ -272,13 +274,13 @@ let Origamier = {
 		jQuery(menu_id)
 			.find('a')
 			.each(function () {
-				let depth, el, i, selected, space;
-				el = jQuery(this);
+				let i, selected, space;
+				const el = jQuery(this);
 				selected = '';
 				if (el.parent().hasClass('current-menu-item') === true) {
 					selected = "selected='selected'";
 				}
-				depth = el.parents('ul').size();
+				const depth = el.parents('ul').size();
 				space = '';
 				if (depth > 1) {
 					i = 1;
@@ -306,11 +308,11 @@ let Origamier = {
 			});
 	},
 };
-let OrigamierUtil = {
-	getViewport: function (w) {
+const OrigamierUtil = {
+	getViewport(w) {
 		w = w || window;
 		if (w.innerWidth !== null) return { w: w.innerWidth, h: w.innerHeight };
-		let d = w.document;
+		const d = w.document;
 		if (document.compatMode === 'CSS1Compat')
 			return {
 				w: d.documentElement.clientWidth,
@@ -318,7 +320,7 @@ let OrigamierUtil = {
 			};
 		return { w: d.body.clientWidth, h: d.body.clientHeight };
 	},
-	getViewportWidth: function (w) {
+	getViewportWidth(w) {
 		const viewport = OrigamierUtil.getViewport(w);
 		return viewport.w;
 	},
