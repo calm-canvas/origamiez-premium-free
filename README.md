@@ -42,7 +42,7 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 
 ## Version History
 
-### 4.0.0 (2025/03/15)
+### 4.0.0 (2026/03/15)
 
 - **New:** Optimized and refactored Docker stack for better development environment
 - **New:** Integrate ESLint and Prettier with `@wordpress/eslint-plugin` and `@wordpress/prettier-config`
