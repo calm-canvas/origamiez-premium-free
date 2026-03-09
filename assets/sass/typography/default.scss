@@ -220,9 +220,6 @@ h2.widget-title {
 			line-height: 20px;
 		}
 	}
-
-	.newsletter-description {
-	}
 }
 
 /*
@@ -320,22 +317,6 @@ h2.widget-title {
  * WIDGET CATEGORIES | ARCHIVES (WP DEFAULT)
  * --------------------------------------------------
  */
-.widget_nav_menu,
-.widget_rss,
-.widget_recent_entries,
-.widget_recent_comments,
-.widget_meta,
-.widget_pages,
-.widget_archive,
-.widget_categories {
-	ul {
-		li {
-			&:before {
-			}
-		}
-	}
-}
-
 .widget_rss {
 	ul {
 		li {
@@ -380,30 +361,6 @@ p.metadata-readmore {
 		font-size: 12px;
 		font-style: italic;
 		text-decoration: none;
-	}
-}
-
-div.origamiez-article-metadata {
-	p {
-		text-align: right;
-		font-size: 13px;
-		font-style: italic;
-
-		.metadata-date,
-		.metadata-comment,
-		.metadata-views {
-		}
-	}
-}
-
-body.origamiez-layout-blog.origamiez-layout-blog-metadata-right {
-	p {
-		text-align: left;
-
-		.metadata-date,
-		.metadata-comment,
-		.metadata-views {
-		}
 	}
 }
 
