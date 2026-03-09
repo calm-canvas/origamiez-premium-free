@@ -10,7 +10,12 @@
 		"jquery": true,
 		"node": true
 	},
+	"globals": {
+		"jQuery": "readonly",
+		"origamiez_vars": "readonly"
+	},
 	"rules": {
+		"camelcase": "off",
 		"@typescript-eslint/no-unused-vars": [
 			"error",
 			{ "argsIgnorePattern": "^_" }
@@ -20,7 +25,7 @@
 	},
 	"settings": {
 		"react": {
-			"version": "detect"
+			"version": "18.2.0"
 		}
 	}
 }
