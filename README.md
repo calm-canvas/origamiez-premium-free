@@ -32,6 +32,7 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 Detailed technical specifications and development guides are available in the `./docs` directory.
 
 ### Core Theme Specifications (`./docs/specs`)
+
 - **[Architecture Overview](./docs/specs/01-architecture-overview.md)**: Theme core & DI Container
 - **[Hook System](./docs/specs/02-hook-system.md)**: HookRegistry & modular hooks
 - **[Asset Management](./docs/specs/03-asset-management.md)**: CSS/JS enqueuing & build system
@@ -47,6 +48,7 @@ Detailed technical specifications and development guides are available in the `.
 - **[Full Documentation Index](./docs/specs/index.md)**
 
 ### Docker Documentation (`./docs/docker`)
+
 - **[Docker Architecture](./docs/docker/architecture.md)**: Detailed stack and service overview
 - **[Usage Guide](./docs/docker/usage.md)**: Commands for development, backup, and restore
 

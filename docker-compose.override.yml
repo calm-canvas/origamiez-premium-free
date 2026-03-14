@@ -12,7 +12,7 @@ services:
     wordpress:
         <<: *dev-common
         ports:
-            - "${WP_PORT:-8080}:80"
+            - '${WP_PORT:-8080}:80'
 
     cli:
         <<: *dev-common
