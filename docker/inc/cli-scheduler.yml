@@ -24,10 +24,11 @@ services:
             - wordpress
 
     scheduler:
+        extends:
+            file: common-defs.yml
+            service: common-base
         image: mcuadros/ofelia:latest
         restart: ${RESTART_POLICY:-unless-stopped}
-        profiles:
-            - scheduler
         depends_on:
             - cli
         volumes:
