@@ -1,4 +1,4 @@
-FROM wordpress:6.9.1-php8.3-apache
+FROM wordpress:6.9.4-php8.3-apache
 
 # Giữ nguyên logic ARG và RUN để map UID/GID của bạn [cite: 1-9]
 ARG WWWUSER=1000

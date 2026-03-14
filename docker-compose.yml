@@ -2,14 +2,6 @@ include:
     - path: docker/inc/wordpress.yml
     - path: docker/inc/cli-scheduler.yml
 
-services:
-    wordpress:
-        volumes:
-            - &craftsman-suite-volume ./plugins/craftsman-suite:/var/www/html/wp-content/plugins/craftsman-suite
-    cli:
-        volumes:
-            - *craftsman-suite-volume
-
 networks:
     dev_tools:
         external: true

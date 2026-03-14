@@ -1,0 +1,18 @@
+x-dev-common: &dev-common
+    environment:
+        WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-1}
+        XDEBUG_CONFIG: 'client_host=host.docker.internal'
+        PHP_IDE_CONFIG: 'serverName=WordPress-Docker'
+    volumes:
+        - ./${WP_THEME_SLUG:-origamiez}:/var/www/html/wp-content/themes/${WP_THEME_SLUG:-origamiez}
+        - ./plugins/${WP_PLUGIN_SLUG:-craftsman-suite}:/var/www/html/wp-content/plugins/${WP_PLUGIN_SLUG:-craftsman-suite}
+        - ./docker/config/override.ini:/usr/local/etc/php/conf.d/override.ini
+
+services:
+    wordpress:
+        <<: *dev-common
+        ports:
+            - "${WP_PORT:-8080}:80"
+
+    cli:
+        <<: *dev-common
