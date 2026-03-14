@@ -26,18 +26,40 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - Dark mode support
 - Fast asset loading with Vite build system
 
-## 2. Compatible Plugins
+## 2. Technical Documentation
+
+Detailed technical specifications and development guides are available in the ./docs directory:
+- Core Theme Specs: Architecture, Hook System, Asset Management, Customizer, and more.
+- Docker Documentation: Stack overview and usage guides for development.
+
+## 3. Compatible Plugins
 
 - Forum: bbPress (https://wordpress.org/plugins/bbpress/)
 - Contact Form: Contact Form 7 (https://wordpress.org/plugins/contact-form-7/)
 - Multi-language: Polylang (https://wordpress.org/plugins/polylang/)
 - E-commerce: WooCommerce (https://wordpress.org/plugins/woocommerce/)
 
-## 3. Support
+## 4. Support
 
 Get free support with tickets on GitHub: https://github.com/calm-canvas/origamiez-premium-free
 
-## 4. Version History
+## 5. Version History
+
+### 4.0.0 (2026/03/15)
+
+- New: Optimized and refactored Docker stack for better development environment
+- New: Integrate ESLint and Prettier with @wordpress/eslint-plugin and @wordpress/prettier-config
+- Update: Modernize build system and asset management
+- Update: Tested and updated for WordPress 6.9.0 and PHP 8.3 compatibility
+- Improve: Added init.sh for streamlined environment initialization
+- Improve: Updated theme metadata and refined tags in style.css
+
+### 3.1.0 (2026-02-25)
+
+- Improve: Refactor Docker configuration using YAML extensions (x-common and x-environment)
+- New: Add scheduler service using Ofelia for automated WP-Cron task execution
+- Update: Enhance cli and wordpress services with shared environment and volume configurations
+- Update: Docker image updated to php8.3-apache
 
 ### 3.0.0 (2025-12-03)
 
@@ -87,7 +109,7 @@ Includes versions 2.2.0, 2.1.x, 2.0.x with continuous improvements to plugin com
 - Option Tree plugin and custom post format support
 - Foundation for responsive design and widget system
 
-## 5. Sources and Credits
+## 6. Sources and Credits
 
 ### Images
 
@@ -132,7 +154,7 @@ Built with modern development tools and open-source libraries:
   - Modern build tool and development server
   - Licensed under MIT
 
-## 6. Limitations
+## 7. Limitations
 
 Footer menu does not support multi-level dropdown menus.
 

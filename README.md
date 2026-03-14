@@ -27,6 +27,29 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - **Dark mode support**
 - **Fast asset loading** with Vite build system
 
+## Technical Documentation
+
+Detailed technical specifications and development guides are available in the `./docs` directory.
+
+### Core Theme Specifications (`./docs/specs`)
+- **[Architecture Overview](./docs/specs/01-architecture-overview.md)**: Theme core & DI Container
+- **[Hook System](./docs/specs/02-hook-system.md)**: HookRegistry & modular hooks
+- **[Asset Management](./docs/specs/03-asset-management.md)**: CSS/JS enqueuing & build system
+- **[Customizer Service](./docs/specs/04-customizer-service.md)**: Theme options & builders
+- **[Configuration Management](./docs/specs/05-configuration-management.md)**: ConfigManager & specialized configs
+- **[Layout and Display](./docs/specs/06-layout-and-display.md)**: Body classes & breadcrumbs
+- **[Widgets and Sidebars](./docs/specs/07-widgets-and-sidebars.md)**: Custom widgets & sidebar registry
+- **[Template System](./docs/specs/08-template-system.md)**: Modular template parts
+- **[Plugin Integrations](./docs/specs/09-plugin-integrations.md)**: WooCommerce & bbPress layers
+- **[Development Guide](./docs/specs/10-development-guide.md)**: Best practices & workflows
+- **[Security and Optimization](./docs/specs/11-security-and-optimization.md)**: Security hooks & HTTP headers
+- **[Post Features](./docs/specs/12-post-features.md)**: Post formats, metadata & classes
+- **[Full Documentation Index](./docs/specs/index.md)**
+
+### Docker Documentation (`./docs/docker`)
+- **[Docker Architecture](./docs/docker/architecture.md)**: Detailed stack and service overview
+- **[Usage Guide](./docs/docker/usage.md)**: Commands for development, backup, and restore
+
 ## Compatible Plugins
 
 - **Forum:** [bbPress](https://wordpress.org/plugins/bbpress/)
