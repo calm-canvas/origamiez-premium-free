@@ -110,8 +110,8 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		$posts_small = new WP_Query( array_merge( $query, array( 'posts_per_page' => 2 ) ) );
 		if ( $posts_small->have_posts() ) :
 			?>
-			<div class="col-sm-4 col-4 col-left" style="width: 33.3333% !important; flex: 0 0 33.3333% !important; max-width: 33.3333% !important;">
-				<div class="d-flex flex-column h-100" style="aspect-ratio: auto !important;">
+			<div class="col-sm-4 col-4 col-left">
+				<div class="clearfix">
 					<?php
 					$is_first = true;
 					while ( $posts_small->have_posts() ) :
@@ -138,8 +138,8 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		);
 		if ( $posts_carousel->have_posts() ) :
 			?>
-			<div class="col-sm-8 col-8 col-right" style="width: 66.6666% !important; flex: 0 0 66.6666% !important; max-width: 66.6666% !important;">
-				<div class="owl-carousel owl-theme h-100">
+			<div class="col-sm-8 col-8 col-right">
+				<div class="owl-carousel owl-theme">
 					<?php
 					while ( $posts_carousel->have_posts() ) :
 						$posts_carousel->the_post();
@@ -189,8 +189,8 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		);
 		if ( $posts_small->have_posts() ) :
 			?>
-			<div class="col-sm-4 col-4 col-left" style="width: 33.3333% !important; flex: 0 0 33.3333% !important; max-width: 33.3333% !important;">
-				<div class="d-flex flex-column h-100" style="aspect-ratio: auto !important;">
+			<div class="col-sm-4 col-4 col-left">
+				<div class="clearfix">
 					<?php
 					$is_first = true;
 					while ( $posts_small->have_posts() ) :
@@ -209,8 +209,8 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		$posts_carousel = new WP_Query( array_merge( $query, array( 'posts_per_page' => $offset ) ) );
 		if ( $posts_carousel->have_posts() ) :
 			?>
-			<div class="col-sm-8 col-8 col-right" style="width: 66.6666% !important; flex: 0 0 66.6666% !important; max-width: 66.6666% !important;">
-				<div class="owl-carousel owl-theme h-100">
+			<div class="col-sm-8 col-8 col-right">
+				<div class="owl-carousel owl-theme">
 					<?php
 					while ( $posts_carousel->have_posts() ) :
 						$posts_carousel->the_post();
@@ -246,12 +246,13 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 		$post_title = get_the_title();
 		$post_url   = get_permalink();
 
+		$article_classes = array( 'item' );
 		if ( $is_small ) :
-			$margin_top = ( 'bottom' === $type ) ? '5px' : '0';
+			$article_classes[] = ( 'top' === $type ) ? 'item-top' : 'item-bottom';
 			?>
-			<div class="item-outer flex-grow-1" style="margin-top: <?php echo esc_attr( $margin_top ); ?>; overflow: hidden; position: relative;">
-				<article <?php post_class( array( 'item', 'item-' . $type, 'h-100' ) ); ?> style="margin-top: 0 !important;">
-					<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive w-100 h-100', 'style' => 'object-fit: cover;' ) ); ?>
+			<div class="item-outer">
+				<article <?php post_class( $article_classes ); ?>>
+					<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
 					<div class="caption">
 						<h5>
 							<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>" title="<?php echo esc_attr( $post_title ); ?>">
@@ -266,8 +267,8 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 			<?php
 		else :
 			?>
-			<article <?php post_class( 'item h-100' ); ?>>
-				<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive w-100 h-100', 'style' => 'object-fit: cover;' ) ); ?>
+			<article <?php post_class( 'item' ); ?>>
+				<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
 				<div class="caption">
 					<h2>
 						<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>" title="<?php echo esc_attr( $post_title ); ?>">
