@@ -15,15 +15,43 @@
 	--origamiez-color-line-1-bg: var(--wp--preset--color--line-1-bg, #e8ecf1);
 	--origamiez-color-line-2-bg: var(--wp--preset--color--line-2-bg, #f0f2f5);
 	--origamiez-color-line-3-bg: var(--wp--preset--color--line-3-bg, #f8fafc);
-	--origamiez-color-footer-sidebars-bg: var(--wp--preset--color--footer-sidebars-bg, #222222);
-	--origamiez-color-footer-sidebars-text: var(--wp--preset--color--footer-sidebars-text, #a0a0a0);
-	--origamiez-color-footer-sidebars-widget-heading: var(--wp--preset--color--footer-sidebars-widget-heading, #ffffff);
-	--origamiez-color-footer-end-bg: var(--wp--preset--color--footer-end-bg, #111111);
-	--origamiez-color-footer-end-text: var(--wp--preset--color--footer-end-text, #a0a0a0);
+	--origamiez-color-footer-sidebars-bg: var(
+		--wp--preset--color--footer-sidebars-bg,
+		#222222
+	);
+	--origamiez-color-footer-sidebars-text: var(
+		--wp--preset--color--footer-sidebars-text,
+		#a0a0a0
+	);
+	--origamiez-color-footer-sidebars-widget-heading: var(
+		--wp--preset--color--footer-sidebars-widget-heading,
+		#ffffff
+	);
+	--origamiez-color-footer-end-bg: var(
+		--wp--preset--color--footer-end-bg,
+		#111111
+	);
+	--origamiez-color-footer-end-text: var(
+		--wp--preset--color--footer-end-text,
+		#a0a0a0
+	);
 
 	// Typography Families
-	--origamiez-font-family-body: var(--wp--preset--font-family--body, "Georgia", "Times New Roman", Times, serif);
-	--origamiez-font-family-heading: var(--wp--preset--font-family--heading, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+	--origamiez-font-family-body: var(
+		--wp--preset--font-family--body,
+		"Georgia",
+		"Times New Roman",
+		Times,
+		serif
+	);
+	--origamiez-font-family-heading: var(
+		--wp--preset--font-family--heading,
+		"Inter",
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		sans-serif
+	);
 
 	// Typography Sizes
 	--origamiez-font-size-small: var(--wp--preset--font-size--small, 13px);
@@ -32,8 +60,20 @@
 	--origamiez-font-size-x-large: var(--wp--preset--font-size--x-large, 28px);
 
 	// Typography Custom
-	--origamiez-line-height-body: var(--wp--custom--typography--line-height--body, 1.7);
-	--origamiez-line-height-heading: var(--wp--custom--typography--line-height--heading, 1.2);
-	--origamiez-font-weight-body: var(--wp--custom--typography--font-weight--body, 400);
-	--origamiez-font-weight-heading: var(--wp--custom--typography--font-weight--heading, 700);
+	--origamiez-line-height-body: var(
+		--wp--custom--typography--line-height--body,
+		1.7
+	);
+	--origamiez-line-height-heading: var(
+		--wp--custom--typography--line-height--heading,
+		1.2
+	);
+	--origamiez-font-weight-body: var(
+		--wp--custom--typography--font-weight--body,
+		400
+	);
+	--origamiez-font-weight-heading: var(
+		--wp--custom--typography--font-weight--heading,
+		700
+	);
 }
