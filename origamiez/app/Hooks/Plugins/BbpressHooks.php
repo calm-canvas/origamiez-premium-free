@@ -1,6 +1,6 @@
 <?php
 /**
- * bbPress Hooks
+ * BbPress Hooks
  *
  * @package Origamiez
  */

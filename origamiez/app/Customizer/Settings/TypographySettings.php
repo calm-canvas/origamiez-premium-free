@@ -135,7 +135,7 @@ class TypographySettings implements SettingsInterface {
 					'description'     => '',
 					'default'         => '',
 					'type'            => 'select',
-					'choices'         => origamiez_get_font_line_heighs(),
+					'choices'         => origamiez_get_font_line_heights(),
 					'section'         => "custom_{$font_slug}",
 					'transport'       => 'refresh',
 					'active_callback' => "origamiez_{$font_slug}_enable_callback",
