@@ -70,7 +70,7 @@ class AssetManager {
 	 * Registers the asset hooks.
 	 */
 	public function register(): void {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 15 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ), 5 );
 	}
 
 	/**

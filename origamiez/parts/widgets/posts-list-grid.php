@@ -10,11 +10,11 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Grid', 'register
 /**
  * Class Origamiez_Widget_Posts_List_Grid
  */
-class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
+class Origamiez_Widget_Posts_List_Grid extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC {
 	/**
 	 * Register widget
 	 */
-	public static function register() {
+	public static function register(): void {
 		register_widget( 'Origamiez_Widget_Posts_List_Grid' );
 	}
 
@@ -39,7 +39,7 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Widget instance.
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
@@ -113,7 +113,7 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance                 = parent::update( $new_instance, $old_instance );
 		$instance['cols_per_row'] = (int) esc_attr( $new_instance['cols_per_row'] );
 
@@ -125,7 +125,7 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		?>
@@ -151,7 +151,7 @@ class Origamiez_Widget_Posts_List_Grid extends Origamiez_Posts_Widget_Type_C {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		$default                 = parent::get_default();
 		$default['cols_per_row'] = 3;
 

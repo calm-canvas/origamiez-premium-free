@@ -73,16 +73,16 @@ class InlineStyleGenerator {
 		);
 
 		$default_colors = array(
-			'body_color'                           => '#333333',
-			'heading_color'                        => '#111111',
-			'link_color'                           => '#111111',
-			'link_hover_color'                     => '#00589f',
-			'primary_color'                        => '#111111',
-			'secondary_color'                      => '#f5f7fa',
-			'main_menu_color'                      => '#111111',
-			'main_menu_bg_color'                   => '#ffffff',
-			'main_menu_hover_color'                => '#00589f',
-			'main_menu_active_color'               => '#111111',
+			'body_color'                           => 'var(--wp--preset--color--body, #333333)',
+			'heading_color'                        => 'var(--wp--preset--color--heading, #111111)',
+			'link_color'                           => 'var(--wp--preset--color--primary, #111111)',
+			'link_hover_color'                     => 'var(--wp--preset--color--link-hover, #00589f)',
+			'primary_color'                        => 'var(--wp--preset--color--primary, #111111)',
+			'secondary_color'                      => 'var(--wp--preset--color--secondary, #f5f7fa)',
+			'main_menu_color'                      => 'var(--wp--preset--color--heading, #111111)',
+			'main_menu_bg_color'                   => 'var(--wp--preset--color--white, #ffffff)',
+			'main_menu_hover_color'                => 'var(--wp--preset--color--link-hover, #00589f)',
+			'main_menu_active_color'               => 'var(--wp--preset--color--heading, #111111)',
 			'line_1_bg_color'                      => '#e8ecf1',
 			'line_2_bg_color'                      => '#f0f2f5',
 			'line_3_bg_color'                      => '#f8fafc',
@@ -91,7 +91,7 @@ class InlineStyleGenerator {
 			'footer_sidebars_widget_heading_color' => '#ffffff',
 			'footer_end_bg_color'                  => '#111111',
 			'footer_end_text_color'                => '#a0a0a0',
-			'metadata_color'                       => '#666666',
+			'metadata_color'                       => 'var(--wp--preset--color--metadata, #666666)',
 			'color_success'                        => '#27ae60',
 		);
 

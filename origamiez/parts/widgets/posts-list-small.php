@@ -10,11 +10,11 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Small', 'registe
 /**
  * Class Origamiez_Widget_Posts_List_Small
  */
-class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
+class Origamiez_Widget_Posts_List_Small extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC {
 	/**
 	 * Register widget
 	 */
-	public static function register() {
+	public static function register(): void {
 		register_widget( 'Origamiez_Widget_Posts_List_Small' );
 	}
 
@@ -39,7 +39,7 @@ class Origamiez_Widget_Posts_List_Small extends Origamiez_Posts_Widget_Type_C {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Widget instance.
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );

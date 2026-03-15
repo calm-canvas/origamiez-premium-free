@@ -1,0 +1,31 @@
+// =============================================================================
+// DESIGN TOKENS (Bridge between WordPress Global Styles and Legacy SCSS)
+// =============================================================================
+
+:root {
+	// Colors
+	--origamiez-color-primary: var(--wp--preset--color--primary, #222222);
+	--origamiez-color-secondary: var(--wp--preset--color--secondary, #f5f7fa);
+	--origamiez-color-body: var(--wp--preset--color--body, #333333);
+	--origamiez-color-heading: var(--wp--preset--color--heading, #222222);
+	--origamiez-color-link-hover: var(--wp--preset--color--link-hover, #00589f);
+	--origamiez-color-white: var(--wp--preset--color--white, #ffffff);
+	--origamiez-color-black: var(--wp--preset--color--black, #000000);
+	--origamiez-color-metadata: var(--wp--preset--color--metadata, #666666);
+
+	// Typography Families
+	--origamiez-font-family-body: var(--wp--preset--font-family--body, "Georgia", "Times New Roman", Times, serif);
+	--origamiez-font-family-heading: var(--wp--preset--font-family--heading, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+
+	// Typography Sizes
+	--origamiez-font-size-small: var(--wp--preset--font-size--small, 13px);
+	--origamiez-font-size-medium: var(--wp--preset--font-size--medium, 15px);
+	--origamiez-font-size-large: var(--wp--preset--font-size--large, 24px);
+	--origamiez-font-size-x-large: var(--wp--preset--font-size--x-large, 28px);
+
+	// Typography Custom
+	--origamiez-line-height-body: var(--wp--custom--typography--line-height--body, 1.7);
+	--origamiez-line-height-heading: var(--wp--custom--typography--line-height--heading, 1.2);
+	--origamiez-font-weight-body: var(--wp--custom--typography--font-weight--body, 400);
+	--origamiez-font-weight-heading: var(--wp--custom--typography--font-weight--heading, 700);
+}
