@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer 3
+ * Footer 1
  *
  * @package Origamiez
  */
@@ -16,11 +16,9 @@
 					<div id="origamiez-footer-right" class="col-md-12 col-sm-12 col-xs-12 widget-area"
 						role="complementary">
 						<div class="row clearfix">
-							<?php add_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_three_cols' ); ?>
-							<?php get_sidebar( 'footer-1' ); ?>
-							<?php get_sidebar( 'footer-2' ); ?>
-							<?php get_sidebar( 'footer-3' ); ?>
-							<?php remove_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_three_cols' ); ?>
+							<?php add_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_one_cols' ); ?>
+							<?php get_template_part( 'parts/sidebar', 'footer-1' ); ?>
+							<?php remove_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_one_cols' ); ?>
 						</div>
 					</div>
 				</div>

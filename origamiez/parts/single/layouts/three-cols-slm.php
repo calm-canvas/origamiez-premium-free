@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-get_sidebar( 'middle' ); ?>
+get_template_part( 'parts/sidebar', 'middle' ); ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">
 		<?php get_template_part( 'parts/breadcrumb' ); ?>
 		<?php if ( have_posts() ) : ?>
@@ -66,4 +66,4 @@ get_sidebar( 'middle' ); ?>
 		endif;
 		?>
 	</div>
-<?php get_sidebar( 'middle-clone' ); ?>
+<?php get_template_part( 'parts/sidebar', 'middle-clone' ); ?>
