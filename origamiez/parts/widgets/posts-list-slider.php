@@ -10,11 +10,11 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Slider', 'regist
 /**
  * Class Origamiez_Widget_Posts_List_Slider
  */
-class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
+class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeB {
 	/**
 	 * Register widget
 	 */
-	public static function register() {
+	public static function register(): void {
 		register_widget( 'Origamiez_Widget_Posts_List_Slider' );
 	}
 
@@ -39,7 +39,7 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 	 * @param array $args Widget arguments.
 	 * @param array $instance Widget instance.
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $args, $instance ): void {
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		$title    = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
@@ -61,7 +61,7 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 	 * @param array $old_instance Old instance.
 	 * @return array
 	 */
-	public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ): array {
 		$instance                            = parent::update( $new_instance, $old_instance );
 		$instance['is_assign_last_to_small'] = isset( $new_instance['is_assign_last_to_small'] ) ? 1 : 0;
 
@@ -73,7 +73,7 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 	 *
 	 * @param array $instance Widget instance.
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): void {
 		parent::form( $instance );
 		$instance = wp_parse_args( (array) $instance, $this->get_default() );
 		?>
@@ -291,7 +291,7 @@ class Origamiez_Widget_Posts_List_Slider extends Origamiez_Posts_Widget_Type_B {
 	 *
 	 * @return array
 	 */
-	protected function get_default() {
+	protected function get_default(): array {
 		$default                            = parent::get_default();
 		$default['is_assign_last_to_small'] = 0;
 

@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-$sidebar = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
+$sidebar = apply_filters( 'origamiez_get_current_sidebar', 'middle-clone', 'middle-clone' );
 if ( is_active_sidebar( $sidebar ) ) :
 	?>
 	<div id="sidebar-middle-clone" class="origamiez-size-02 pull-left hidden" role="complementary">

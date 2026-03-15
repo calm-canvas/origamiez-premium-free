@@ -32,7 +32,7 @@ get_header();
 			</div>
 			<?php get_sidebar( 'main-bottom' ); ?>
 		</div>
-		<?php get_sidebar( 'right' ); ?>
+		<?php get_template_part( 'sidebar-right' ); ?>
 	</div>
 	<div class="clearfix"></div>
 <?php get_sidebar( 'bottom' ); ?>

@@ -8,4 +8,4 @@
 # docker compose exec --user root wordpress sh -c "chown -R www-data:www-data /var/www/html/wp-content && chmod -R 775 /var/www/html/wp-content"
 
 echo "Installing plugins..."
-docker compose exec cli wp plugin install theme-check woocommerce wordpress-importer --activate
+docker compose exec cli wp plugin install theme-check wordpress-importer --activate

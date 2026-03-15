@@ -38,7 +38,7 @@ class SidebarRegistry {
 	 * @return self
 	 */
 	public function register_default_sidebars(): self {
-		add_action( 'init', array( $this, 'setup_default_sidebars' ), 5 );
+		add_action( 'widgets_init', array( $this, 'setup_default_sidebars' ), 5 );
 		return $this;
 	}
 
@@ -55,6 +55,8 @@ class SidebarRegistry {
 			'main-bottom'        => SidebarConfiguration::create( 'main-bottom', esc_attr__( 'Main Bottom', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
 			'left'               => SidebarConfiguration::create( 'left', esc_attr__( 'Left', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
 			'right'              => SidebarConfiguration::create( 'right', esc_attr__( 'Right', 'origamiez' ), '' ),
+			'middle'             => SidebarConfiguration::create( 'middle', esc_attr__( 'Middle Sidebar', 'origamiez' ), '' ),
+			'middle-clone'       => SidebarConfiguration::create( 'middle-clone', esc_attr__( 'Middle Sidebar Clone', 'origamiez' ), '' ),
 			'bottom'             => SidebarConfiguration::create( 'bottom', esc_attr__( 'Bottom', 'origamiez' ), '' ),
 			'footer-1'           => SidebarConfiguration::create( 'footer-1', esc_attr__( 'Footer 1', 'origamiez' ), '' ),
 			'footer-2'           => SidebarConfiguration::create( 'footer-2', esc_attr__( 'Footer 2', 'origamiez' ), '' ),
@@ -72,7 +74,7 @@ class SidebarRegistry {
 	 * Register sidebars.
 	 */
 	public function register(): void {
-		add_action( 'init', array( $this, 'do_register_sidebars' ), 30 );
+		add_action( 'widgets_init', array( $this, 'do_register_sidebars' ), 30 );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'handle_dynamic_sidebar_params' ) );
 	}
 
@@ -93,17 +95,28 @@ class SidebarRegistry {
 	 */
 	public function handle_dynamic_sidebar_params( array $params ): array {
 		global $wp_registered_widgets;
-		$widget_id  = $params[0]['widget_id'];
-		$widget_obj = $wp_registered_widgets[ $widget_id ];
+
+		$widget_id  = $params[0]['widget_id'] ?? null;
+		$widget_obj = $wp_registered_widgets[ $widget_id ] ?? null;
+
+		if ( null === $widget_obj || ! isset( $widget_obj['callback'][0] ) ) {
+			return $params;
+		}
+
 		$widget_opt = get_option( $widget_obj['callback'][0]->option_name );
-		$widget_num = $widget_obj['params'][0]['number'];
+		$widget_num = $widget_obj['params'][0]['number'] ?? null;
+
+		if ( null === $widget_num ) {
+			return $params;
+		}
+
 		if ( ! isset( $widget_opt[ $widget_num ]['title'] ) || ( isset( $widget_opt[ $widget_num ]['title'] ) && empty( $widget_opt[ $widget_num ]['title'] ) ) ) {
 			$params[0]['before_widget'] .= '<div class="origamiez-widget-content clearfix">';
 			$params[0]['before_title']   = '<h2 class="widget-title clearfix"><span class="widget-title-text pull-left">';
 			$params[0]['after_title']    = '</span></h2>';
 		}
 
-		return $params;
+		return apply_filters( 'origamiez_dynamic_sidebar_params', $params );
 	}
 
 	/**

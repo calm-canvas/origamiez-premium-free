@@ -8,7 +8,7 @@
 ?>
 </div>
 </div>
-<?php get_sidebar( 'right' ); ?>
+<?php get_template_part( 'sidebar-right' ); ?>
 <div class="clearfix"></div>
 <?php get_sidebar( 'bottom' ); ?>
 <div class="clearfix"></div>

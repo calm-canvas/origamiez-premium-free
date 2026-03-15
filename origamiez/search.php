@@ -59,7 +59,7 @@ get_header(); ?>
 			<?php get_template_part( 'pagination' ); ?>
 		</div>
 	</div>
-<?php get_sidebar( 'right' ); ?>
+<?php get_template_part( 'sidebar-right' ); ?>
 	<div class="clearfix"></div>
 <?php
 $footer_number_of_cols = (int) get_theme_mod( 'footer_number_of_cols', 5 );
