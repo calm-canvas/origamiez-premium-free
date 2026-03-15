@@ -43,6 +43,46 @@
 					"name": "Metadata",
 					"slug": "metadata",
 					"color": "#666666"
+				},
+				{
+					"name": "Line 1 Background",
+					"slug": "line-1-bg",
+					"color": "#e8ecf1"
+				},
+				{
+					"name": "Line 2 Background",
+					"slug": "line-2-bg",
+					"color": "#f0f2f5"
+				},
+				{
+					"name": "Line 3 Background",
+					"slug": "line-3-bg",
+					"color": "#f8fafc"
+				},
+				{
+					"name": "Footer Sidebars Background",
+					"slug": "footer-sidebars-bg",
+					"color": "#222222"
+				},
+				{
+					"name": "Footer Sidebars Text",
+					"slug": "footer-sidebars-text",
+					"color": "#a0a0a0"
+				},
+				{
+					"name": "Footer Sidebars Widget Heading",
+					"slug": "footer-sidebars-widget-heading",
+					"color": "#ffffff"
+				},
+				{
+					"name": "Footer End Background",
+					"slug": "footer-end-bg",
+					"color": "#111111"
+				},
+				{
+					"name": "Footer End Text",
+					"slug": "footer-end-text",
+					"color": "#a0a0a0"
 				}
 			],
 			"custom": true,
