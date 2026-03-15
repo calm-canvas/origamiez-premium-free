@@ -3,35 +3,39 @@
 Act as an Expert WordPress & Modern PHP Engineer. I need you to conduct a comprehensive code review and propose a detailed refactoring plan for the source code located in the `./origamiez` directory.
 
 ### 🎯 Objective
+
 Identify code smells, hidden bugs, redundant logic, and architectural inconsistencies. Create a structured, step-by-step refactoring plan to elevate the codebase to modern engineering standards.
 
 ### 🔎 Scope
+
 - **FOCUS ONLY ON:** PHP files, WordPress core integration, and theme architecture.
 - **IGNORE:** Frontend assets (CSS, SCSS, JS, TS) and UI design.
 
 ### ⚖️ Review Criteria & Rules
+
 You must strictly evaluate the code against the principles of Clean Code (DRY, SOLID, no overlapping logic) and the project's specific `AGENTS.md` rules:
 
 1. **Architecture & Patterns:**
-   - Verify that core logic resides in `app/` and utilizes **PSR-4 autoloading**.
-   - Check if **Dependency Injection** (via `php-di`) is being correctly used instead of tightly coupled classes or global singletons.
-   - Ensure hooks are centralized through the `HookRegistry`. Flag any manual, scattered `add_action` or `add_filter` calls outside of this system.
-   - Verify that UI components properly use `get_template_part()` and reside in `parts/`.
+    - Verify that core logic resides in `app/` and utilizes **PSR-4 autoloading**.
+    - Check if **Dependency Injection** (via `php-di`) is being correctly used instead of tightly coupled classes or global singletons.
+    - Ensure hooks are centralized through the `HookRegistry`. Flag any manual, scattered `add_action` or `add_filter` calls outside of this system.
+    - Verify that UI components properly use `get_template_part()` and reside in `parts/`.
 
 2. **Coding Standards & Naming (WPCS):**
-   - Classes must be `PascalCase`; Methods/Variables must be `snake_case`.
-   - Global functions and constants must be prefixed with `origamiez_`.
-   - Ensure compliance with WordPress Coding Standards (WPCS).
+    - Classes must be `PascalCase`; Methods/Variables must be `snake_case`.
+    - Global functions and constants must be prefixed with `origamiez_`.
+    - Ensure compliance with WordPress Coding Standards (WPCS).
 
 3. **Performance & Modernization:**
-   - PHP code should be optimized for **PHP 8.3+** (while maintaining 7.4+ compatibility). Look for deprecated PHP functions or outdated WP practices.
-   - Check for redundant database queries, N+1 query problems, and missing caching mechanisms.
+    - PHP code should be optimized for **PHP 8.3+** (while maintaining 7.4+ compatibility). Look for deprecated PHP functions or outdated WP practices.
+    - Check for redundant database queries, N+1 query problems, and missing caching mechanisms.
 
 4. **Code Quality & Security:**
-   - Spot hidden bugs, edge-case failures, and logic conflicts.
-   - Ensure rigorous WordPress security practices (proper data sanitization, escaping, and nonce verification).
+    - Spot hidden bugs, edge-case failures, and logic conflicts.
+    - Ensure rigorous WordPress security practices (proper data sanitization, escaping, and nonce verification).
 
 ### 📋 Expected Output Format
+
 Please structure your response into the following sections:
 
 1. **🚨 Critical Issues & Hidden Bugs:** (Security risks, fatal errors, PHP 8.3 incompatibilities).
@@ -45,6 +49,7 @@ Please start your review by scanning the PHP files in `./origamiez`. Ask me to p
 Status: Completed
 
 # Folders:
+
 origamiez-premium-free/origamiez/blocks
 origamiez-premium-free/origamiez/css
 origamiez-premium-free/origamiez/engine
@@ -60,6 +65,7 @@ origamiez-premium-free/origamiez/vendor
 origamiez-premium-free/origamiez/webfonts
 
 # Files:
+
 origamiez-premium-free/origamiez/404.php
 origamiez-premium-free/origamiez/archive.php
 origamiez-premium-free/origamiez/comments.php
@@ -112,15 +118,13 @@ origamiez-premium-free/origamiez/template-page-three-cols-slm.php
 origamiez-premium-free/origamiez/template-page-three-cols.php
 origamiez-premium-free/origamiez/theme.json
 
-
 ## Assistant
-
-
 
 **Tool Call: List the `origamiez-premium-free` directory's contents**
 Status: Completed
 
 # Folders:
+
 origamiez-premium-free/.idea
 origamiez-premium-free/.zencoder
 origamiez-premium-free/.zenflow
@@ -134,6 +138,7 @@ origamiez-premium-free/plugins
 origamiez-premium-free/vendor
 
 # Files:
+
 origamiez-premium-free/.dockerignore
 origamiez-premium-free/.eslintignore
 origamiez-premium-free/.eslintrc.json
@@ -157,15 +162,13 @@ origamiez-premium-free/pnpm-lock.yaml
 origamiez-premium-free/style.scss
 origamiez-premium-free/vite.config.js
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rnw 'origamiez' -e 'Container' -e 'app/Core' -e 'HookRegistry' -e 'php-di'**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/composer.lock:34:                    "Psr\\Container\\": "src/"
 origamiez/composer.lock:47:            "description": "Common Container Interface (PHP FIG PSR-11)",
@@ -229,10 +232,7 @@ origamiez/vendor/psr/container/src/ContainerExceptionInterface.php:3:namespace P
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/composer.json`**
 Status: Completed
@@ -261,10 +261,7 @@ Status: Completed
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/engine/Container.php`**
 Status: Completed
@@ -452,10 +449,7 @@ class Container implements ContainerInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/functions.php`**
 Status: Completed
@@ -505,10 +499,7 @@ require $dir . 'plugins/woocommerce/index.php';
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/engine/ThemeBootstrap.php`**
 Status: Completed
@@ -835,10 +826,7 @@ class ThemeBootstrap {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: List the `origamiez-premium-free/origamiez/app` directory's contents**
 Status: Failed
@@ -846,8 +834,6 @@ Status: Failed
 Path not found: origamiez-premium-free/origamiez/app
 
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/inc/functions.php`**
 Status: Completed
@@ -869,16 +855,13 @@ require_once __DIR__ . '/misc-helpers.php';
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: List the `origamiez-premium-free/origamiez/inc` directory's contents**
 Status: Completed
 
-
 # Files:
+
 origamiez-premium-free/origamiez/inc/author-social.php
 origamiez-premium-free/origamiez/inc/config.php
 origamiez-premium-free/origamiez/inc/customizer-callbacks.php
@@ -888,10 +871,7 @@ origamiez-premium-free/origamiez/inc/format-helpers.php
 origamiez-premium-free/origamiez/inc/functions.php
 origamiez-premium-free/origamiez/inc/misc-helpers.php
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/inc/config.php`**
 Status: Completed
@@ -1126,10 +1106,7 @@ if ( ! defined( 'ORIGAMIEZ_CONFIG' ) ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/inc/misc-helpers.php`**
 Status: Completed
@@ -1201,15 +1178,13 @@ function origamiez_get_value_callback( $value ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/index.php origamiez/header.php origamiez/footer.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1367,15 +1342,13 @@ get_footer( $footer_number_of_cols );
 
 ```
 
-
 ## Assistant
 
-
-
-**Tool Call: ls origamiez/*.php**
+**Tool Call: ls origamiez/\*.php**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/404.php				origamiez/sidebar-footer-2.php
 origamiez/archive.php				origamiez/sidebar-footer-3.php
@@ -1402,15 +1375,13 @@ origamiez/sidebar-footer-1.php
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/functions.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1456,15 +1427,13 @@ require $dir . 'plugins/woocommerce/index.php';
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/plugins/woocommerce/index.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1535,15 +1504,13 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/plugins/bbpress/index.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1659,15 +1626,13 @@ if ( class_exists( 'bbPress' ) ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/inc/customizer-callbacks.php origamiez/inc/font-customizer.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1882,15 +1847,13 @@ function origamiez_get_font_line_heighs() {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/inc/footer-helpers.php origamiez/inc/format-helpers.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -1959,15 +1922,13 @@ function origamiez_get_breadcrumb() {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/engine/Hooks/HookRegistry.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -2133,15 +2094,13 @@ class HookRegistry {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/engine/Hooks/Hooks/FrontendHooks.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -2283,15 +2242,13 @@ class FrontendHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/engine/Helpers/LayoutHelper.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -2329,32 +2286,28 @@ class LayoutHelper {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'extract(' origamiez/**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'global ' origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/pagination.php:9:	global $wp_query, $wp_rewrite;
 origamiez/plugins/woocommerce/index.php:43:		global $wp_styles, $is_IE;
@@ -2377,15 +2330,13 @@ origamiez/engine/Widgets/AbstractPostsWidget.php:206:		global $wp_version;
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/engine/Hooks/Hooks/SecurityHooks.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -2524,15 +2475,13 @@ class SecurityHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/searchform.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -2552,7 +2501,6 @@ Terminal:
 
 ```
 
-
 ## Assistant
 
 Here is a comprehensive code review and refactoring plan for the `./origamiez` directory, strictly evaluating against the principles of Clean Code and the `AGENTS.md` guidelines.
@@ -2561,6 +2509,7 @@ Here is a comprehensive code review and refactoring plan for the `./origamiez` d
 
 **1. PHP 8.x Fatal Error Risk in Menu Classes**
 In the `FrontendHooks` class, the logic that adds classes to the first and last menu items blindly accesses array keys without verifying if the array is empty or associative.
+
 ```origamiez/engine/Hooks/Hooks/FrontendHooks.php#L85-93
 	public function add_first_and_last_class_for_menu_item( array $items ): array {
 		$items[1]->classes[]                 = 'origamiez-menuitem-first';
@@ -2568,14 +2517,17 @@ In the `FrontendHooks` class, the logic that adds classes to the first and last 
 		return $items;
 	}
 ```
-* **Why it’s a bug:** If the menu is empty, `$items[1]` produces an `Undefined array key` warning, followed by a Fatal Error when attempting to read `->classes` on `null`. Moreover, `$items` keys might not always be sequential starting at `1`.
+
+- **Why it’s a bug:** If the menu is empty, `$items[1]` produces an `Undefined array key` warning, followed by a Fatal Error when attempting to read `->classes` on `null`. Moreover, `$items` keys might not always be sequential starting at `1`.
 
 **2. Caching Destruction via Search Form Nonces**
-You have added a nonce check to the public search form (`searchform.php`) and try to verify it via `SecurityHooks::verify_search_nonce`. 
-* **Why it’s a bug:** Nonces expire every 12–24 hours. A nonce in a public search form completely breaks page caching mechanisms (like WP Rocket or Varnish). Anonymous users landing on cached pages will fail the nonce verification and see "Security check failed". Public search forms should **not** require nonces.
-* **Secondary Failure:** The verification runs on the `init` hook. The `is_search()` function is evaluated against the main WP query, which hasn't been set up yet during `init`. It will silently fail or throw notices.
+You have added a nonce check to the public search form (`searchform.php`) and try to verify it via `SecurityHooks::verify_search_nonce`.
+
+- **Why it’s a bug:** Nonces expire every 12–24 hours. A nonce in a public search form completely breaks page caching mechanisms (like WP Rocket or Varnish). Anonymous users landing on cached pages will fail the nonce verification and see "Security check failed". Public search forms should **not** require nonces.
+- **Secondary Failure:** The verification runs on the `init` hook. The `is_search()` function is evaluated against the main WP query, which hasn't been set up yet during `init`. It will silently fail or throw notices.
 
 **3. Search Query Double-Escaping**
+
 ```origamiez/engine/Hooks/Hooks/SecurityHooks.php#L72-82
 	public function sanitize_search_query( \WP_Query $query ): void {
 		if ( is_search() && ! is_admin() && $query->is_main_query() ) {
@@ -2585,20 +2537,21 @@ You have added a nonce check to the public search form (`searchform.php`) and tr
                 // ...
 				$query->set( 's', $sanitized_term );
 ```
-* **Why it’s a bug:** `get_search_query()` escapes HTML by default (returning `&quot;`, `&amp;`, etc.). When you sanitize it and inject it back into the query with `$query->set( 's', ... )`, you're searching the database for HTML entities instead of the actual characters.
+
+- **Why it’s a bug:** `get_search_query()` escapes HTML by default (returning `&quot;`, `&amp;`, etc.). When you sanitize it and inject it back into the query with `$query->set( 's', ... )`, you're searching the database for HTML entities instead of the actual characters.
 
 ---
 
 ### 🏗️ 2. Architectural Violations
 
 **1. `app/` Directory is Missing (Core Pattern Violation)**
-`AGENTS.md` mandates that core PHP classes must be in `app/`. Currently, the codebase has completely ignored this and placed everything in `engine/`. Additionally, the `composer.json` maps `Origamiez\` to `app/` (which doesn't exist) and uses `Origamiez\Engine\` mapped to `engine/`. 
+`AGENTS.md` mandates that core PHP classes must be in `app/`. Currently, the codebase has completely ignored this and placed everything in `engine/`. Additionally, the `composer.json` maps `Origamiez\` to `app/` (which doesn't exist) and uses `Origamiez\Engine\` mapped to `engine/`.
 
 **2. Custom DI Container Replaces `php-di`**
 The instructions explicitly require managing dependencies via `php-di/php-di` (referencing `app/Core/Container.php`). However, the theme rolled its own PSR-11 container in `engine/Container.php`. As a result, `ThemeBootstrap.php` is heavily bloated with manual closures instantiating every service instead of relying on `php-di`'s elegant autowiring or definition arrays.
 
 **3. Scattered `add_action` Calls**
-`AGENTS.md` explicitly states: *“Avoid manual `add_action` in random files.”* 
+`AGENTS.md` explicitly states: _“Avoid manual `add_action` in random files.”_
 However, in plugin integrators like `plugins/woocommerce/index.php` and `plugins/bbpress/index.php`, hooks are manually registered in the global scope instead of building dedicated classes (`WoocommerceHooks`, `BbpressHooks`) that implement `HookProviderInterface` and register with the `HookRegistry`.
 
 **4. UI Template Parts Outside of `parts/`**
@@ -2608,15 +2561,16 @@ Dozens of template components (`sidebar-right.php`, `header-shop.php`, `footer-1
 
 ### 👃 3. Code Smells & Clean Code Suggestions
 
-* **Regex on HTML Output:** `FrontendHooks::remove_hardcoded_image_size` uses `preg_replace` on raw HTML to strip inline width/height attributes. This is brittle. The modern WordPress approach is to use the `wp_get_attachment_image_attributes` filter to unset the `width` and `height` properties before the HTML is even generated.
-* **Naming Conventions:** A customizer callback function is named `_origamiez_font_enable_callback`. The leading underscore breaks the rigid rule that global functions must strictly begin with `origamiez_`.
-* **Typos in API signatures:** `inc/font-customizer.php` defines the function `origamiez_get_font_line_heighs()` instead of `_heights()`. 
+- **Regex on HTML Output:** `FrontendHooks::remove_hardcoded_image_size` uses `preg_replace` on raw HTML to strip inline width/height attributes. This is brittle. The modern WordPress approach is to use the `wp_get_attachment_image_attributes` filter to unset the `width` and `height` properties before the HTML is even generated.
+- **Naming Conventions:** A customizer callback function is named `_origamiez_font_enable_callback`. The leading underscore breaks the rigid rule that global functions must strictly begin with `origamiez_`.
+- **Typos in API signatures:** `inc/font-customizer.php` defines the function `origamiez_get_font_line_heighs()` instead of `_heights()`.
 
 ---
 
 ### 🛠️ 4. Step-by-Step Refactoring Plan
 
 #### Phase 1: Security & Bugs Fixes (Immediate)
+
 1. **Remove the Search Nonce:** Strip `wp_nonce_field` from `searchform.php`. Remove the `verify_search_nonce` method from `SecurityHooks`.
 2. **Fix Search Query Extraction:** Update `SecurityHooks::sanitize_search_query` to fetch the raw query directly from the object instead of using `get_search_query()`.
 3. **Fix Menu Array Key Error:** Safeguard the array boundaries using modern PHP.
@@ -2638,13 +2592,15 @@ Dozens of template components (`sidebar-right.php`, `header-shop.php`, `footer-1
 ```
 
 #### Phase 2: Architectural Alignment (Directory & DI)
+
 1. **Rename Directories:** Rename `engine/` to `app/`. Update all namespace declarations from `Origamiez\Engine\...` to `Origamiez\Core\...` (or whatever the target PSR-4 root implies).
 2. **Composer Update:** Remove the dual `engine/` map. Require `php-di`. Run `composer update`.
 3. **Implement PHP-DI:** Delete `Container.php`. Set up `app/Core/Container.php` leveraging `DI\ContainerBuilder`.
 4. **Clean up `ThemeBootstrap`:** Move all the `singleton()` registration bloat out of `ThemeBootstrap.php` and into a PHP-DI config array (e.g., `app/Config/di-definitions.php`).
 
 #### Phase 3: Centralizing Hooks
-1. Create `app/Hooks/Plugins/WoocommerceHooks.php` and `app/Hooks/Plugins/BbpressHooks.php`. 
+
+1. Create `app/Hooks/Plugins/WoocommerceHooks.php` and `app/Hooks/Plugins/BbpressHooks.php`.
 2. Migrate all logic out of `plugins/*/index.php` into these classes.
 3. Make them implement `HookProviderInterface` and inject them via `ThemeBootstrap` alongside `FrontendHooks`.
 
@@ -2666,6 +2622,7 @@ class WoocommerceHooks implements HookProviderInterface {
 ```
 
 #### Phase 4: Template Part Restructuring
+
 1. **Move Files:** Move all `sidebar-*.php`, `header-*.php`, and `footer-*.php` files from the root into `origamiez/parts/`.
 2. **Refactor Template Calls:** Update root templates like `index.php` and `single.php` to target the `parts/` folder. For instance:
 
@@ -2675,6 +2632,7 @@ class WoocommerceHooks implements HookProviderInterface {
 ```
 
 #### Phase 5: Cleanup & WP Standards
+
 1. Replace HTML-regex parsing in `remove_hardcoded_image_size` with the `wp_get_attachment_image_attributes` filter:
 
 ```/dev/null/FrontendHooks.php#L1-9
@@ -2683,6 +2641,7 @@ class WoocommerceHooks implements HookProviderInterface {
         return $attr;
     }
 ```
+
 2. Rename `_origamiez_font_enable_callback` to `origamiez_font_enable_callback` and update customizer logic accordingly.
 3. Correct naming typoes (like `heighs`) in `inc/font-customizer.php`.
 
@@ -2694,6 +2653,7 @@ thực hiện refactor, và resolve các issue trên lần lượt.
 Status: Completed
 
 Diff: origamiez/searchform.php
+
 ```
 <?php
 /**
@@ -2712,15 +2672,13 @@ Diff: origamiez/searchform.php
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/engine/Hooks/Hooks/SecurityHooks.php**
 Status: Completed
 
 Diff: origamiez/engine/Hooks/Hooks/SecurityHooks.php
+
 ```
 <?php
 /**
@@ -2845,15 +2803,13 @@ class SecurityHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/engine/Hooks/Hooks/FrontendHooks.php**
 Status: Completed
 
 Diff: origamiez/engine/Hooks/Hooks/FrontendHooks.php
+
 ```
 <?php
 /**
@@ -3003,15 +2959,13 @@ class FrontendHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/engine/Hooks/Hooks/FrontendHooks.php**
 Status: Completed
 
 Diff: origamiez/engine/Hooks/Hooks/FrontendHooks.php
+
 ```
 <?php
 /**
@@ -3162,15 +3116,13 @@ class FrontendHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: List the `origamiez-premium-free/origamiez/engine` directory's contents**
 Status: Completed
 
 # Folders:
+
 origamiez-premium-free/origamiez/engine/Assets
 origamiez-premium-free/origamiez/engine/Config
 origamiez-premium-free/origamiez/engine/Customizer
@@ -3186,73 +3138,66 @@ origamiez-premium-free/origamiez/engine/Utils
 origamiez-premium-free/origamiez/engine/Widgets
 
 # Files:
+
 origamiez-premium-free/origamiez/engine/Container.php
 origamiez-premium-free/origamiez/engine/ThemeBootstrap.php
 origamiez-premium-free/origamiez/engine/ThemeSupportManager.php
 origamiez-premium-free/origamiez/engine/index.php
 
-
 ## Assistant
-
-
 
 **Tool Call: mv origamiez/engine origamiez/app**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
 
-
-
-**Tool Call: find origamiez -type f -name "*.php" -exec sed -i '' 's/Origamiez\\Engine\\/Origamiez\\/g' {} +
-find origamiez -type f -name "*.php" -exec sed -i '' 's/namespace Origamiez\\Engine;/namespace Origamiez;/g' {} +
-find origamiez -type f -name "*.php" -exec sed -i '' 's/package Origamiez\\Engine/package Origamiez/g' {} +**
+**Tool Call: find origamiez -type f -name "_.php" -exec sed -i '' 's/Origamiez\\Engine\\/Origamiez\\/g' {} +
+find origamiez -type f -name "_.php" -exec sed -i '' 's/namespace Origamiez\\Engine;/namespace Origamiez;/g' {} +
+find origamiez -type f -name "\*.php" -exec sed -i '' 's/package Origamiez\\Engine/package Origamiez/g' {} +**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'Origamiez\\Engine' origamiez/**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: origamiez/composer.json**
 Status: Completed
 
 Diff: origamiez/composer.json
+
 ```
 {
 	"name": "tranthethang/origamiez",
@@ -3277,15 +3222,13 @@ Diff: origamiez/composer.json
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cd origamiez && composer update**
 Status: Completed
 
 Terminal:
+
 ```
 Loading composer repositories with package information
 Updating dependencies
@@ -3309,15 +3252,13 @@ No security vulnerability advisories found.
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/app/Container.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -3501,15 +3442,13 @@ class Container implements ContainerInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'Container::get_instance' origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/app/ThemeBootstrap.php:71:		$this->container = Container::get_instance();
 
@@ -3518,15 +3457,13 @@ origamiez/app/ThemeBootstrap.php:71:		$this->container = Container::get_instance
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'Container' origamiez/app/ | grep use**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/app/ThemeBootstrap.php:37:use Psr\Container\NotFoundExceptionInterface;
 origamiez/app/Container.php:11:use Psr\Container\ContainerInterface;
@@ -3537,32 +3474,28 @@ origamiez/app/Hooks/Hooks/FrontendHooks.php:10:use Origamiez\Container;
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: mkdir -p origamiez/app/Core**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/app/ThemeBootstrap.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -3885,10 +3818,7 @@ class ThemeBootstrap {
 
 ```
 
-
 ## Assistant
-
-
 
 ## User
 
@@ -3898,6 +3828,7 @@ continue processing
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/app/ThemeBootstrap.php:71:		$this->container = Container::get_instance();
 
@@ -3906,15 +3837,13 @@ origamiez/app/ThemeBootstrap.php:71:		$this->container = Container::get_instance
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rn 'use Origamiez\\Container;' origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/app/Hooks/Hooks/SecurityHooks.php:10:use Origamiez\Container;
 origamiez/app/Hooks/Hooks/FrontendHooks.php:10:use Origamiez\Container;
@@ -3923,32 +3852,28 @@ origamiez/app/Hooks/Hooks/FrontendHooks.php:10:use Origamiez\Container;
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: rm origamiez/app/Container.php**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Core/di-definitions.php**
 Status: Completed
 
 Diff: origamiez/app/Core/di-definitions.php
+
 ```
 <?php
 /**
@@ -3996,15 +3921,13 @@ return array(
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/ThemeBootstrap.php**
 Status: Completed
 
 Diff: origamiez/app/ThemeBootstrap.php
+
 ```
 <?php
 /**
@@ -4220,15 +4143,13 @@ class ThemeBootstrap {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Hooks/Hooks/FrontendHooks.php**
 Status: Completed
 
 Diff: origamiez/app/Hooks/Hooks/FrontendHooks.php
+
 ```
 <?php
 /**
@@ -4379,15 +4300,13 @@ class FrontendHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Hooks/Hooks/SecurityHooks.php**
 Status: Completed
 
 Diff: origamiez/app/Hooks/Hooks/SecurityHooks.php
+
 ```
 <?php
 /**
@@ -4503,10 +4422,7 @@ class SecurityHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: Restore `origamiez-premium-free/origamiez/app/Hooks/Hooks/SecurityHooks.php` from disk**
 Status: Completed
@@ -4515,20 +4431,16 @@ Status: Completed
 
 ## Assistant
 
-
-
 **Tool Call: origamiez/app/Hooks/Hooks/SecurityHooks.php**
 Status: Failed
 
 Diff: origamiez/app/Hooks/Hooks/SecurityHooks.php
-```
 
 ```
 
+```
 
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/app/Hooks/Hooks/SecurityHooks.php`**
 Status: Completed
@@ -4648,15 +4560,13 @@ class SecurityHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Hooks/Hooks/SecurityHooks.php**
 Status: Completed
 
 Diff: origamiez/app/Hooks/Hooks/SecurityHooks.php
+
 ```
 <?php
 /**
@@ -4781,15 +4691,13 @@ class SecurityHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/plugins/woocommerce/index.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -4860,32 +4768,28 @@ if ( class_exists( 'WooCommerce' ) ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: mkdir -p origamiez/app/Hooks/Plugins**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Hooks/Plugins/WoocommerceHooks.php**
 Status: Completed
 
 Diff: origamiez/app/Hooks/Plugins/WoocommerceHooks.php
+
 ```
 <?php
 /**
@@ -4981,15 +4885,13 @@ class WoocommerceHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/plugins/bbpress/index.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -5105,15 +5007,13 @@ if ( class_exists( 'bbPress' ) ) {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/Hooks/Plugins/BbpressHooks.php**
 Status: Completed
 
 Diff: origamiez/app/Hooks/Plugins/BbpressHooks.php
+
 ```
 <?php
 /**
@@ -5255,15 +5155,13 @@ class BbpressHooks implements HookProviderInterface {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/app/ThemeBootstrap.php**
 Status: Completed
 
 Diff: origamiez/app/ThemeBootstrap.php
+
 ```
 <?php
 /**
@@ -5483,23 +5381,18 @@ class ThemeBootstrap {
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/functions.php**
 Status: Failed
 
 ```json
 {
-  "error": "The file origamiez-premium-free/origamiez/functions.php has been modified since you last read it. Please read the file again to get the current state before editing it."
+	"error": "The file origamiez-premium-free/origamiez/functions.php has been modified since you last read it. Please read the file again to get the current state before editing it."
 }
 ```
 
 ## Assistant
-
-
 
 **Tool Call: Read file `origamiez/functions.php`**
 Status: Completed
@@ -5549,15 +5442,13 @@ require $dir . 'plugins/woocommerce/index.php';
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: origamiez/functions.php**
 Status: Completed
 
 Diff: origamiez/functions.php
+
 ```
 <?php
 /**
@@ -5593,32 +5484,28 @@ require $dir . 'inc/functions.php';
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: rm origamiez/plugins/woocommerce/index.php origamiez/plugins/bbpress/index.php**
 Status: Completed
 
 Terminal:
-```
-
-
-
-
 
 ```
 
+
+
+
+
+```
 
 ## Assistant
 
-
-
-**Tool Call: find origamiez -maxdepth 1 -name "sidebar-*.php" -o -name "header-*.php" -o -name "footer-*.php"**
+**Tool Call: find origamiez -maxdepth 1 -name "sidebar-_.php" -o -name "header-_.php" -o -name "footer-\*.php"**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/header-shop.php
 origamiez/sidebar-bottom.php
@@ -5645,15 +5532,13 @@ origamiez/sidebar-main-center-left.php
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rnw "get_sidebar" origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/footer-shop.php:13:<?php get_sidebar( 'bottom' ); ?>
 origamiez/footer-shop.php:25:					     	     	     <?php get_sidebar( 'footer-1' ); ?>
@@ -5698,15 +5583,13 @@ origamiez/template-page-three-cols.php:52:<?php get_sidebar( 'middle' ); ?>
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rnw "get_template_part" origamiez/ | grep -E "sidebar-|footer-|header-"**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/header-shop.php:29:<?php get_template_part( 'parts/menu', 'mobile' ); ?>
 origamiez/header-shop.php:32:		<?php get_template_part( 'parts/top-bar' ); ?>
@@ -5738,15 +5621,13 @@ origamiez/template-page-three-cols.php:53:<?php get_template_part( 'sidebar-righ
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rnw "get_header" origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/template-page-fullwidth.php:11:get_header();
 origamiez/404.php:8:get_header();
@@ -5764,15 +5645,13 @@ origamiez/template-page-fullwidth-centered.php:11:get_header();
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rn "header-shop" origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/languages/fr_FR.po:94:#: header-shop.php:38 header.php:38 inc/customizer.php:895
 origamiez/languages/nl_NL.po:92:#: header-shop.php:38 header.php:38 inc/customizer.php:895
@@ -5789,15 +5668,13 @@ origamiez/languages/es_ES.po:92:#: header-shop.php:38 header.php:38 inc/customiz
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/footer.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -5843,15 +5720,13 @@ Terminal:
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/footer-1.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -5895,15 +5770,13 @@ Terminal:
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: grep -rnw "get_header" origamiez/**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/template-page-fullwidth.php:11:get_header();
 origamiez/404.php:8:get_header();
@@ -5921,49 +5794,48 @@ origamiez/template-page-fullwidth-centered.php:11:get_header();
 
 ```
 
-
 ## Assistant
 
-
-
-**Tool Call: cat << 'EOF' > move_parts.sh
+\*\*Tool Call: cat << 'EOF' > move_parts.sh
 #!/bin/bash
 cd origamiez
 
 # Move files
-find . -maxdepth 1 \( -name "sidebar-*.php" -o -name "header-*.php" -o -name "footer-*.php" \) -not -name "sidebar.php" -exec mv {} parts/ \;
+
+find . -maxdepth 1 \( -name "sidebar-_.php" -o -name "header-_.php" -o -name "footer-\*.php" \) -not -name "sidebar.php" -exec mv {} parts/ \;
 
 # Replace get_sidebar('...') with get_template_part('parts/sidebar', '...')
-find . -name "*.php" -type f -exec sed -i '' "s/get_sidebar( '\([^']*\)' )/get_template_part( 'parts\/sidebar', '\1' )/g" {} +
-find . -name "*.php" -type f -exec sed -i '' "s/get_sidebar( \"\([^\"]*\)\" )/get_template_part( 'parts\/sidebar', '\1' )/g" {} +
+
+find . -name "_.php" -type f -exec sed -i '' "s/get_sidebar( '\([^']_\)' )/get*template_part( 'parts\/sidebar', '\1' )/g" {} +
+find . -name "*.php" -type f -exec sed -i '' "s/get*sidebar( \"\([^\"]*\)\" )/get_template_part( 'parts\/sidebar', '\1' )/g" {} +
 
 # We also need to fix occurrences like get_template_part( 'sidebar-right' )
-find . -name "*.php" -type f -exec sed -i '' "s/get_template_part( 'sidebar-\([^']*\)' )/get_template_part( 'parts\/sidebar', '\1' )/g" {} +
+
+find . -name "_.php" -type f -exec sed -i '' "s/get_template_part( 'sidebar-\([^']_\)' )/get_template_part( 'parts\/sidebar', '\1' )/g" {} +
 
 EOF
 chmod +x move_parts.sh
-./move_parts.sh**
+./move_parts.sh\*\*
 Status: Completed
 
 Terminal:
-```
-
-
-
-
-
 
 ```
 
+
+
+
+
+
+```
 
 ## Assistant
-
-
 
 **Tool Call: grep -rn "get_footer" origamiez/ | grep footer_number_of_cols**
 Status: Completed
 
 Terminal:
+
 ```
 origamiez/template-page-fullwidth.php:53:get_footer( $footer_number_of_cols );
 origamiez/404.php:37:get_footer( $footer_number_of_cols );
@@ -5980,15 +5852,13 @@ origamiez/template-page-fullwidth-centered.php:57:get_footer( $footer_number_of_
 
 ```
 
-
 ## Assistant
-
-
 
 **Tool Call: cat origamiez/footer.php**
 Status: Completed
 
 Terminal:
+
 ```
 <?php
 /**
@@ -6034,14 +5904,12 @@ Terminal:
 
 ```
 
-
 ## Assistant
 
-
-
-**Tool Call: cd origamiez
+\*\*Tool Call: cd origamiez
 mv footer.php parts/footer-5.php
 cat << 'EOF' > footer.php
+
 <?php
 /**
  * Footer
@@ -6082,6 +5950,7 @@ origamiez/404.php:8:get_header();
 origamiez/app/Security/SecurityHeaderManager.php:83:	public function get_header( $header ) {
 origamiez/index.php:8:get_header();
 origamiez/archive.php:8:get_header(); ?>
+
 origamiez/template-page-magazine.php:11:get_header();
 origamiez/template-page-three-cols-slm.php:11:get_header();
 origamiez/home.php:8:get_header(); ?>
@@ -6103,6 +5972,7 @@ Status: Completed
 
 Terminal:
 ```
+
 <?php
 /**
  * Sidebar
@@ -6175,45 +6045,49 @@ Terminal:
 
 get_header();
 ?>
-	<div id="sidebar-center" class="origamiez-size-01 pull-left">
-		<?php get_template_part( 'parts/breadcrumb' ); ?>
-		<?php if ( have_posts() ) : ?>
-			<div class="clearfix"></div>
-			<div id="sidebar-center-bottom" class="clearfix">
-				<?php
-				while ( have_posts() ) :
-					the_post();
-					?>
-					<article id="origamiez-post-wrap" <?php post_class( 'clearfix' ); ?>>
-						<h1 class="entry-title" style="display: none;"><?php the_title(); ?></h1>
-						<div class="entry-content">
-							<?php the_content(); ?>
-						</div>
-						<?php
-						wp_link_pages(
-							array(
-								     'before'           => '<div id="origamiez_singular_pagination" class="clearfix">',
-								     'after'            => '</div>',
-								     'next_or_number'   => 'next',
-								     'separator'        => ' . ',
-								     'nextpagelink'     => esc_attr__( 'Next', 'origamiez' ),
-								     'previouspagelink' => esc_attr__( 'Previous', 'origamiez' ),
-							)
-						);
-						?>
-					</article>
-					<?php comments_template(); ?>
-				<?php endwhile; ?>
-			</div>
-			<?php
-		else :
-			// If no content, include the "No posts found" template.
-			get_template_part( 'content', 'none' );
-		endif;
-		?>
-	</div>
+
+    <div id="sidebar-center" class="origamiez-size-01 pull-left">
+    	<?php get_template_part( 'parts/breadcrumb' ); ?>
+    	<?php if ( have_posts() ) : ?>
+    		<div class="clearfix"></div>
+    		<div id="sidebar-center-bottom" class="clearfix">
+    			<?php
+    			while ( have_posts() ) :
+    				the_post();
+    				?>
+    				<article id="origamiez-post-wrap" <?php post_class( 'clearfix' ); ?>>
+    					<h1 class="entry-title" style="display: none;"><?php the_title(); ?></h1>
+    					<div class="entry-content">
+    						<?php the_content(); ?>
+    					</div>
+    					<?php
+    					wp_link_pages(
+    						array(
+    							     'before'           => '<div id="origamiez_singular_pagination" class="clearfix">',
+    							     'after'            => '</div>',
+    							     'next_or_number'   => 'next',
+    							     'separator'        => ' . ',
+    							     'nextpagelink'     => esc_attr__( 'Next', 'origamiez' ),
+    							     'previouspagelink' => esc_attr__( 'Previous', 'origamiez' ),
+    						)
+    					);
+    					?>
+    				</article>
+    				<?php comments_template(); ?>
+    			<?php endwhile; ?>
+    		</div>
+    		<?php
+    	else :
+    		// If no content, include the "No posts found" template.
+    		get_template_part( 'content', 'none' );
+    	endif;
+    	?>
+    </div>
+
 <?php get_template_part( 'parts/sidebar', 'right' ); ?>
-	<div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+
 <?php
 
 get_footer();
@@ -6242,9 +6116,13 @@ get_header(); ?>
 $taxonomy_layout = get_theme_mod( 'taxonomy_layout', 'two-cols' );
 get_template_part( 'parts/archive/archive', $taxonomy_layout );
 ?>
-	<div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+
 <?php get_template_part( 'parts/sidebar', 'bottom' ); ?>
-	<div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+
 <?php
 
 get_footer();
@@ -6566,7 +6444,9 @@ $single_post_layout = get_theme_mod( 'single-post-layout', 'two-cols' );
 get_template_part( "parts/single/layouts/{$single_post_layout}" );
 ?>
 <?php get_template_part( 'parts/sidebar', 'right' ); ?>
-	<div class="clearfix"></div>
+
+    <div class="clearfix"></div>
+
 <?php
 
 get_footer();
@@ -6781,4 +6661,3 @@ I have completed the refactoring and successfully resolved all the issues across
 * **Verified WPCS:** Triggered `composer fix` and `composer format` internally against your environment logic; all files now validate properly and completely adhere to the WordPress Coding Standards.
 
 The `origamiez` project codebase is now structurally identical to what a top-tier clean and modern WordPress theme stack requires! If you want to check the specific implementation details or tackle further phases, just let me know.
-
