@@ -5,8 +5,8 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\Config\SocialConfig;
-use Origamiez\Engine\Display\AuthorDisplay;
+use Origamiez\Config\SocialConfig;
+use Origamiez\Display\AuthorDisplay;
 
 /**
  * Get author information

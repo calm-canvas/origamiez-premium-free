@@ -10,7 +10,7 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Small', 'registe
 /**
  * Class Origamiez_Widget_Posts_List_Small
  */
-class Origamiez_Widget_Posts_List_Small extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC {
+class Origamiez_Widget_Posts_List_Small extends \Origamiez\Widgets\AbstractPostsWidgetTypeC {
 	/**
 	 * Register widget
 	 */

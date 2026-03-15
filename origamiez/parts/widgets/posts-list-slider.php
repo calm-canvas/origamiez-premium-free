@@ -10,7 +10,7 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Slider', 'regist
 /**
  * Class Origamiez_Widget_Posts_List_Slider
  */
-class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeB {
+class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPostsWidgetTypeB {
 	/**
 	 * Register widget
 	 */

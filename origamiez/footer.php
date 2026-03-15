@@ -11,7 +11,7 @@
 <footer id="origamiez-footer" class="clearfix">
 	<?php if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) || is_active_sidebar( 'footer-5' ) ) : ?>
 		<div id="origamiez-footer-sidebars" class="clearfix">
-			<div id="origamiez-footer-sidebars-inner" class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
+			<div id="origamiez-footer-sidebars-inner" class="<?php \Origamiez\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 				<div class="row clearfix">
 					<div id="origamiez-footer-right" class="col-md-8 col-sm-12 col-xs-12 widget-area"
 						role="complementary">
@@ -28,7 +28,7 @@
 		</div>
 	<?php endif; ?>
 	<div id="origamiez-footer-end" class="clearfix">
-		<div class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
+		<div class="<?php \Origamiez\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 			<?php get_template_part( 'parts/menu', 'bottom' ); ?>
 			<?php get_template_part( 'parts/copyright' ); ?>
 		</div>

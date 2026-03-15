@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\Helpers\FormatHelper;
+use Origamiez\Helpers\FormatHelper;
 
 /**
  * Get format icon

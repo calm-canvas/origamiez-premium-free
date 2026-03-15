@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\ThemeBootstrap;
+use Origamiez\ThemeBootstrap;
 
 const ORIGAMIEZ_PREFIX  = 'origamiez_';
 const ORIGAMIEZ_VERSION = '4.0.0';
@@ -29,13 +29,3 @@ All callback functions for action hooks & filter hooks.
 */
 require_once $dir . 'inc/config.php';
 require $dir . 'inc/functions.php';
-
-/*
-PLUGINS
---------------------
-Setup - config for compatible plugins.
---------------------
-*/
-require $dir . 'plugins/bbpress/index.php';
-
-require $dir . 'plugins/woocommerce/index.php';

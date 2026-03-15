@@ -7,7 +7,7 @@
 
 ?>
 <div id="origamiez-header-top" class="origamiez-header-up-down">
-	<div class="<?php \Origamiez\Engine\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
+	<div class="<?php \Origamiez\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 		<?php $logo = get_theme_mod( 'logo', false ); ?>
 		<div id="origamiez-logo" class="clearfix">
 			<a id="site-home-link" href="<?php echo esc_url( home_url() ); ?>"

@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\Config\FontCustomizerConfig;
+use Origamiez\Config\FontCustomizerConfig;
 
 /**
  * Get font families

@@ -10,7 +10,7 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_With_Background'
 /**
  * Class Origamiez_Widget_Posts_List_With_Background
  */
-class Origamiez_Widget_Posts_List_With_Background extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC {
+class Origamiez_Widget_Posts_List_With_Background extends \Origamiez\Widgets\AbstractPostsWidgetTypeC {
 	/**
 	 * Register widget
 	 */
