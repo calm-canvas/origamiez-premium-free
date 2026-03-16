@@ -5,8 +5,8 @@ The Origamiez theme uses a modular approach to handle layout-related body classe
 
 ## Core Architecture
 - **Main Classes**: 
-    - `Origamiez\Engine\Layout\BodyClassManager` (`origamiez/engine/Layout/BodyClassManager.php`)
-    - `Origamiez\Engine\Display\Breadcrumb\BreadcrumbGenerator` (`origamiez/engine/Display/Breadcrumb/BreadcrumbGenerator.php`)
+    - `Origamiez\Layout\BodyClassManager` (`origamiez/app/Layout/BodyClassManager.php`)
+    - `Origamiez\Display\Breadcrumb\BreadcrumbGenerator` (`origamiez/app/Display/Breadcrumb/BreadcrumbGenerator.php`)
 - **Dependencies**: 
     - `BodyClassProviderInterface`: Interface for classes that provide specific body classes.
     - `BreadcrumbBuilder`: Internal class that handles the logic of building the breadcrumb trail.
@@ -40,8 +40,8 @@ The Origamiez theme uses a modular approach to handle layout-related body classe
     - **CSS Conflicts**: Ensure that classes added via providers do not conflict with core WordPress classes.
 
 ## Related Files
-- `origamiez/engine/Layout/BodyClassManager.php`
-- `origamiez/engine/Layout/Providers/` (Directory)
-- `origamiez/engine/Display/Breadcrumb/BreadcrumbGenerator.php`
-- `origamiez/engine/Display/Breadcrumb/BreadcrumbBuilder.php`
+- `origamiez/app/Layout/BodyClassManager.php`
+- `origamiez/app/Layout/Providers/` (Directory)
+- `origamiez/app/Display/Breadcrumb/BreadcrumbGenerator.php`
+- `origamiez/app/Display/Breadcrumb/BreadcrumbBuilder.php`
 - `origamiez/parts/breadcrumb.php`

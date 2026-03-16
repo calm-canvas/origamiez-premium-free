@@ -16,15 +16,17 @@ The Origamiez theme utilizes a modular and structured template system, extending
 
 ## Implementation Details
 - **Template Parts Structure**: 
-    - `parts/header/`: Contains different header layout variations (e.g., `header-left-right.php`).
+    - `parts/header/`: Contains header layout variations (e.g., `header-left-right.php`).
     - `parts/archive/`: Layouts for archive pages (e.g., `archive-two-cols.php`).
-    - `parts/metadata/`: Small components for post metadata (date, author, category).
+    - `parts/metadata/`: Components for post metadata (date, author, category).
     - `parts/single/`: Post-specific elements like author info, tags, and related posts.
-    - `parts/widgets/`: Front-end HTML templates for the custom theme widgets.
-- **Layout Selection**: The theme uses Customizer settings to determine which specific template parts to load. For example, `header.php` may dynamically load a part from `parts/header/` based on the user's choice in the Customizer.
+    - `parts/widgets/`: Front-end HTML templates for custom theme widgets.
+    - `parts/sidebar-*.php`: Individual sidebar templates moved from the root to `parts/`.
+    - `parts/footer-*.php`: Footer layout variations moved from the root to `parts/`.
+- **Layout Selection**: The theme uses Customizer settings to determine which template parts to load. Root template files (like `header.php`, `footer.php`, `sidebar.php`) act as entry points that dynamically load the appropriate part from the `parts/` directory based on theme configurations.
 - **Key Functions/Methods**:
     - `get_template_part('parts/folder/file')`: Standard method for including modular components.
-    - `origamiez_get_template_part()` (if used): A potential theme wrapper for the standard WordPress function that might pass context or data.
+    - `\Origamiez\Helpers\LayoutHelper::get_wrap_classes()`: Helper to get consistent container classes.
 
 ## Maintenance & Development
 - **Customizing a Component**: 
@@ -33,14 +35,13 @@ The Origamiez theme utilizes a modular and structured template system, extending
 - **Adding a New Layout**: 
     - Create a new file in the appropriate `parts/` sub-directory.
     - Add a new option in the Customizer to allow the user to select this layout.
-    - Update the main template file (e.g., `archive.php`) to respect the new Customizer choice.
-- **Common Issues**: 
-    - **Missing Files**: Ensure that all `get_template_part` calls point to valid file paths within the theme directory.
+    - Update the entry point file to respect the new Customizer choice.
 
 ## Related Files
 - `origamiez/parts/` (Directory)
 - `origamiez/header.php`
 - `origamiez/footer.php`
+- `origamiez/sidebar.php`
 - `origamiez/index.php`
 - `origamiez/archive.php`
 - `origamiez/single.php`

@@ -5,9 +5,9 @@ The Origamiez theme provides a robust set of features for enhancing post display
 
 ## Core Architecture
 - **Main Classes**: 
-    - `Origamiez\Engine\Post\PostClassManager` (`origamiez/engine/Post/PostClassManager.php`)
-    - `Origamiez\Engine\Post\PostFormatter` (`origamiez/engine/Post/PostFormatter.php`)
-    - `Origamiez\Engine\Post\MetadataManager` (`origamiez/engine/Post/MetadataManager.php`)
+    - `Origamiez\Post\PostClassManager` (`origamiez/app/Post/PostClassManager.php`)
+    - `Origamiez\Post\PostFormatter` (`origamiez/app/Post/PostFormatter.php`)
+    - `Origamiez\Post\MetadataManager` (`origamiez/app/Post/MetadataManager.php`)
 - **Dependencies**: 
     - `PostIconFactory`: Generates FontAwesome icons based on the current post format.
 - **Patterns Used**: 
@@ -37,6 +37,6 @@ The Origamiez theme provides a robust set of features for enhancing post display
     - **Post Class Conflicts**: Ensure that new classes added to the `post_class` filter do not conflict with core WordPress or plugin classes.
 
 ## Related Files
-- `origamiez/engine/Post/` (Directory)
+- `origamiez/app/Post/` (Directory)
 - `origamiez/parts/metadata/` (Directory)
 - `origamiez/content.php` (Where post classes and formats are applied)

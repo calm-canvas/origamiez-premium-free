@@ -4,12 +4,12 @@
 The Origamiez theme utilizes a centralized `ConfigManager` to handle theme-wide defaults, static configurations, and runtime settings. This is supplemented by specialized configuration classes that provide logic-heavy settings for skins, layouts, and typography, ensuring that configuration is both accessible and well-organized.
 
 ## Core Architecture
-- **Main Class/File**: `Origamiez\Engine\Config\ConfigManager` (`origamiez/engine/Config/ConfigManager.php`)
+- **Main Class/File**: `Origamiez\Config\ConfigManager` (`origamiez/app/Config/ConfigManager.php`)
 - **Dependencies**: 
-    - `Origamiez\Engine\Config\SkinConfig`: Manages color schemes and skins.
-    - `Origamiez\Engine\Config\LayoutConfig`: Manages sidebar and content layout logic.
-    - `Origamiez\Engine\Config\FontConfig`: Manages typography and font settings.
-    - `Origamiez\Engine\Config\BodyClassConfig`: Manages rules for body classes.
+    - `Origamiez\Config\SkinConfig`: Manages color schemes and skins.
+    - `Origamiez\Config\LayoutConfig`: Manages sidebar and content layout logic.
+    - `Origamiez\Config\FontConfig`: Manages typography and font settings.
+    - `Origamiez\Config\BodyClassConfig`: Manages rules for body classes.
 - **Patterns Used**: 
     - **Singleton**: `ConfigManager` provides a single source of truth for configuration.
     - **Dot Notation**: Supports hierarchical data access via strings (e.g., `theme.name`).
@@ -30,11 +30,11 @@ The Origamiez theme utilizes a centralized `ConfigManager` to handle theme-wide 
 ## Maintenance & Development
 - **Updating Defaults**: Core defaults like supported WordPress features should be updated in `ConfigManager::initialize_defaults()`.
 - **Retrieving Settings**: Always use the `ConfigManager` or the specialized config classes instead of calling `get_theme_mod` directly in templates. This ensures that the theme's logic (like default values and overrides) is respected.
-- **Extending**: To add a new complex configuration area, create a new class in the `origamiez/engine/Config/` directory and register it in `ThemeBootstrap`.
+- **Extending**: To add a new complex configuration area, create a new class in the `origamiez/app/Config/` directory and register it in `ThemeBootstrap`.
 
 ## Related Files
-- `origamiez/engine/Config/ConfigManager.php`
-- `origamiez/engine/Config/SkinConfig.php`
-- `origamiez/engine/Config/LayoutConfig.php`
-- `origamiez/engine/Config/FontConfig.php`
-- `origamiez/engine/Config/BodyClassConfig.php`
+- `origamiez/app/Config/ConfigManager.php`
+- `origamiez/app/Config/SkinConfig.php`
+- `origamiez/app/Config/LayoutConfig.php`
+- `origamiez/app/Config/FontConfig.php`
+- `origamiez/app/Config/BodyClassConfig.php`
