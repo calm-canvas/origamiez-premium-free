@@ -139,10 +139,10 @@
 	// =============================================================================
 
 	--body-color: var(--origamiez-color-body, #333333);
-	--heading-color: var(--origamiez-color-heading, #222222);
+	--heading-color: var(--origamiez-color-heading, #111111);
 	--link-color: var(
 		--origamiez-color-primary,
-		#222222
+		#111111
 	); // Links are black, rely on underline for identification
 	--link-hover-color: var(
 		--origamiez-color-link-hover,
@@ -150,16 +150,25 @@
 	); // Classic blue on hover
 	--primary-color: var(
 		--origamiez-color-primary,
-		#222222
+		#111111
 	); // Main "action" color is now black
 	--secondary-color: var(
 		--origamiez-color-secondary,
 		#f5f7fa
 	); // Light gray for backgrounds
-	--main-menu-color: var(--heading-color);
-	--main-menu-bg-color: var(--white);
-	--main-menu-hover-color: var(--link-hover-color);
-	--main-menu-active-color: var(--heading-color);
+	--main-menu-color: var(
+		--origamiez-color-main-menu-text,
+		var(--heading-color)
+	);
+	--main-menu-bg-color: var(--origamiez-color-main-menu-bg, var(--white));
+	--main-menu-hover-color: var(
+		--origamiez-color-main-menu-hover,
+		var(--link-hover-color)
+	);
+	--main-menu-active-color: var(
+		--origamiez-color-main-menu-active,
+		var(--heading-color)
+	);
 	--line-1-bg-color: var(--origamiez-color-line-1-bg, #e8ecf1);
 	--line-2-bg-color: var(--origamiez-color-line-2-bg, #f0f2f5);
 	--line-3-bg-color: var(--origamiez-color-line-3-bg, #f8fafc);
@@ -179,11 +188,11 @@
 	--footer-end-text-color: var(--origamiez-color-footer-end-text, #a0a0a0);
 	--white: var(--origamiez-color-white, #ffffff);
 	--black: var(--origamiez-color-black, #000000);
-	--black_light: #f8fafc;
+	--black_light: var(--origamiez-color-black-light, #f8fafc);
 	--overlay_white: rgba(255, 255, 255, 0.85);
 	--overlay_black: rgba(0, 0, 0, 0.75);
 	--metadata-color: var(--origamiez-color-metadata, #666666);
-	--color-success: #27ae60;
+	--color-success: var(--origamiez-color-success, #27ae60);
 
 	// =============================================================================
 	// Social Media Brand Colors (Unchanged)

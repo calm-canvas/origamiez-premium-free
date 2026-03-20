@@ -23,6 +23,7 @@ class BodyClassConfig {
 	public const LAYOUT_FLUID          = 'origamiez-fluid';
 	public const SHOW_FOOTER_AREA      = 'origamiez-show-footer-area';
 	public const SKIN_PREFIX           = 'origamiez-skin-';
+	public const GLOBAL_STYLES_BRIDGE  = 'origamiez-global-styles-bridge';
 	public const HEADER_STYLE_PREFIX   = 'origamiez-header-style-';
 	public const MISSING_SIDEBAR_RIGHT = 'origamiez-missing-sidebar-right';
 	public const MISSING_SIDEBAR_LEFT  = 'origamiez-missing-sidebar-left';

@@ -14,12 +14,29 @@ namespace Origamiez\Assets;
 class StylesheetManager {
 
 	private const PREFIX = 'origamiez_';
+
 	/**
 	 * The handle for the main stylesheet.
 	 *
 	 * @var string
 	 */
 	private string $style_handle = '';
+
+	/**
+	 * Merged Theme JSON / theme_mod resolver for Google Fonts.
+	 *
+	 * @var ThemeJsonAppearanceBridge
+	 */
+	private ThemeJsonAppearanceBridge $appearance_bridge;
+
+	/**
+	 * StylesheetManager constructor.
+	 *
+	 * @param ThemeJsonAppearanceBridge|null $appearance_bridge Optional bridge.
+	 */
+	public function __construct( ?ThemeJsonAppearanceBridge $appearance_bridge = null ) {
+		$this->appearance_bridge = $appearance_bridge ?? new ThemeJsonAppearanceBridge();
+	}
 
 	/**
 	 * Enqueues all stylesheets.
@@ -54,7 +71,7 @@ class StylesheetManager {
 				self::PREFIX . $handle,
 				trailingslashit( $template_uri ) . $path,
 				array(),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
+				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
 			);
 		}
 	}
@@ -68,7 +85,7 @@ class StylesheetManager {
 			$this->style_handle,
 			get_stylesheet_uri(),
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
 		);
 	}
 
@@ -90,7 +107,7 @@ class StylesheetManager {
 			self::PREFIX . 'google-fonts',
 			$google_fonts_url,
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
+			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
 		);
 	}
 
@@ -98,32 +115,18 @@ class StylesheetManager {
 	 * Enqueues dynamic fonts from theme options.
 	 */
 	private function enqueue_dynamic_fonts(): void {
-		$font_groups            = array();
-		$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
+		$dynamic = $this->appearance_bridge->get_dynamic_google_fonts_for_enqueue();
 
-		if ( $number_of_google_fonts ) {
-			for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
-				$font_family = get_theme_mod( sprintf( 'google_font_%s_name', $i ), '' );
-				$font_src    = get_theme_mod( sprintf( 'google_font_%s_src', $i ), '' );
-
-				if ( $font_family && $font_src ) {
-					$font_family_slug                            = $this->slugify( $font_family );
-					$font_groups['dynamic'][ $font_family_slug ] = $font_src;
-				}
+		foreach ( $dynamic as $font_slug => $font_url ) {
+			if ( ! is_string( $font_slug ) || ! is_string( $font_url ) || '' === $font_url ) {
+				continue;
 			}
-		}
-
-		foreach ( $font_groups as $font_group ) {
-			if ( $font_group ) {
-				foreach ( $font_group as $font_slug => $font ) {
-					wp_enqueue_style(
-						self::PREFIX . $font_slug,
-						$font,
-						array(),
-						defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.0.0'
-					);
-				}
-			}
+			wp_enqueue_style(
+				self::PREFIX . $font_slug,
+				$font_url,
+				array(),
+				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
+			);
 		}
 	}
 
@@ -137,15 +140,5 @@ class StylesheetManager {
 			$this->style_handle = self::PREFIX . 'style';
 		}
 		wp_add_inline_style( $this->style_handle, $css );
-	}
-
-	/**
-	 * Slugifies a string.
-	 *
-	 * @param string $str The string to slugify.
-	 * @return string The slugified string.
-	 */
-	private function slugify( string $str ): string {
-		return strtolower( preg_replace( '/[^a-zA-Z0-9-]/', '-', $str ) );
 	}
 }

@@ -4,11 +4,32 @@
 
 :root {
 	// Colors
-	--origamiez-color-primary: var(--wp--preset--color--primary, #222222);
+	--origamiez-color-primary: var(--wp--preset--color--primary, #111111);
 	--origamiez-color-secondary: var(--wp--preset--color--secondary, #f5f7fa);
 	--origamiez-color-body: var(--wp--preset--color--body, #333333);
-	--origamiez-color-heading: var(--wp--preset--color--heading, #222222);
+	--origamiez-color-heading: var(--wp--preset--color--heading, #111111);
 	--origamiez-color-link-hover: var(--wp--preset--color--link-hover, #00589f);
+	--origamiez-color-main-menu-text: var(
+		--wp--preset--color--main-menu-text,
+		#111111
+	);
+	--origamiez-color-main-menu-bg: var(
+		--wp--preset--color--main-menu-bg,
+		#ffffff
+	);
+	--origamiez-color-main-menu-hover: var(
+		--wp--preset--color--main-menu-hover,
+		#00589f
+	);
+	--origamiez-color-main-menu-active: var(
+		--wp--preset--color--main-menu-active,
+		#111111
+	);
+	--origamiez-color-black-light: var(
+		--wp--preset--color--black-light,
+		#f8fafc
+	);
+	--origamiez-color-success: var(--wp--preset--color--success, #27ae60);
 	--origamiez-color-white: var(--wp--preset--color--white, #ffffff);
 	--origamiez-color-black: var(--wp--preset--color--black, #000000);
 	--origamiez-color-metadata: var(--wp--preset--color--metadata, #666666);

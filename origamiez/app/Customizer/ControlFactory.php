@@ -7,6 +7,7 @@
 
 namespace Origamiez\Customizer;
 
+use Origamiez\Customizer\Controls\SiteEditorNoticeControl;
 use WP_Customize_Manager;
 use WP_Customize_Control;
 use WP_Customize_Color_Control;
@@ -30,6 +31,9 @@ class ControlFactory {
 		$type = $args['type'] ?? 'text';
 
 		switch ( $type ) {
+			case 'origamiez_site_editor_notice':
+				return new SiteEditorNoticeControl( $wp_customize, $id, $args );
+
 			case 'upload':
 			case 'image':
 				unset( $args['type'] );

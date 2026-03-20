@@ -47,6 +47,8 @@ class SettingBuilder {
 	 * @param array  $args The setting arguments.
 	 */
 	public function build( string $id, array $args ): void {
+		$control_type = $args['type'] ?? 'text';
+
 		// Prepare arguments for add_setting.
 		$setting_args = array(
 			'default'           => $args['default'] ?? '',
@@ -55,6 +57,10 @@ class SettingBuilder {
 			'transport'         => $args['transport'] ?? 'refresh',
 			'sanitize_callback' => $args['sanitize_callback'] ?? 'sanitize_text_field',
 		);
+
+		if ( 'origamiez_site_editor_notice' === $control_type ) {
+			$setting_args['sanitize_callback'] = '__return_empty_string';
+		}
 
 		$this->wp_customize->add_setting( $id, $setting_args );
 

@@ -13,7 +13,21 @@ namespace Origamiez\Assets;
  */
 class InlineStyleGenerator {
 
-	private const PREFIX = 'origamiez_';
+	/**
+	 * Theme JSON bridge (migration + merged data).
+	 *
+	 * @var ThemeJsonAppearanceBridge
+	 */
+	private ThemeJsonAppearanceBridge $bridge;
+
+	/**
+	 * InlineStyleGenerator constructor.
+	 *
+	 * @param ThemeJsonAppearanceBridge|null $bridge Optional bridge (for tests).
+	 */
+	public function __construct( ?ThemeJsonAppearanceBridge $bridge = null ) {
+		$this->bridge = $bridge ?? new ThemeJsonAppearanceBridge();
+	}
 
 	/**
 	 * Adds inline styles.
@@ -31,6 +45,10 @@ class InlineStyleGenerator {
 	 * @param StylesheetManager $stylesheet_manager The stylesheet manager.
 	 */
 	private function add_color_variables( StylesheetManager $stylesheet_manager ): void {
+		if ( $this->bridge->is_active() ) {
+			return;
+		}
+
 		$skin = get_theme_mod( 'skin', 'default' );
 
 		if ( 'custom' !== $skin ) {
@@ -79,10 +97,10 @@ class InlineStyleGenerator {
 			'link_hover_color'                     => 'var(--wp--preset--color--link-hover, #00589f)',
 			'primary_color'                        => 'var(--wp--preset--color--primary, #111111)',
 			'secondary_color'                      => 'var(--wp--preset--color--secondary, #f5f7fa)',
-			'main_menu_color'                      => 'var(--wp--preset--color--heading, #111111)',
-			'main_menu_bg_color'                   => 'var(--wp--preset--color--white, #ffffff)',
-			'main_menu_hover_color'                => 'var(--wp--preset--color--link-hover, #00589f)',
-			'main_menu_active_color'               => 'var(--wp--preset--color--heading, #111111)',
+			'main_menu_color'                      => 'var(--wp--preset--color--main-menu-text, #111111)',
+			'main_menu_bg_color'                   => 'var(--wp--preset--color--main-menu-bg, #ffffff)',
+			'main_menu_hover_color'                => 'var(--wp--preset--color--main-menu-hover, #00589f)',
+			'main_menu_active_color'               => 'var(--wp--preset--color--main-menu-active, #111111)',
 			'line_1_bg_color'                      => 'var(--wp--preset--color--line-1-bg, #e8ecf1)',
 			'line_2_bg_color'                      => 'var(--wp--preset--color--line-2-bg, #f0f2f5)',
 			'line_3_bg_color'                      => 'var(--wp--preset--color--line-3-bg, #f8fafc)',
@@ -92,13 +110,13 @@ class InlineStyleGenerator {
 			'footer_end_bg_color'                  => 'var(--wp--preset--color--footer-end-bg, #111111)',
 			'footer_end_text_color'                => 'var(--wp--preset--color--footer-end-text, #a0a0a0)',
 			'metadata_color'                       => 'var(--wp--preset--color--metadata, #666666)',
-			'color_success'                        => '#27ae60',
+			'color_success'                        => 'var(--wp--preset--color--success, #27ae60)',
 		);
 
 		$css  = '';
 		$css .= '--white: #ffffff;';
 		$css .= '--black: #000000;';
-		$css .= '--black_light: ' . get_theme_mod( 'black_light_color', '#f8fafc' ) . ';';
+		$css .= '--black_light: ' . get_theme_mod( 'black_light_color', 'var(--wp--preset--color--black-light, #f8fafc)' ) . ';';
 		$css .= '--overlay_white: rgba(255, 255, 255, 0.85);';
 		$css .= '--overlay_black: rgba(0, 0, 0, 0.75);';
 
@@ -131,6 +149,25 @@ class InlineStyleGenerator {
 	 * @return string The CSS for font variables.
 	 */
 	private function build_font_variables(): string {
+		if ( $this->bridge->is_active() ) {
+			$raw = $this->bridge->get_merged_raw_data();
+			if ( is_array( $raw ) ) {
+				$from_theme_json = $this->build_font_variables_from_merged( $raw );
+				if ( '' !== $from_theme_json ) {
+					return $from_theme_json;
+				}
+			}
+		}
+
+		return $this->build_font_variables_from_theme_mods();
+	}
+
+	/**
+	 * Legacy Customizer theme_mod typography.
+	 *
+	 * @return string
+	 */
+	private function build_font_variables_from_theme_mods(): string {
 		$rules = array(
 			'family'      => '',
 			'size'        => '-size',
@@ -171,5 +208,149 @@ class InlineStyleGenerator {
 		}
 
 		return $css;
+	}
+
+	/**
+	 * Map merged Theme JSON styles + custom widget typography to Origamiez CSS variables.
+	 *
+	 * @param array<string, mixed> $raw Merged Theme JSON.
+	 *
+	 * @return string
+	 */
+	private function build_font_variables_from_merged( array $raw ): string {
+		$styles = $raw['styles'] ?? array();
+		if ( ! is_array( $styles ) ) {
+			$styles = array();
+		}
+
+		$css = '';
+
+		$map = array(
+			array(
+				'css_base' => 'font-body',
+				'path'     => array( 'elements', 'body' ),
+			),
+			array(
+				'css_base' => 'font-menu',
+				'path'     => array( 'blocks', 'core/navigation' ),
+			),
+			array(
+				'css_base' => 'font-site-title',
+				'path'     => array( 'blocks', 'core/site-title' ),
+			),
+			array(
+				'css_base' => 'font-site-subtitle',
+				'path'     => array( 'blocks', 'core/site-tagline' ),
+			),
+			array(
+				'css_base' => 'font-heading-h1',
+				'path'     => array( 'elements', 'h1' ),
+			),
+			array(
+				'css_base' => 'font-heading-h2',
+				'path'     => array( 'elements', 'h2' ),
+			),
+			array(
+				'css_base' => 'font-heading-h3',
+				'path'     => array( 'elements', 'h3' ),
+			),
+			array(
+				'css_base' => 'font-heading-h4',
+				'path'     => array( 'elements', 'h4' ),
+			),
+			array(
+				'css_base' => 'font-heading-h5',
+				'path'     => array( 'elements', 'h5' ),
+			),
+			array(
+				'css_base' => 'font-heading-h6',
+				'path'     => array( 'elements', 'h6' ),
+			),
+		);
+
+		foreach ( $map as $item ) {
+			$typo = $this->get_typography_at_style_path( $styles, $item['path'] );
+			if ( null !== $typo ) {
+				$css .= $this->typography_to_css_variables( $typo, $item['css_base'] );
+			}
+		}
+
+		$settings = $raw['settings'] ?? array();
+		if ( is_array( $settings ) ) {
+			$widget_typo = $settings['custom']['origamiez']['widgetTitleTypography'] ?? null;
+			if ( is_array( $widget_typo ) ) {
+				$css .= $this->typography_to_css_variables( $widget_typo, 'font-widget-title' );
+			}
+		}
+
+		return $css;
+	}
+
+	/**
+	 * Read styles.*.typography at a nested path.
+	 *
+	 * @param array<string, mixed> $styles Root styles branch.
+	 * @param array<int, string>   $path   Path segments (e.g. elements, body).
+	 *
+	 * @return array<string, mixed>|null
+	 */
+	private function get_typography_at_style_path( array $styles, array $path ): ?array {
+		$node = $styles;
+		foreach ( $path as $segment ) {
+			if ( ! isset( $node[ $segment ] ) || ! is_array( $node[ $segment ] ) ) {
+				return null;
+			}
+			$node = $node[ $segment ];
+		}
+		if ( empty( $node['typography'] ) || ! is_array( $node['typography'] ) ) {
+			return null;
+		}
+
+		return $node['typography'];
+	}
+
+	/**
+	 * Map Theme JSON typography keys to Origamiez --font-* custom properties.
+	 *
+	 * @param array<string, mixed> $typo     Theme JSON typography keys.
+	 * @param string               $css_base CSS variable base (e.g. font-body).
+	 *
+	 * @return string
+	 */
+	private function typography_to_css_variables( array $typo, string $css_base ): string {
+		$map = array(
+			'fontFamily' => '',
+			'fontSize'   => '-size',
+			'fontStyle'  => '-style',
+			'fontWeight' => '-weight',
+			'lineHeight' => '-line-height',
+		);
+
+		$css = '';
+		foreach ( $map as $json_key => $suffix ) {
+			if ( empty( $typo[ $json_key ] ) || ! is_scalar( $typo[ $json_key ] ) ) {
+				continue;
+			}
+			$val  = (string) $typo[ $json_key ];
+			$safe = $this->sanitize_inline_css_value( $val );
+			$var  = '--' . $css_base . $suffix;
+			$css .= "{$var}: {$safe};";
+		}
+
+		return $css;
+	}
+
+	/**
+	 * Strip characters that could break inline CSS declarations.
+	 *
+	 * @param string $value Raw value.
+	 *
+	 * @return string
+	 */
+	private function sanitize_inline_css_value( string $value ): string {
+		$value = wp_strip_all_tags( $value );
+		$value = str_replace( array( "\n", "\r", ';', '{', '}' ), '', $value );
+
+		return trim( $value );
 	}
 }

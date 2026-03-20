@@ -7,6 +7,8 @@
 
 namespace Origamiez\Layout\Providers;
 
+use Origamiez\Assets\ThemeJsonAppearanceBridge;
+
 /**
  * Class GeneralClassProvider
  *
@@ -93,6 +95,11 @@ class GeneralClassProvider extends AbstractBodyClassProvider {
 	 * @return void
 	 */
 	private function add_skin_classes( array &$classes ): void {
+		$bridge = new ThemeJsonAppearanceBridge();
+		if ( $bridge->is_active() ) {
+			$classes[] = $this->body_class_config::GLOBAL_STYLES_BRIDGE;
+		}
+
 		$skin = get_theme_mod( 'skin', 'default' );
 		if ( $skin ) {
 			$classes[] = $this->body_class_config::SKIN_PREFIX . $skin;

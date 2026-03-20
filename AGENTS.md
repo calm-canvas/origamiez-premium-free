@@ -18,12 +18,12 @@
 
 ## Repository vs Shipped Theme
 
-| Area | Role |
-|------|------|
-| **`origamiez/`** | **Deliverable theme** loaded by WordPress: `functions.php`, `theme.json`, `app/` (PSR-4), `parts/`, `inc/`, `patterns/`, `templates/`, built CSS/JS consumed by the theme. |
-| **`assets/`** | **Authoring** SASS/JS for Vite; output is typically synchronized into the theme’s enqueue paths (see `docs/specs/03-asset-management.md`). |
-| **`docs/specs/`** | Architecture specs; treat as source of truth alongside this file. |
-| **`plugins/craftsman-suite/`** | Separate plugin with its own `app/` tree—do not confuse with the theme’s `origamiez/app/`. |
+| Area                           | Role                                                                                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`origamiez/`**               | **Deliverable theme** loaded by WordPress: `functions.php`, `theme.json`, `app/` (PSR-4), `parts/`, `inc/`, `patterns/`, `templates/`, built CSS/JS consumed by the theme. |
+| **`assets/`**                  | **Authoring** SASS/JS for Vite; output is typically synchronized into the theme’s enqueue paths (see `docs/specs/03-asset-management.md`).                                 |
+| **`docs/specs/`**              | Architecture specs; treat as source of truth alongside this file.                                                                                                          |
+| **`plugins/craftsman-suite/`** | Separate plugin with its own `app/` tree—do not confuse with the theme’s `origamiez/app/`.                                                                                 |
 
 ## Architecture & Coding Standards
 
@@ -76,11 +76,11 @@ This repo is optimized for **agent-assisted development**: small, reviewable dif
 
 - **Standard**: [WordPress Coding Standards (WPCS)](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
 - **Naming**:
-  - **Classes**: `PascalCase`.
-  - **Methods/Functions**: `snake_case`.
-  - **Variables**: `snake_case`.
-  - **Class files**: PSR-4 under `origamiez/app/` (e.g. `origamiez/app/Hooks/HookRegistry.php` → `Origamiez\Hooks\HookRegistry`).
-  - **Template files**: `kebab-case.php`.
+    - **Classes**: `PascalCase`.
+    - **Methods/Functions**: `snake_case`.
+    - **Variables**: `snake_case`.
+    - **Class files**: PSR-4 under `origamiez/app/` (e.g. `origamiez/app/Hooks/HookRegistry.php` → `Origamiez\Hooks\HookRegistry`).
+    - **Template files**: `kebab-case.php`.
 - **Prefixing**: Global functions and constants **`origamiez_`** (and constant `ORIGAMIEZ_*` where used); text domain **`origamiez`**.
 
 ### CSS / SASS
@@ -122,124 +122,124 @@ Twenty high-signal patterns for themes that must coexist with **blocks**, **bloc
 
 ### 1. Hook registration
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                             | Bad                                                                                         |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Add actions/filters inside a `HookProviderInterface` class; register it from `ThemeBootstrap::register_hooks()`. | Sprinkle `add_action` across `inc/functions.php` and random templates with no central list. |
 
 ### 2. Service location
 
-| Good | Bad |
-|------|-----|
+| Good                                                                         | Bad                                                                       |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Resolve dependencies via **`di-definitions.php`** and constructor injection. | `new` heavy objects in templates or global functions; untestable globals. |
 
 ### 3. Widget lifecycle
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                                             | Bad                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
 | Register widget classes through **`WidgetRegistry`** / **`WidgetFactory`** so every widget is tracked and hooked on `widgets_init` consistently. | Call `register_widget()` directly in `functions.php` for each class, bypassing project conventions. |
 
 ### 4. Sidebar definitions
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                    | Bad                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | Use **`SidebarRegistry`** + **`SidebarConfiguration`** so IDs, descriptions, and counts stay documented and filterable. | Duplicate `register_sidebar()` blocks with magic string IDs in multiple files. |
 
 ### 5. Hybrid: `theme.json` vs PHP
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                             | Bad                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Define editor palette and typography in **`theme.json`**; mirror critical colors in SASS tokens/Customizer for front-end parity. | Hard-code hex colors only in widgets while `theme.json` says something else—editor and front mismatch. |
 
 ### 6. Block patterns
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                                        | Bad                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Ship patterns under **`origamiez/patterns/`** with file headers; register category **`origamiez`**; optional scoped CSS in `css/patterns/`. | Paste huge HTML blobs into a page once and never ship reusable, versioned patterns. |
 
 ### 7. Block-only styles
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                  | Bad                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | Use **`wp_enqueue_block_style`** (when available) for pattern/block-specific CSS with unique handles. | Load a global `patterns.css` on every page regardless of content. |
 
 ### 8. Editor vs front styles
 
-| Good | Bad |
-|------|-----|
+| Good                                                                          | Bad                                                                     |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | **`add_editor_style`** + shared token file so the editor resembles the front. | Editor uses default styles; users see a different layout after publish. |
 
 ### 9. Widget form security
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                          | Bad                                                          |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | Sanitize/validate widget options with theme **`SanitizationManager`** / dedicated sanitizers. | `$_POST` → `update()` with `stripslashes` only or raw saves. |
 
 ### 10. Customizer settings
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                         | Bad                                                         |
+| ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
 | One settings class per concern (`LayoutSettings`, `ColorSettings`, …) registered on **`CustomizerService`**. | Hundreds of `$wp_customize->add_setting` calls in one file. |
 
 ### 11. Template reuse
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                       | Bad                                                          |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **`get_template_part( 'parts/...' )`** for markup shared by blocks, widgets, and archives. | Copy-paste the same HTML into a widget class and a template. |
 
 ### 12. Asset loading
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                       | Bad                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | Register handles/dependencies in **`AssetManager`** / script & stylesheet managers; conditional enqueue for special views. | `wp_enqueue_script` with inline paths in header.php for every page. |
 
 ### 13. Body / layout classes
 
-| Good | Bad |
-|------|-----|
+| Good                                                                              | Bad                                                                              |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Extend **`BodyClassManager`** providers when context-specific classes are needed. | Ad-hoc `body_class` filters in five unrelated files with overlapping priorities. |
 
 ### 14. Text domain & strings
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                           | Bad                                                               |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | All user-facing strings use **`'origamiez'`** and consistent translator comments where needed. | Mixed text domains or missing i18n in new widgets/block patterns. |
 
 ### 15. Block widgets vs classic widget markup
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                     | Bad                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | Support **`widgets-block-editor`**; output stable, accessible HTML from `widget()` whether the form is block or classic. | Rely on jQuery-only admin scripts that break in the block widget screen. |
 
 ### 16. FSE / block templates compatibility
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                                       | Bad                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
 | Keep **`block-templates`** support and templates under **`origamiez/templates/`** coherent with header/footer in PHP when users mix modes. | Assume `header.php` always runs while an `index.html` template omits critical wrappers. |
 
 ### 17. Feature flags (free / premium)
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                                      | Bad                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Gate capabilities with configuration + **`apply_filters( 'origamiez_*' )`** so one codebase can ship free/premium builds. | Maintain two almost-identical widget classes that diverge over time. |
 
 ### 18. Performance on query-heavy widgets
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                                     | Bad                                                                      |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Use `WP_Query` with sensible limits, `no_found_rows`, transient/cache where appropriate, shared helpers. | Uncached full-category queries on every `widget()` render on every page. |
 
 ### 19. Plugin integration hooks
 
-| Good | Bad |
-|------|-----|
+| Good                                                                              | Bad                                                                                          |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Isolate WooCommerce/bbPress hooks in **`WoocommerceHooks`** / **`BbpressHooks`**. | Theme template hacks that `if ( function_exists( 'is_shop' ) )` deeply through `header.php`. |
 
 ### 20. After-bootstrap extensions
 
-| Good | Bad |
-|------|-----|
+| Good                                                                                          | Bad                                                                               |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | Child themes/plugins hook **`origamiez_engine_booted`** or public filters to extend behavior. | Patch core theme files under `origamiez/app/` that will be overwritten on update. |
 
 ---
 
-*When in doubt, follow an existing class in `origamiez/app/` as the reference implementation and read the matching file in `docs/specs/`.*
+_When in doubt, follow an existing class in `origamiez/app/` as the reference implementation and read the matching file in `docs/specs/`._

@@ -26,6 +26,7 @@ use Origamiez\Customizer\Settings\TypographySettings;
 use Origamiez\Display\Breadcrumb\BreadcrumbGenerator;
 use Origamiez\Display\ReadMoreButton;
 use Origamiez\Hooks\HookRegistry;
+use Origamiez\Hooks\Hooks\AdminHooks;
 use Origamiez\Hooks\Hooks\ThemeHooks;
 use Origamiez\Hooks\Hooks\FrontendHooks;
 use Origamiez\Hooks\Hooks\SecurityHooks;
@@ -100,6 +101,7 @@ class ThemeBootstrap {
 	 */
 	private function register_hooks(): void {
 		$this->hook_registry->register_hooks( new ThemeHooks() );
+		$this->hook_registry->register_hooks( new AdminHooks() );
 		$this->hook_registry->register_hooks( new FrontendHooks( $this->container ) );
 		$this->hook_registry->register_hooks( new SecurityHooks( $this->container ) );
 		$this->hook_registry->register_hooks( new BbpressHooks() );

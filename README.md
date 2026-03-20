@@ -65,6 +65,15 @@ Detailed technical specifications and development guides are available in the `.
 
 ## Version History
 
+### 4.3.1 (2026/03/20)
+
+- **New:** Site Editor–first appearance pipeline: expanded `theme.json` palette (menu, black-light, success), one-shot migration of Customizer colors/typography/Google Fonts to user global styles (`GlobalStylesCustomizerMigrator` + option `origamiez_mig_gs_v1`)
+- **New:** `ThemeJsonAppearanceBridge` for front-end parity with merged Theme JSON (WP 6.2+); inline colors/typography and Google Fonts enqueue align with global styles when migration has completed
+- **New:** Customizer **Colors**, **Typography**, and **Google fonts** panels now show a Site Editor notice control instead of legacy controls; spec: [Customizer → Site Editor migration](./docs/specs/13-customizer-to-site-editor-migration.md)
+- **New:** `LegacyAppearanceThemeModKeys` documents optional `theme_mod` purge after QA (no automatic deletion)
+- **Update:** `StylesheetManager` owns all Google Font stylesheets; `FontManager::enqueue` is a no-op placeholder to avoid duplicate handles
+- **Breaking:** Removed unused global Customizer callbacks `origamiez_skin_custom_callback` and `origamiez_font_*` from `inc/customizer-callbacks.php`; child themes referencing them as `active_callback` must supply their own functions
+
 ### 4.0.0 (2026/03/15)
 
 - **New:** Optimized and refactored Docker stack for better development environment

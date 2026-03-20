@@ -13,12 +13,12 @@ use Origamiez\Customizer\CustomizerService;
 /**
  * Class TypographySettings
  *
- * @package Origamiez\Customizer\Settings
+ * Typography and Google Fonts are edited in Appearance → Editor. Phase 3: informational controls only.
  */
 class TypographySettings implements SettingsInterface {
 
 	/**
-	 * Register typography settings.
+	 * Register typography settings (Site Editor redirect notices).
 	 *
 	 * @param CustomizerService $service The customizer service.
 	 */
@@ -26,159 +26,65 @@ class TypographySettings implements SettingsInterface {
 		$service->register_panel(
 			'origamiez_typography',
 			array(
-				'title' => esc_attr__( 'Typography', 'origamiez' ),
+				'title' => esc_html__( 'Typography', 'origamiez' ),
 			)
 		);
 
 		$service->register_panel(
 			'origamiez_google_fonts',
 			array(
-				'title' => esc_attr__( 'Google fonts', 'origamiez' ),
+				'title' => esc_html__( 'Google fonts', 'origamiez' ),
 			)
 		);
 
-		$font_objects = array(
-			'font_body'          => esc_attr__( 'Body', 'origamiez' ),
-			'font_menu'          => esc_attr__( 'Menu', 'origamiez' ),
-			'font_site_title'    => esc_attr__( 'Site title', 'origamiez' ),
-			'font_site_subtitle' => esc_attr__( 'Site subtitle', 'origamiez' ),
-			'font_widget_title'  => esc_attr__( 'Widget title', 'origamiez' ),
-			'font_h1'            => esc_attr__( 'Heading 1', 'origamiez' ),
-			'font_h2'            => esc_attr__( 'Heading 2', 'origamiez' ),
-			'font_h3'            => esc_attr__( 'Heading 3', 'origamiez' ),
-			'font_h4'            => esc_attr__( 'Heading 4', 'origamiez' ),
-			'font_h5'            => esc_attr__( 'Heading 5', 'origamiez' ),
-			'font_h6'            => esc_attr__( 'Heading 6', 'origamiez' ),
+		$service->register_section(
+			'origamiez_typography_site_editor',
+			array(
+				'panel'       => 'origamiez_typography',
+				'title'       => esc_html__( 'Fonts & typography', 'origamiez' ),
+				'description' => '',
+			)
 		);
 
-		foreach ( $font_objects as $font_slug => $font_title ) {
-			$service->register_section(
-				"custom_{$font_slug}",
-				array(
-					'panel' => 'origamiez_typography',
-					'title' => $font_title,
-				)
-			);
+		$service->register_setting(
+			'origamiez_notice_site_editor_typography',
+			array(
+				'label'             => '',
+				'description'       => wp_kses_post(
+					__( 'Body text, headings, navigation, site title, and related typography are configured in the Site Editor: open <strong>Styles</strong> → <strong>Typography</strong> (and block styles where applicable). Customizer typography settings were migrated to your theme’s user styles when possible.', 'origamiez' )
+				),
+				'default'           => '',
+				'type'              => 'origamiez_site_editor_notice',
+				'section'           => 'origamiez_typography_site_editor',
+				'transport'         => 'refresh',
+				'sanitize_callback' => '__return_empty_string',
+				'priority'          => 1,
+			)
+		);
 
-			$service->register_setting(
-				"{$font_slug}_is_enable",
-				array(
-					'label'       => esc_attr__( 'Check to enable', 'origamiez' ),
-					'description' => '',
-					'default'     => 0,
-					'type'        => 'checkbox',
-					'section'     => "custom_{$font_slug}",
-					'transport'   => 'refresh',
-				)
-			);
+		$service->register_section(
+			'origamiez_google_fonts_site_editor',
+			array(
+				'panel'       => 'origamiez_google_fonts',
+				'title'       => esc_html__( 'Web fonts', 'origamiez' ),
+				'description' => '',
+			)
+		);
 
-			$service->register_setting(
-				"{$font_slug}_family",
-				array(
-					'label'           => esc_attr__( 'Font Family', 'origamiez' ),
-					'description'     => '',
-					'default'         => '',
-					'type'            => 'select',
-					'choices'         => origamiez_get_font_families(),
-					'section'         => "custom_{$font_slug}",
-					'transport'       => 'refresh',
-					'active_callback' => "origamiez_{$font_slug}_enable_callback",
-				)
-			);
-
-			$service->register_setting(
-				"{$font_slug}_size",
-				array(
-					'label'           => esc_attr__( 'Font Size', 'origamiez' ),
-					'description'     => '',
-					'default'         => '',
-					'type'            => 'select',
-					'choices'         => origamiez_get_font_sizes(),
-					'section'         => "custom_{$font_slug}",
-					'transport'       => 'refresh',
-					'active_callback' => "origamiez_{$font_slug}_enable_callback",
-				)
-			);
-
-			$service->register_setting(
-				"{$font_slug}_style",
-				array(
-					'label'           => esc_attr__( 'Font Style', 'origamiez' ),
-					'description'     => '',
-					'default'         => '',
-					'type'            => 'select',
-					'choices'         => origamiez_get_font_styles(),
-					'section'         => "custom_{$font_slug}",
-					'transport'       => 'refresh',
-					'active_callback' => "origamiez_{$font_slug}_enable_callback",
-				)
-			);
-
-			$service->register_setting(
-				"{$font_slug}_weight",
-				array(
-					'label'           => esc_attr__( 'Font Weight', 'origamiez' ),
-					'description'     => '',
-					'default'         => '',
-					'type'            => 'select',
-					'choices'         => origamiez_get_font_weights(),
-					'section'         => "custom_{$font_slug}",
-					'transport'       => 'refresh',
-					'active_callback' => "origamiez_{$font_slug}_enable_callback",
-				)
-			);
-
-			$service->register_setting(
-				"{$font_slug}_line_height",
-				array(
-					'label'           => esc_attr__( 'Line height', 'origamiez' ),
-					'description'     => '',
-					'default'         => '',
-					'type'            => 'select',
-					'choices'         => origamiez_get_font_line_heights(),
-					'section'         => "custom_{$font_slug}",
-					'transport'       => 'refresh',
-					'active_callback' => "origamiez_{$font_slug}_enable_callback",
-				)
-			);
-		}
-
-		// Google Fonts.
-		$number_of_google_fonts = (int) apply_filters( 'origamiez_get_number_of_google_fonts', 3 );
-		if ( $number_of_google_fonts ) {
-			for ( $i = 0; $i < $number_of_google_fonts; $i++ ) {
-				$service->register_section(
-					sprintf( 'google_font_%s', $i ),
-					array(
-						'panel' => 'origamiez_google_fonts',
-						'title' => esc_attr__( 'Font #:', 'origamiez' ) . ( $i + 1 ),
-					)
-				);
-
-				$service->register_setting(
-					sprintf( 'google_font_%s_name', $i ),
-					array(
-						'label'       => esc_attr__( 'Font family (name)', 'origamiez' ),
-						'description' => __( 'Please remove "+" by " ". Ex: <code>Open+Sans</code> to <code>Open Sans</code>', 'origamiez' ),
-						'default'     => '',
-						'type'        => 'text',
-						'section'     => sprintf( 'google_font_%s', $i ),
-						'transport'   => 'refresh',
-					)
-				);
-
-				$service->register_setting(
-					sprintf( 'google_font_%s_src', $i ),
-					array(
-						'label'       => esc_attr__( 'Path of this font', 'origamiez' ),
-						'description' => '',
-						'default'     => '',
-						'type'        => 'text',
-						'section'     => sprintf( 'google_font_%s', $i ),
-						'transport'   => 'refresh',
-					)
-				);
-			}
-		}
+		$service->register_setting(
+			'origamiez_notice_site_editor_google_fonts',
+			array(
+				'label'             => '',
+				'description'       => wp_kses_post(
+					__( 'Register font families in the Site Editor (<strong>Styles</strong> → <strong>Typography</strong>). Google Fonts stylesheet URLs from the old Customizer were stored in theme JSON where supported; the theme may still enqueue them from that data.', 'origamiez' )
+				),
+				'default'           => '',
+				'type'              => 'origamiez_site_editor_notice',
+				'section'           => 'origamiez_google_fonts_site_editor',
+				'transport'         => 'refresh',
+				'sanitize_callback' => '__return_empty_string',
+				'priority'          => 1,
+			)
+		);
 	}
 }

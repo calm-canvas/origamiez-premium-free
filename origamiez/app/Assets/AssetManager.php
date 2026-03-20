@@ -58,12 +58,15 @@ class AssetManager {
 	 * @param ConfigManager $config_manager The config manager.
 	 */
 	public function __construct( ConfigManager $config_manager ) {
-		$this->config_manager         = $config_manager;
-		$this->template_uri           = get_template_directory_uri();
-		$this->stylesheet_manager     = new StylesheetManager();
+		$this->config_manager = $config_manager;
+		$this->template_uri   = get_template_directory_uri();
+
+		$appearance_bridge = new ThemeJsonAppearanceBridge();
+
+		$this->stylesheet_manager     = new StylesheetManager( $appearance_bridge );
 		$this->script_manager         = new ScriptManager();
-		$this->inline_style_generator = new InlineStyleGenerator();
-		$this->font_manager           = new FontManager( $this->template_uri );
+		$this->inline_style_generator = new InlineStyleGenerator( $appearance_bridge );
+		$this->font_manager           = new FontManager();
 	}
 
 	/**
@@ -78,7 +81,6 @@ class AssetManager {
 	 */
 	public function enqueue_assets(): void {
 		$this->stylesheet_manager->enqueue( $this->template_uri );
-		$this->font_manager->enqueue();
 		$this->inline_style_generator->add_inline_styles( $this->stylesheet_manager );
 		$this->script_manager->enqueue( $this->template_uri );
 	}

@@ -8,8 +8,9 @@ The Origamiez theme uses a structured approach to asset management, separating a
 - **Dependencies**: 
     - `Origamiez\Assets\StylesheetManager`: Handles CSS enqueuing.
     - `Origamiez\Assets\ScriptManager`: Handles JS enqueuing.
-    - `Origamiez\Assets\InlineStyleGenerator`: Generates dynamic CSS based on theme settings.
-    - `Origamiez\Assets\FontManager`: Manages custom and Google font loading.
+    - `Origamiez\Assets\InlineStyleGenerator`: Generates dynamic CSS (Customizer or, after migration, merged Theme JSON via `ThemeJsonAppearanceBridge`).
+    - `Origamiez\Assets\FontManager`: Placeholder / extension hook; Google Fonts and dynamic slots enqueue in `StylesheetManager` (single handle set).
+    - `Origamiez\Assets\ThemeJsonAppearanceBridge`: Resolves merged Theme JSON + theme_mod fallbacks for Phase 4 front-end parity.
 - **Patterns Used**: 
     - **Delegation Pattern**: `AssetManager` acts as a facade, delegating specific enqueuing tasks to sub-managers.
     - **Strategy Pattern**: Different managers handle different asset types.
@@ -18,9 +19,8 @@ The Origamiez theme uses a structured approach to asset management, separating a
 - **How it works**: 
     1.  **Registration**: `ThemeBootstrap` initializes the `AssetManager` and calls its `register()` method, which hooks into WordPress's `wp_enqueue_scripts` event with a priority of 15.
     2.  **Enqueuing Lifecycle**: During `wp_enqueue_scripts`, the following occurs sequentially:
-        - `StylesheetManager` enqueues core CSS files (Bootstrap, FontAwesome, theme styles).
-        - `FontManager` enqueues font-related styles.
-        - `InlineStyleGenerator` injects dynamic CSS generated from Customizer settings.
+        - `StylesheetManager` enqueues core CSS files (Bootstrap, FontAwesome, theme styles, base + dynamic Google Fonts).
+        - `InlineStyleGenerator` injects dynamic CSS (legacy Customizer or merged global styles / typography when the migration bridge is active).
         - `ScriptManager` enqueues JavaScript files (jQuery, plugins, theme scripts).
     3.  **Dynamic Styles**: The `InlineStyleGenerator` processes theme options (colors, typography) and outputs them as a `wp_add_inline_style` block attached to the main theme stylesheet.
 - **Key Functions/Methods**:
