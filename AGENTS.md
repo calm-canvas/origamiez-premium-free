@@ -5,7 +5,7 @@
 - **Name**: Origamiez
 - **Purpose**: A flexible, high-performance WordPress theme for magazines, newspapers, and e-commerce.
 - **Vibe**: Professional, modular, and extensible. It bridges traditional WordPress development with modern engineering practices (Vite, Dependency Injection, PSR-4).
-- **Hybrid theme**: The shipped theme combines **classic PHP templates**, **`theme.json` (Block Editor design tokens / settings)**, **`block-templates` support**, **block patterns** (under `origamiez/patterns/`), and **classic + block widgets** (`widgets-block-editor`). Agents should assume features may surface in the Site Editor, Customizer, widget areas, or PHP templates—keep behavior and styling coherent across all paths.
+- **Hybrid theme**: The shipped theme combines **classic PHP templates**, **`theme.json` (Block Editor design tokens / settings)**, **`block-templates` support**, **block patterns** (planned via custom blocks; `origamiez/patterns/` is reserved), and **classic + block widgets** (`widgets-block-editor`). Agents should assume features may surface in the Site Editor, Customizer, widget areas, or PHP templates—keep behavior and styling coherent across all paths.
 
 ## Tech Stack & Environment
 
@@ -38,7 +38,7 @@
 - **Dependency injection**: `DI\ContainerBuilder` + **`origamiez/app/Core/di-definitions.php`** (singleton-style services use `factory( [ Class::class, 'get_instance' ] )`).
 - **Bootstrap orchestration**: `ThemeBootstrap::boot()` order—`ThemeSupportManager::register()` → hooks → assets → layout (`BodyClassManager`) → display (`BreadcrumbGenerator`) → Customizer (`CustomizerService` + settings classes) → **`WidgetFactory`** → **`SidebarRegistry`** → action **`origamiez_engine_booted`**.
 - **Hook system**: Central registration via **`HookRegistry`** and classes implementing **`HookProviderInterface`** under `origamiez/app/Hooks/` (e.g. `ThemeHooks`, `FrontendHooks`, `SecurityHooks`, plugin-specific providers). Prefer **not** adding loose `add_action` / `add_filter` in random files; extend an existing provider or add a new provider and register it from `ThemeBootstrap::register_hooks()`.
-- **Theme supports (hybrid)**: Declared in **`ThemeSupportManager`**—includes **`editor-styles`**, **`align-wide`**, **`wp-block-styles`**, **`responsive-embeds`**, **`appearance-tools`**, **`block-templates`**, **`widgets-block-editor`**, plus classic features (menus, post formats, custom header/background, etc.). Block patterns are registered from `origamiez/patterns/*.php` with optional per-pattern CSS via `wp_enqueue_block_style` when `css/patterns/{name}.css` exists.
+- **Theme supports (hybrid)**: Declared in **`ThemeSupportManager`**—includes **`editor-styles`**, **`align-wide`**, **`wp-block-styles`**, **`responsive-embeds`**, **`appearance-tools`**, **`block-templates`**, **`widgets-block-editor`**, plus classic features (menus, post formats, custom header/background, etc.). Theme-owned block patterns are not auto-loaded from PHP; add `register_block_pattern` (or Block Editor registration) when custom blocks ship, with optional `wp_enqueue_block_style` for scoped CSS.
 - **Global design tokens**: **`origamiez/theme.json`** defines palette and settings consumed by the block editor; keep SASS/CSS custom properties (`assets/sass/_tokens.scss`, `_variables.scss`) and Customizer output aligned where colors overlap.
 - **Widgets**: **`AbstractWidget`** extends **`WP_Widget`**; registration flows through **`WidgetRegistry`** / **`WidgetFactory`** (see `WidgetRegistry::register()` on `widgets_init`). Sidebars use **`SidebarRegistry`** and configuration under `origamiez/app/Widgets/Sidebars/`.
 - **Customizer**: Modular **settings classes** (e.g. `GeneralSettings`, `LayoutSettings`) registered on **`CustomizerService`** in `ThemeBootstrap::register_customizer()`—avoid monolithic `functions.php` option definitions.
@@ -58,7 +58,7 @@ This repo is optimized for **agent-assisted development**: small, reviewable dif
 
 - **`origamiez/app/`**: Core PHP (bootstrap, hooks, assets, customizer, widgets, layout, display, security, config).
 - **`origamiez/inc/`**: Theme includes and legacy/global helpers wired from `functions.php`.
-- **`origamiez/parts/`**: Template parts; **`origamiez/patterns/`**: Block pattern PHP files; **`origamiez/templates/`**: Block templates (e.g. `index.html`).
+- **`origamiez/parts/`**: Template parts; **`origamiez/patterns/`**: Reserved for future block patterns; **`origamiez/templates/`**: Block templates (e.g. `index.html`).
 - **`assets/`**: Vite/SASS/JS sources at repo root.
 - **`docs/`**: Specs and guides (`docs/specs/`).
 - **`docker/`**: Container configuration.
@@ -154,7 +154,7 @@ Twenty high-signal patterns for themes that must coexist with **blocks**, **bloc
 
 | Good                                                                                                                                        | Bad                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Ship patterns under **`origamiez/patterns/`** with file headers; register category **`origamiez`**; optional scoped CSS in `css/patterns/`. | Paste huge HTML blobs into a page once and never ship reusable, versioned patterns. |
+| Register patterns (e.g. from custom blocks) with a dedicated category such as **`origamiez`**; optional scoped CSS via **`wp_enqueue_block_style`**. | Paste huge HTML blobs into a page once and never ship reusable, versioned patterns. |
 
 ### 7. Block-only styles
 
