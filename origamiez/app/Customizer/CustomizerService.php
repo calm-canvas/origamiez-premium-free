@@ -152,6 +152,16 @@ class CustomizerService {
 	 */
 	public function register(): void {
 		add_action( 'customize_register', array( $this, 'process_registration' ) );
+		add_action( 'customize_register', array( $this, 'remove_duplicate_core_sections' ), 200 );
+	}
+
+	/**
+	 * Drop core sections superseded by Appearance → Editor (after core registers them).
+	 *
+	 * @param WP_Customize_Manager $wp_customize Customize bootstrap.
+	 */
+	public function remove_duplicate_core_sections( WP_Customize_Manager $wp_customize ): void {
+		$wp_customize->remove_section( 'background_image' );
 	}
 
 	/**

@@ -13,7 +13,7 @@ use Origamiez\Customizer\CustomizerService;
 /**
  * Class TypographySettings
  *
- * Typography and Google Fonts are edited in Appearance → Editor. Phase 3: informational controls only.
+ * Typography and Google Fonts are edited in Appearance → Editor. Phase 3: top-level informational sections only.
  */
 class TypographySettings implements SettingsInterface {
 
@@ -23,26 +23,12 @@ class TypographySettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	public function register( CustomizerService $service ): void {
-		$service->register_panel(
-			'origamiez_typography',
-			array(
-				'title' => esc_html__( 'Typography', 'origamiez' ),
-			)
-		);
-
-		$service->register_panel(
-			'origamiez_google_fonts',
-			array(
-				'title' => esc_html__( 'Google fonts', 'origamiez' ),
-			)
-		);
-
+		// Top-level sections (no panel → sub-section) so notices show in one click.
 		$service->register_section(
 			'origamiez_typography_site_editor',
 			array(
-				'panel'       => 'origamiez_typography',
-				'title'       => esc_html__( 'Fonts & typography', 'origamiez' ),
-				'description' => '',
+				'title'    => esc_html__( 'Typography', 'origamiez' ),
+				'priority' => 50,
 			)
 		);
 
@@ -65,9 +51,8 @@ class TypographySettings implements SettingsInterface {
 		$service->register_section(
 			'origamiez_google_fonts_site_editor',
 			array(
-				'panel'       => 'origamiez_google_fonts',
-				'title'       => esc_html__( 'Web fonts', 'origamiez' ),
-				'description' => '',
+				'title'    => esc_html__( 'Google fonts', 'origamiez' ),
+				'priority' => 55,
 			)
 		);
 

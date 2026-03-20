@@ -7,6 +7,7 @@
 
 namespace Origamiez\Hooks\Hooks;
 
+use Origamiez\Assets\ThemeJsonAppearanceBridge;
 use Origamiez\Hooks\HookProviderInterface;
 use Origamiez\Hooks\HookRegistry;
 use Psr\Container\ContainerInterface;
@@ -35,6 +36,18 @@ class FrontendHooks implements HookProviderInterface {
 	}
 
 	/**
+	 * Avoid duplicate body background CSS once global styles own background (migration completed).
+	 *
+	 * @return void
+	 */
+	public function maybe_remove_custom_background_support(): void {
+		$bridge = new ThemeJsonAppearanceBridge();
+		if ( $bridge->is_active() ) {
+			remove_theme_support( 'custom-background' );
+		}
+	}
+
+	/**
 	 * Register.
 	 *
 	 * @param HookRegistry $registry The registry.
@@ -43,6 +56,7 @@ class FrontendHooks implements HookProviderInterface {
 	 */
 	public function register( HookRegistry $registry ): void {
 		$registry
+			->add_action( 'after_setup_theme', array( $this, 'maybe_remove_custom_background_support' ), 20 )
 			->add_action( 'init', array( $this, 'widget_order_class' ) )
 			->add_filter( 'post_class', array( $this, 'archive_post_class' ) )
 			->add_filter( 'excerpt_more', '__return_false' )

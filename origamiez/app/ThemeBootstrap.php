@@ -15,6 +15,7 @@ use Origamiez\Config\SkinConfig;
 use Origamiez\Config\LayoutConfig;
 use Origamiez\Config\FontConfig;
 use Origamiez\Customizer\CustomizerService;
+use Origamiez\Customizer\Settings\BackgroundSettings;
 use Origamiez\Customizer\Settings\BlogSettings;
 use Origamiez\Customizer\Settings\ColorSettings;
 use Origamiez\Customizer\Settings\CustomCssSettings;
@@ -144,6 +145,7 @@ class ThemeBootstrap {
 		$customizer_service->add_settings_class( new BlogSettings() );
 		$customizer_service->add_settings_class( new SinglePostSettings() );
 		$customizer_service->add_settings_class( new ColorSettings() );
+		$customizer_service->add_settings_class( new BackgroundSettings() );
 		$customizer_service->add_settings_class( new CustomCssSettings() );
 		$customizer_service->add_settings_class( new SocialSettings() );
 		$customizer_service->add_settings_class( new TypographySettings() );

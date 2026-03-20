@@ -22,6 +22,16 @@ class ColorSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	public function register( CustomizerService $service ): void {
+		// Top-level section so the notice is visible in one click (avoids nested core Colors panels).
+		$service->register_section(
+			'origamiez_site_editor_colors',
+			array(
+				'title'       => esc_html__( 'Colors', 'origamiez' ),
+				'description' => '',
+				'priority'    => 40,
+			)
+		);
+
 		$service->register_setting(
 			'origamiez_notice_site_editor_colors',
 			array(
@@ -31,7 +41,7 @@ class ColorSettings implements SettingsInterface {
 				),
 				'default'           => '',
 				'type'              => 'origamiez_site_editor_notice',
-				'section'           => 'colors',
+				'section'           => 'origamiez_site_editor_colors',
 				'transport'         => 'refresh',
 				'sanitize_callback' => '__return_empty_string',
 				'priority'          => 1,

@@ -152,8 +152,8 @@ Twenty high-signal patterns for themes that must coexist with **blocks**, **bloc
 
 ### 6. Block patterns
 
-| Good                                                                                                                                        | Bad                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Good                                                                                                                                                 | Bad                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Register patterns (e.g. from custom blocks) with a dedicated category such as **`origamiez`**; optional scoped CSS via **`wp_enqueue_block_style`**. | Paste huge HTML blobs into a page once and never ship reusable, versioned patterns. |
 
 ### 7. Block-only styles

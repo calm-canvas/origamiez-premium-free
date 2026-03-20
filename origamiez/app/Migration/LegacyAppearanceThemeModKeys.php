@@ -47,6 +47,15 @@ final class LegacyAppearanceThemeModKeys {
 		'origamiez_notice_site_editor_colors',
 		'origamiez_notice_site_editor_typography',
 		'origamiez_notice_site_editor_google_fonts',
+		'origamiez_notice_site_editor_background',
+		'background_image',
+		'background_color',
+		'background_repeat',
+		'background_position_x',
+		'background_position_y',
+		'background_preset',
+		'background_size',
+		'background_attachment',
 	);
 
 	/**

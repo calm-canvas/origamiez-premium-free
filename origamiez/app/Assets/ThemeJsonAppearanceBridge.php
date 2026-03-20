@@ -87,6 +87,43 @@ class ThemeJsonAppearanceBridge {
 	}
 
 	/**
+	 * Body background flags from merged Theme JSON (for layout classes when custom-background support is off).
+	 *
+	 * @return array{image_url: string, color: string} Non-empty strings when a literal image URL or hex color is set.
+	 */
+	public function get_merged_body_background_flags(): array {
+		$out = array(
+			'image_url' => '',
+			'color'     => '',
+		);
+		$raw = $this->get_merged_raw_data();
+		if ( ! $raw || empty( $raw['styles'] ) || ! is_array( $raw['styles'] ) ) {
+			return $out;
+		}
+		$styles = $raw['styles'];
+		$url    = '';
+		if ( ! empty( $styles['background']['backgroundImage']['url'] ) && is_string( $styles['background']['backgroundImage']['url'] ) ) {
+			$url = trim( $styles['background']['backgroundImage']['url'] );
+		} elseif ( ! empty( $styles['elements']['body']['background']['backgroundImage']['url'] ) && is_string( $styles['elements']['body']['background']['backgroundImage']['url'] ) ) {
+			$url = trim( $styles['elements']['body']['background']['backgroundImage']['url'] );
+		}
+		if ( '' !== $url ) {
+			$out['image_url'] = $url;
+		}
+		foreach ( array( $styles['color']['background'] ?? null, $styles['elements']['body']['color']['background'] ?? null ) as $candidate ) {
+			if ( ! is_string( $candidate ) || '' === trim( $candidate ) ) {
+				continue;
+			}
+			$c = trim( $candidate );
+			if ( preg_match( '/^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i', $c ) ) {
+				$out['color'] = $c;
+				break;
+			}
+		}
+		return $out;
+	}
+
+	/**
 	 * Load merged theme + user Theme JSON (WP 6.2+).
 	 *
 	 * @return \WP_Theme_JSON|null

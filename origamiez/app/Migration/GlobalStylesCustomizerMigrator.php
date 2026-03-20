@@ -178,7 +178,74 @@ class GlobalStylesCustomizerMigrator {
 			$patch['settings']['custom']['origamiez']['googleFonts'] = $font_families['meta'];
 		}
 
+		$background_styles = $this->build_background_styles_patch();
+		if ( ! empty( $background_styles ) ) {
+			$patch['styles'] = array_replace_recursive( $patch['styles'], $background_styles );
+		}
+
 		return $this->remove_empty_branch( $patch );
+	}
+
+	/**
+	 * Map legacy Customizer / custom-background theme mods to Theme JSON styles (body / canvas).
+	 *
+	 * @return array<string, mixed> Partial styles tree.
+	 */
+	private function build_background_styles_patch(): array {
+		$image = get_theme_mod( 'background_image', '' );
+		$color = get_theme_mod( 'background_color', '' );
+		$image = is_string( $image ) ? trim( $image ) : '';
+		$color = is_string( $color ) ? trim( $color ) : '';
+
+		if ( '' === $image && '' === $color ) {
+			return array();
+		}
+
+		$styles = array();
+
+		if ( '' !== $color ) {
+			$hex = ltrim( $color, '#' );
+			if ( preg_match( '/^[0-9a-fA-F]{3,8}$/', $hex ) ) {
+				$styles['color']['background'] = '#' . strtolower( $hex );
+			}
+		}
+
+		if ( '' !== $image ) {
+			$url = esc_url_raw( $image );
+			if ( $url ) {
+				$attachment_id = function_exists( 'attachment_url_to_postid' )
+					? (int) attachment_url_to_postid( $url )
+					: 0;
+				$bg            = array(
+					'backgroundImage' => array(
+						'url'    => $url,
+						'title'  => '',
+						'id'     => $attachment_id,
+						'source' => 'file',
+					),
+				);
+				$repeat        = get_theme_mod( 'background_repeat', 'repeat' );
+				$attachment    = get_theme_mod( 'background_attachment', 'scroll' );
+				$size          = get_theme_mod( 'background_size', 'auto' );
+				$pos_x         = get_theme_mod( 'background_position_x', 'left' );
+				$pos_y         = get_theme_mod( 'background_position_y', 'top' );
+				if ( is_string( $repeat ) && '' !== $repeat ) {
+					$bg['backgroundRepeat'] = $repeat;
+				}
+				if ( is_string( $attachment ) && '' !== $attachment ) {
+					$bg['backgroundAttachment'] = $attachment;
+				}
+				if ( is_string( $size ) && '' !== $size ) {
+					$bg['backgroundSize'] = $size;
+				}
+				if ( is_string( $pos_x ) && is_string( $pos_y ) ) {
+					$bg['backgroundPosition'] = trim( $pos_x . ' ' . $pos_y );
+				}
+				$styles['background'] = $bg;
+			}
+		}
+
+		return $styles;
 	}
 
 	/**

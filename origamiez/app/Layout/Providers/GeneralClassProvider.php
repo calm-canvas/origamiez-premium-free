@@ -45,8 +45,19 @@ class GeneralClassProvider extends AbstractBodyClassProvider {
 	 * @return void
 	 */
 	private function add_background_classes( array &$classes ): void {
-		$bg_image = get_background_image();
-		$bg_color = get_background_color();
+		$bridge = new ThemeJsonAppearanceBridge();
+		if ( $bridge->is_active() ) {
+			$bg_image = (string) get_theme_mod( 'background_image', '' );
+			$bg_color = (string) get_theme_mod( 'background_color', '' );
+			if ( '' === $bg_image && '' === $bg_color ) {
+				$flags    = $bridge->get_merged_body_background_flags();
+				$bg_image = $flags['image_url'];
+				$bg_color = $flags['color'];
+			}
+		} else {
+			$bg_image = get_background_image();
+			$bg_color = get_background_color();
+		}
 
 		if ( $bg_image || $bg_color ) {
 			$classes[] = $this->body_class_config::CUSTOM_BG;
