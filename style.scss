@@ -1571,7 +1571,9 @@ body.origamiez-layout-blog {
 					a {
 						position: relative;
 						overflow: hidden;
-						@include inline-block();
+						display: block;
+						width: fit-content;
+						max-width: 100%;
 
 						.overlay {
 							position: absolute;
@@ -1611,6 +1613,11 @@ body.origamiez-layout-blog {
 							font-size: 18px;
 							@include opacity(0);
 						}
+					}
+
+					img {
+						max-width: 100%;
+						height: auto;
 					}
 				}
 
@@ -1681,6 +1688,17 @@ body.origamiez-layout-blog-thumbnail-full-width {
 		article {
 			div.entry-thumb {
 				margin-bottom: 20px;
+
+				a {
+					display: block;
+					width: 100%;
+				}
+
+				img {
+					width: 100%;
+					max-width: 100%;
+					height: auto;
+				}
 			}
 		}
 	}
@@ -2545,25 +2563,11 @@ body.origamiez_custom_bg {
 	}
 }
 
+// Sticky posts in archives (padding only; thumb sizing lives under body.origamiez-layout-blog).
 #origamiez-blogposts {
-	& > li {
-		.entry-thumb {
-			a {
-				display: block;
-				position: relative;
-				width: 100% !important;
-				height: 100% !important;
-			}
-			img {
-				width: 100% !important;
-				height: 100% !important;
-			}
-		}
-
-		&.sticky {
-			article {
-				padding: 20px;
-			}
+	& > li.sticky {
+		article {
+			padding: 20px;
 		}
 	}
 }

@@ -44,7 +44,7 @@
 							the_post_thumbnail(
 								$thumbnail_size,
 								array(
-									'class' => 'img-responsive',
+									'class' => 'img-fluid',
 									'title' => esc_attr( get_the_title() ),
 								)
 							);
