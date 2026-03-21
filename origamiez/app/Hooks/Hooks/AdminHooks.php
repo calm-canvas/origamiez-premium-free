@@ -48,7 +48,7 @@ class AdminHooks implements HookProviderInterface {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			return;
 		}
-		$error = get_option( GlobalStylesCustomizerMigrator::ERROR_OPTION_KEY );
+		$error = get_option( GlobalStylesCustomizerMigrator::ERROR_OPTION_KEY, '' );
 		if ( ! is_string( $error ) || '' === $error ) {
 			return;
 		}

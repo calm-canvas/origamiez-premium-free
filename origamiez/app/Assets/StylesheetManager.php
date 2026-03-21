@@ -8,6 +8,8 @@
 
 namespace Origamiez\Assets;
 
+use Origamiez\Helpers\ThemeVersion;
+
 /**
  * Class StylesheetManager
  */
@@ -71,7 +73,7 @@ class StylesheetManager {
 				self::PREFIX . $handle,
 				trailingslashit( $template_uri ) . $path,
 				array(),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
+				ThemeVersion::get()
 			);
 		}
 	}
@@ -85,7 +87,7 @@ class StylesheetManager {
 			$this->style_handle,
 			get_stylesheet_uri(),
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
+			ThemeVersion::get()
 		);
 	}
 
@@ -107,7 +109,7 @@ class StylesheetManager {
 			self::PREFIX . 'google-fonts',
 			$google_fonts_url,
 			array(),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
+			ThemeVersion::get()
 		);
 	}
 
@@ -125,7 +127,7 @@ class StylesheetManager {
 				self::PREFIX . $font_slug,
 				$font_url,
 				array(),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1'
+				ThemeVersion::get()
 			);
 		}
 	}

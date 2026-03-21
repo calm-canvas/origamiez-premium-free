@@ -9,14 +9,42 @@
 
 namespace Origamiez\Migration;
 
+use Origamiez\Helpers\ThemeVersion;
+
 /**
  * Class GlobalStylesCustomizerMigrator
  */
 class GlobalStylesCustomizerMigrator {
 
-	public const OPTION_KEY = 'origamiez_mig_gs_v1';
+	/**
+	 * Stores migration outcome: success (array with theme_version, completed_at), or skip reason (string).
+	 */
+	public const OPTION_KEY = 'origamiez_global_styles_migration';
 
-	public const ERROR_OPTION_KEY = 'origamiez_mig_gs_v1_error';
+	public const ERROR_OPTION_KEY = 'origamiez_global_styles_migration_error';
+
+	/**
+	 * One-shot migration runs only while the Origamiez engine theme `Version` header equals this value
+	 * (parent version when a child theme is active). Bump for future migration waves.
+	 */
+	public const MIGRATION_TARGET_VERSION = '4.4.0';
+
+	private const TRANSIENT_LOCK = 'origamiez_global_styles_migration_lock';
+
+	/**
+	 * Whether the active Origamiez release is exactly the version that should run this migration.
+	 *
+	 * @return bool
+	 */
+	public static function is_migration_target_version(): bool {
+		$target = apply_filters( 'origamiez_global_styles_migration_target_version', self::MIGRATION_TARGET_VERSION );
+		$target = is_string( $target ) ? trim( $target ) : '';
+		if ( '' === $target ) {
+			return false;
+		}
+
+		return ThemeVersion::get_style_sheet_version() === $target;
+	}
 
 	/**
 	 * Run migration if needed (idempotent via OPTION_KEY).
@@ -32,15 +60,19 @@ class GlobalStylesCustomizerMigrator {
 			return;
 		}
 
+		if ( ! self::is_migration_target_version() ) {
+			return;
+		}
+
 		// Option absent: get_option() returns false → run once. Any stored status (array, string) skips.
 		if ( false !== get_option( self::OPTION_KEY, false ) ) {
 			return;
 		}
 
-		if ( get_transient( 'origamiez_mig_gs_v1_lock' ) ) {
+		if ( get_transient( self::TRANSIENT_LOCK ) ) {
 			return;
 		}
-		set_transient( 'origamiez_mig_gs_v1_lock', '1', 60 );
+		set_transient( self::TRANSIENT_LOCK, '1', 60 );
 
 		try {
 			$this->run();
@@ -61,7 +93,7 @@ class GlobalStylesCustomizerMigrator {
 			);
 		}
 
-		delete_transient( 'origamiez_mig_gs_v1_lock' );
+		delete_transient( self::TRANSIENT_LOCK );
 	}
 
 	/**
@@ -134,8 +166,9 @@ class GlobalStylesCustomizerMigrator {
 		update_option(
 			self::OPTION_KEY,
 			array(
-				'completed_at' => time(),
-				'wp_version'   => get_bloginfo( 'version' ),
+				'completed_at'  => time(),
+				'theme_version' => ThemeVersion::get_style_sheet_version(),
+				'wp_version'    => get_bloginfo( 'version' ),
 			),
 			false
 		);

@@ -45,6 +45,10 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 
 ## 5. Version History
 
+### 4.4.0 (2026/03/21)
+
+- Update: Customizer → Site Editor global styles migration runs only when the Origamiez engine theme Version is 4.4.0 (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); filter `origamiez_global_styles_migration_target_version`
+
 ### 4.3.1 (2026/03/20)
 
 - New: Site Editor–first appearance pipeline (theme.json palette expansion, migration to user global styles, ThemeJsonAppearanceBridge)

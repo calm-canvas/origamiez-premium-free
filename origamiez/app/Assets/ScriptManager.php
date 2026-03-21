@@ -8,6 +8,8 @@
 
 namespace Origamiez\Assets;
 
+use Origamiez\Helpers\ThemeVersion;
+
 /**
  * Class ScriptManager
  */
@@ -61,7 +63,7 @@ class ScriptManager {
 				self::PREFIX . $handle,
 				trailingslashit( $template_uri ) . $path,
 				array( 'jquery' ),
-				defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1',
+				ThemeVersion::get(),
 				true
 			);
 		}
@@ -77,7 +79,7 @@ class ScriptManager {
 			self::PREFIX . self::INIT_HANDLE,
 			trailingslashit( $template_uri ) . 'js/script.js',
 			array( 'jquery' ),
-			defined( 'ORIGAMIEZ_VERSION' ) ? ORIGAMIEZ_VERSION : '4.3.1',
+			ThemeVersion::get(),
 			true
 		);
 	}

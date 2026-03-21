@@ -7,9 +7,8 @@
 
 use Origamiez\ThemeBootstrap;
 
-const ORIGAMIEZ_PREFIX  = 'origamiez_';
-const ORIGAMIEZ_VERSION = '4.3.1';
-$dir                    = trailingslashit( get_template_directory() );
+const ORIGAMIEZ_PREFIX = 'origamiez_';
+$dir                   = trailingslashit( get_template_directory() );
 
 require_once $dir . '/vendor/autoload.php';
 
