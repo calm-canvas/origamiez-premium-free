@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-$sidebar = apply_filters( 'origamiez_get_current_sidebar', 'left', 'left' );
+$sidebar = apply_filters( 'origamiez_get_current_sidebar', 'middle', 'middle' );
 if ( is_active_sidebar( $sidebar ) ) :
 	?>
 	<div id="sidebar-middle" class="origamiez-size-01 pull-left" role="complementary">

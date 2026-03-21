@@ -26,5 +26,5 @@
 			<?php get_template_part( 'pagination' ); ?>
 		</div>
 	</div>
-	<?php get_sidebar( 'right' ); ?>
+	<?php get_template_part( 'sidebar-right' ); ?>
 </div>
