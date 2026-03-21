@@ -45,6 +45,17 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 
 ## 5. Version History
 
+### 4.4.0 (2026/03/21)
+
+- Update: Customizer → Site Editor global styles migration runs only when the Origamiez engine theme Version is 4.4.0 (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); filter `origamiez_global_styles_migration_target_version`
+
+### 4.3.1 (2026/03/20)
+
+- New: Site Editor–first appearance pipeline (theme.json palette expansion, migration to user global styles, ThemeJsonAppearanceBridge)
+- New: Customizer Colors / Typography / Google fonts panels show Site Editor notice; see theme docs for migration spec
+- Update: Google Fonts enqueued via StylesheetManager only
+- Breaking: Removed unused global Customizer callbacks origamiez_skin_custom_callback and origamiez_font_* from inc/customizer-callbacks.php
+
 ### 4.0.0 (2026/03/15)
 
 - New: Optimized and refactored Docker stack for better development environment

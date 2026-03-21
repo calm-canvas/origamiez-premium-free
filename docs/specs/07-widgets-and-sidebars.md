@@ -5,11 +5,11 @@ The Origamiez theme provides a comprehensive set of custom widgets designed for 
 
 ## Core Architecture
 - **Main Classes**: 
-    - `Origamiez\Engine\Widgets\WidgetFactory` (`origamiez/engine/Widgets/WidgetFactory.php`)
-    - `Origamiez\Engine\Widgets\SidebarRegistry` (`origamiez/engine/Widgets/SidebarRegistry.php`)
+    - `Origamiez\Widgets\WidgetFactory` (`origamiez/app/Widgets/WidgetFactory.php`)
+    - `Origamiez\Widgets\SidebarRegistry` (`origamiez/app/Widgets/SidebarRegistry.php`)
 - **Dependencies**: 
-    - `Origamiez\Engine\Widgets\WidgetRegistry`: Internal registry for managing widget classes.
-    - `Origamiez\Engine\Widgets\Sidebars\SidebarConfiguration`: Data object for sidebar settings.
+    - `Origamiez\Widgets\WidgetRegistry`: Internal registry for managing widget classes.
+    - `Origamiez\Widgets\Sidebars\SidebarConfiguration`: Data object for sidebar settings.
 - **Patterns Used**: 
     - **Factory Pattern**: `WidgetFactory` instantiates and registers multiple widget types.
     - **Registry Pattern**: Both widgets and sidebars are maintained in centralized registries.
@@ -32,7 +32,7 @@ The Origamiez theme provides a comprehensive set of custom widgets designed for 
 
 ## Maintenance & Development
 - **Adding a New Widget**: 
-    1.  Create a new widget class in `origamiez/engine/Widgets/Types/`, extending the appropriate base class.
+    1.  Create a new widget class in `origamiez/app/Widgets/Types/`, extending the appropriate base class.
     2.  Register the new class in `WidgetFactory::register_widgets()`.
 - **Adding a New Sidebar**: 
     1.  Add a new `SidebarConfiguration` entry in `SidebarRegistry::setup_default_sidebars()`.
@@ -41,9 +41,9 @@ The Origamiez theme provides a comprehensive set of custom widgets designed for 
     - **Widget Not Appearing**: Ensure the sidebar it's assigned to is actually called in the current template via `dynamic_sidebar()`.
 
 ## Related Files
-- `origamiez/engine/Widgets/WidgetFactory.php`
-- `origamiez/engine/Widgets/WidgetRegistry.php`
-- `origamiez/engine/Widgets/SidebarRegistry.php`
-- `origamiez/engine/Widgets/Types/` (Directory)
-- `origamiez/engine/Widgets/Sidebars/` (Directory)
-- `origamiez/sidebar.php` and other `sidebar-*.php` files in the theme root.
+- `origamiez/app/Widgets/WidgetFactory.php`
+- `origamiez/app/Widgets/WidgetRegistry.php`
+- `origamiez/app/Widgets/SidebarRegistry.php`
+- `origamiez/app/Widgets/Types/` (Directory)
+- `origamiez/app/Widgets/Sidebars/` (Directory)
+- `origamiez/sidebar.php` (Root entry point) and `origamiez/parts/sidebar-*.php` files.

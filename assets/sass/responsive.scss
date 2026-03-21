@@ -308,8 +308,9 @@
 			}
 
 			a.image-overlay {
-				img.img-responsive {
+				img.img-fluid {
 					width: 100%;
+					height: auto;
 				}
 			}
 		}

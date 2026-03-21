@@ -16,6 +16,7 @@ This directory contains the technical specifications for the Origamiez WordPress
 10. **[10-development-guide.md](./10-development-guide.md)**: Best practices for development, maintenance, and extending the theme's functionality.
 11. **[11-security-and-optimization.md](./11-security-and-optimization.md)**: Details on the `SecurityHooks` and HTTP security headers.
 12. **[12-post-features.md](./12-post-features.md)**: Documentation for post formats, metadata, and dynamic post classes.
+13. **[13-customizer-to-site-editor-migration.md](./13-customizer-to-site-editor-migration.md)**: Plan and field mapping for migrating Color, Typography, and Google Fonts from `theme_mod` / Customizer to Site Editor Theme JSON (user global styles).
 
 ## Documentation Template
 All technical documentation files follow the standard format defined in **[template.md](./template.md)**.

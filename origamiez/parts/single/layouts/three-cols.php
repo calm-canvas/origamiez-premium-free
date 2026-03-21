@@ -65,4 +65,4 @@
 	endif;
 	?>
 </div>
-<?php get_sidebar( 'middle' ); ?>
+<?php get_template_part( 'parts/sidebar', 'middle' ); ?>

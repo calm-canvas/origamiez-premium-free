@@ -4,12 +4,12 @@
 The Origamiez theme provides a structured, object-oriented wrapper around the WordPress Customizer API. The `CustomizerService` orchestrates the registration of panels, sections, and settings, using a "Builder" pattern to separate the configuration of options from their implementation within the WordPress environment.
 
 ## Core Architecture
-- **Main Class/File**: `Origamiez\Engine\Customizer\CustomizerService` (`origamiez/engine/Customizer/CustomizerService.php`)
+- **Main Class/File**: `Origamiez\Customizer\CustomizerService` (`origamiez/app/Customizer/CustomizerService.php`)
 - **Dependencies**: 
-    - `Origamiez\Engine\Customizer\Builders\PanelBuilder`: Handles `WP_Customize_Panel` creation.
-    - `Origamiez\Engine\Customizer\Builders\SectionBuilder`: Handles `WP_Customize_Section` creation.
-    - `Origamiez\Engine\Customizer\Builders\SettingBuilder`: Handles `WP_Customize_Setting` and `WP_Customize_Control` creation.
-    - `Origamiez\Engine\Customizer\Settings\SettingsInterface`: Interface for defining groups of theme settings.
+    - `Origamiez\Customizer\Builders\PanelBuilder`: Handles `WP_Customize_Panel` creation.
+    - `Origamiez\Customizer\Builders\SectionBuilder`: Handles `WP_Customize_Section` creation.
+    - `Origamiez\Customizer\Builders\SettingBuilder`: Handles `WP_Customize_Setting` and `WP_Customize_Control` creation.
+    - `Origamiez\Customizer\Settings\SettingsInterface`: Interface for defining groups of theme settings.
 - **Patterns Used**: 
     - **Builder Pattern**: Decouples the definition of settings from the complex WordPress Customizer registration logic.
     - **Service Pattern**: Provides a centralized service for managing all theme options.
@@ -32,7 +32,7 @@ The Origamiez theme provides a structured, object-oriented wrapper around the Wo
 
 ## Maintenance & Development
 - **Adding a New Setting**: 
-    1.  Locate the relevant settings class in `origamiez/engine/Customizer/Settings/`.
+    1.  Locate the relevant settings class in `origamiez/app/Customizer/Settings/`.
     2.  Use the `register_setting()` method within that class's `register()` function.
     3.  Define the `section`, `label`, `type`, and `default` value in the arguments array.
 - **Creating a New Settings Group**: 
@@ -41,7 +41,7 @@ The Origamiez theme provides a structured, object-oriented wrapper around the Wo
 - **Sanitization**: Always provide a `sanitize_callback` in the setting arguments to ensure data integrity.
 
 ## Related Files
-- `origamiez/engine/Customizer/CustomizerService.php`
-- `origamiez/engine/Customizer/Settings/SettingsInterface.php`
-- `origamiez/engine/Customizer/Builders/` (Directory)
-- `origamiez/engine/Customizer/Settings/` (Directory)
+- `origamiez/app/Customizer/CustomizerService.php`
+- `origamiez/app/Customizer/Settings/SettingsInterface.php`
+- `origamiez/app/Customizer/Builders/` (Directory)
+- `origamiez/app/Customizer/Settings/` (Directory)

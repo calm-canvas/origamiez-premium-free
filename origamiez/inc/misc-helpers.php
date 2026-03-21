@@ -5,8 +5,8 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\Config\AllowedTagsConfig;
-use Origamiez\Engine\Helpers\MetadataHelper;
+use Origamiez\Config\AllowedTagsConfig;
+use Origamiez\Helpers\MetadataHelper;
 
 /**
  * Get the metadata prefix.

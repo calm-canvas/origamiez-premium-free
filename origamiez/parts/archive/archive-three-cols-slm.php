@@ -7,7 +7,7 @@
 
 ?>
 <div class="d-flex">
-	<?php get_sidebar( 'middle' ); ?>
+	<?php get_template_part( 'parts/sidebar', 'middle' ); ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">
 		<?php get_template_part( 'parts/breadcrumb' ); ?>
 		<div class="clearfix"></div>
@@ -27,6 +27,6 @@
 			<?php get_template_part( 'pagination' ); ?>
 		</div>
 	</div>
-	<?php get_sidebar( 'middle-clone' ); ?>
-	<?php get_template_part( 'sidebar-right' ); ?>
+	<?php get_template_part( 'parts/sidebar', 'middle-clone' ); ?>
+	<?php get_template_part( 'parts/sidebar', 'right' ); ?>
 </div>

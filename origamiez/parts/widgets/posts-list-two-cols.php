@@ -10,7 +10,7 @@ add_action( 'widgets_init', array( 'Origamiez_Widget_Posts_List_Two_Cols', 'regi
 /**
  * Class Origamiez_Widget_Posts_List_Two_Cols
  */
-class Origamiez_Widget_Posts_List_Two_Cols extends \Origamiez\Engine\Widgets\AbstractPostsWidgetTypeC {
+class Origamiez_Widget_Posts_List_Two_Cols extends \Origamiez\Widgets\AbstractPostsWidgetTypeC {
 	/**
 	 * Register widget
 	 */

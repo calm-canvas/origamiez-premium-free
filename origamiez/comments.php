@@ -28,7 +28,7 @@ if ( ! comments_open() ) {
 						'style'       => 'ol',
 						'short_ping'  => true,
 						'avatar_size' => 50,
-						'callback'    => \Origamiez\Engine\Display\CommentDisplay::register(),
+						'callback'    => \Origamiez\Display\CommentDisplay::register(),
 					)
 				);
 				?>
@@ -47,7 +47,7 @@ if ( ! comments_open() ) {
 		</div>
 	<?php endif; ?>
 	<?php
-	$comment_form = new \Origamiez\Engine\Display\CommentFormBuilder();
+	$comment_form = new \Origamiez\Display\CommentFormBuilder();
 	$comment_form->display();
 	?>
 </div><!-- #comments -->

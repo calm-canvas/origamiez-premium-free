@@ -5,7 +5,7 @@
  * @package Origamiez
  */
 
-use Origamiez\Engine\Config\FontCustomizerConfig;
+use Origamiez\Config\FontCustomizerConfig;
 
 /**
  * Get font families
@@ -48,6 +48,6 @@ function origamiez_get_font_weights() {
  *
  * @return array
  */
-function origamiez_get_font_line_heighs() {
+function origamiez_get_font_line_heights() {
 	return FontCustomizerConfig::get_font_line_heights();
 }

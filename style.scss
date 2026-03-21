@@ -1182,6 +1182,9 @@ div.alert {
 
 			img {
 				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
 			}
 
 			.caption {
@@ -1216,14 +1219,42 @@ div.alert {
 		}
 
 		.col-left {
+			width: 33.3333%;
+			flex: 0 0 33.3333%;
+			max-width: 33.3333%;
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				gap: 5px;
+			}
+
 			.item-outer {
 				overflow: hidden;
 				aspect-ratio: 1/1;
+				flex: 1 1 0;
+				min-height: 0;
+
+				.item.item-bottom {
+					margin-top: 0;
+				}
 			}
 		}
 
 		.col-right {
+			width: 66.6666%;
+			flex: 0 0 66.6666%;
+			max-width: 66.6666%;
 			position: relative;
+
+			.owl-carousel,
+			.owl-stage-outer,
+			.owl-stage,
+			.owl-item,
+			.item {
+				height: 100%;
+			}
 
 			.owl-dots {
 				position: absolute;
@@ -1540,7 +1571,9 @@ body.origamiez-layout-blog {
 					a {
 						position: relative;
 						overflow: hidden;
-						@include inline-block();
+						display: block;
+						width: fit-content;
+						max-width: 100%;
 
 						.overlay {
 							position: absolute;
@@ -1580,6 +1613,11 @@ body.origamiez-layout-blog {
 							font-size: 18px;
 							@include opacity(0);
 						}
+					}
+
+					img {
+						max-width: 100%;
+						height: auto;
 					}
 				}
 
@@ -1650,6 +1688,17 @@ body.origamiez-layout-blog-thumbnail-full-width {
 		article {
 			div.entry-thumb {
 				margin-bottom: 20px;
+
+				a {
+					display: block;
+					width: 100%;
+				}
+
+				img {
+					width: 100%;
+					max-width: 100%;
+					height: auto;
+				}
 			}
 		}
 	}
@@ -2514,25 +2563,11 @@ body.origamiez_custom_bg {
 	}
 }
 
+// Sticky posts in archives (padding only; thumb sizing lives under body.origamiez-layout-blog).
 #origamiez-blogposts {
-	& > li {
-		.entry-thumb {
-			a {
-				display: block;
-				position: relative;
-				width: 100% !important;
-				height: 100% !important;
-			}
-			img {
-				width: 100% !important;
-				height: 100% !important;
-			}
-		}
-
-		&.sticky {
-			article {
-				padding: 20px;
-			}
+	& > li.sticky {
+		article {
+			padding: 20px;
 		}
 	}
 }
@@ -2828,7 +2863,7 @@ nav#origamiez-mobile-nav {
 .origamiez-widget-posts-slider {
 	.col-left.col-sm-4 > div {
 		height: 100%;
-		aspect-ratio: 1/2;
+		aspect-ratio: auto;
 	}
 }
 

@@ -7,7 +7,7 @@
 				{
 					"name": "Primary",
 					"slug": "primary",
-					"color": "#222222"
+					"color": "#111111"
 				},
 				{
 					"name": "Secondary",
@@ -17,7 +17,7 @@
 				{
 					"name": "Heading",
 					"slug": "heading",
-					"color": "#222222"
+					"color": "#111111"
 				},
 				{
 					"name": "Body",
@@ -28,6 +28,26 @@
 					"name": "Link Hover",
 					"slug": "link-hover",
 					"color": "#00589f"
+				},
+				{
+					"name": "Main Menu Text",
+					"slug": "main-menu-text",
+					"color": "#111111"
+				},
+				{
+					"name": "Main Menu Background",
+					"slug": "main-menu-bg",
+					"color": "#ffffff"
+				},
+				{
+					"name": "Main Menu Hover",
+					"slug": "main-menu-hover",
+					"color": "#00589f"
+				},
+				{
+					"name": "Main Menu Active",
+					"slug": "main-menu-active",
+					"color": "#111111"
 				},
 				{
 					"name": "White",
@@ -83,6 +103,16 @@
 					"name": "Footer End Text",
 					"slug": "footer-end-text",
 					"color": "#a0a0a0"
+				},
+				{
+					"name": "Black Light",
+					"slug": "black-light",
+					"color": "#f8fafc"
+				},
+				{
+					"name": "Success",
+					"slug": "success",
+					"color": "#27ae60"
 				}
 			],
 			"custom": true,
