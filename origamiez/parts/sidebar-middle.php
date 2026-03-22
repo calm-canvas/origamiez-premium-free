@@ -8,8 +8,8 @@
 $sidebar = apply_filters( 'origamiez_get_current_sidebar', 'middle', 'middle' );
 if ( is_active_sidebar( $sidebar ) ) :
 	?>
-	<div id="sidebar-middle" class="origamiez-size-01 pull-left" role="complementary">
+	<aside id="sidebar-middle" class="origamiez-size-01 pull-left">
 		<?php dynamic_sidebar( $sidebar ); ?>
-	</div>
+	</aside>
 	<?php
 endif;

@@ -10,7 +10,7 @@
  */
 get_header();
 ?>
-<?php get_template_part( 'parts/sidebar', 'middle' ); ?>
+<?php get_template_part( ORIGAMIEZ_PART_SIDEBAR_SLUG, 'middle' ); ?>
 	<div id="sidebar-center" class="origamiez-size-01 pull-left">
 		<?php get_template_part( 'parts/breadcrumb' ); ?>
 		<?php if ( have_posts() ) : ?>
@@ -49,8 +49,8 @@ get_header();
 		endif;
 		?>
 	</div>
-<?php get_template_part( 'parts/sidebar', 'middle-clone' ); ?>
-<?php get_template_part( 'parts/sidebar', 'right' ); ?>
+<?php get_template_part( ORIGAMIEZ_PART_SIDEBAR_SLUG, 'middle-clone' ); ?>
+<?php get_template_part( ORIGAMIEZ_PART_SIDEBAR_SLUG, 'right' ); ?>
 	<div class="clearfix"></div>
 <?php
 

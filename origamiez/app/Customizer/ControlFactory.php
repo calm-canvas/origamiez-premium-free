@@ -30,18 +30,22 @@ class ControlFactory {
 	public function create( WP_Customize_Manager $wp_customize, string $id, array $args ): WP_Customize_Control {
 		$type = $args['type'] ?? 'text';
 
+		$control = null;
 		switch ( $type ) {
 			case 'origamiez_site_editor_notice':
-				return new SiteEditorNoticeControl( $wp_customize, $id, $args );
+				$control = new SiteEditorNoticeControl( $wp_customize, $id, $args );
+				break;
 
 			case 'upload':
 			case 'image':
 				unset( $args['type'] );
-				return new WP_Customize_Image_Control( $wp_customize, $id, $args );
+				$control = new WP_Customize_Image_Control( $wp_customize, $id, $args );
+				break;
 
 			case 'color':
 				unset( $args['type'] );
-				return new WP_Customize_Color_Control( $wp_customize, $id, $args );
+				$control = new WP_Customize_Color_Control( $wp_customize, $id, $args );
+				break;
 
 			case 'text':
 			case 'textarea':
@@ -49,7 +53,10 @@ class ControlFactory {
 			case 'radio':
 			case 'select':
 			default:
-				return new WP_Customize_Control( $wp_customize, $id, $args );
+				$control = new WP_Customize_Control( $wp_customize, $id, $args );
+				break;
 		}
+
+		return $control;
 	}
 }

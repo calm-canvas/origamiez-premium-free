@@ -7,9 +7,13 @@
   @include woocommerce_button_secondary();
 }
 
-@mixin woocommerce_button_success{}
+@mixin woocommerce_button_success(){
+	font-weight: inherit;
+}
 
-@mixin woocommerce_button_success_hover{}
+@mixin woocommerce_button_success_hover(){
+	font-weight: inherit;
+}
 
 @mixin woocommerce_input{
   line-height: 40px;

@@ -15,6 +15,13 @@ use Origamiez\Widgets\Sidebars\SidebarConfiguration;
 class SidebarRegistry {
 
 	/**
+	 * Sidebar description for Magazine template regions (single translated string).
+	 */
+	private static function get_magazine_template_sidebar_description(): string {
+		return esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' );
+	}
+
+	/**
 	 * Sidebars.
 	 *
 	 * @var array
@@ -46,14 +53,15 @@ class SidebarRegistry {
 	 * Setup default sidebars.
 	 */
 	public function setup_default_sidebars(): void {
-		$defaults = array(
-			'main-top'           => SidebarConfiguration::create( 'main-top', esc_attr__( 'Main Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'main-center-top'    => SidebarConfiguration::create( 'main-center-top', esc_attr__( 'Main Center Top', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'main-center-left'   => SidebarConfiguration::create( 'main-center-left', esc_attr__( 'Main Center Left', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'main-center-right'  => SidebarConfiguration::create( 'main-center-right', esc_attr__( 'Main Center Right', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'main-center-bottom' => SidebarConfiguration::create( 'main-center-bottom', esc_attr__( 'Main Center Bottom', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'main-bottom'        => SidebarConfiguration::create( 'main-bottom', esc_attr__( 'Main Bottom', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
-			'left'               => SidebarConfiguration::create( 'left', esc_attr__( 'Left', 'origamiez' ), esc_attr__( 'For only page with template: "Page Magazine".', 'origamiez' ) ),
+		$magazine_desc = self::get_magazine_template_sidebar_description();
+		$defaults      = array(
+			'main-top'           => SidebarConfiguration::create( 'main-top', esc_attr__( 'Main Top', 'origamiez' ), $magazine_desc ),
+			'main-center-top'    => SidebarConfiguration::create( 'main-center-top', esc_attr__( 'Main Center Top', 'origamiez' ), $magazine_desc ),
+			'main-center-left'   => SidebarConfiguration::create( 'main-center-left', esc_attr__( 'Main Center Left', 'origamiez' ), $magazine_desc ),
+			'main-center-right'  => SidebarConfiguration::create( 'main-center-right', esc_attr__( 'Main Center Right', 'origamiez' ), $magazine_desc ),
+			'main-center-bottom' => SidebarConfiguration::create( 'main-center-bottom', esc_attr__( 'Main Center Bottom', 'origamiez' ), $magazine_desc ),
+			'main-bottom'        => SidebarConfiguration::create( 'main-bottom', esc_attr__( 'Main Bottom', 'origamiez' ), $magazine_desc ),
+			'left'               => SidebarConfiguration::create( 'left', esc_attr__( 'Left', 'origamiez' ), $magazine_desc ),
 			'right'              => SidebarConfiguration::create( 'right', esc_attr__( 'Right', 'origamiez' ), '' ),
 			'middle'             => SidebarConfiguration::create( 'middle', esc_attr__( 'Middle Sidebar', 'origamiez' ), '' ),
 			'middle-clone'       => SidebarConfiguration::create( 'middle-clone', esc_attr__( 'Middle Sidebar Clone', 'origamiez' ), '' ),

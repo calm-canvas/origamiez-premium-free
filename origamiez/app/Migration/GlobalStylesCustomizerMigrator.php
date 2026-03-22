@@ -31,6 +31,9 @@ class GlobalStylesCustomizerMigrator {
 
 	private const TRANSIENT_LOCK = 'origamiez_global_styles_migration_lock';
 
+	/** Default dark gray used for multiple custom-skin theme_mod fallbacks. */
+	private const CUSTOM_SKIN_DEFAULT_DARK = '#111111';
+
 	/**
 	 * Whether the active Origamiez release is exactly the version that should run this migration.
 	 *
@@ -52,24 +55,15 @@ class GlobalStylesCustomizerMigrator {
 	 * @return void
 	 */
 	public function maybe_migrate(): void {
-		if ( ! is_admin() || ! current_user_can( 'edit_theme_options' ) ) {
-			return;
-		}
-
-		if ( ! apply_filters( 'origamiez_global_styles_migration_enabled', true ) ) {
-			return;
-		}
-
-		if ( ! self::is_migration_target_version() ) {
-			return;
-		}
-
 		// Option absent: get_option() returns false → run once. Any stored status (array, string) skips.
-		if ( false !== get_option( self::OPTION_KEY, false ) ) {
-			return;
-		}
-
-		if ( get_transient( self::TRANSIENT_LOCK ) ) {
+		if (
+			! is_admin()
+			|| ! current_user_can( 'edit_theme_options' )
+			|| ! apply_filters( 'origamiez_global_styles_migration_enabled', true )
+			|| ! self::is_migration_target_version()
+			|| false !== get_option( self::OPTION_KEY, false )
+			|| get_transient( self::TRANSIENT_LOCK )
+		) {
 			return;
 		}
 		set_transient( self::TRANSIENT_LOCK, '1', 60 );
@@ -100,7 +94,7 @@ class GlobalStylesCustomizerMigrator {
 	 * Perform migration and set status option.
 	 *
 	 * @return void
-	 * @throws \RuntimeException When the global styles post cannot be read, merged, or saved.
+	 * @throws GlobalStylesMigrationException When the global styles post cannot be read, merged, or saved.
 	 */
 	private function run(): void {
 		if ( ! class_exists( '\WP_Theme_JSON' ) || ! class_exists( '\WP_Theme_JSON_Resolver' ) ) {
@@ -115,13 +109,13 @@ class GlobalStylesCustomizerMigrator {
 
 		$user_cpt = \WP_Theme_JSON_Resolver::get_user_data_from_wp_global_styles( wp_get_theme(), true );
 		if ( empty( $user_cpt['ID'] ) || empty( $user_cpt['post_content'] ) ) {
-			throw new \RuntimeException( 'Could not load or create wp_global_styles post.' );
+			throw new GlobalStylesMigrationException( 'Could not load or create wp_global_styles post.' );
 		}
 
 		$post_id = (int) $user_cpt['ID'];
 		$data    = json_decode( $user_cpt['post_content'], true );
 		if ( ! is_array( $data ) ) {
-			throw new \RuntimeException( 'Invalid global styles post JSON.' );
+			throw new GlobalStylesMigrationException( 'Invalid global styles post JSON.' );
 		}
 
 		$schema_version = class_exists( '\WP_Theme_JSON' ) ? \WP_Theme_JSON::LATEST_SCHEMA : 2;
@@ -143,7 +137,7 @@ class GlobalStylesCustomizerMigrator {
 			$data    = $this->merge_fill_missing( $data, $patch );
 			$encoded = wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 			if ( false === $encoded ) {
-				throw new \RuntimeException( 'Could not encode global styles JSON.' );
+				throw new GlobalStylesMigrationException( 'Could not encode global styles JSON.' );
 			}
 
 			$result = wp_update_post(
@@ -155,7 +149,7 @@ class GlobalStylesCustomizerMigrator {
 			);
 
 			if ( is_wp_error( $result ) ) {
-				throw new \RuntimeException( esc_html( $result->get_error_message() ) );
+				throw new GlobalStylesMigrationException( esc_html( $result->get_error_message() ) );
 			}
 		}
 
@@ -235,50 +229,71 @@ class GlobalStylesCustomizerMigrator {
 		}
 
 		$styles = array();
-
-		if ( '' !== $color ) {
-			$hex = ltrim( $color, '#' );
-			if ( preg_match( '/^[0-9a-fA-F]{3,8}$/', $hex ) ) {
-				$styles['color']['background'] = '#' . strtolower( $hex );
-			}
-		}
-
-		if ( '' !== $image ) {
-			$url = esc_url_raw( $image );
-			if ( $url ) {
-				$attachment_id = function_exists( 'attachment_url_to_postid' )
-					? (int) attachment_url_to_postid( $url )
-					: 0;
-				$bg            = array(
-					'backgroundImage' => array(
-						'url'    => $url,
-						'title'  => '',
-						'id'     => $attachment_id,
-						'source' => 'file',
-					),
-				);
-				$repeat        = get_theme_mod( 'background_repeat', 'repeat' );
-				$attachment    = get_theme_mod( 'background_attachment', 'scroll' );
-				$size          = get_theme_mod( 'background_size', 'auto' );
-				$pos_x         = get_theme_mod( 'background_position_x', 'left' );
-				$pos_y         = get_theme_mod( 'background_position_y', 'top' );
-				if ( is_string( $repeat ) && '' !== $repeat ) {
-					$bg['backgroundRepeat'] = $repeat;
-				}
-				if ( is_string( $attachment ) && '' !== $attachment ) {
-					$bg['backgroundAttachment'] = $attachment;
-				}
-				if ( is_string( $size ) && '' !== $size ) {
-					$bg['backgroundSize'] = $size;
-				}
-				if ( is_string( $pos_x ) && is_string( $pos_y ) ) {
-					$bg['backgroundPosition'] = trim( $pos_x . ' ' . $pos_y );
-				}
-				$styles['background'] = $bg;
-			}
-		}
+		$this->assign_background_color_style( $styles, $color );
+		$this->assign_background_image_style( $styles, $image );
 
 		return $styles;
+	}
+
+	/**
+	 * Apply validated background color to the styles fragment.
+	 *
+	 * @param array  $styles Output styles fragment.
+	 * @param string $color  Raw background_color theme_mod.
+	 */
+	private function assign_background_color_style( array &$styles, string $color ): void {
+		if ( '' === $color ) {
+			return;
+		}
+		$hex = ltrim( $color, '#' );
+		if ( preg_match( '/^[0-9a-fA-F]{3,8}$/', $hex ) ) {
+			$styles['color']['background'] = '#' . strtolower( $hex );
+		}
+	}
+
+	/**
+	 * Apply background image and related properties to the styles fragment.
+	 *
+	 * @param array  $styles Output styles fragment.
+	 * @param string $image  Raw background_image theme_mod.
+	 */
+	private function assign_background_image_style( array &$styles, string $image ): void {
+		if ( '' === $image ) {
+			return;
+		}
+		$url = esc_url_raw( $image );
+		if ( ! $url ) {
+			return;
+		}
+		$attachment_id = function_exists( 'attachment_url_to_postid' )
+			? (int) attachment_url_to_postid( $url )
+			: 0;
+		$bg            = array(
+			'backgroundImage' => array(
+				'url'    => $url,
+				'title'  => '',
+				'id'     => $attachment_id,
+				'source' => 'file',
+			),
+		);
+		$repeat        = get_theme_mod( 'background_repeat', 'repeat' );
+		$attachment    = get_theme_mod( 'background_attachment', 'scroll' );
+		$size          = get_theme_mod( 'background_size', 'auto' );
+		$pos_x         = get_theme_mod( 'background_position_x', 'left' );
+		$pos_y         = get_theme_mod( 'background_position_y', 'top' );
+		if ( is_string( $repeat ) && '' !== $repeat ) {
+			$bg['backgroundRepeat'] = $repeat;
+		}
+		if ( is_string( $attachment ) && '' !== $attachment ) {
+			$bg['backgroundAttachment'] = $attachment;
+		}
+		if ( is_string( $size ) && '' !== $size ) {
+			$bg['backgroundSize'] = $size;
+		}
+		if ( is_string( $pos_x ) && is_string( $pos_y ) ) {
+			$bg['backgroundPosition'] = trim( $pos_x . ' ' . $pos_y );
+		}
+		$styles['background'] = $bg;
 	}
 
 	/**
@@ -290,47 +305,9 @@ class GlobalStylesCustomizerMigrator {
 	 * @return array
 	 */
 	private function merge_fill_missing( array $existing, array $patch ): array {
-		if ( isset( $patch['settings']['color']['palette'] ) && is_array( $patch['settings']['color']['palette'] ) ) {
-			if ( ! isset( $existing['settings'] ) ) {
-				$existing['settings'] = array();
-			}
-			$existing['settings'] = $this->merge_palette_fill_missing(
-				$existing['settings'],
-				$patch['settings']['color']['palette']
-			);
-			unset( $patch['settings']['color'] );
-		}
-
-		if ( isset( $patch['settings']['typography']['fontFamilies'] ) && is_array( $patch['settings']['typography']['fontFamilies'] ) ) {
-			if ( ! isset( $existing['settings'] ) ) {
-				$existing['settings'] = array();
-			}
-			$existing['settings'] = $this->merge_font_families_fill_missing(
-				$existing['settings'],
-				$patch['settings']['typography']['fontFamilies']
-			);
-			unset( $patch['settings']['typography']['fontFamilies'] );
-			if ( empty( $patch['settings']['typography'] ) ) {
-				unset( $patch['settings']['typography'] );
-			}
-		}
-
-		if ( isset( $patch['settings']['custom']['origamiez']['googleFonts'] ) ) {
-			if ( ! isset( $existing['settings']['custom']['origamiez'] ) ) {
-				$existing['settings']['custom']['origamiez'] = array();
-			}
-			$incoming = $patch['settings']['custom']['origamiez']['googleFonts'];
-			if ( ! isset( $existing['settings']['custom']['origamiez']['googleFonts'] ) || ! is_array( $existing['settings']['custom']['origamiez']['googleFonts'] ) ) {
-				$existing['settings']['custom']['origamiez']['googleFonts'] = $incoming;
-			} else {
-				$existing['settings']['custom']['origamiez']['googleFonts'] = $this->merge_google_font_meta_fill_missing(
-					$existing['settings']['custom']['origamiez']['googleFonts'],
-					$incoming
-				);
-			}
-			unset( $patch['settings']['custom']['origamiez']['googleFonts'] );
-			$patch['settings'] = $this->remove_empty_branch( $patch['settings'] );
-		}
+		$existing = $this->merge_fill_missing_palette( $existing, $patch );
+		$existing = $this->merge_fill_missing_font_families( $existing, $patch );
+		$existing = $this->merge_fill_missing_google_font_meta( $existing, $patch );
 
 		if ( ! empty( $patch['settings'] ) ) {
 			$existing['settings'] = $this->deep_merge_settings_fill_missing(
@@ -345,6 +322,81 @@ class GlobalStylesCustomizerMigrator {
 				$patch['styles']
 			);
 		}
+
+		return $existing;
+	}
+
+	/**
+	 * Merge color palette from patch when present.
+	 *
+	 * @param array $existing Theme JSON.
+	 * @param array $patch    Fragment (modified by reference via unset).
+	 */
+	private function merge_fill_missing_palette( array $existing, array &$patch ): array {
+		if ( ! isset( $patch['settings']['color']['palette'] ) || ! is_array( $patch['settings']['color']['palette'] ) ) {
+			return $existing;
+		}
+		if ( ! isset( $existing['settings'] ) ) {
+			$existing['settings'] = array();
+		}
+		$existing['settings'] = $this->merge_palette_fill_missing(
+			$existing['settings'],
+			$patch['settings']['color']['palette']
+		);
+		unset( $patch['settings']['color'] );
+
+		return $existing;
+	}
+
+	/**
+	 * Merge font families from patch when present.
+	 *
+	 * @param array $existing Theme JSON.
+	 * @param array $patch    Fragment (modified by reference via unset).
+	 */
+	private function merge_fill_missing_font_families( array $existing, array &$patch ): array {
+		if ( ! isset( $patch['settings']['typography']['fontFamilies'] ) || ! is_array( $patch['settings']['typography']['fontFamilies'] ) ) {
+			return $existing;
+		}
+		if ( ! isset( $existing['settings'] ) ) {
+			$existing['settings'] = array();
+		}
+		$existing['settings'] = $this->merge_font_families_fill_missing(
+			$existing['settings'],
+			$patch['settings']['typography']['fontFamilies']
+		);
+		unset( $patch['settings']['typography']['fontFamilies'] );
+		if ( empty( $patch['settings']['typography'] ) ) {
+			unset( $patch['settings']['typography'] );
+		}
+
+		return $existing;
+	}
+
+	/**
+	 * Merge Google Fonts metadata from patch when present.
+	 *
+	 * @param array $existing Theme JSON.
+	 * @param array $patch    Fragment (modified by reference via unset).
+	 */
+	private function merge_fill_missing_google_font_meta( array $existing, array &$patch ): array {
+		if ( ! isset( $patch['settings']['custom']['origamiez']['googleFonts'] ) ) {
+			return $existing;
+		}
+		if ( ! isset( $existing['settings']['custom']['origamiez'] ) ) {
+			$existing['settings']['custom']['origamiez'] = array();
+		}
+		$incoming = $patch['settings']['custom']['origamiez']['googleFonts'];
+		if ( ! isset( $existing['settings']['custom']['origamiez']['googleFonts'] ) || ! is_array( $existing['settings']['custom']['origamiez']['googleFonts'] ) ) {
+			$existing['settings']['custom']['origamiez']['googleFonts'] = $incoming;
+		} else {
+			$existing['settings']['custom']['origamiez']['googleFonts'] = $this->merge_google_font_meta_fill_missing(
+				$existing['settings']['custom']['origamiez']['googleFonts'],
+				$incoming
+			);
+		}
+		unset( $patch['settings']['custom']['origamiez']['googleFonts'] );
+		$patch['settings'] = $this->remove_empty_branch( $patch['settings'] );
 
 		return $existing;
 	}
@@ -504,22 +556,22 @@ class GlobalStylesCustomizerMigrator {
 		}
 
 		$defaults = array(
-			'primary_color'                        => '#111111',
+			'primary_color'                        => self::CUSTOM_SKIN_DEFAULT_DARK,
 			'secondary_color'                      => '#f5f7fa',
 			'body_color'                           => '#333333',
-			'heading_color'                        => '#111111',
+			'heading_color'                        => self::CUSTOM_SKIN_DEFAULT_DARK,
 			'link_hover_color'                     => '#00589f',
-			'main_menu_color'                      => '#111111',
+			'main_menu_color'                      => self::CUSTOM_SKIN_DEFAULT_DARK,
 			'main_menu_bg_color'                   => '#ffffff',
 			'main_menu_hover_color'                => '#00589f',
-			'main_menu_active_color'               => '#111111',
+			'main_menu_active_color'               => self::CUSTOM_SKIN_DEFAULT_DARK,
 			'line_1_bg_color'                      => '#e8ecf1',
 			'line_2_bg_color'                      => '#f0f2f5',
 			'line_3_bg_color'                      => '#f8fafc',
 			'footer_sidebars_bg_color'             => '#222222',
 			'footer_sidebars_text_color'           => '#a0a0a0',
 			'footer_sidebars_widget_heading_color' => '#ffffff',
-			'footer_end_bg_color'                  => '#111111',
+			'footer_end_bg_color'                  => self::CUSTOM_SKIN_DEFAULT_DARK,
 			'footer_end_text_color'                => '#a0a0a0',
 			'black_light_color'                    => '#f8fafc',
 			'metadata_color'                       => '#666666',
@@ -592,7 +644,7 @@ class GlobalStylesCustomizerMigrator {
 		}
 
 		$primary_hex = sanitize_hex_color( get_theme_mod( 'primary_color', $defaults['primary_color'] ) );
-		$link_hex    = sanitize_hex_color( get_theme_mod( 'link_color', '#111111' ) );
+		$link_hex    = sanitize_hex_color( get_theme_mod( 'link_color', self::CUSTOM_SKIN_DEFAULT_DARK ) );
 		if ( $link_hex && $primary_hex && strtolower( $link_hex ) !== strtolower( $primary_hex ) ) {
 			$out[] = array(
 				'name'  => $names['link'],

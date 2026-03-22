@@ -13,14 +13,13 @@
 		<div id="origamiez-footer-sidebars" class="clearfix">
 			<div id="origamiez-footer-sidebars-inner" class="<?php \Origamiez\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
 				<div class="row clearfix">
-					<div id="origamiez-footer-right" class="col-md-12 col-sm-12 col-xs-12 widget-area"
-						role="complementary">
+					<aside id="origamiez-footer-right" class="col-md-12 col-sm-12 col-xs-12 widget-area">
 						<div class="row clearfix">
 							<?php add_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_one_cols' ); ?>
-							<?php get_template_part( 'parts/sidebar', 'footer-1' ); ?>
+							<?php get_template_part( ORIGAMIEZ_PART_SIDEBAR_SLUG, 'footer-1' ); ?>
 							<?php remove_filter( 'origamiez_get_footer_classes', 'origamiez_set_classes_for_footer_one_cols' ); ?>
 						</div>
-					</div>
+					</aside>
 				</div>
 			</div>
 		</div>

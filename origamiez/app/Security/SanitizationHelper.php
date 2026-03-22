@@ -56,20 +56,29 @@ class SanitizationHelper {
 	 * @return mixed
 	 */
 	public static function sanitize_db_input( $input, string $type = 'text' ) {
+		$result = null;
 		switch ( $type ) {
 			case 'int':
-				return absint( $input );
+				$result = absint( $input );
+				break;
 			case 'float':
-				return floatval( $input );
+				$result = floatval( $input );
+				break;
 			case 'email':
-				return self::get_manager()->sanitize_email( $input );
+				$result = self::get_manager()->sanitize_email( $input );
+				break;
 			case 'url':
-				return self::get_manager()->sanitize_url( $input );
+				$result = self::get_manager()->sanitize_url( $input );
+				break;
 			case 'key':
-				return sanitize_key( $input );
+				$result = sanitize_key( $input );
+				break;
 			default:
-				return self::get_manager()->sanitize_text( $input );
+				$result = self::get_manager()->sanitize_text( $input );
+				break;
 		}
+
+		return $result;
 	}
 
 	/**

@@ -111,11 +111,6 @@ h6 {
 	border-left: 1px solid var(--line-2-bg-color);
 }
 
-#origamiez-footer-sidebars {
-	border-top: none;
-	background-color: var(--footer-sidebars-bg-color);
-}
-
 #origamiez-footer-end {
 	background-color: var(--footer-end-bg-color);
 	color: var(--footer-end-text-color);
@@ -221,6 +216,9 @@ h6 {
 }
 
 #origamiez-footer-sidebars {
+	border-top: none;
+	background-color: var(--footer-sidebars-bg-color);
+
 	h2.widget-title {
 		color: var(--footer-sidebars-widget-heading-color);
 	}
@@ -938,6 +936,7 @@ ul.page-numbers {
 #origamiez_singular_pagination {
 	a {
 		color: var(--primary-color);
+		border-right: 3px solid var(--primary-color);
 	}
 }
 
@@ -990,9 +989,7 @@ body.origamiez-layout-single {
 
 	#origamiez-post-author {
 		border-top: 1px solid var(--line-2-bg-color);
-	}
 
-	#origamiez-post-author {
 		.origamiez-author-name {
 			a {
 				color: var(--primary-color);
@@ -1329,25 +1326,10 @@ body.origamiez-boxer {
  * RESPONSIVE (COLOR)
  * --------------------------------------------------
  */
-@media only screen and (min-width: 1280px) {
-}
-
-@media only screen and (max-width: 1179px) {
-}
-
 @media only screen and (max-width: 1023px) {
 	#origamiez-sidebar-right {
 		border-top: 1px solid var(--line-2-bg-color);
 	}
-}
-
-@media only screen and (max-width: 979px) {
-}
-
-@media only screen and (max-width: 899px) {
-}
-
-@media only screen and (max-width: 799px) {
 }
 
 @media only screen and (max-width: 767px) {
@@ -1372,9 +1354,7 @@ body.origamiez-boxer {
 			border-top: 1px solid var(--line-2-bg-color);
 		}
 	}
-}
 
-@media only screen and (max-width: 767px) {
 	body.origamiez-page-magazine {
 		#main-center-outer,
 		#main-center-inner {
@@ -1385,46 +1365,10 @@ body.origamiez-boxer {
 	}
 }
 
-@media only screen and (max-width: 599px) {
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1179px) {
+@media only screen and (min-width: 768px) and (max-width: 1179px) {
 	.origamiez-col-right {
 		border-right: 1px solid var(--line-2-bg-color);
 	}
-}
-
-@media only screen and (min-width: 980px) and (max-width: 1023px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-
-@media only screen and (min-width: 900px) and (max-width: 979px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-
-@media only screen and (min-width: 800px) and (max-width: 899px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-
-@media only screen and (min-width: 768px) and (max-width: 799px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-
-@media only screen and (min-width: 640px) and (max-width: 767px) {
-}
-
-@media only screen and (min-width: 600px) and (max-width: 639px) {
-}
-
-@media only screen and (min-width: 480px) and (max-width: 599px) {
 }
 
 @media only screen and (max-width: 599px) {
@@ -1433,9 +1377,6 @@ body.origamiez-boxer {
 			border-left: none;
 		}
 	}
-}
-
-@media only screen and (max-width: 479px) {
 }
 
 /*
@@ -1555,11 +1496,6 @@ p.origamiez-readmore-block > a,
  * UPDATE :: 2015.07.22 (1.2.2)
  * --------------------------------------------------
  */
-#origamiez_singular_pagination {
-	a {
-		border-right: 3px solid var(--primary-color);
-	}
-}
 
 body.page-template-template-page-three-cols,
 body.origamiez-taxonomy-three-cols,

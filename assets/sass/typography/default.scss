@@ -457,6 +457,17 @@ body.origamiez-layout-single {
 			}
 		}
 	}
+
+	#origamiez-post-wrap {
+		.entry-content {
+			.wp-caption {
+				.wp-caption-text,
+				&.aligncenter {
+					text-align: center;
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -499,6 +510,11 @@ body.origamiez-layout-single {
  */
 #origamiez_singular_pagination {
 	font-style: italic;
+	text-align: right;
+
+	a {
+		line-height: 25px;
+	}
 }
 
 /*
@@ -524,19 +540,6 @@ label {
  * UPDATE :: 2015.07.01
  * --------------------------------------------------
  */
-
-body.origamiez-layout-single {
-	#origamiez-post-wrap {
-		.entry-content {
-			.wp-caption {
-				.wp-caption-text,
-				&.aligncenter {
-					text-align: center;
-				}
-			}
-		}
-	}
-}
 
 /*
  * --------------------------------------------------
@@ -590,13 +593,6 @@ p.origamiez-readmore-block > a,
  * UPDATE :: 2015.07.22 (1.2.2)
  * --------------------------------------------------
  */
-#origamiez_singular_pagination {
-	text-align: right;
-
-	a {
-		line-height: 25px;
-	}
-}
 
 /*
  * --------------------------------------------------
