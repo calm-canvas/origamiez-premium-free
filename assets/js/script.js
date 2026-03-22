@@ -240,8 +240,8 @@ const Origamier = {
 			usePopupNav: false,
 			popupBlankCaptionText: false,
 		};
-		const argsNoNav = Object.assign({}, baseArgs, { usePopupNav: false });
-		const argsWithNav = Object.assign({}, baseArgs, { usePopupNav: true });
+		const argsNoNav = { ...baseArgs, usePopupNav: false };
+		const argsWithNav = { ...baseArgs, usePopupNav: true };
 		Origamier.poptroxIfNonEmpty(blogposts, argsNoNav);
 		Origamier.poptroxIfNonEmpty(media, argsNoNav);
 		Origamier.poptroxIfNonEmpty(gallery, argsWithNav);
