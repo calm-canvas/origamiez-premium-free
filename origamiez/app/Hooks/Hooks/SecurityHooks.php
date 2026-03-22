@@ -82,7 +82,7 @@ class SecurityHooks implements HookProviderInterface {
 			$csp  = "default-src 'self'; ";
 			$csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com; ";
 			$csp .= "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com; ";
-			$csp .= "img-src 'self' data: *.gravatar.com *.wp.com; ";
+			$csp .= 'img-src ' . $this->build_csp_img_src() . '; ';
 			$csp .= "font-src 'self' data: *.googleapis.com *.gstatic.com; ";
 			$csp .= "worker-src 'self' blob:; ";
 			$csp .= "connect-src 'self'; ";
@@ -92,6 +92,54 @@ class SecurityHooks implements HookProviderInterface {
 
 			header( 'Content-Security-Policy: ' . $csp );
 		}
+	}
+
+	/**
+	 * Builds img-src for CSP. Includes HTTP and HTTPS origins for the site host so media URLs
+	 * that use a different scheme than the current page (common WordPress mixed-content cases)
+	 * still match. Adds the uploads base URL origin when it differs (e.g. CDN).
+	 *
+	 * @return string Space-separated CSP source list (no directive name).
+	 */
+	private function build_csp_img_src(): string {
+		$sources = array( "'self'", 'data:', '*.gravatar.com', '*.wp.com' );
+
+		$home      = home_url();
+		$home_host = wp_parse_url( $home, PHP_URL_HOST );
+		if ( ! empty( $home_host ) ) {
+			$port      = wp_parse_url( $home, PHP_URL_PORT );
+			$port_part = $port ? ':' . $port : '';
+			$sources[] = 'http://' . $home_host . $port_part;
+			$sources[] = 'https://' . $home_host . $port_part;
+		}
+
+		$upload_dir = wp_upload_dir();
+		if ( empty( $upload_dir['error'] ) && ! empty( $upload_dir['baseurl'] ) ) {
+			$upload_origin = $this->csp_origin_from_url( $upload_dir['baseurl'] );
+			if ( null !== $upload_origin ) {
+				$sources[] = $upload_origin;
+			}
+		}
+
+		return implode( ' ', array_unique( $sources ) );
+	}
+
+	/**
+	 * Returns a CSP host source (scheme://host:port) for a full URL.
+	 *
+	 * @param string $url Full URL.
+	 * @return string|null Origin string or null if the URL has no host.
+	 */
+	private function csp_origin_from_url( string $url ): ?string {
+		$parts = wp_parse_url( $url );
+		if ( empty( $parts['host'] ) ) {
+			return null;
+		}
+		$scheme = isset( $parts['scheme'] ) ? $parts['scheme'] : 'http';
+		$host   = $parts['host'];
+		$port   = isset( $parts['port'] ) ? ':' . $parts['port'] : '';
+
+		return $scheme . '://' . $host . $port;
 	}
 
 	/**
