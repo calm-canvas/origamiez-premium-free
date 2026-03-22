@@ -5,7 +5,7 @@
  * Author: tranthethang
  * Author URI: https://github.com/calm-canvas
  * Description: Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices. Developed and maintained by **@tranthethang** with a commitment to continuous updates. Origamiez combines simplicity with professional power. The theme offers outstanding features: multi-language support, unlimited color schemes, 8 customizable widgets, seamless integration with WooCommerce, bbPress, SEO-optimized structure, and dark mode support. Built with Bootstrap 5.3 and modern Vite build tool, ensuring fast performance and unlimited customization possibilities.
- * Version: 4.4.0
+ * Version: 4.4.1
  * License: GNU General Public License v3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain: origamiez
@@ -398,10 +398,6 @@ h6 a:hover {
 .origamiez-col-right {
 	border-left: 1px solid var(--line-2-bg-color);
 }
-#origamiez-footer-sidebars {
-	border-top: none;
-	background-color: var(--footer-sidebars-bg-color);
-}
 #origamiez-footer-end {
 	background-color: var(--footer-end-bg-color);
 	color: var(--footer-end-text-color);
@@ -475,6 +471,10 @@ h6 a:hover {
 #sidebar-bottom .widget .widget-title-text,
 #sidebar-main-bottom .widget .widget-title-text {
 	border-bottom: none;
+}
+#origamiez-footer-sidebars {
+	border-top: none;
+	background-color: var(--footer-sidebars-bg-color);
 }
 #origamiez-footer-sidebars h2.widget-title {
 	color: var(--footer-sidebars-widget-heading-color);
@@ -1055,6 +1055,7 @@ ul.page-numbers li span.current {
 }
 #origamiez_singular_pagination a {
 	color: var(--primary-color);
+	border-right: 3px solid var(--primary-color);
 }
 /*
  * --------------------------------------------------
@@ -1385,34 +1386,12 @@ body.origamiez-boxer
 	.origamiez-widget-posts-two-cols .article-col-right {
 		border-top: 1px solid var(--line-2-bg-color);
 	}
-}
-@media only screen and (max-width: 767px) {
 	body.origamiez-page-magazine #main-center-outer > .origamiez-left,
 	body.origamiez-page-magazine #main-center-inner > .origamiez-left {
 		border-right: none !important;
 	}
 }
-@media only screen and (min-width: 1024px) and (max-width: 1179px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-@media only screen and (min-width: 980px) and (max-width: 1023px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-@media only screen and (min-width: 900px) and (max-width: 979px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-@media only screen and (min-width: 800px) and (max-width: 899px) {
-	.origamiez-col-right {
-		border-right: 1px solid var(--line-2-bg-color);
-	}
-}
-@media only screen and (min-width: 768px) and (max-width: 799px) {
+@media only screen and (min-width: 768px) and (max-width: 1179px) {
 	.origamiez-col-right {
 		border-right: 1px solid var(--line-2-bg-color);
 	}
@@ -1507,9 +1486,6 @@ p.origamiez-readmore-block > a:hover,
  * UPDATE :: 2015.07.22 (1.2.2)
  * --------------------------------------------------
  */
-#origamiez_singular_pagination a {
-	border-right: 3px solid var(--primary-color);
-}
 body.page-template-template-page-three-cols #sidebar-middle,
 body.origamiez-taxonomy-three-cols #sidebar-middle,
 body.origamiez-single-post-three-cols #sidebar-middle {
@@ -2491,6 +2467,7 @@ body.woocommerce-page ul.products li.product > .add_to_cart_button {
 body.woocommerce-page ul.products li.product > .added_to_cart {
 	line-height: 40px;
 	font-weight: 400;
+	font-weight: inherit;
 }
 body.woocommerce-page ul.products li.product .price {
 	font-size: 15px;
@@ -2531,6 +2508,8 @@ body.woocommerce-page
 	.button {
 	line-height: 40px;
 	font-weight: 400;
+	font-weight: inherit;
+	font-weight: inherit;
 }
 body.woocommerce-page .bootstrap-touchspin-up,
 body.woocommerce-page .bootstrap-touchspin-down {
@@ -2549,6 +2528,8 @@ body.woocommerce-page form.checkout.woocommerce-checkout textarea {
 body.woocommerce-page form.checkout.woocommerce-checkout #place_order {
 	line-height: 40px;
 	font-weight: 400;
+	font-weight: inherit;
+	font-weight: inherit;
 }
 body.woocommerce-page .select2-choice {
 	line-height: 40px;
@@ -2599,6 +2580,10 @@ The styling for dedault woocommerce's widgets.
 .widget.woocommerce.widget_shopping_cart .buttons .button.wc-forward {
 	line-height: 40px;
 	font-weight: 400;
+}
+.widget.woocommerce.widget_shopping_cart .buttons .button.wc-forward.checkout {
+	font-weight: inherit;
+	font-weight: inherit;
 }
 .widget.woocommerce.widget_price_filter .price_slider_amount .button {
 	line-height: 40px;
@@ -3007,6 +2992,17 @@ body.origamiez-layout-single
 	a {
 	text-decoration: none;
 }
+body.origamiez-layout-single
+	#origamiez-post-wrap
+	.entry-content
+	.wp-caption
+	.wp-caption-text,
+body.origamiez-layout-single
+	#origamiez-post-wrap
+	.entry-content
+	.wp-caption.aligncenter {
+	text-align: center;
+}
 /*
  * --------------------------------------------------
  * ERROR 404
@@ -3032,6 +3028,10 @@ body.origamiez-layout-single
  */
 #origamiez_singular_pagination {
 	font-style: italic;
+	text-align: right;
+}
+#origamiez_singular_pagination a {
+	line-height: 25px;
 }
 /*
  * --------------------------------------------------
@@ -3050,17 +3050,6 @@ label {
  * UPDATE :: 2015.07.01
  * --------------------------------------------------
  */
-body.origamiez-layout-single
-	#origamiez-post-wrap
-	.entry-content
-	.wp-caption
-	.wp-caption-text,
-body.origamiez-layout-single
-	#origamiez-post-wrap
-	.entry-content
-	.wp-caption.aligncenter {
-	text-align: center;
-}
 /*
  * --------------------------------------------------
  * UPDATE :: 2015.07.07 (1.1.9)
@@ -3102,12 +3091,6 @@ p.origamiez-readmore-block > a,
  * UPDATE :: 2015.07.22 (1.2.2)
  * --------------------------------------------------
  */
-#origamiez_singular_pagination {
-	text-align: right;
-}
-#origamiez_singular_pagination a {
-	line-height: 25px;
-}
 /*
  * --------------------------------------------------
  * UNIFY POST TITLE FONT
@@ -5804,9 +5787,6 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 	#origamiez-logo img {
 		display: inline-block;
 	}
-	#origamiez-top-banner {
-		text-align: center;
-	}
 	#origamiez-logo,
 	#origamiez-top-banner {
 		float: none !important;
@@ -5815,6 +5795,7 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 		max-width: 100%;
 	}
 	#origamiez-top-banner {
+		text-align: center;
 		margin-top: 20px;
 	}
 	#origamiez-footer-copyright {
@@ -6085,11 +6066,6 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 		visibility: visible !important;
 	}
 	body.page-template-template-page-three-cols-slm #origamiez-sidebar-right,
-	body.origamiez-taxonomy-three-cols-slm #origamiez-sidebar-right,
-	body.origamiez-single-post-three-cols-slm #origamiez-sidebar-right {
-		border-left: 1px solid var(--line-2-bg-color) !important;
-	}
-	body.page-template-template-page-three-cols-slm #origamiez-sidebar-right,
 	body.page-template-template-page-three-cols-slm #sidebar-middle-clone,
 	body.origamiez-taxonomy-three-cols-slm #origamiez-sidebar-right,
 	body.origamiez-taxonomy-three-cols-slm #sidebar-middle-clone,
@@ -6100,6 +6076,7 @@ img:is([sizes="auto" i], [sizes^="auto," i]) {
 	body.page-template-template-page-three-cols-slm #origamiez-sidebar-right,
 	body.origamiez-taxonomy-three-cols-slm #origamiez-sidebar-right,
 	body.origamiez-single-post-three-cols-slm #origamiez-sidebar-right {
+		border-left: 1px solid var(--line-2-bg-color) !important;
 		padding-left: 20px !important;
 		border-top: none !important;
 	}

@@ -27,7 +27,7 @@ class GlobalStylesCustomizerMigrator {
 	 * One-shot migration runs only while the Origamiez engine theme `Version` header equals this value
 	 * (parent version when a child theme is active). Bump for future migration waves.
 	 */
-	public const MIGRATION_TARGET_VERSION = '4.4.0';
+	public const MIGRATION_TARGET_VERSION = '4.4.1';
 
 	private const TRANSIENT_LOCK = 'origamiez_global_styles_migration_lock';
 

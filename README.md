@@ -65,6 +65,14 @@ Detailed technical specifications and development guides are available in the `.
 
 ## Version History
 
+### 4.4.1 (2026/03/22)
+
+- **Update:** Customizer → Site Editor global styles migration is gated to theme **4.4.1** only (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); override via filter `origamiez_global_styles_migration_target_version` if needed (e.g. tests)
+- **Security:** Content Security Policy — add `worker-src`; improve `img-src` generation (`build_csp_img_src`, `csp_origin_from_url`) for http/https site host, mixed-content safety, and uploads/CDN origins when the media base URL differs from the site host
+- **Styles:** Image height `auto` where needed for aspect ratio; footer/header hovers, “Read more”, search controls, and Twitter icon hover colors aligned; remove dead commented CSS
+- **Refactor:** Extract `GlobalStylesThemeJsonMerger` from `GlobalStylesCustomizerMigrator`; broader structure pass — template-part slug constants, lightbox JS cleanup, Customizer registration split, widgets (`SocialLinksWidget`, `PostsListSlider`), `WidgetClassManager`, `SidebarRegistry`, `SanitizationHelper`, `StringUtils::time_ago`, `GlobalStylesMigrationException`, SCSS organization
+- **Quality:** `Number.parseInt` with radix 10 in JS; Font Awesome `fantasy` fallback in SCSS/CSS; `.site-title` selector; placeholder image `alt` text; `require_once` for `functions.php`; remove unused `move_parts.sh`
+
 ### 4.4.0 (2026/03/21)
 
 - **Update:** Customizer → Site Editor global styles migration is gated to theme **4.4.0** only (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); override via filter `origamiez_global_styles_migration_target_version` if needed (e.g. tests)

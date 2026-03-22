@@ -15,7 +15,7 @@ final class ThemeVersion {
 	/**
 	 * Used for wp_enqueue_* when the Version header is missing or WordPress is unavailable.
 	 */
-	private const FALLBACK = '4.4.0';
+	private const FALLBACK = '4.4.1';
 
 	/**
 	 * `Version` from style.css: parent theme when a child is active, else the active theme.
