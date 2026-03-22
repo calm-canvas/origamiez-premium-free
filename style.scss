@@ -23,7 +23,6 @@
 @import "./assets/sass/skin/default";
 @import "./assets/sass/plugins/bbpress/index";
 @import "./assets/sass/plugins/woocommerce/index";
-
 @import "./assets/sass/typography/default";
 
 * {
@@ -839,6 +838,7 @@ div.alert {
 
 				img {
 					width: 100%;
+					height: auto;
 				}
 			}
 
@@ -886,6 +886,7 @@ div.alert {
 
 					& > img {
 						width: 100%;
+						height: auto;
 					}
 				}
 
@@ -1058,6 +1059,7 @@ div.alert {
 	.origamiez-post-thumb {
 		img {
 			width: 100%;
+			height: auto;
 		}
 	}
 

@@ -3529,6 +3529,7 @@ div.alert {
 }
 .origamiez-widget-posts-small-thumbnail .origamiez-widget-content .origamiez-wp-mt-post .origamiez-post-thumb img {
   width: 100%;
+  height: auto;
 }
 .origamiez-widget-posts-small-thumbnail .origamiez-widget-content .origamiez-wp-mt-post.origamiez-wp-mt-post-first {
   margin-top: 0;
@@ -3566,6 +3567,7 @@ div.alert {
 }
 .origamiez-widget-posts-grid .origamiez-widget-content .row .origamiez-wp-grid-post .origamiez-post-thumb > img {
   width: 100%;
+  height: auto;
 }
 .origamiez-widget-posts-grid .origamiez-widget-content .row .origamiez-wp-grid-post .metadata {
   margin-top: 10px;
@@ -3725,6 +3727,7 @@ div.alert {
  */
 .origamiez-widget-posts-two-cols .origamiez-post-thumb img {
   width: 100%;
+  height: auto;
 }
 .origamiez-widget-posts-two-cols .article-col-left p {
   margin-top: 10px;

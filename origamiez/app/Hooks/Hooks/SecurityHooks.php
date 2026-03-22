@@ -83,7 +83,8 @@ class SecurityHooks implements HookProviderInterface {
 			$csp .= "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com; ";
 			$csp .= "style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com; ";
 			$csp .= "img-src 'self' data: *.gravatar.com *.wp.com; ";
-			$csp .= "font-src 'self' *.googleapis.com *.gstatic.com; ";
+			$csp .= "font-src 'self' data: *.googleapis.com *.gstatic.com; ";
+			$csp .= "worker-src 'self' blob:; ";
 			$csp .= "connect-src 'self'; ";
 			$csp .= "frame-src 'self' *.youtube.com *.vimeo.com; ";
 			$csp .= "object-src 'none'; ";
