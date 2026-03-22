@@ -55,48 +55,39 @@ class StringUtils {
 
 		$abs_diff = abs( $to - $from );
 
+		$result = '';
 		if ( $abs_diff < 1 ) {
-			return __( 'just now', 'origamiez' );
-		}
-
-		if ( $abs_diff < 60 ) {
+			$result = __( 'just now', 'origamiez' );
+		} elseif ( $abs_diff < 60 ) {
 			// translators: %s is the number of seconds.
-			return sprintf( _n( '%s second', '%s seconds', $abs_diff, 'origamiez' ), $abs_diff );
-		}
-
-		if ( $abs_diff < 3600 ) {
+			$result = sprintf( _n( '%s second', '%s seconds', $abs_diff, 'origamiez' ), $abs_diff );
+		} elseif ( $abs_diff < 3600 ) {
 			$minutes = round( $abs_diff / 60 );
 			// translators: %s is the number of minutes.
-			return sprintf( _n( '%s minute', '%s minutes', $minutes, 'origamiez' ), $minutes );
-		}
-
-		if ( $abs_diff < 86400 ) {
+			$result = sprintf( _n( '%s minute', '%s minutes', $minutes, 'origamiez' ), $minutes );
+		} elseif ( $abs_diff < 86400 ) {
 			$hours = round( $abs_diff / 3600 );
 			// translators: %s is the number of hours.
-			return sprintf( _n( '%s hour', '%s hours', $hours, 'origamiez' ), $hours );
-		}
-
-		if ( $abs_diff < 604800 ) {
+			$result = sprintf( _n( '%s hour', '%s hours', $hours, 'origamiez' ), $hours );
+		} elseif ( $abs_diff < 604800 ) {
 			$days = round( $abs_diff / 86400 );
 			// translators: %s is the number of days.
-			return sprintf( _n( '%s day', '%s days', $days, 'origamiez' ), $days );
-		}
-
-		if ( $abs_diff < 2592000 ) {
+			$result = sprintf( _n( '%s day', '%s days', $days, 'origamiez' ), $days );
+		} elseif ( $abs_diff < 2592000 ) {
 			$weeks = round( $abs_diff / 604800 );
 			// translators: %s is the number of weeks.
-			return sprintf( _n( '%s week', '%s weeks', $weeks, 'origamiez' ), $weeks );
-		}
-
-		if ( $abs_diff < 31536000 ) {
+			$result = sprintf( _n( '%s week', '%s weeks', $weeks, 'origamiez' ), $weeks );
+		} elseif ( $abs_diff < 31536000 ) {
 			$months = round( $abs_diff / 2592000 );
 			// translators: %s is the number of months.
-			return sprintf( _n( '%s month', '%s months', $months, 'origamiez' ), $months );
+			$result = sprintf( _n( '%s month', '%s months', $months, 'origamiez' ), $months );
+		} else {
+			$years = round( $abs_diff / 31536000 );
+			// translators: %s is the number of years.
+			$result = sprintf( _n( '%s year', '%s years', $years, 'origamiez' ), $years );
 		}
 
-		$years = round( $abs_diff / 31536000 );
-		// translators: %s is the number of years.
-		return sprintf( _n( '%s year', '%s years', $years, 'origamiez' ), $years );
+		return $result;
 	}
 
 	/**

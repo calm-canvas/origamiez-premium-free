@@ -101,35 +101,10 @@ class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPost
 			<div class="col-left col-sm-4 col-xs-4">
 				<div class="d-flex flex-column">
 					<?php
-					$is_first   = true;
-					$loop_index = 1;
+					$is_first = true;
 					while ( $posts->have_posts() ) :
 						$posts->the_post();
-						$post_title = get_the_title();
-						$post_url   = get_permalink();
-						if ( has_post_thumbnail() ) :
-							$classes   = array( 'item' );
-							$classes[] = $is_first ? 'item-top' : 'item-bottom';
-							?>
-							<div class="item-outer">
-								<article <?php post_class( $classes ); ?>>
-									<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
-									<div class="caption">
-										<h4>
-											<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
-												title="<?php echo esc_attr( $post_title ); ?>">
-												<?php echo esc_attr( $post_title ); ?>
-											</a>
-										</h4>
-										<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix hidden' ); ?>
-										<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix hidden' ); ?>
-									</div>
-								</article>
-							</div>
-							<?php
-							$is_first = false;
-						endif;
-						++$loop_index;
+						$is_first = $this->render_slider_small_tile( $instance, $is_first );
 					endwhile;
 					?>
 				</div>
@@ -153,26 +128,7 @@ class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPost
 					<?php
 					while ( $posts->have_posts() ) :
 						$posts->the_post();
-						$post_title = get_the_title();
-						$post_url   = get_permalink();
-						if ( has_post_thumbnail() ) :
-							?>
-							<article <?php post_class( 'item' ); ?>>
-								<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
-								<div class="caption">
-									<h2>
-										<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
-											title="<?php echo esc_attr( $post_title ); ?>">
-											<?php echo esc_attr( $post_title ); ?>
-										</a>
-									</h2>
-									<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix' ); ?>
-									<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
-								</div>
-							</article>
-							<?php
-						endif;
-						++$loop_index;
+						$this->render_slider_carousel_slide( $instance );
 					endwhile;
 					?>
 				</div>
@@ -211,35 +167,10 @@ class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPost
 				<div class="col-left col-sm-4 col-xs-4">
 					<div class="d-flex flex-column">
 						<?php
-						$is_first   = true;
-						$loop_index = 1;
+						$is_first = true;
 						while ( $posts->have_posts() ) :
 							$posts->the_post();
-							$post_title = get_the_title();
-							$post_url   = get_permalink();
-							if ( has_post_thumbnail() ) :
-								$classes   = array( 'item' );
-								$classes[] = $is_first ? 'item-top' : 'item-bottom';
-								?>
-								<div class="item-outer">
-									<article <?php post_class( $classes ); ?>>
-										<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
-										<div class="caption">
-											<h4>
-												<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
-													title="<?php echo esc_attr( $post_title ); ?>">
-													<?php echo esc_attr( $post_title ); ?>
-												</a>
-											</h4>
-											<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix hidden' ); ?>
-											<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix hidden' ); ?>
-										</div>
-									</article>
-								</div>
-								<?php
-								$is_first = false;
-							endif;
-							++$loop_index;
+							$is_first = $this->render_slider_small_tile( $instance, $is_first );
 						endwhile;
 						?>
 					</div>
@@ -255,26 +186,7 @@ class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPost
 						<?php
 						while ( $posts->have_posts() ) :
 							$posts->the_post();
-							$post_title = get_the_title();
-							$post_url   = get_permalink();
-							if ( has_post_thumbnail() ) :
-								?>
-								<article <?php post_class( 'item' ); ?>>
-									<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
-									<div class="caption">
-										<h2>
-											<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
-												title="<?php echo esc_attr( $post_title ); ?>">
-												<?php echo esc_attr( $post_title ); ?>
-											</a>
-										</h2>
-										<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix' ); ?>
-										<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
-									</div>
-								</article>
-								<?php
-							endif;
-							++$loop_index;
+							$this->render_slider_carousel_slide( $instance );
 						endwhile;
 						?>
 					</div>
@@ -284,6 +196,69 @@ class Origamiez_Widget_Posts_List_Slider extends \Origamiez\Widgets\AbstractPost
 			wp_reset_postdata();
 		endif;
 		echo '</div>';
+	}
+
+	/**
+	 * Left column tile (two stacked posts).
+	 *
+	 * @param array $instance Instance.
+	 * @param bool  $is_first Whether this is the first tile.
+	 * @return bool Next value for $is_first.
+	 */
+	protected function render_slider_small_tile( array $instance, bool $is_first ): bool {
+		if ( ! has_post_thumbnail() ) {
+			return $is_first;
+		}
+		$classes    = array( 'item' );
+		$classes[]  = $is_first ? 'item-top' : 'item-bottom';
+		$post_title = get_the_title();
+		$post_url   = get_permalink();
+		?>
+		<div class="item-outer">
+			<article <?php post_class( $classes ); ?>>
+				<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
+				<div class="caption">
+					<h4>
+						<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
+							title="<?php echo esc_attr( $post_title ); ?>">
+							<?php echo esc_attr( $post_title ); ?>
+						</a>
+					</h4>
+					<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix hidden' ); ?>
+					<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix hidden' ); ?>
+				</div>
+			</article>
+		</div>
+		<?php
+		return false;
+	}
+
+	/**
+	 * Carousel slide (main column).
+	 *
+	 * @param array $instance Instance.
+	 */
+	protected function render_slider_carousel_slide( array $instance ): void {
+		if ( ! has_post_thumbnail() ) {
+			return;
+		}
+		$post_title = get_the_title();
+		$post_url   = get_permalink();
+		?>
+		<article <?php post_class( 'item' ); ?>>
+			<?php the_post_thumbnail( 'origamiez-posts-slide-metro', array( 'class' => 'img-responsive' ) ); ?>
+			<div class="caption">
+				<h2>
+					<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
+						title="<?php echo esc_attr( $post_title ); ?>">
+						<?php echo esc_attr( $post_title ); ?>
+					</a>
+				</h2>
+				<?php parent::print_metadata( $instance['is_show_date'], $instance['is_show_comments'], $instance['is_show_author'], 'metadata clearfix' ); ?>
+				<?php parent::print_excerpt( $instance['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
+			</div>
+		</article>
+		<?php
 	}
 
 	/**

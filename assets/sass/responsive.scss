@@ -134,9 +134,6 @@
 			@include inline-block();
 		}
 	}
-	#origamiez-top-banner {
-		text-align: center;
-	}
 	#origamiez-logo,
 	#origamiez-top-banner {
 		float: none !important;
@@ -145,6 +142,7 @@
 		max-width: 100%;
 	}
 	#origamiez-top-banner {
+		text-align: center;
 		margin-top: 20px;
 	}
 	#origamiez-footer-copyright {
@@ -437,16 +435,13 @@
 			visibility: visible !important;
 		}
 
-		#origamiez-sidebar-right {
-			border-left: 1px solid var(--line-2-bg-color) !important;
-		}
-
 		#origamiez-sidebar-right,
 		#sidebar-middle-clone {
 			width: 50% !important;
 		}
 
 		#origamiez-sidebar-right {
+			border-left: 1px solid var(--line-2-bg-color) !important;
 			padding-left: 20px !important;
 			border-top: none !important;
 		}

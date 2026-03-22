@@ -62,7 +62,7 @@ if ( $related_posts->have_posts() ) :
 						<?php if ( has_post_thumbnail() ) : ?>
 							<?php the_post_thumbnail( 'origamiez-square-md', array( 'class' => 'img-responsive' ) ); ?>
 						<?php else : ?>
-							<img src="http://placehold.it/374x209" class="img-responsive">
+							<img src="http://placehold.it/374x209" class="img-responsive" alt="<?php echo esc_attr( get_the_title() ); ?>">
 						<?php endif; ?>
 						<figcaption><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></figcaption>
 					</figure>

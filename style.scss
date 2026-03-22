@@ -23,7 +23,6 @@
 @import "./assets/sass/skin/default";
 @import "./assets/sass/plugins/bbpress/index";
 @import "./assets/sass/plugins/woocommerce/index";
-
 @import "./assets/sass/typography/default";
 
 * {
@@ -43,7 +42,8 @@
 }
 
 #site-home-link {
-	#site-title {
+	#site-title,
+	.site-title {
 		display: block;
 		margin-top: 0;
 		margin-bottom: 0;
@@ -163,12 +163,6 @@
 	> li {
 		display: inline-block;
 		*display: inline-block;
-
-		//&.origamiez-menuitem-first {
-		//  > a {
-		//    padding-left: 0;
-		//  }
-		//}
 
 		&.menu-item-has-children {
 			> a {
@@ -839,6 +833,7 @@ div.alert {
 
 				img {
 					width: 100%;
+					height: auto;
 				}
 			}
 
@@ -886,6 +881,7 @@ div.alert {
 
 					& > img {
 						width: 100%;
+						height: auto;
 					}
 				}
 
@@ -1058,6 +1054,7 @@ div.alert {
 	.origamiez-post-thumb {
 		img {
 			width: 100%;
+			height: auto;
 		}
 	}
 

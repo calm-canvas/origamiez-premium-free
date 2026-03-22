@@ -23,7 +23,17 @@ class SinglePostSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	public function register( CustomizerService $service ): void {
-		// Single Post Section.
+		$this->register_single_post_main( $service );
+		$this->register_single_post_adjacent( $service );
+		$this->register_single_post_related( $service );
+	}
+
+	/**
+	 * Main single post section and controls.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
+	private function register_single_post_main( CustomizerService $service ): void {
 		$service->register_section(
 			'single_post',
 			array(
@@ -144,8 +154,14 @@ class SinglePostSettings implements SettingsInterface {
 				'transport'   => 'refresh',
 			)
 		);
+	}
 
-		// Single Post Adjacent Section.
+	/**
+	 * Adjacent posts subsection.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
+	private function register_single_post_adjacent( CustomizerService $service ): void {
 		$service->register_section(
 			'single_post_adjacent',
 			array(
@@ -213,8 +229,14 @@ class SinglePostSettings implements SettingsInterface {
 				'transport'   => 'refresh',
 			)
 		);
+	}
 
-		// Single Post Related Section.
+	/**
+	 * Related posts subsection.
+	 *
+	 * @param CustomizerService $service The customizer service.
+	 */
+	private function register_single_post_related( CustomizerService $service ): void {
 		$service->register_section(
 			'single_post_related',
 			array(

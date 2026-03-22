@@ -45,6 +45,14 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 
 ## 5. Version History
 
+### 4.4.1 (2026/03/22)
+
+- Security: CSP worker-src; improved img-src (site host http/https, uploads/CDN origins)
+- Styles: image height auto; hover and border tweaks; remove commented CSS
+- Refactor: GlobalStylesThemeJsonMerger; template-part constants; widgets and migrator cleanup
+- Quality: JS parseInt radix; accessibility and require_once fixes
+- Update: Customizer → Site Editor migration target version is 4.4.1 (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); filter `origamiez_global_styles_migration_target_version`
+
 ### 4.4.0 (2026/03/21)
 
 - Update: Customizer → Site Editor global styles migration runs only when the Origamiez engine theme Version is 4.4.0 (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); filter `origamiez_global_styles_migration_target_version`

@@ -17,9 +17,8 @@ if ( is_active_sidebar( $sidebar ) ) :
 		'footer-1'
 	);
 	?>
-	<div id="origamiez-footer-1" class="widget-area <?php echo esc_attr( implode( ' ', $classes ) ); ?>"
-		role="complementary">
+	<aside id="origamiez-footer-1" class="widget-area <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 		<?php dynamic_sidebar( $sidebar ); ?>
-	</div>
+	</aside>
 	<?php
 endif;

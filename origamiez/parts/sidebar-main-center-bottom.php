@@ -8,8 +8,8 @@
 $sidebar = apply_filters( 'origamiez_get_current_sidebar', 'main-center-bottom', 'main-center-bottom' );
 if ( is_active_sidebar( $sidebar ) ) :
 	?>
-	<div id="sidebar-main-center-bottom" class="clearfix widget-area" role="complementary">
+	<aside id="sidebar-main-center-bottom" class="clearfix widget-area">
 		<?php dynamic_sidebar( $sidebar ); ?>
-	</div>
+	</aside>
 	<?php
 endif;

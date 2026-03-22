@@ -5,6 +5,16 @@
  * @package Origamiez
  */
 
+if ( ! defined( 'ORIGAMIEZ_PART_SIDEBAR_SLUG' ) ) {
+	define( 'ORIGAMIEZ_PART_SIDEBAR_SLUG', 'parts/sidebar' );
+}
+if ( ! defined( 'ORIGAMIEZ_PART_METADATA_DIVIDER_SLUG' ) ) {
+	define( 'ORIGAMIEZ_PART_METADATA_DIVIDER_SLUG', 'parts/metadata/divider' );
+}
+if ( ! defined( 'ORIGAMIEZ_CSP_SOURCE_SELF' ) ) {
+	define( 'ORIGAMIEZ_CSP_SOURCE_SELF', "'self'" );
+}
+
 if ( ! defined( 'ORIGAMIEZ_CONFIG' ) ) {
 	define(
 		'ORIGAMIEZ_CONFIG',
@@ -38,15 +48,16 @@ if ( ! defined( 'ORIGAMIEZ_CONFIG' ) ) {
 					'Referrer-Policy'        => 'strict-origin-when-cross-origin',
 				),
 				'csp'     => array(
-					'default-src' => "'self'",
-					'script-src'  => "'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com",
-					'style-src'   => "'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
-					'img-src'     => "'self' data: *.gravatar.com *.wp.com",
-					'font-src'    => "'self' *.googleapis.com *.gstatic.com",
-					'connect-src' => "'self'",
-					'frame-src'   => "'self' *.youtube.com *.vimeo.com",
+					'default-src' => ORIGAMIEZ_CSP_SOURCE_SELF,
+					'script-src'  => ORIGAMIEZ_CSP_SOURCE_SELF . " 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com",
+					'style-src'   => ORIGAMIEZ_CSP_SOURCE_SELF . " 'unsafe-inline' *.googleapis.com *.gstatic.com",
+					'img-src'     => ORIGAMIEZ_CSP_SOURCE_SELF . ' data: *.gravatar.com *.wp.com',
+					'font-src'    => ORIGAMIEZ_CSP_SOURCE_SELF . ' data: *.googleapis.com *.gstatic.com',
+					'worker-src'  => ORIGAMIEZ_CSP_SOURCE_SELF . ' blob:',
+					'connect-src' => ORIGAMIEZ_CSP_SOURCE_SELF,
+					'frame-src'   => ORIGAMIEZ_CSP_SOURCE_SELF . ' *.youtube.com *.vimeo.com',
 					'object-src'  => "'none'",
-					'base-uri'    => "'self'",
+					'base-uri'    => ORIGAMIEZ_CSP_SOURCE_SELF,
 				),
 			),
 			'socials'       => array(

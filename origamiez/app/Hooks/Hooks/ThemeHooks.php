@@ -75,10 +75,8 @@ class ThemeHooks implements HookProviderInterface {
 		}
 
 		foreach ( $new_value as $key => $value ) {
-			if ( 'logo' === $key ) {
-				if ( isset( $value['url'] ) && isset( $value['attachment_id'] ) ) {
-					$value = esc_url( $value['url'] );
-				}
+			if ( 'logo' === $key && isset( $value['url'], $value['attachment_id'] ) ) {
+				$value = esc_url( $value['url'] );
 			}
 			set_theme_mod( $key, $value );
 		}

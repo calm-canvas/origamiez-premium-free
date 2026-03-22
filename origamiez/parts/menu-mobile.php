@@ -5,7 +5,12 @@
  * @package Origamiez
  */
 
-$menu_slug = has_nav_menu( 'mobile-nav' ) ? 'mobile-nav' : ( has_nav_menu( 'main-nav' ) ? 'main-nav' : false );
+$menu_slug = false;
+if ( has_nav_menu( 'mobile-nav' ) ) {
+	$menu_slug = 'mobile-nav';
+} elseif ( has_nav_menu( 'main-nav' ) ) {
+	$menu_slug = 'main-nav';
+}
 if ( $menu_slug ) :
 	?>
 	<nav id="origamiez-mobile-nav" class="sb-slidebar sb-left sb-width-custom clearfix">

@@ -36,6 +36,8 @@ class FormatHelper {
 			case 'gallery':
 				$icon = 'fa fa-picture-o';
 				break;
+			default:
+				break;
 		}
 
 		return apply_filters( 'origamiez_get_format_icon', $icon, $format );

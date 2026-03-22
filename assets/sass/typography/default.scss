@@ -64,7 +64,8 @@ h6 {
 	text-decoration: none;
 	color: var(--heading-color);
 
-	#site-title {
+	#site-title,
+	.site-title {
 		font-family: var(--font-heading-h1), serif;
 		font-size: 40px;
 		line-height: 40px;
@@ -97,7 +98,7 @@ h6 {
 	> li {
 		&.menu-item-has-children {
 			> a:after {
-				font-family: "FontAwesome" !important;
+				font-family: "FontAwesome", fantasy !important;
 				content: "\f0d7";
 				font-weight: 400;
 			}
@@ -109,7 +110,7 @@ h6 {
 			li {
 				&.menu-item-has-children {
 					> a:after {
-						font-family: "FontAwesome" !important;
+						font-family: "FontAwesome", fantasy !important;
 						content: "\f0da";
 						line-height: 40px;
 					}
@@ -456,6 +457,17 @@ body.origamiez-layout-single {
 			}
 		}
 	}
+
+	#origamiez-post-wrap {
+		.entry-content {
+			.wp-caption {
+				.wp-caption-text,
+				&.aligncenter {
+					text-align: center;
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -498,6 +510,11 @@ body.origamiez-layout-single {
  */
 #origamiez_singular_pagination {
 	font-style: italic;
+	text-align: right;
+
+	a {
+		line-height: 25px;
+	}
 }
 
 /*
@@ -523,19 +540,6 @@ label {
  * UPDATE :: 2015.07.01
  * --------------------------------------------------
  */
-
-body.origamiez-layout-single {
-	#origamiez-post-wrap {
-		.entry-content {
-			.wp-caption {
-				.wp-caption-text,
-				&.aligncenter {
-					text-align: center;
-				}
-			}
-		}
-	}
-}
 
 /*
  * --------------------------------------------------
@@ -589,13 +593,6 @@ p.origamiez-readmore-block > a,
  * UPDATE :: 2015.07.22 (1.2.2)
  * --------------------------------------------------
  */
-#origamiez_singular_pagination {
-	text-align: right;
-
-	a {
-		line-height: 25px;
-	}
-}
 
 /*
  * --------------------------------------------------
