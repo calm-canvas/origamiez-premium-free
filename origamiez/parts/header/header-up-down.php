@@ -19,7 +19,7 @@
 					<?php if ( is_front_page() || is_home() ) : ?>
 						<h1 id="site-title"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></h1>
 					<?php else : ?>
-						<p id="site-title"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></p>
+						<p class="site-title"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></p>
 					<?php endif; ?>
 					<p id="site-desc">
 						<?php echo esc_textarea( get_bloginfo( 'description' ) ); ?>

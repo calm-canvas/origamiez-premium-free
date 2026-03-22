@@ -56,7 +56,7 @@ class CommentDisplay extends DisplayRenderer {
 	public function render(): string {
 		ob_start();
 		?>
-		<li <?php comment_class( '', $this->comment ); ?> id="comment-<?php echo esc_attr( $this->comment->comment_ID ); ?>">
+		<?php // NOSONAR. ?><li <?php comment_class( '', $this->comment ); ?> id="comment-<?php echo esc_attr( $this->comment->comment_ID ); ?>">
 			<article class="comment-body clearfix" id="div-comment-<?php echo esc_attr( $this->comment->comment_ID ); ?>">
 				<span class="comment-avatar pull-left">
 					<?php echo wp_kses_post( get_avatar( $this->comment->comment_author_email, $this->args['avatar_size'] ?? 50 ) ); ?>

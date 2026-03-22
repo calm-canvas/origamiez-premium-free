@@ -195,10 +195,15 @@ const Origamier = {
 		}
 	},
 	initLightboxEffect() {
-		if (1 === parseInt(origamiez_vars.config.is_enable_lightbox)) {
+		if (
+			1 === Number.parseInt(origamiez_vars.config.is_enable_lightbox, 10)
+		) {
 			const blogposts = jQuery('#origamiez-blogposts .entry-thumb');
 			let gallery = {};
-			if (1 === parseInt(origamiez_vars.config.is_use_gallery_popup)) {
+			if (
+				1 ===
+				Number.parseInt(origamiez_vars.config.is_use_gallery_popup, 10)
+			) {
 				gallery = jQuery('#origamiez-post-wrap .gallery');
 			}
 			const photos = jQuery(
@@ -244,7 +249,11 @@ const Origamier = {
 	},
 	convertFlatMenuToDropdown() {
 		if (
-			1 === parseInt(origamiez_vars.config.is_enable_convert_flat_menus)
+			1 ===
+			Number.parseInt(
+				origamiez_vars.config.is_enable_convert_flat_menus,
+				10
+			)
 		) {
 			const topNav = jQuery('#top-nav');
 			if (topNav.length) {

@@ -27,4 +27,4 @@ All callback functions for action hooks & filter hooks.
 --------------------
 */
 require_once $dir . 'inc/config.php';
-require $dir . 'inc/functions.php';
+require_once $dir . 'inc/functions.php';
