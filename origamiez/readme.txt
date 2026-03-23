@@ -45,6 +45,14 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 
 ## 5. Version History
 
+### 4.4.2 (2026/03/25)
+
+- Refactor: Customizer helpers, InlineStyleGenerator, shared template parts; widget registration via WidgetFactory
+- Quality: ESLint es2020, globalThis in JS; PHP cleanup
+- Chore: Sonar scannerwork / gitignore
+- Security: NOSONAR on intentional security hook
+- Update: Customizer → Site Editor migration target version is 4.4.2 (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); filter `origamiez_global_styles_migration_target_version`
+
 ### 4.4.1 (2026/03/22)
 
 - Security: CSP worker-src; improved img-src (site host http/https, uploads/CDN origins)
