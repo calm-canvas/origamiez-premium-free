@@ -109,7 +109,7 @@ class SecurityHooks implements HookProviderInterface {
 		if ( ! empty( $home_host ) ) {
 			$port      = wp_parse_url( $home, PHP_URL_PORT );
 			$port_part = $port ? ':' . $port : '';
-			$sources[] = 'http://' . $home_host . $port_part; // NOSONAR
+			$sources[] = 'http://' . $home_host . $port_part; // NOSONAR.
 			$sources[] = 'https://' . $home_host . $port_part;
 		}
 

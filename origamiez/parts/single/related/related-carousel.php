@@ -5,43 +5,9 @@
  * @package Origamiez
  */
 
-global $post;
-$get_related_post_by     = get_theme_mod( 'get_related_post_by', 'post_tag' );
-$number_of_related_posts = (int) get_theme_mod( 'number_of_related_posts', 5 );
-$args                    = array(
-	'post__not_in'   => array( $post->ID ),
-	'posts_per_page' => $number_of_related_posts,
-);
-if ( 'post_tag' === $get_related_post_by ) {
-	$tags = get_the_tags( $post->ID );
-	if ( ! empty( $tags ) ) {
-		$tag_ids = array();
-		foreach ( $tags as $t ) {
-			$tag_ids[] = $t->term_id;
-		}
-		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			array(
-				'taxonomy' => 'post_tag',
-				'field'    => 'id',
-				'terms'    => $tag_ids,
-			),
-		);
-	}
-} else {
-	$categories = get_the_category( $post->ID );
-	if ( ! empty( $categories ) ) {
-		$category_id = array();
-		foreach ( $categories as $category ) {
-			$category_id[] = $category->term_id;
-		}
-		$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-			array(
-				'taxonomy' => 'category',
-				'field'    => 'id',
-				'terms'    => $category_id,
-			),
-		);
-	}
+$args = origamiez_get_related_posts_query_args( null, 5 );
+if ( empty( $args ) ) {
+	return;
 }
 $related_posts = new WP_Query( $args );
 if ( $related_posts->have_posts() ) :

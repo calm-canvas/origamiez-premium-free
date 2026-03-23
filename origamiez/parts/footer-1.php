@@ -24,15 +24,4 @@
 			</div>
 		</div>
 	<?php endif; ?>
-	<div id="origamiez-footer-end" class="clearfix">
-		<div class="<?php \Origamiez\Helpers\LayoutHelper::get_wrap_classes(); ?> clearfix">
-			<?php get_template_part( 'parts/menu', 'bottom' ); ?>
-			<?php get_template_part( 'parts/copyright' ); ?>
-		</div>
-	</div>
-</footer>
-</div>
-<?php wp_footer(); ?>
-<?php do_action( 'origamiez_before_body_close' ); ?>
-</body>
-</html>
+	<?php get_template_part( 'parts/footer/footer-markup-end' ); ?>

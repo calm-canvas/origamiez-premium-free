@@ -34,13 +34,7 @@ class SinglePostSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	private function register_single_post_main( CustomizerService $service ): void {
-		$service->register_section(
-			'single_post',
-			array(
-				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Single post', 'origamiez' ),
-			)
-		);
+		CustomizerPanelHelper::register_section_under_general( $service, 'single_post', esc_attr__( 'Single post', 'origamiez' ) );
 
 		$service->register_setting(
 			'single-post-layout',
@@ -49,111 +43,20 @@ class SinglePostSettings implements SettingsInterface {
 				'description' => '',
 				'default'     => 'two-cols',
 				'type'        => 'radio',
-				'choices'     => array(
-					'two-cols'       => esc_attr__( 'Two column', 'origamiez' ),
-					'three-cols'     => esc_attr__( 'Three column - large : small : medium', 'origamiez' ),
-					'three-cols-slm' => esc_attr__( 'Three column - small : large : medium', 'origamiez' ),
-				),
+				'choices'     => PostLayoutCustomizerHelper::get_three_column_layout_choices(),
 				'section'     => 'single_post',
 				'transport'   => 'refresh',
 			)
 		);
 
-		$service->register_setting(
-			'is_show_post_datetime',
-			array(
-				'label'       => esc_attr__( 'Show datetime', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_comments',
-			array(
-				'label'       => esc_attr__( 'Show number of comments', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_category',
-			array(
-				'label'       => esc_attr__( 'Show category', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_category_below_title',
-			array(
-				'label'       => esc_attr__( 'Show category (below title)', 'origamiez' ),
-				'description' => '',
-				'default'     => 0,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_tag',
-			array(
-				'label'       => esc_attr__( 'Show tag', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_author_info',
-			array(
-				'label'       => esc_attr__( 'Show author information', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_border_for_images',
-			array(
-				'label'       => esc_attr__( 'Show border for image inside post-content', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_use_gallery_popup',
-			array(
-				'label'       => esc_attr__( 'Use gallery popup', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post',
-				'transport'   => 'refresh',
-			)
-		);
+		$service->register_checkbox_setting( 'is_show_post_datetime', 'single_post', esc_attr__( 'Show datetime', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_comments', 'single_post', esc_attr__( 'Show number of comments', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_category', 'single_post', esc_attr__( 'Show category', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_category_below_title', 'single_post', esc_attr__( 'Show category (below title)', 'origamiez' ), 0 );
+		$service->register_checkbox_setting( 'is_show_post_tag', 'single_post', esc_attr__( 'Show tag', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_author_info', 'single_post', esc_attr__( 'Show author information', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_border_for_images', 'single_post', esc_attr__( 'Show border for image inside post-content', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_use_gallery_popup', 'single_post', esc_attr__( 'Use gallery popup', 'origamiez' ) );
 	}
 
 	/**
@@ -162,49 +65,11 @@ class SinglePostSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	private function register_single_post_adjacent( CustomizerService $service ): void {
-		$service->register_section(
-			'single_post_adjacent',
-			array(
-				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Single post - adjacent', 'origamiez' ),
-			)
-		);
+		CustomizerPanelHelper::register_section_under_general( $service, 'single_post_adjacent', esc_attr__( 'Single post - adjacent', 'origamiez' ) );
 
-		$service->register_setting(
-			'is_show_post_adjacent',
-			array(
-				'label'       => esc_attr__( 'Show next & prev posts', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post_adjacent',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_adjacent_title',
-			array(
-				'label'       => esc_attr__( 'Show title', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post_adjacent',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_show_post_adjacent_datetime',
-			array(
-				'label'       => esc_attr__( 'Show datetime', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post_adjacent',
-				'transport'   => 'refresh',
-			)
-		);
+		$service->register_checkbox_setting( 'is_show_post_adjacent', 'single_post_adjacent', esc_attr__( 'Show next & prev posts', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_adjacent_title', 'single_post_adjacent', esc_attr__( 'Show title', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_show_post_adjacent_datetime', 'single_post_adjacent', esc_attr__( 'Show datetime', 'origamiez' ) );
 
 		$service->register_setting(
 			'post_adjacent_arrow_left',
@@ -237,13 +102,7 @@ class SinglePostSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	private function register_single_post_related( CustomizerService $service ): void {
-		$service->register_section(
-			'single_post_related',
-			array(
-				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Single post - related', 'origamiez' ),
-			)
-		);
+		CustomizerPanelHelper::register_section_under_general( $service, 'single_post_related', esc_attr__( 'Single post - related', 'origamiez' ) );
 
 		$service->register_setting(
 			'single_post_related_layout',
@@ -261,17 +120,7 @@ class SinglePostSettings implements SettingsInterface {
 			)
 		);
 
-		$service->register_setting(
-			'post_related_layout',
-			array(
-				'label'       => esc_attr__( 'Show related posts', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'single_post_related',
-				'transport'   => 'refresh',
-			)
-		);
+		$service->register_checkbox_setting( 'post_related_layout', 'single_post_related', esc_attr__( 'Show related posts', 'origamiez' ) );
 
 		$service->register_setting(
 			'get_related_post_by',

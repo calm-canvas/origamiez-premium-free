@@ -18,28 +18,8 @@ get_header();
 				<?php
 				while ( have_posts() ) :
 					the_post();
-					?>
-					<article id="origamiez-post-wrap" <?php post_class( 'clearfix' ); ?>>
-						<h1 class="entry-title"><?php the_title(); ?></h1>
-						<div class="entry-content">
-							<?php the_content(); ?>
-						</div>
-						<?php
-						wp_link_pages(
-							array(
-								'before'           => '<div id="origamiez_singular_pagination" class="clearfix">',
-								'after'            => '</div>',
-								'next_or_number'   => 'next',
-								'separator'        => ' . ',
-								'nextpagelink'     => esc_attr__( 'Next', 'origamiez' ),
-								'previouspagelink' => esc_attr__( 'Previous', 'origamiez' ),
-							)
-						);
-						?>
-					</article>
-
-					<?php comments_template(); ?>
-					<?php
+					set_query_var( 'origamiez_hide_entry_title', false );
+					get_template_part( 'parts/loop/singular-entry' );
 				endwhile;
 				?>
 			</div>
