@@ -43,22 +43,13 @@ class PostsListGridWidget extends AbstractPostsWidgetTypeC {
 	 * @param array $instance Widget instance.
 	 */
 	public function widget( $args, $instance ): void {
-		$instance      = wp_parse_args( (array) $instance, $this->get_default() );
-		$before_widget = $args['before_widget'];
-		$after_widget  = $args['after_widget'];
-		$before_title  = $args['before_title'];
-		$after_title   = $args['after_title'];
-
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
-		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
-		}
+		$instance = wp_parse_args( (array) $instance, $this->get_default() );
+		$this->echo_widget_shell_open( $args, $instance );
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
 		$this->render_posts_grid_widget_content( $posts, $instance );
 		wp_reset_postdata();
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
+		$this->echo_widget_shell_close( $args );
 	}
 
 	/**

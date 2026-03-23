@@ -15,6 +15,29 @@ use WP_Query;
 abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 
 	/**
+	 * Echo widget wrapper open and title.
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Parsed instance.
+	 */
+	protected function echo_widget_shell_open( array $args, array $instance ): void {
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
+		if ( ! empty( $title ) ) {
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
+		}
+	}
+
+	/**
+	 * Echo widget wrapper close.
+	 *
+	 * @param array $args Widget arguments.
+	 */
+	protected function echo_widget_shell_close( array $args ): void {
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
+	}
+
+	/**
 	 * Output grid rows for the posts grid widget (shared by PSR-4 and legacy widget classes).
 	 *
 	 * @param WP_Query $posts    Query with posts to render.

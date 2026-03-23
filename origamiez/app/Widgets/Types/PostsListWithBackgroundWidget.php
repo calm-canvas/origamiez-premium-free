@@ -49,11 +49,7 @@ class PostsListWithBackgroundWidget extends AbstractPostsWidgetTypeC {
 		$is_show_author      = $instance['is_show_author'];
 		$excerpt_words_limit = $instance['excerpt_words_limit'];
 
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
-		if ( ! empty( $title ) ) {
-			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
-		}
+		$this->echo_widget_shell_open( $args, $instance );
 		$query = $this->get_query( $instance );
 		$posts = new WP_Query( $query );
 		if ( $posts->have_posts() ) :
@@ -94,6 +90,6 @@ class PostsListWithBackgroundWidget extends AbstractPostsWidgetTypeC {
 			endwhile;
 		endif;
 		wp_reset_postdata();
-		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
+		$this->echo_widget_shell_close( $args );
 	}
 }
