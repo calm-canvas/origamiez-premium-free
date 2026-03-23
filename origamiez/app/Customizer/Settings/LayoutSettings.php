@@ -20,73 +20,20 @@ class LayoutSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	public function register( CustomizerService $service ): void {
-		$service->register_section(
-			'layout',
-			array(
-				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Layout', 'origamiez' ),
-			)
-		);
+		CustomizerPanelHelper::register_section_under_general( $service, 'layout', esc_attr__( 'Layout', 'origamiez' ) );
 
-		$service->register_setting(
-			'use_layout_fullwidth',
-			array(
-				'label'       => esc_attr__( 'Layout full width', 'origamiez' ),
-				'description' => '',
-				'default'     => 0,
-				'type'        => 'checkbox',
-				'section'     => 'layout',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_display_top_bar',
-			array(
-				'label'       => esc_attr__( 'Show top bar', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'layout',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
+		$service->register_checkbox_setting( 'use_layout_fullwidth', 'layout', esc_attr__( 'Layout full width', 'origamiez' ), 0 );
+		$service->register_checkbox_setting( 'is_display_top_bar', 'layout', esc_attr__( 'Show top bar', 'origamiez' ) );
+		$service->register_checkbox_setting(
 			'is_display_top_social_links',
+			'layout',
+			esc_attr__( 'Show top social links', 'origamiez' ),
+			1,
 			array(
-				'label'           => esc_attr__( 'Show top social links', 'origamiez' ),
-				'description'     => '',
-				'default'         => 1,
-				'type'            => 'checkbox',
-				'section'         => 'layout',
-				'transport'       => 'refresh',
 				'active_callback' => 'origamiez_top_bar_enable_callback',
 			)
 		);
-
-		$service->register_setting(
-			'is_display_breadcrumb',
-			array(
-				'label'       => esc_attr__( 'Show breadcrumb', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'layout',
-				'transport'   => 'refresh',
-			)
-		);
-
-		$service->register_setting(
-			'is_enable_convert_flat_menus',
-			array(
-				'label'       => esc_attr__( 'Is convert top(bottom) menu to select box on mobile.', 'origamiez' ),
-				'description' => '',
-				'default'     => 1,
-				'type'        => 'checkbox',
-				'section'     => 'layout',
-				'transport'   => 'refresh',
-			)
-		);
+		$service->register_checkbox_setting( 'is_display_breadcrumb', 'layout', esc_attr__( 'Show breadcrumb', 'origamiez' ) );
+		$service->register_checkbox_setting( 'is_enable_convert_flat_menus', 'layout', esc_attr__( 'Is convert top(bottom) menu to select box on mobile.', 'origamiez' ) );
 	}
 }

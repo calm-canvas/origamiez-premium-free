@@ -20,13 +20,7 @@ class BlogSettings implements SettingsInterface {
 	 * @param CustomizerService $service The customizer service.
 	 */
 	public function register( CustomizerService $service ): void {
-		$service->register_section(
-			'blog_posts',
-			array(
-				'panel' => 'origamiez_general',
-				'title' => esc_attr__( 'Blog posts', 'origamiez' ),
-			)
-		);
+		CustomizerPanelHelper::register_section_under_general( $service, 'blog_posts', esc_attr__( 'Blog posts', 'origamiez' ) );
 
 		$service->register_setting(
 			'taxonomy_layout',
@@ -35,11 +29,7 @@ class BlogSettings implements SettingsInterface {
 				'description' => '',
 				'default'     => 'two-cols',
 				'type'        => 'radio',
-				'choices'     => array(
-					'two-cols'       => esc_attr__( 'Two column', 'origamiez' ),
-					'three-cols'     => esc_attr__( 'Three column - large : small : medium', 'origamiez' ),
-					'three-cols-slm' => esc_attr__( 'Three column - small : large : medium', 'origamiez' ),
-				),
+				'choices'     => PostLayoutCustomizerHelper::get_three_column_layout_choices(),
 				'section'     => 'blog_posts',
 				'transport'   => 'refresh',
 			)

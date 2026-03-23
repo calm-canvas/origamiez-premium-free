@@ -67,50 +67,27 @@ class InlineStyleGenerator {
 	 * @return string The CSS for color variables.
 	 */
 	private function build_color_variables(): string {
-		$colors = array(
-			'--body-color'                           => 'body_color',
-			'--heading-color'                        => 'heading_color',
-			'--link-color'                           => 'link_color',
-			'--link-hover-color'                     => 'link_hover_color',
-			'--primary-color'                        => 'primary_color',
-			'--secondary-color'                      => 'secondary_color',
-			'--main-menu-color'                      => 'main_menu_color',
-			'--main-menu-bg-color'                   => 'main_menu_bg_color',
-			'--main-menu-hover-color'                => 'main_menu_hover_color',
-			'--main-menu-active-color'               => 'main_menu_active_color',
-			'--line-1-bg-color'                      => 'line_1_bg_color',
-			'--line-2-bg-color'                      => 'line_2_bg_color',
-			'--line-3-bg-color'                      => 'line_3_bg_color',
-			'--footer-sidebars-bg-color'             => 'footer_sidebars_bg_color',
-			'--footer-sidebars-text-color'           => 'footer_sidebars_text_color',
-			'--footer-sidebars-widget-heading-color' => 'footer_sidebars_widget_heading_color',
-			'--footer-end-bg-color'                  => 'footer_end_bg_color',
-			'--footer-end-text-color'                => 'footer_end_text_color',
-			'--metadata-color'                       => 'metadata_color',
-			'--color-success'                        => 'color_success',
-		);
-
-		$default_colors = array(
-			'body_color'                           => 'var(--wp--preset--color--body, #333333)',
-			'heading_color'                        => 'var(--wp--preset--color--heading, #111111)',
-			'link_color'                           => 'var(--wp--preset--color--primary, #111111)',
-			'link_hover_color'                     => 'var(--wp--preset--color--link-hover, #00589f)',
-			'primary_color'                        => 'var(--wp--preset--color--primary, #111111)',
-			'secondary_color'                      => 'var(--wp--preset--color--secondary, #f5f7fa)',
-			'main_menu_color'                      => 'var(--wp--preset--color--main-menu-text, #111111)',
-			'main_menu_bg_color'                   => 'var(--wp--preset--color--main-menu-bg, #ffffff)',
-			'main_menu_hover_color'                => 'var(--wp--preset--color--main-menu-hover, #00589f)',
-			'main_menu_active_color'               => 'var(--wp--preset--color--main-menu-active, #111111)',
-			'line_1_bg_color'                      => 'var(--wp--preset--color--line-1-bg, #e8ecf1)',
-			'line_2_bg_color'                      => 'var(--wp--preset--color--line-2-bg, #f0f2f5)',
-			'line_3_bg_color'                      => 'var(--wp--preset--color--line-3-bg, #f8fafc)',
-			'footer_sidebars_bg_color'             => 'var(--wp--preset--color--footer-sidebars-bg, #222222)',
-			'footer_sidebars_text_color'           => 'var(--wp--preset--color--footer-sidebars-text, #a0a0a0)',
-			'footer_sidebars_widget_heading_color' => 'var(--wp--preset--color--footer-sidebars-widget-heading, #ffffff)',
-			'footer_end_bg_color'                  => 'var(--wp--preset--color--footer-end-bg, #111111)',
-			'footer_end_text_color'                => 'var(--wp--preset--color--footer-end-text, #a0a0a0)',
-			'metadata_color'                       => 'var(--wp--preset--color--metadata, #666666)',
-			'color_success'                        => 'var(--wp--preset--color--success, #27ae60)',
+		$color_rows = array(
+			array( '--body-color', 'body_color', 'var(--wp--preset--color--body, #333333)' ),
+			array( '--heading-color', 'heading_color', 'var(--wp--preset--color--heading, #111111)' ),
+			array( '--link-color', 'link_color', 'var(--wp--preset--color--primary, #111111)' ),
+			array( '--link-hover-color', 'link_hover_color', 'var(--wp--preset--color--link-hover, #00589f)' ),
+			array( '--primary-color', 'primary_color', 'var(--wp--preset--color--primary, #111111)' ),
+			array( '--secondary-color', 'secondary_color', 'var(--wp--preset--color--secondary, #f5f7fa)' ),
+			array( '--main-menu-color', 'main_menu_color', 'var(--wp--preset--color--main-menu-text, #111111)' ),
+			array( '--main-menu-bg-color', 'main_menu_bg_color', 'var(--wp--preset--color--main-menu-bg, #ffffff)' ),
+			array( '--main-menu-hover-color', 'main_menu_hover_color', 'var(--wp--preset--color--main-menu-hover, #00589f)' ),
+			array( '--main-menu-active-color', 'main_menu_active_color', 'var(--wp--preset--color--main-menu-active, #111111)' ),
+			array( '--line-1-bg-color', 'line_1_bg_color', 'var(--wp--preset--color--line-1-bg, #e8ecf1)' ),
+			array( '--line-2-bg-color', 'line_2_bg_color', 'var(--wp--preset--color--line-2-bg, #f0f2f5)' ),
+			array( '--line-3-bg-color', 'line_3_bg_color', 'var(--wp--preset--color--line-3-bg, #f8fafc)' ),
+			array( '--footer-sidebars-bg-color', 'footer_sidebars_bg_color', 'var(--wp--preset--color--footer-sidebars-bg, #222222)' ),
+			array( '--footer-sidebars-text-color', 'footer_sidebars_text_color', 'var(--wp--preset--color--footer-sidebars-text, #a0a0a0)' ),
+			array( '--footer-sidebars-widget-heading-color', 'footer_sidebars_widget_heading_color', 'var(--wp--preset--color--footer-sidebars-widget-heading, #ffffff)' ),
+			array( '--footer-end-bg-color', 'footer_end_bg_color', 'var(--wp--preset--color--footer-end-bg, #111111)' ),
+			array( '--footer-end-text-color', 'footer_end_text_color', 'var(--wp--preset--color--footer-end-text, #a0a0a0)' ),
+			array( '--metadata-color', 'metadata_color', 'var(--wp--preset--color--metadata, #666666)' ),
+			array( '--color-success', 'color_success', 'var(--wp--preset--color--success, #27ae60)' ),
 		);
 
 		$css  = '';
@@ -120,10 +97,9 @@ class InlineStyleGenerator {
 		$css .= '--overlay_white: rgba(255, 255, 255, 0.85);';
 		$css .= '--overlay_black: rgba(0, 0, 0, 0.75);';
 
-		foreach ( $colors as $css_var => $option ) {
-			$default = $default_colors[ $option ] ?? '';
-			$value   = get_theme_mod( $option, $default );
-			$css    .= $css_var . ': ' . $value . ';';
+		foreach ( $color_rows as $row ) {
+			$value = get_theme_mod( $row[1], $row[2] );
+			$css  .= $row[0] . ': ' . $value . ';';
 		}
 
 		return $css;

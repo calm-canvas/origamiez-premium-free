@@ -8,7 +8,7 @@ jQuery(document).ready(function (_$) {
 	Origamier.convertFlatMenuToDropdown();
 	Origamier.fixGalleryPopupMissingTitle();
 });
-jQuery(window).load(function (_$) {
+jQuery(globalThis).load(function (_$) {
 	'use strict';
 
 	Origamier.initImageEffect();
@@ -159,7 +159,7 @@ const Origamier = {
 				.mouseleave(function () {
 					jQuery(this)
 						.stop()
-						.transition({ scale: [1.0, 1.0] });
+						.transition({ scale: [1, 1] });
 				});
 			jQuery('.image-overlay')
 				.hover(function () {
@@ -319,13 +319,15 @@ const Origamier = {
 			.find('select')
 			.first()
 			.change(function () {
-				window.location = jQuery(this).find('option:selected').val();
+				globalThis.location = jQuery(this)
+					.find('option:selected')
+					.val();
 			});
 	},
 };
 const OrigamierUtil = {
 	getViewport(w) {
-		w = w || window;
+		w = w || globalThis;
 		if (w.innerWidth !== null) return { w: w.innerWidth, h: w.innerHeight };
 		const d = w.document;
 		if (document.compatMode === 'CSS1Compat')

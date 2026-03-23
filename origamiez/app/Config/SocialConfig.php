@@ -26,9 +26,10 @@ class SocialConfig {
 	 */
 	public static function get_socials(): array {
 		$socials = self::$socials;
-		foreach ( $socials as $key => &$data ) {
+		foreach ( $socials as &$data ) {
 			$data['label'] = esc_attr( $data['label'] );
 		}
+		unset( $data );
 		return apply_filters( 'origamiez_social_networks', $socials );
 	}
 

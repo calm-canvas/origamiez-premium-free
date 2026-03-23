@@ -65,6 +65,14 @@ Detailed technical specifications and development guides are available in the `.
 
 ## Version History
 
+### 4.4.2 (2026/03/25)
+
+- **Update:** Customizer → Site Editor global styles migration is gated to theme **4.4.2** only (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); override via filter `origamiez_global_styles_migration_target_version` if needed (e.g. tests)
+- **Refactor:** Customizer and template structure — leaner `InlineStyleGenerator` color variables; `CustomizerPanelHelper` and `PostLayoutCustomizerHelper`; shared template parts (`footer-markup-end`, `sidebar-center-singular`, `singular-entry`, `taxonomy-loop`, `singular-post-inner`); legacy widget markup removed from `parts/widgets` in favor of `AbstractPostsWidgetTypeC` / `WidgetFactory`
+- **Quality:** ESLint `es2020` env; `globalThis` instead of `window` in JS; minor PHP cleanup (`SocialConfig`); consistent line endings
+- **Chore:** Sonar scanner worktree / `.gitignore` for `.scannerwork/report-task.txt`
+- **Security:** Sonar suppression comment (`NOSONAR`) on security hook where intentional
+
 ### 4.4.1 (2026/03/22)
 
 - **Update:** Customizer → Site Editor global styles migration is gated to theme **4.4.1** only (`GlobalStylesCustomizerMigrator::MIGRATION_TARGET_VERSION`); override via filter `origamiez_global_styles_migration_target_version` if needed (e.g. tests)
