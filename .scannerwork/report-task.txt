@@ -2,5 +2,5 @@ projectKey=origamiez
 serverUrl=http://localhost:9000
 serverVersion=26.3.0.120487
 dashboardUrl=http://localhost:9000/dashboard?id=origamiez
-ceTaskId=b75ace61-2e94-4945-a966-1ecb214f969b
-ceTaskUrl=http://localhost:9000/api/ce/task?id=b75ace61-2e94-4945-a966-1ecb214f969b
+ceTaskId=88552348-8356-4c56-ac0c-d9d78022e58a
+ceTaskUrl=http://localhost:9000/api/ce/task?id=88552348-8356-4c56-ac0c-d9d78022e58a

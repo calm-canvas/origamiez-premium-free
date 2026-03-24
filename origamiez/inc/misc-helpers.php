@@ -81,6 +81,78 @@ function origamiez_the_singular_wp_link_pages( $separator = ' . ' ) {
 }
 
 /**
+ * Resolve the target post ID for related-posts queries.
+ *
+ * @param int|null $post_id Post ID, or null to use the global $post.
+ * @return int Post ID, or 0 when not resolvable.
+ */
+function origamiez_resolve_related_post_id( $post_id ) {
+	global $post;
+
+	if ( $post_id ) {
+		return (int) $post_id;
+	}
+
+	if ( isset( $post->ID ) ) {
+		return (int) $post->ID;
+	}
+
+	return 0;
+}
+
+/**
+ * Build a tag-based tax_query fragment for related posts.
+ *
+ * @param int $resolved_id Post ID.
+ * @return array<int, array<string, mixed>>|null One tax_query clause set, or null when there are no tags.
+ */
+function origamiez_related_posts_tax_query_for_tags( $resolved_id ) {
+	$tags = get_the_tags( $resolved_id );
+	if ( empty( $tags ) ) {
+		return null;
+	}
+
+	$tag_ids = array();
+	foreach ( $tags as $t ) {
+		$tag_ids[] = $t->term_id;
+	}
+
+	return array(
+		array(
+			'taxonomy' => 'post_tag',
+			'field'    => 'id',
+			'terms'    => $tag_ids,
+		),
+	);
+}
+
+/**
+ * Build a category-based tax_query fragment for related posts.
+ *
+ * @param int $resolved_id Post ID.
+ * @return array<int, array<string, mixed>>|null One tax_query clause set, or null when there are no categories.
+ */
+function origamiez_related_posts_tax_query_for_categories( $resolved_id ) {
+	$categories = get_the_category( $resolved_id );
+	if ( empty( $categories ) ) {
+		return null;
+	}
+
+	$category_id = array();
+	foreach ( $categories as $category ) {
+		$category_id[] = $category->term_id;
+	}
+
+	return array(
+		array(
+			'taxonomy' => 'category',
+			'field'    => 'id',
+			'terms'    => $category_id,
+		),
+	);
+}
+
+/**
  * Build WP_Query arguments for related posts (tags or categories per Customizer).
  *
  * @param int|null $post_id        Post ID. Defaults to global $post.
@@ -88,9 +160,7 @@ function origamiez_the_singular_wp_link_pages( $separator = ' . ' ) {
  * @return array<string, mixed> Query arguments; empty if the post ID is invalid.
  */
 function origamiez_get_related_posts_query_args( $post_id = null, $default_count = 5 ) {
-	global $post;
-
-	$resolved_id = $post_id ? (int) $post_id : ( isset( $post->ID ) ? (int) $post->ID : 0 );
+	$resolved_id = origamiez_resolve_related_post_id( $post_id );
 	if ( $resolved_id <= 0 ) {
 		return array();
 	}
@@ -104,34 +174,14 @@ function origamiez_get_related_posts_query_args( $post_id = null, $default_count
 	);
 
 	if ( 'post_tag' === $get_related_post_by ) {
-		$tags = get_the_tags( $resolved_id );
-		if ( ! empty( $tags ) ) {
-			$tag_ids = array();
-			foreach ( $tags as $t ) {
-				$tag_ids[] = $t->term_id;
-			}
-			$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				array(
-					'taxonomy' => 'post_tag',
-					'field'    => 'id',
-					'terms'    => $tag_ids,
-				),
-			);
+		$tax_query = origamiez_related_posts_tax_query_for_tags( $resolved_id );
+		if ( null !== $tax_query ) {
+			$args['tax_query'] = $tax_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		}
 	} else {
-		$categories = get_the_category( $resolved_id );
-		if ( ! empty( $categories ) ) {
-			$category_id = array();
-			foreach ( $categories as $category ) {
-				$category_id[] = $category->term_id;
-			}
-			$args['tax_query'] = array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'id',
-					'terms'    => $category_id,
-				),
-			);
+		$tax_query = origamiez_related_posts_tax_query_for_categories( $resolved_id );
+		if ( null !== $tax_query ) {
+			$args['tax_query'] = $tax_query; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		}
 	}
 
