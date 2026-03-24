@@ -16,11 +16,11 @@ The Origamiez theme utilizes a modular and structured template system, extending
 
 ## Implementation Details
 - **Template Parts Structure**: 
-    - `parts/header/`: Contains header layout variations (e.g., `header-left-right.php`).
+    - `parts/header/`: Contains header layout variations (e.g., `header-left-right.php`, `header-up-down.php`). Shared fragments include **`header-site-shell.php`** (outer site wrapper / skip-link / structure used by `header.php` and shop header) and **`header-branding.php`** (logo, site title, tagline, mobile toggle) so layout files do not duplicate that markup.
     - `parts/archive/`: Layouts for archive pages (e.g., `archive-two-cols.php`).
     - `parts/metadata/`: Components for post metadata (date, author, category).
     - `parts/single/`: Post-specific elements like author info, tags, and related posts.
-    - `parts/widgets/`: Front-end HTML templates for custom theme widgets.
+    - `parts/widgets/`: Optional front-end fragments for widgets where markup stays in template parts; several **posts-list** widgets now render entirely from PHP classes under `app/Widgets/` (see `07-widgets-and-sidebars.md`).
     - `parts/sidebar-*.php`: Individual sidebar templates moved from the root to `parts/`.
     - `parts/footer-*.php`: Footer layout variations moved from the root to `parts/`.
 - **Layout Selection**: The theme uses Customizer settings to determine which template parts to load. Root template files (like `header.php`, `footer.php`, `sidebar.php`) act as entry points that dynamically load the appropriate part from the `parts/` directory based on theme configurations.

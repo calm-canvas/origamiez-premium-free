@@ -22,7 +22,7 @@ The Origamiez theme uses a structured approach to asset management, separating a
         - `StylesheetManager` enqueues core CSS files (Bootstrap, FontAwesome, theme styles, base + dynamic Google Fonts).
         - `InlineStyleGenerator` injects dynamic CSS (legacy Customizer or merged global styles / typography when the migration bridge is active).
         - `ScriptManager` enqueues JavaScript files (jQuery, plugins, theme scripts).
-    3.  **Dynamic Styles**: The `InlineStyleGenerator` processes theme options (colors, typography) and outputs them as a `wp_add_inline_style` block attached to the main theme stylesheet.
+    3.  **Dynamic Styles**: The `InlineStyleGenerator` processes theme options (colors, typography) and outputs them as a `wp_add_inline_style` block attached to the main theme stylesheet. Heading-level font rules (`h1`–`h6`) are generated with a small loop over levels to avoid repeated mapping code.
 - **Key Functions/Methods**:
     - `AssetManager::register()`: Hooks into the WordPress enqueue action.
     - `AssetManager::enqueue_assets()`: Orchestrates the enqueuing sequence.
