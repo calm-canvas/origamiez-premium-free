@@ -1,8 +1,13 @@
 <?php
 /**
- * Compact social network rows for ORIGAMIEZ_CONFIG (slug, icon class, label, color).
+ * Social network row definitions for theme config (icons, labels, colors).
  *
  * @package Origamiez
+ */
+
+/**
+ * Returns compact social network rows for ORIGAMIEZ_CONFIG (slug, icon class, label, color).
+ *
  * @return array<int, array{0: string, 1: string, 2: string, 3: string}>
  */
 function origamiez_get_social_network_row_definitions() {

@@ -218,31 +218,13 @@ class InlineStyleGenerator {
 				'css_base' => 'font-site-subtitle',
 				'path'     => array( 'blocks', 'core/site-tagline' ),
 			),
-			array(
-				'css_base' => 'font-heading-h1',
-				'path'     => array( 'elements', 'h1' ),
-			),
-			array(
-				'css_base' => 'font-heading-h2',
-				'path'     => array( 'elements', 'h2' ),
-			),
-			array(
-				'css_base' => 'font-heading-h3',
-				'path'     => array( 'elements', 'h3' ),
-			),
-			array(
-				'css_base' => 'font-heading-h4',
-				'path'     => array( 'elements', 'h4' ),
-			),
-			array(
-				'css_base' => 'font-heading-h5',
-				'path'     => array( 'elements', 'h5' ),
-			),
-			array(
-				'css_base' => 'font-heading-h6',
-				'path'     => array( 'elements', 'h6' ),
-			),
 		);
+		foreach ( range( 1, 6 ) as $heading_level ) {
+			$map[] = array(
+				'css_base' => 'font-heading-h' . $heading_level,
+				'path'     => array( 'elements', 'h' . $heading_level ),
+			);
+		}
 
 		foreach ( $map as $item ) {
 			$typo = $this->get_typography_at_style_path( $styles, $item['path'] );

@@ -7,58 +7,36 @@
 
 namespace Origamiez\Widgets\Types;
 
-use Origamiez\Widgets\AbstractPostsWidgetTypeC;
+use Origamiez\Widgets\AbstractPostsListTypeCWidget;
 use WP_Query;
 
 /**
  * Class PostsListGridWidget
  */
-class PostsListGridWidget extends AbstractPostsWidgetTypeC {
-	/**
-	 * Register widget.
-	 */
-	public static function register(): void {
-		register_widget( __CLASS__ );
-	}
+class PostsListGridWidget extends AbstractPostsListTypeCWidget {
 
 	/**
-	 * PostsListGridWidget constructor.
-	 */
-	public function __construct() {
-		$widget_ops  = array(
-			'classname'   => 'origamiez-widget-posts-grid',
-			'description' => esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' ),
-		);
-		$control_ops = array(
-			'width'  => 'auto',
-			'height' => 'auto',
-		);
-		parent::__construct( 'origamiez-widget-post-grid', esc_attr__( 'Origamiez Posts Grid', 'origamiez' ), $widget_ops, $control_ops );
-	}
-
-	/**
-	 * Render widget.
+	 * Widget id, labels, and body class for WP_Widget.
 	 *
-	 * @param array $args Widget arguments.
-	 * @param array $instance Widget instance.
+	 * @return array{id_base: string, title: string, classname: string, description: string}
 	 */
-	public function widget( $args, $instance ): void {
-		$instance      = wp_parse_args( (array) $instance, $this->get_default() );
-		$before_widget = $args['before_widget'];
-		$after_widget  = $args['after_widget'];
-		$before_title  = $args['before_title'];
-		$after_title   = $args['after_title'];
+	protected static function widget_registration_config(): array {
+		return static::make_widget_registration(
+			'origamiez-widget-post-grid',
+			esc_attr__( 'Origamiez Posts Grid', 'origamiez' ),
+			'origamiez-widget-posts-grid',
+			esc_attr__( 'Display posts grid with small thumbnail.', 'origamiez' )
+		);
+	}
 
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
-		echo wp_kses( $before_widget, origamiez_get_allowed_tags() );
-		if ( ! empty( $title ) ) {
-			echo wp_kses( $before_title . $title . $after_title, origamiez_get_allowed_tags() );
-		}
-		$query = $this->get_query( $instance );
-		$posts = new WP_Query( $query );
+	/**
+	 * Print the posts markup for this widget layout.
+	 *
+	 * @param WP_Query $posts    Posts query.
+	 * @param array    $instance Parsed instance.
+	 */
+	protected function render_posts_list_markup( WP_Query $posts, array $instance ): void {
 		$this->render_posts_grid_widget_content( $posts, $instance );
-		wp_reset_postdata();
-		echo wp_kses( $after_widget, origamiez_get_allowed_tags() );
 	}
 
 	/**

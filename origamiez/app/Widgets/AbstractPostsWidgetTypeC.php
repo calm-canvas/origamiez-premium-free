@@ -15,6 +15,62 @@ use WP_Query;
 abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 
 	/**
+	 * Echo widget wrapper open and title.
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Parsed instance.
+	 */
+	protected function echo_widget_shell_open( array $args, array $instance ): void {
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+		echo wp_kses( $args['before_widget'], origamiez_get_allowed_tags() );
+		if ( ! empty( $title ) ) {
+			echo wp_kses( $args['before_title'] . $title . $args['after_title'], origamiez_get_allowed_tags() );
+		}
+	}
+
+	/**
+	 * Echo widget wrapper close.
+	 *
+	 * @param array $args Widget arguments.
+	 */
+	protected function echo_widget_shell_close( array $args ): void {
+		echo wp_kses( $args['after_widget'], origamiez_get_allowed_tags() );
+	}
+
+	/**
+	 * Widget shell + WP_Query + loop callback (deduplicates Type C widget bodies).
+	 *
+	 * @param array    $args         Widget arguments.
+	 * @param array    $instance     Raw instance.
+	 * @param callable $render_loop function ( WP_Query $posts, array $instance ): void Invoked only when the query has posts.
+	 */
+	protected function render_posts_widget_with_query( array $args, array $instance, callable $render_loop ): void {
+		$instance = wp_parse_args( (array) $instance, $this->get_default() );
+		$this->echo_widget_shell_open( $args, $instance );
+		$posts = new WP_Query( $this->get_query( $instance ) );
+		if ( $posts->have_posts() ) {
+			$render_loop( $posts, $instance );
+		}
+		wp_reset_postdata();
+		$this->echo_widget_shell_close( $args );
+	}
+
+	/**
+	 * Metadata / excerpt flags for post list output (single place for widget loops).
+	 *
+	 * @param array $instance Parsed widget instance.
+	 * @return array<string, int|bool>
+	 */
+	protected function get_post_list_display_vars( array $instance ): array {
+		return array(
+			'is_show_date'        => $instance['is_show_date'],
+			'is_show_comments'    => $instance['is_show_comments'],
+			'is_show_author'      => $instance['is_show_author'],
+			'excerpt_words_limit' => (int) $instance['excerpt_words_limit'],
+		);
+	}
+
+	/**
 	 * Output grid rows for the posts grid widget (shared by PSR-4 and legacy widget classes).
 	 *
 	 * @param WP_Query $posts    Query with posts to render.
@@ -41,10 +97,7 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 					$post_classes[] = 'col-sm-4';
 					break;
 			}
-			$is_show_date        = $instance['is_show_date'];
-			$is_show_comments    = $instance['is_show_comments'];
-			$is_show_author      = $instance['is_show_author'];
-			$excerpt_words_limit = $instance['excerpt_words_limit'];
+			$d = $this->get_post_list_display_vars( $instance );
 
 			$loop_index = 0;
 			while ( $posts->have_posts() ) :
@@ -71,8 +124,8 @@ abstract class AbstractPostsWidgetTypeC extends AbstractPostsWidgetTypeB {
 							<a class="entry-title" href="<?php echo esc_url( $post_url ); ?>"
 								title="<?php echo esc_attr( $post_title ); ?>"><?php echo esc_html( $post_title ); ?></a>
 						</h4>
-						<?php $this->print_metadata( $is_show_date, $is_show_comments, $is_show_author, 'metadata' ); ?>
-						<?php $this->print_excerpt( $excerpt_words_limit, 'entry-excerpt clearfix' ); ?>
+						<?php $this->print_metadata( $d['is_show_date'], $d['is_show_comments'], $d['is_show_author'], 'metadata' ); ?>
+						<?php $this->print_excerpt( $d['excerpt_words_limit'], 'entry-excerpt clearfix' ); ?>
 					</div>
 				</article>
 				<?php

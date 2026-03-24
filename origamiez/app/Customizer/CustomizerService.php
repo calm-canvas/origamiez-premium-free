@@ -130,17 +130,17 @@ class CustomizerService {
 	 * @param string               $id      Setting ID.
 	 * @param string               $section Section ID.
 	 * @param string               $label   Translated label.
-	 * @param int                  $default Default 0 or 1.
-	 * @param array<string, mixed> $extra   Optional. Merged into setting args (e.g. active_callback).
+	 * @param int                  $default_value Default 0 or 1.
+	 * @param array<string, mixed> $extra         Optional. Merged into setting args (e.g. active_callback).
 	 *
 	 * @return self
 	 */
-	public function register_checkbox_setting( string $id, string $section, string $label, int $default = 1, array $extra = array() ): self {
+	public function register_checkbox_setting( string $id, string $section, string $label, int $default_value = 1, array $extra = array() ): self {
 		$args = array_merge(
 			array(
 				'label'       => $label,
 				'description' => '',
-				'default'     => $default,
+				'default'     => $default_value,
 				'type'        => 'checkbox',
 				'section'     => $section,
 				'transport'   => 'refresh',
