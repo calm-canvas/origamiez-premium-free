@@ -52,12 +52,30 @@ class WidgetTypeB {
 	}
 
 	/**
+	 * Normalize checkbox-like values (matches {@see AbstractPostsWidgetTypeB::normalize_checkbox_flag}).
+	 *
+	 * @param mixed $value Raw value.
+	 * @param bool  $fallback When the key is missing from instance (WidgetTypeB constructor merge).
+	 * @return bool
+	 */
+	private function normalize_checkbox_flag( $value, bool $fallback ): bool {
+		if ( null === $value ) {
+			return $fallback;
+		}
+		if ( is_bool( $value ) ) {
+			return $value;
+		}
+		$filtered = filter_var( $value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		return null !== $filtered ? $filtered : (bool) (int) $value;
+	}
+
+	/**
 	 * Is show author.
 	 *
 	 * @return bool
 	 */
 	public function is_show_author(): bool {
-		return (bool) ( $this->instance['is_show_author'] ?? 0 );
+		return $this->normalize_checkbox_flag( $this->instance['is_show_author'] ?? null, false );
 	}
 
 	/**
@@ -66,7 +84,7 @@ class WidgetTypeB {
 	 * @return bool
 	 */
 	public function is_show_date(): bool {
-		return (bool) ( $this->instance['is_show_date'] ?? 1 );
+		return $this->normalize_checkbox_flag( $this->instance['is_show_date'] ?? null, true );
 	}
 
 	/**
@@ -75,7 +93,7 @@ class WidgetTypeB {
 	 * @return bool
 	 */
 	public function is_show_comments(): bool {
-		return (bool) ( $this->instance['is_show_comments'] ?? 1 );
+		return $this->normalize_checkbox_flag( $this->instance['is_show_comments'] ?? null, true );
 	}
 
 	/**

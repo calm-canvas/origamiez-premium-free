@@ -8,7 +8,7 @@ jQuery(document).ready(function (_$) {
 	Origamier.convertFlatMenuToDropdown();
 	Origamier.fixGalleryPopupMissingTitle();
 });
-jQuery(globalThis).load(function (_$) {
+jQuery(globalThis).on('load', function (_$) {
 	'use strict';
 
 	Origamier.initImageEffect();
@@ -21,10 +21,10 @@ const Origamier = {
 		const items = jQuery('.gallery-item');
 		if (items.length) {
 			jQuery.each(items, function () {
-				const caption = jQuery.trim(
-					jQuery(this).find('.gallery-caption').html()
-				);
-				if (caption !== undefined) {
+				const caption = String(
+					jQuery(this).find('.gallery-caption').html() ?? ''
+				).trim();
+				if (caption) {
 					jQuery(this).find('img').attr('title', caption);
 				}
 			});
@@ -111,18 +111,18 @@ const Origamier = {
 			}
 			post_related.owlCarousel(args);
 			const widget = post_related.parents('.widget');
-			widget.find('.fa-angle-left').click(function () {
+			widget.find('.fa-angle-left').on('click', function () {
 				post_related.trigger('owl.prev');
 			});
-			widget.find('.fa-angle-right').click(function () {
+			widget.find('.fa-angle-right').on('click', function () {
 				post_related.trigger('owl.next');
 			});
 			const figure = post_related.find('figure');
-			figure.hover(function () {
+			figure.on('mouseenter', function () {
 				const figcaption = jQuery(this).find('figcaption');
 				figcaption.stop().transition({ bottom: 15 });
 			});
-			figure.mouseleave(function () {
+			figure.on('mouseleave', function () {
 				const figcaption = jQuery(this).find('figcaption');
 				figcaption.stop().transition({ bottom: 0 });
 			});
@@ -151,18 +151,18 @@ const Origamier = {
 		const images = jQuery('.image-effect, .image-overlay');
 		if (0 < images.length) {
 			jQuery('.image-effect')
-				.hover(function () {
+				.on('mouseenter', function () {
 					jQuery(this)
 						.stop()
 						.transition({ scale: [1.1, 1.1] });
 				})
-				.mouseleave(function () {
+				.on('mouseleave', function () {
 					jQuery(this)
 						.stop()
 						.transition({ scale: [1, 1] });
 				});
 			jQuery('.image-overlay')
-				.hover(function () {
+				.on('mouseenter', function () {
 					if (OrigamierUtil.getViewportWidth() >= 768) {
 						jQuery(this)
 							.find('.overlay')
@@ -182,7 +182,7 @@ const Origamier = {
 							.transition({ opacity: 1 });
 					}
 				})
-				.mouseleave(function () {
+				.on('mouseleave', function () {
 					if (OrigamierUtil.getViewportWidth() >= 768) {
 						jQuery(this)
 							.find('.overlay')
@@ -318,7 +318,7 @@ const Origamier = {
 		jQuery(menu_id)
 			.find('select')
 			.first()
-			.change(function () {
+			.on('change', function () {
 				globalThis.location = jQuery(this)
 					.find('option:selected')
 					.val();

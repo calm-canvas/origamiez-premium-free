@@ -27,11 +27,12 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ): array {
+		$new_instance                    = (array) $new_instance;
 		$instance                        = parent::update( $new_instance, $old_instance );
 		$instance['excerpt_words_limit'] = isset( $new_instance['excerpt_words_limit'] ) ? (int) $new_instance['excerpt_words_limit'] : 0;
-		$instance['is_show_author']      = isset( $new_instance['is_show_author'] ) ? 1 : 0;
-		$instance['is_show_date']        = isset( $new_instance['is_show_date'] ) ? 1 : 0;
-		$instance['is_show_comments']    = isset( $new_instance['is_show_comments'] ) ? 1 : 0;
+		$instance['is_show_author']      = static::parse_widget_checkbox( $new_instance, 'is_show_author' );
+		$instance['is_show_date']        = static::parse_widget_checkbox( $new_instance, 'is_show_date' );
+		$instance['is_show_comments']    = static::parse_widget_checkbox( $new_instance, 'is_show_comments' );
 
 		return $instance;
 	}
@@ -92,14 +93,37 @@ abstract class AbstractPostsWidgetTypeB extends AbstractPostsWidget {
 	}
 
 	/**
+	 * Normalize widget checkbox values (0/1, booleans, JSON strings like "false").
+	 *
+	 * PHP coerces non-empty strings to true for bool-typed parameters; avoid that by normalizing here.
+	 *
+	 * @param mixed $value Raw instance value.
+	 * @return bool
+	 */
+	protected function normalize_checkbox_flag( $value ): bool {
+		if ( is_bool( $value ) ) {
+			return $value;
+		}
+		$filtered = filter_var( $value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		if ( null !== $filtered ) {
+			return $filtered;
+		}
+		return (bool) (int) $value;
+	}
+
+	/**
 	 * Print metadata.
 	 *
-	 * @param bool   $is_show_date Show date.
-	 * @param bool   $is_show_comments Show comments.
-	 * @param bool   $is_show_author Show author.
+	 * @param mixed  $is_show_date Show date (bool, 0/1, or string from JSON).
+	 * @param mixed  $is_show_comments Show comments.
+	 * @param mixed  $is_show_author Show author.
 	 * @param string $classes Additional classes.
 	 */
-	protected function print_metadata( bool $is_show_date = false, bool $is_show_comments = false, bool $is_show_author = false, string $classes = '' ): void {
+	protected function print_metadata( $is_show_date = false, $is_show_comments = false, $is_show_author = false, string $classes = '' ): void {
+		$is_show_date     = $this->normalize_checkbox_flag( $is_show_date );
+		$is_show_comments = $this->normalize_checkbox_flag( $is_show_comments );
+		$is_show_author   = $this->normalize_checkbox_flag( $is_show_author );
+
 		if ( $is_show_date || $is_show_comments || $is_show_author ) :
 			?>
 
