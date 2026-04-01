@@ -15,6 +15,23 @@ use WP_Widget;
 abstract class AbstractPostsWidget extends WP_Widget {
 
 	/**
+	 * Normalize a checkbox field from widget update input.
+	 *
+	 * Classic forms omit unchecked keys; the widgets block / REST may send boolean false — `isset( $new_instance['key'] )` is
+	 * true for false, so never use isset alone for on/off.
+	 *
+	 * @param array  $new_instance New instance.
+	 * @param string $key Field key.
+	 * @return int 0 or 1
+	 */
+	protected static function parse_widget_checkbox( array $new_instance, string $key ): int {
+		if ( ! array_key_exists( $key, $new_instance ) ) {
+			return 0;
+		}
+		return filter_var( $new_instance[ $key ], FILTER_VALIDATE_BOOLEAN ) ? 1 : 0;
+	}
+
+	/**
 	 * Update widget.
 	 *
 	 * @param array $new_instance New instance.
@@ -22,7 +39,8 @@ abstract class AbstractPostsWidget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ): array {
-		$instance = $old_instance;
+		$new_instance = (array) $new_instance;
+		$instance     = is_array( $old_instance ) ? $old_instance : array();
 
 		$instance['title']               = wp_strip_all_tags( $new_instance['title'] );
 		$instance['posts_per_page']      = (int) wp_strip_all_tags( $new_instance['posts_per_page'] );
@@ -32,7 +50,7 @@ abstract class AbstractPostsWidget extends WP_Widget {
 		$instance['post_format']         = ( isset( $new_instance['post_format'] ) && is_array( $new_instance['post_format'] ) ) ? array_filter( $new_instance['post_format'] ) : array();
 		$instance['relation']            = isset( $new_instance['relation'] ) && in_array( $new_instance['relation'], array( 'AND', 'OR' ), true ) ? $new_instance['relation'] : 'OR';
 		$instance['in']                  = wp_strip_all_tags( $new_instance['in'] );
-		$instance['is_include_children'] = (int) isset( $new_instance['is_include_children'] ) ? 1 : 0;
+		$instance['is_include_children'] = static::parse_widget_checkbox( $new_instance, 'is_include_children' );
 
 		return $instance;
 	}

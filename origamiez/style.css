@@ -348,7 +348,6 @@ h6 a:hover {
 #origamiez-header {
 	background: var(--white);
 	border-bottom: none;
-	padding-bottom: 20px;
 }
 #origamiez-header-bottom {
 	border-bottom: 2px solid var(--main-menu-bg-color);

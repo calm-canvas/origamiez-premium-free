@@ -70,8 +70,9 @@ class PostsListSliderWidget extends AbstractPostsWidgetTypeB {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ): array {
+		$new_instance                        = (array) $new_instance;
 		$instance                            = parent::update( $new_instance, $old_instance );
-		$instance['is_assign_last_to_small'] = isset( $new_instance['is_assign_last_to_small'] ) ? 1 : 0;
+		$instance['is_assign_last_to_small'] = static::parse_widget_checkbox( $new_instance, 'is_assign_last_to_small' );
 
 		return $instance;
 	}
