@@ -27,6 +27,11 @@ The Origamiez theme provides a robust set of features for enhancing post display
     - `PostClassManager::get_post_classes(classes)`: Injects theme-specific post classes.
     - `PostFormatter::format_content(content)`: Tailors post content based on the assigned format.
     - `PostIconFactory::create(format)`: Returns the appropriate FontAwesome icon string for a given format.
+- **Related posts query (legacy helpers)**:
+    - Single-post “related posts” blocks use `WP_Query` arguments built in `origamiez/inc/misc-helpers.php`.
+    - `origamiez_resolve_related_post_id( $post_id )`: resolves the effective post ID (explicit ID or global `$post`).
+    - `origamiez_related_posts_tax_query_for_tags( $resolved_id )` and `origamiez_related_posts_tax_query_for_categories( $resolved_id )`: return `tax_query` clause sets for tags or categories, or `null` when none apply.
+    - `origamiez_get_related_posts_query_args( $post_id, $default_count )`: assembles final query args using Customizer mods `get_related_post_by` and `number_of_related_posts`, excluding the current post.
 
 ## Maintenance & Development
 - **Customizing Post Icons**: 
@@ -38,5 +43,6 @@ The Origamiez theme provides a robust set of features for enhancing post display
 
 ## Related Files
 - `origamiez/app/Post/` (Directory)
+- `origamiez/inc/misc-helpers.php` (Related posts query helpers; shared utilities)
 - `origamiez/parts/metadata/` (Directory)
 - `origamiez/content.php` (Where post classes and formats are applied)
