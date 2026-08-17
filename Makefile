@@ -1,8 +1,16 @@
-.PHONY: up down remove restart setup network-check
+.PHONY: up down remove restart setup network-check submodule
+
+# Git submodules
+submodule:
+	@echo "📦 Initializing and updating git submodules..."
+	@git submodule update --init --recursive
+	@echo "✅ Submodules updated successfully."
 
 # Environment setup
 setup:
 	@echo "🔧 Starting environment setup..."
+	@# Initialize/update git submodules
+	@$(MAKE) submodule
 	@# Create .env from example if it doesn't exist
 	@if [ ! -f .env ]; then \
 		cp .env.example .env && echo "✅ .env file created from .env.example"; \
