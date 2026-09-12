@@ -1,3 +1,4 @@
 [submodule "plugins/craftsman-suite"]
 	path = plugins/craftsman-suite
 	url = https://github.com/calm-canvas/craftsman-suite
+	ignore = dirty
