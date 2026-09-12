@@ -27,6 +27,42 @@ Origamiez combines simplicity with professional power. The theme offers outstand
 - **Dark mode support**
 - **Fast asset loading** with Vite build system
 
+## Getting Started & Development
+
+### 1. Clone & Submodules
+
+```bash
+# Clone with submodules
+git clone --recurse-submodules https://github.com/calm-canvas/origamiez-premium-free.git
+
+# Or initialize submodules in an existing repo via Makefile:
+make submodule
+# (equivalent to: git submodule update --init --recursive)
+```
+
+### 2. Environment & Docker
+
+```bash
+# Setup environment (.env, submodules, Docker network)
+make setup
+
+# Start Docker containers
+make up
+```
+
+### 3. Frontend Assets
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start Vite dev server with HMR
+pnpm dev
+
+# Build production assets
+pnpm build
+```
+
 ## Technical Documentation
 
 Detailed technical specifications and development guides are available in the `./docs` directory.

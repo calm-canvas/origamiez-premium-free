@@ -11,8 +11,15 @@ make setup
 ```
 
 This will:
-1. Create a `.env` file from `.env.example` if it doesn't already exist.
-2. Check if the `dev_tools` Docker network exists and create it if necessary.
+1. Initialize and update Git submodules (`plugins/craftsman-suite`).
+2. Create a `.env` file from `.env.example` if it doesn't already exist.
+3. Check if the `dev_tools` Docker network exists and create it if necessary.
+
+You can also initialize/update submodules independently at any time:
+
+```bash
+make submodule
+```
 
 ## General Commands
 
