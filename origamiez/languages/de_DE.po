@@ -191,8 +191,8 @@ msgid "In:"
 msgstr "in:"
 
 #: ../inc/classes/abstract-widget.php:130
-msgid "(require Wordpress 3.7+)"
-msgstr "(erfordert Wordpress 3.7+)"
+msgid "(require WordPress 3.7+)"
+msgstr "(erfordert WordPress 3.7+)"
 
 #: ../inc/classes/abstract-widget.php:135
 msgid "1 week"

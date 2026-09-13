@@ -180,7 +180,7 @@ msgid "In:"
 msgstr "En:"
 
 #: inc/classes/abstract-widget.php:130
-msgid "(require Wordpress 3.7+)"
+msgid "(require WordPress 3.7+)"
 msgstr "(nécessite WordPress 3.7+)"
 
 #: inc/classes/abstract-widget.php:135

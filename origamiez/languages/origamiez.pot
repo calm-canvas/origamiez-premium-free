@@ -183,7 +183,7 @@ msgid "In:"
 msgstr ""
 
 #: ../inc/classes/abstract-widget.php:130
-msgid "(require Wordpress 3.7+)"
+msgid "(require WordPress 3.7+)"
 msgstr ""
 
 #: ../inc/classes/abstract-widget.php:135

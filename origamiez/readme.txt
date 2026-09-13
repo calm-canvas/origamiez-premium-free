@@ -1,4 +1,4 @@
-Origamiez - Wordpress Theme
+Origamiez - WordPress Theme
 
 Origamiez is a modern WordPress theme designed for professional blogs, magazines, forums, and online stores. With intelligent responsive design, Origamiez delivers exceptional user experience across all devices.
 
@@ -85,7 +85,7 @@ Get free support with tickets on GitHub: https://github.com/calm-canvas/origamie
 
 - Improve: Refactor Docker configuration using YAML extensions (x-common and x-environment)
 - New: Add scheduler service using Ofelia for automated WP-Cron task execution
-- Update: Enhance cli and wordpress services with shared environment and volume configurations
+- Update: Enhance cli and WordPress services with shared environment and volume configurations
 - Update: Docker image updated to php8.3-apache
 
 ### 3.0.0 (2025-12-03)
