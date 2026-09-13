@@ -113,6 +113,8 @@ This repo is optimized for **agent-assisted development**: small, reviewable dif
 - **Use hooks**: Extend `HookProviderInterface` implementations and register from `ThemeBootstrap`.
 - **Read specs**: `docs/specs/` for asset pipeline, hooks, customizer, etc.
 - **Free vs premium**: Keep a single core structure; gate features via config/filters as the project already does, rather than forking unrelated copies of logic.
+- **Generated artifacts & agent boundaries**: Never hand-edit or create ignored files/directories (e.g. `node_modules/`, `vendor/`, `origamiez/vendor/`, `.env*`, `dist/`, `build/`, `.cache/`, `.sonar/`, `.snapshots/`, `coverage/`, logs, `docker/snapshot/*.sql`). Always modify source files (`assets/`, `style.scss`, `origamiez/app/`, `origamiez/parts/`, `plugins/craftsman-suite/assets/`) instead of compiled outputs. Root `.gitignore` does not apply inside the `plugins/craftsman-suite/` git submodule—keep plugin-local ignores in `plugins/craftsman-suite/.gitignore`.
+- **Tracked theme deliverables**: Shipped theme files in `origamiez/` (`style.css`, `js/script.js`, vendor CSS/JS under `origamiez/css/` and `origamiez/js/`, webfonts under `origamiez/webfonts/`, and translations `origamiez/languages/*.mo`) are tracked product deliverables built by Vite/tooling; synchronize them from sources via tooling (`pnpm build`, `bin/i18n.sh`) rather than ad-hoc hand edits.
 
 ---
 

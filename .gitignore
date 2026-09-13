@@ -1,12 +1,45 @@
+# Dependencies & Package Managers
 node_modules/
 .pnpm-store/
+vendor/
+origamiez/vendor/
+
+# Environment & Local Configuration
+/.env
+/.env.local
+/.env.*.local
+docker/config/override.ini
+
+# Build & Tooling Outputs
+dist/
+build/
+
+# Caches, Test Outputs & Reports
+.cache/
+.sonar/
+.scannerwork/
+.snapshots/
+coverage/
+test-output/
+reports/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database Backups
+docker/snapshot/*.sql
+
+# IDE & Editor / AI Tools
 .idea/
 .vscode/
 .zencoder/
-origamiez/vendor/
-/.env
-/.env.local
-vendor/
+.zenflow/
+.agent-relay/
+
+# OS Metadata & Backups
 .DS_Store
 .DS_Store?
 ._*
@@ -15,6 +48,3 @@ vendor/
 ehthumbs.db
 Thumbs.db
 *.po~
-docker/config/override.ini
-.scannerwork/
-.agent-relay/
