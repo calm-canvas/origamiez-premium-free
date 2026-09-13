@@ -10,9 +10,9 @@
 ## Tech Stack & Environment
 
 - **PHP**: 7.4+ (fully optimized for PHP 8.3+).
-- **WordPress**: 5.5+ (tested up to 6.9.0).
+- **WordPress**: 5.5+ (tested up to 7.1.0).
 - **Frontend**: Vite-based build system, SASS (modular entry under repo `assets/`), Bootstrap 5.3.
-- **Dependencies**: PHP-DI (`php-di/php-di`), Font Awesome 6.4.0, Owl Carousel.
+- **Dependencies**: PHP-DI (`php-di/php-di`), Font Awesome 7.3.1, Owl Carousel.
 - **Environment**: Docker (Apache / PHP 8.3); orchestration via `Makefile` and `docker/`.
 - **Package manager (JS)**: Prefer **`pnpm`** for scripts referenced in this doc (`pnpm format`, `pnpm lint:fix`).
 

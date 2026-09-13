@@ -76,6 +76,14 @@ class StylesheetManager {
 				ThemeVersion::get()
 			);
 		}
+
+		// Theme markup still uses FA4 names (fa-picture-o, fa-calendar-o, …).
+		wp_enqueue_style(
+			self::PREFIX . 'font-awesome-v4-shims',
+			trailingslashit( $template_uri ) . 'css/fontawesome-v4-shims.css',
+			array( self::PREFIX . 'font-awesome' ),
+			ThemeVersion::get()
+		);
 	}
 
 	/**

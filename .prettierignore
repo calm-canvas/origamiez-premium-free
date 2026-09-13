@@ -1,4 +1,11 @@
+# Match ESLint ignores: Vite copies vendor CSS/JS into the theme tree.
+origamiez/js/
+origamiez/plugins/
+origamiez/css/
+origamiez/style.css
+origamiez/webfonts/
 node_modules
+.pnpm-store
 vendor
 dist
 build

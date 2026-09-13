@@ -41,6 +41,10 @@ const copyFilesPlugin = () => {
 					dest: 'origamiez/css/fontawesome.css',
 				},
 				{
+					src: 'node_modules/@fortawesome/fontawesome-free/css/v4-shims.css',
+					dest: 'origamiez/css/fontawesome-v4-shims.css',
+				},
+				{
 					src: 'node_modules/owl.carousel/dist/assets/owl.carousel.css',
 					dest: 'origamiez/css/owl.carousel.css',
 				},
@@ -99,6 +103,33 @@ const copyFilesPlugin = () => {
 					);
 				}
 			}
+
+			// Font Awesome CSS references ../webfonts; keep shipped fonts in sync with the package.
+			try {
+				const webfontsSrc = resolve(
+					'node_modules/@fortawesome/fontawesome-free/webfonts'
+				);
+				const webfontsDest = resolve('origamiez/webfonts');
+
+				if (!fs.existsSync(webfontsDest)) {
+					fs.mkdirSync(webfontsDest, { recursive: true });
+				}
+
+				for (const entry of fs.readdirSync(webfontsSrc)) {
+					fs.copyFileSync(
+						resolve(webfontsSrc, entry),
+						resolve(webfontsDest, entry)
+					);
+				}
+				// eslint-disable-next-line no-console
+				console.log(`Copied ${webfontsSrc}`);
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.warn(
+					'Warning: Could not copy Font Awesome webfonts:',
+					error.message
+				);
+			}
 		},
 	};
 };
@@ -112,8 +143,8 @@ export default defineConfig({
 		minify: false,
 		rollupOptions: {
 			input: {
-				style: resolve(__dirname, 'style.scss'),
-				script: resolve(__dirname, 'assets/js/script.js'),
+				style: resolve(import.meta.dirname, 'style.scss'),
+				script: resolve(import.meta.dirname, 'assets/js/script.js'),
 			},
 			output: {
 				entryFileNames: (chunkInfo) => {

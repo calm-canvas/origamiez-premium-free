@@ -1,4 +1,4 @@
-FROM wordpress:cli-php8.3
+FROM wordpress:cli-2.12.0-php8.3
 
 ARG WWWUSER=1000
 ARG WWWGROUP=1000

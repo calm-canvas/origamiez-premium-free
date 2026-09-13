@@ -218,14 +218,12 @@ const Origamier = {
 			'.origamiez-widget-posts-by-photos .origamiez-photos-wrap'
 		);
 		const media = jQuery('.origamiez-lighbox');
-		if (
-			!(
-				0 < blogposts.length ||
-				0 < gallery.length ||
-				0 < photos.length ||
-				0 < media.length
-			)
-		) {
+		if (!(
+			0 < blogposts.length ||
+			0 < gallery.length ||
+			0 < photos.length ||
+			0 < media.length
+		)) {
 			return;
 		}
 		const baseArgs = {
